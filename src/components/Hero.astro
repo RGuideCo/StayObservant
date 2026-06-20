@@ -12,12 +12,15 @@ const {
 
 <section class="relative w-full overflow-hidden">
   <!-- PARALLAX BACKGROUND -->
-  <div
-    class="absolute inset-0 will-change-transform scale-110"
+  <img
+    src="/hero-bg.avif"
+    alt=""
+    fetchpriority="high"
+    decoding="async"
+    class="absolute inset-0 h-full w-full scale-110 object-cover will-change-transform"
     data-parallax
-    style="background-image: url('/hero-bg.avif'); background-size: cover; background-position: center; transform: translate3d(0,0,0); filter: saturate(0.75) brightness(0.75);"
-  >
-  </div>
+    style="transform: translate3d(0,0,0); filter: saturate(0.75) brightness(0.75);"
+  />
 
   <!-- DARK OVERLAY -->
   <div

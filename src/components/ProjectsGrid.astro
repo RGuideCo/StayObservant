@@ -49,7 +49,9 @@ const uniqueTags = Array.from(
             <img
               src={p.image}
               alt={p.title}
-              loading="lazy"
+              loading={index < 2 ? "eager" : "lazy"}
+              fetchpriority={index < 2 ? "high" : "auto"}
+              decoding="async"
 class={`absolute inset-0 h-full w-full object-cover ${index === 0 ? "object-right" : "object-center"} transition-transform duration-700 ease-out group-hover:scale-[1.04]`}            />
 
             <!-- Glass panel -->

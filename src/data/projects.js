@@ -4,7 +4,7 @@ export const projects = [
     title: "Chick-Fil-A",
     description:
       "An interactive in-store concept designed to make kid participation fun, social, and measurable.",
-    image: "/Projects/ChickFilA/Joy%20Machine/J04.png",
+    image: "/optimized/Projects/ChickFilA/Joy%20Machine/J04.webp",
     tags: ["Experience Design", "UI/UX"],
     role: "Experience Designer",
     medium: "Interactive Retail",
@@ -17,7 +17,7 @@ export const projects = [
     title: "SideStreat",
     description:
       "A discovery-driven mobile app experience for reviewing and navigating hidden street food vendors.",
-    image: "/Projects/SideStreat/SSm.jpg",
+    image: "/optimized/Projects/SideStreat/SSm.webp",
     tags: ["Branding", "UI/UX"],
     role: "UI/UX Designer",
     medium: "Mobile App",
