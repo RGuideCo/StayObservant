@@ -1,11 +1,28 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import ProjectsGrid from "../components/ProjectsGrid.astro";
+import ContactSection from "../components/ContactSection.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = "Stay Observant";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={title}>
+  <Hero
+    title="Stay Observant"
+    note="Selected work below"
+    primaryCtaText="View work"
+    primaryCtaHref="#work"
+    secondaryCtaText="Contact"
+    secondaryCtaHref="#contact"
+  />
+
+  <!-- Cream wrapper for lower sections -->
+  <div class="bg-[#F6F3ED] text-zinc-900">
+    <ProjectsGrid />
+
+    <div class="border-t border-black/10">
+      <ContactSection />
+    </div>
+  </div>
 </Layout>

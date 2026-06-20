@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/* Base */
+:root {
+  --font-ui: "Geist", "Inter", "Segoe UI", sans-serif;
+  --font-display: "Geist", "Inter", "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0b0b0f;
+  font-family: var(--font-ui);
+}
+
+/* Layout helpers */
+.container-page {
+  @apply max-w-6xl mx-auto px-6;
+}
+
+.section-pad {
+  @apply py-16;
+}
+
+.case-container {
+  @apply max-w-6xl mx-auto px-6;
+}
+
+/* =========================================
+   Markdown / Content Collections rendering
+   (THE FIX for touching consecutive images)
+========================================= */
+
+/* Make images block-level so margins actually create space */
+.project-content :where(img) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* If markdown outputs <p><img><img></p>, this forces a gap */
+.project-content :where(img + img) {
+  margin-top: 48px;
+}
+
+/* If images are wrapped in <p>, put spacing on the images */
+.project-content :where(p > img) {
+  margin: 48px 0;
+}
+
+/* Optional: if your pipeline outputs <picture> (common with optimizers) */
+.project-content :where(picture) {
+  display: block;
+}
+
+.project-content :where(picture + picture) {
+  margin-top: 48px;
+}
+
+/* Optional: if figures appear */
+.project-content :where(figure) {
+  margin: 48px 0;
+}
+.project-content :where(figure + figure) {
+  margin-top: 48px;
+}
