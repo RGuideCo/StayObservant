@@ -13,6 +13,19 @@ export const projects = [
   },
 
   {
+    slug: "chobani",
+    title: "Chobani",
+    description:
+      "A packaging exploration extending Chobani into indulgent Greek yogurt and whole-milk concepts.",
+    image: "/optimized/Projects/Chobani/Brian%20Rodriguez_%20Packaging_Graphic%20Design_Page_10.webp",
+    tags: ["Packaging", "Art Direction", "Graphic Design"],
+    role: "Packaging Designer",
+    medium: "Packaging",
+
+    sections: [],
+  },
+
+  {
     slug: "sidestreat",
     title: "SideStreat",
     description:
