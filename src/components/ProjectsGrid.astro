@@ -2,25 +2,35 @@
 import { getCollection } from "astro:content";
 
 const entries = await getCollection("projects");
-const preferredOrder = ["chick-fil-a", "chobani", "sidestreat"];
+const preferredOrder = ["sidestreat", "chick-fil-a", "chobani"];
 const projects = entries
   .map((entry) => ({ slug: entry.slug, ...entry.data }))
-  .sort((a, b) => preferredOrder.indexOf(a.slug) - preferredOrder.indexOf(b.slug));
+  .sort((a, b) => {
+    const aIndex = preferredOrder.indexOf(a.slug);
+    const bIndex = preferredOrder.indexOf(b.slug);
+    return (aIndex === -1 ? preferredOrder.length : aIndex)
+      - (bIndex === -1 ? preferredOrder.length : bIndex);
+  });
 
-const uniqueTags = Array.from(
-  new Set(projects.flatMap((project) => project.tags || []).filter(Boolean))
-).sort((a, b) => a.localeCompare(b));
+const filterTags = [
+  "UI/UX",
+  "Branding",
+  "Retail",
+  "Industrial Design",
+  "Illustration",
+  "Experience Design",
+  "Advertising",
+];
 ---
 
 <section id="work" class="work-section" aria-labelledby="work-title">
   <header class="work-header">
-    <h2 id="work-title">Selected work</h2>
+    <h2 id="work-title" class="work-kicker">01 / Selected work</h2>
 
     <div class="filter-group">
-      <p>Categories</p>
       <div class="project-filters" data-project-filters aria-label="Filter projects">
         <button type="button" class="project-filter-btn is-active" data-filter="all">All</button>
-        {uniqueTags.map((tag) => (
+        {filterTags.map((tag) => (
           <button type="button" class="project-filter-btn" data-filter={tag.toLowerCase()}>{tag}</button>
         ))}
       </div>
@@ -32,6 +42,7 @@ const uniqueTags = Array.from(
       <a
         href={`/work/${project.slug}`}
         data-project-card
+        data-project-slug={project.slug}
         data-project-tags={(project.tags || []).map((tag) => tag.toLowerCase()).join("|")}
         class="project-card"
       >
@@ -45,7 +56,6 @@ const uniqueTags = Array.from(
         <span class="project-shade" aria-hidden="true"></span>
         <div class="project-label">
           <div class="project-label-heading">
-            <span class="project-number">{String(index + 1).padStart(2, "0")}</span>
             <h3>{project.title}</h3>
             <span class="project-open" aria-hidden="true">↗</span>
           </div>
@@ -102,35 +112,31 @@ const uniqueTags = Array.from(
   }
 
   .work-header {
-    display: grid;
-    grid-template-columns: minmax(13rem, 0.85fr) minmax(24rem, 1.15fr);
-    gap: 1.5rem;
-    align-items: center;
-    padding: clamp(1.15rem, 2vw, 1.75rem) var(--page-gutter);
+    --work-header-pad: clamp(1.15rem, 2vw, 1.75rem);
+    position: relative;
+    padding: var(--work-header-pad) var(--page-gutter);
     border-bottom: var(--rule);
   }
 
-  .filter-group > p {
-    margin-bottom: 0.45rem;
+  .work-kicker {
+    position: absolute;
+    top: calc((var(--work-header-pad) - 0.72rem) / 2);
+    left: var(--page-gutter);
+    margin: 0;
     font-size: 0.6rem;
     font-weight: 700;
+    line-height: 1.2;
     letter-spacing: 0.11em;
     text-transform: uppercase;
   }
 
-  h2 {
+  .filter-group {
     margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 3.8vw, 4rem);
-    font-weight: 700;
-    line-height: 0.88;
-    letter-spacing: -0.075em;
-    text-transform: uppercase;
   }
 
   .project-filters {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
     border-top: var(--rule);
     border-left: var(--rule);
   }
@@ -204,6 +210,10 @@ const uniqueTags = Array.from(
       filter 380ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  .project-card[data-project-slug="sidestreat"] img {
+    object-position: right center;
+  }
+
   .project-shade {
     background: linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.08) 55%, rgba(0, 0, 0, 0.78) 100%);
   }
@@ -219,20 +229,15 @@ const uniqueTags = Array.from(
 
   .project-label-heading {
     display: grid;
-    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.7rem;
     align-items: center;
     height: 4.6rem;
     padding: 0 1rem;
   }
 
-  .project-number,
   .project-open {
     font-size: 0.65rem;
-  }
-
-  .project-number {
-    color: rgba(255, 255, 255, 0.52);
   }
 
   h3 {
@@ -250,13 +255,14 @@ const uniqueTags = Array.from(
     width: 1.8rem;
     height: 1.8rem;
     place-items: center;
-    color: var(--ink);
-    background: var(--signal);
+    color: var(--signal);
+    background: transparent;
+    border: 1px solid var(--signal);
   }
 
   .project-detail {
     min-height: 9rem;
-    padding: 0 1rem 1.2rem 3.7rem;
+    padding: 0 1rem 1.2rem;
   }
 
   .project-detail > p {
@@ -305,6 +311,10 @@ const uniqueTags = Array.from(
   }
 
   @media (max-width: 1050px) {
+    .project-filters {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
     .projects-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -320,14 +330,6 @@ const uniqueTags = Array.from(
       scroll-margin-top: var(--mobile-header-height);
     }
 
-    .work-header {
-      grid-template-columns: 1fr;
-      align-items: start;
-    }
-
-    .filter-group {
-      margin-top: 0.5rem;
-    }
   }
 
   @media (max-width: 600px) {

@@ -5,7 +5,7 @@ export const projects = [
     description:
       "An interactive in-store concept designed to make kid participation fun, social, and measurable.",
     image: "/Projects/ChickFilA/Thumb.png",
-    tags: ["Experience Design", "UI/UX"],
+    tags: ["UI/UX", "Retail", "Industrial Design", "Experience Design"],
     role: "Chief Designer",
     medium: "Interactive Retail",
 
@@ -17,8 +17,8 @@ export const projects = [
     title: "Chobani",
     description:
       "A packaging exploration extending Chobani into indulgent Greek yogurt and whole-milk concepts.",
-    image: "/optimized/Projects/Chobani/Brian%20Rodriguez_%20Packaging_Graphic%20Design_Page_10.webp",
-    tags: ["Packaging", "Art Direction", "Graphic Design"],
+    image: "/Projects/Chobani/chobani-hero.webp",
+    tags: ["Branding", "Retail", "Illustration", "Advertising"],
     role: "Packaging Designer",
     medium: "Packaging",
 

@@ -1,8 +1,8 @@
 ---
 title: "Chobani"
 description: "A packaging exploration for Chobani that extends the brand into indulgent Greek yogurt and whole-milk concepts."
-tags: ["Packaging", "Art Direction", "Graphic Design"]
-cover: "/optimized/Projects/Chobani/Brian%20Rodriguez_%20Packaging_Graphic%20Design_Page_10.webp"
+tags: ["Branding", "Retail", "Illustration", "Advertising"]
+cover: "/Projects/Chobani/chobani-hero.webp"
 hero: "/optimized/Projects/Chobani/Brian%20Rodriguez_%20Packaging_Graphic%20Design_Page_10.webp"
 role: "Packaging Designer"
 tools: ["Visual Research", "Sketching", "Packaging Mockups", "Graphic Design"]
