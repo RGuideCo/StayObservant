@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro";
+import CapabilitiesSection from "../components/CapabilitiesSection.astro";
+import SketchbookSection from "../components/SketchbookSection.astro";
+import CvSection from "../components/CvSection.astro";
 import ContactSection from "../components/ContactSection.astro";
 
 const title = "Stay Observant";
@@ -11,18 +14,15 @@ const title = "Stay Observant";
   <Hero
     title="Stay Observant"
     note="Selected work below"
-    primaryCtaText="View work"
-    primaryCtaHref="#work"
+    primaryCtaText="Experience"
+    primaryCtaHref="#cv"
     secondaryCtaText="Contact"
     secondaryCtaHref="#contact"
   />
 
-  <!-- Cream wrapper for lower sections -->
-  <div class="bg-[#F6F3ED] text-zinc-900">
-    <ProjectsGrid />
-
-    <div class="border-t border-black/10">
-      <ContactSection />
-    </div>
-  </div>
+  <ProjectsGrid />
+  <SketchbookSection />
+  <CapabilitiesSection />
+  <CvSection />
+  <ContactSection />
 </Layout>

@@ -1,0 +1,487 @@
+---
+const sketches = [
+  {
+    title: "Iona",
+    src: "/sketchbook/iona.jpg",
+    ratio: "747 / 749",
+  },
+  {
+    title: "Hand Study",
+    src: "/sketchbook/hand.jpg",
+    ratio: "747 / 749",
+  },
+  {
+    title: "Las Mujeres de la Selva",
+    src: "/sketchbook/so-jungle.jpg",
+    ratio: "2000 / 1627",
+  },
+  {
+    title: "Smoke Study",
+    src: "/sketchbook/smoke.png",
+    ratio: "1000 / 1417",
+  },
+  {
+    title: "Hands Composition",
+    src: "/sketchbook/hands-composition.png",
+    ratio: "325 / 517",
+  },
+  {
+    title: "Luis",
+    src: "/sketchbook/luis.webp",
+    ratio: "1 / 1",
+  },
+];
+---
+
+<section id="sketchbook" class="sketchbook-section" aria-labelledby="sketchbook-title">
+  <header class="sketchbook-header">
+    <div>
+      <p>02 / Personal studies</p>
+      <h2 id="sketchbook-title">Sketchbook</h2>
+    </div>
+    <p class="sketchbook-instruction">Swipe + select<br />Click center to view</p>
+  </header>
+
+  <div class="sketchbook-stage" data-sketchbook-stage>
+    <p class="stage-note" aria-hidden="true">Loose studies / 2013—ongoing</p>
+    <span class="coverflow-floor" aria-hidden="true"></span>
+    {sketches.map((sketch, index) => (
+      <button
+        type="button"
+        class="sketch-card"
+        style={`--ratio:${sketch.ratio};`}
+        data-sketch-card
+        data-sketch-index={index}
+        data-src={sketch.src}
+        data-title={sketch.title}
+        aria-label={`View ${sketch.title}`}
+      >
+        <span class="sketch-card-surface">
+          <img src={sketch.src} alt={sketch.title} loading="lazy" decoding="async" draggable="false" />
+        </span>
+      </button>
+    ))}
+  </div>
+
+  <dialog class="sketch-viewer" data-sketch-viewer aria-label="Sketchbook image viewer">
+    <div class="viewer-shell">
+      <div class="viewer-media">
+        <img data-viewer-image alt="" />
+        <button type="button" class="viewer-close" data-viewer-close aria-label="Close image viewer">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    (() => {
+      const stage = document.querySelector("[data-sketchbook-stage]");
+      const cards = Array.from(document.querySelectorAll("[data-sketch-card]"));
+      const viewer = document.querySelector("[data-sketch-viewer]");
+      const viewerImage = viewer?.querySelector("[data-viewer-image]");
+      const closeButton = viewer?.querySelector("[data-viewer-close]");
+      let activeIndex = Math.min(2, cards.length - 1);
+      let suppressClickUntil = 0;
+
+      if (!stage || !viewer || !viewerImage) return;
+
+      const openViewer = (card) => {
+        viewerImage.src = card.getAttribute("data-src") || "";
+        viewerImage.alt = card.getAttribute("data-title") || "Sketchbook artwork";
+        viewer.showModal();
+        document.body.style.overflow = "hidden";
+      };
+
+      const closeViewer = () => {
+        viewer.close();
+        document.body.style.removeProperty("overflow");
+      };
+
+      const updateCoverFlow = () => {
+        const stageWidth = stage.getBoundingClientRect().width;
+        const firstOffset = Math.min(285, Math.max(110, stageWidth * 0.245));
+        const stepOffset = Math.min(105, Math.max(38, stageWidth * 0.09));
+
+        cards.forEach((card, index) => {
+          const position = index - activeIndex;
+          const distance = Math.abs(position);
+          const direction = Math.sign(position);
+          const offset = distance === 0 ? 0 : direction * (firstOffset + (distance - 1) * stepOffset);
+          const turn = distance === 0 ? 0 : direction * (distance === 1 ? -68 : -74);
+          const scale = distance === 0 ? 1 : Math.max(0.72, 0.92 - (distance - 1) * 0.06);
+          const depth = distance === 0 ? 72 : -distance * 44;
+          const isActive = distance === 0;
+
+          card.style.setProperty("--cover-x", `${offset}px`);
+          card.style.setProperty("--cover-turn", `${turn}deg`);
+          card.style.setProperty("--cover-scale", String(scale));
+          card.style.setProperty("--cover-z", `${depth}px`);
+          card.style.zIndex = String(30 - distance);
+          card.classList.toggle("is-active", isActive);
+          card.setAttribute("aria-pressed", String(isActive));
+          card.setAttribute("aria-label", `${isActive ? "View" : "Select"} ${card.getAttribute("data-title")}`);
+        });
+      };
+
+      const selectCard = (index, focus = false) => {
+        activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+        updateCoverFlow();
+        if (focus) cards[activeIndex]?.focus();
+      };
+
+      let wheelAccumulator = 0;
+      let wheelCooldown = 0;
+
+      stage.addEventListener("wheel", (event) => {
+        const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) * 0.75;
+        if (!horizontalIntent || Math.abs(event.deltaX) < 3) return;
+
+        event.preventDefault();
+        if (wheelCooldown) return;
+
+        wheelAccumulator += event.deltaX;
+        if (Math.abs(wheelAccumulator) < 32) return;
+
+        selectCard(activeIndex + (wheelAccumulator > 0 ? 1 : -1));
+        wheelAccumulator = 0;
+        wheelCooldown = window.setTimeout(() => {
+          wheelCooldown = 0;
+        }, 190);
+      }, { passive: false });
+
+      let touchPointerId = null;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchCurrentX = 0;
+      let touchCurrentY = 0;
+
+      stage.addEventListener("pointerdown", (event) => {
+        if (event.pointerType !== "touch") return;
+        touchPointerId = event.pointerId;
+        touchStartX = event.clientX;
+        touchStartY = event.clientY;
+        touchCurrentX = event.clientX;
+        touchCurrentY = event.clientY;
+        stage.setPointerCapture?.(event.pointerId);
+      });
+
+      stage.addEventListener("pointermove", (event) => {
+        if (event.pointerId !== touchPointerId) return;
+        touchCurrentX = event.clientX;
+        touchCurrentY = event.clientY;
+      });
+
+      const finishTouchGesture = (event, cancelled = false) => {
+        if (event.pointerId !== touchPointerId) return;
+        const deltaX = touchCurrentX - touchStartX;
+        const deltaY = touchCurrentY - touchStartY;
+
+        if (!cancelled && Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+          suppressClickUntil = Date.now() + 320;
+          selectCard(activeIndex + (deltaX < 0 ? 1 : -1));
+        }
+
+        if (stage.hasPointerCapture?.(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+        touchPointerId = null;
+      };
+
+      stage.addEventListener("pointerup", (event) => finishTouchGesture(event));
+      stage.addEventListener("pointercancel", (event) => finishTouchGesture(event, true));
+
+      cards.forEach((card, index) => {
+        card.addEventListener("pointermove", (event) => {
+          if (index !== activeIndex || event.pointerType !== "mouse") return;
+          const bounds = card.getBoundingClientRect();
+          const localX = (event.clientX - bounds.left) / bounds.width - 0.5;
+          const localY = (event.clientY - bounds.top) / bounds.height - 0.5;
+          card.style.setProperty("--hover-rx", `${localY * -5}deg`);
+          card.style.setProperty("--hover-ry", `${localX * 6}deg`);
+        });
+
+        card.addEventListener("pointerleave", () => {
+          card.style.setProperty("--hover-rx", "0deg");
+          card.style.setProperty("--hover-ry", "0deg");
+        });
+
+        card.addEventListener("click", () => {
+          if (Date.now() < suppressClickUntil) return;
+          if (index === activeIndex) openViewer(card);
+          else selectCard(index);
+        });
+
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            selectCard(activeIndex - 1, true);
+          }
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            selectCard(activeIndex + 1, true);
+          }
+        });
+      });
+
+      window.addEventListener("resize", updateCoverFlow);
+      updateCoverFlow();
+
+      closeButton?.addEventListener("click", closeViewer);
+      viewer.addEventListener("click", (event) => {
+        if (event.target === viewer) closeViewer();
+      });
+      viewer.addEventListener("close", () => document.body.style.removeProperty("overflow"));
+    })();
+  </script>
+</section>
+
+<style>
+  .sketchbook-section {
+    color: var(--ink);
+    background: #dcd6ca;
+    border-top: var(--rule);
+    border-bottom: var(--rule);
+    scroll-margin-top: 0;
+  }
+
+  .sketchbook-header {
+    display: flex;
+    min-height: 6.75rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.35rem var(--page-gutter) 1.5rem;
+    background: var(--signal);
+    border-bottom: var(--rule);
+  }
+
+  .sketchbook-header p,
+  .stage-note {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .sketchbook-header h2 {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 5.5vw, 5.75rem);
+    font-weight: 700;
+    line-height: 0.78;
+    letter-spacing: -0.075em;
+    text-transform: uppercase;
+  }
+
+  .sketchbook-instruction {
+    flex: none;
+    line-height: 1.55;
+    text-align: right;
+  }
+
+  .sketchbook-stage {
+    position: relative;
+    height: clamp(26rem, 36vw, 33rem);
+    overflow: hidden;
+    perspective: 1050px;
+    perspective-origin: 50% 40%;
+    background:
+      radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.5), transparent 48%),
+      #dcd6ca;
+    isolation: isolate;
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
+  }
+
+  .stage-note {
+    position: absolute;
+    right: var(--page-gutter);
+    bottom: 1.25rem;
+    opacity: 0.55;
+  }
+
+  .coverflow-floor {
+    position: absolute;
+    top: auto;
+    bottom: -0.75rem;
+    left: 50%;
+    z-index: 0;
+    width: min(68%, 52rem);
+    height: 4.5rem;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(8, 8, 8, 0.24) 0%, rgba(8, 8, 8, 0.11) 42%, transparent 74%);
+    filter: blur(13px);
+    transform: translateX(-50%) scaleY(0.46);
+    pointer-events: none;
+  }
+
+  .sketch-card {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: auto;
+    height: clamp(17rem, 32vw, 26rem);
+    aspect-ratio: var(--ratio);
+    padding: 0;
+    color: #f4f0e7;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform:
+      translate3d(calc(-50% + var(--cover-x, 0px)), -50%, var(--cover-z, 0px))
+      rotateX(var(--hover-rx, 0deg))
+      rotateY(calc(var(--cover-turn, 0deg) + var(--hover-ry, 0deg)))
+      scale(var(--cover-scale, 1));
+    transition:
+      transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .sketch-card:focus-visible {
+    outline: none;
+  }
+
+  .sketch-card:focus-visible .sketch-card-surface {
+    outline: 3px solid var(--signal);
+    outline-offset: 4px;
+  }
+
+  .sketch-card:not(.is-active) {
+    filter: saturate(0.82) brightness(0.82);
+  }
+
+  .sketch-card.is-active {
+    filter: none;
+    cursor: zoom-in;
+  }
+
+  .sketch-card-surface {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--ink);
+    transform: translateZ(1px);
+  }
+
+  .sketch-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sketch-viewer {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: auto;
+    padding: 0;
+    color: #f4f0e7;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .sketch-viewer::backdrop {
+    background: rgba(8, 8, 8, 0.86);
+    backdrop-filter: blur(5px);
+  }
+
+  .viewer-shell {
+    display: grid;
+    height: 100%;
+    place-items: center;
+  }
+
+  .viewer-media {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .viewer-close {
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    place-items: center;
+    color: #f4f0e7;
+    background: var(--ink);
+    border: 1px solid rgba(244, 240, 231, 0.55);
+    border-radius: 0;
+    font: 400 1.8rem/1 var(--font-ui);
+    cursor: pointer;
+    transition:
+      color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 340ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .viewer-close:hover,
+  .viewer-close:focus-visible {
+    color: var(--ink);
+    background: var(--signal);
+    outline: none;
+  }
+
+  .viewer-media img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: calc(100vw - 8rem);
+    max-height: calc(100dvh - 8rem);
+    object-fit: contain;
+  }
+
+  @media (max-width: 760px) {
+    .sketchbook-section {
+      scroll-margin-top: var(--mobile-header-height);
+    }
+
+    .sketchbook-header {
+      min-height: 6.25rem;
+    }
+
+    .sketchbook-stage {
+      height: 25rem;
+    }
+
+    .sketch-card {
+      top: 42%;
+      height: 17rem;
+    }
+
+    .sketch-viewer {
+      width: 100vw;
+      height: 100dvh;
+    }
+
+    .viewer-media img {
+      max-width: calc(100vw - 3rem);
+      max-height: calc(100dvh - 6rem);
+    }
+
+    .viewer-close {
+      top: -2.8rem;
+      right: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sketch-card,
+    .sketch-card-surface,
+    .viewer-close {
+      transition: none;
+    }
+  }
+</style>

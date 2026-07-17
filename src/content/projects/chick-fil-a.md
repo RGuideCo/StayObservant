@@ -2,9 +2,9 @@
 title: "Chick-Fil-A"
 description: "An interactive in-store concept designed to make kid participation fun, social, and measurable."
 tags: ["Experience Design", "UI/UX", "Interactive"]
-cover: "/optimized/Projects/ChickFilA/Joy%20Machine/J04.webp"
+cover: "/Projects/ChickFilA/Thumb.png"
 hero: "/optimized/Projects/ChickFilA/Joy%20Machine/J04.webp"
-role: "Experience Designer"
+role: "Chief Designer"
 tools: ["Sketching", "3D Visualization", "Interaction Design"]
 deliverables: ["Concept development", "Interaction model", "UI direction", "Prototype visuals"]
 ---

@@ -4,9 +4,9 @@ export const projects = [
     title: "Chick-Fil-A",
     description:
       "An interactive in-store concept designed to make kid participation fun, social, and measurable.",
-    image: "/optimized/Projects/ChickFilA/Joy%20Machine/J04.webp",
+    image: "/Projects/ChickFilA/Thumb.png",
     tags: ["Experience Design", "UI/UX"],
-    role: "Experience Designer",
+    role: "Chief Designer",
     medium: "Interactive Retail",
 
     sections: [],

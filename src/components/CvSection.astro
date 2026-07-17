@@ -1,0 +1,782 @@
+---
+const experience = [
+  {
+    company: "Symple",
+    role: "Design Director — UI/UX",
+    period: "2022 — Present",
+    location: "Worldwide",
+    description:
+      "Direct UI/UX design and product direction for digital products connected to the tax-sale process across the United States. Manage a design team and create interface systems that support government and business workflows throughout the industry.",
+    bullets: [
+      "Worked on five end-to-end applications supporting a custom adjudicated property workflow.",
+      "Created and managed more than 500 custom components in a comprehensive design system.",
+      "Created more than 2,000 custom assets, including interactive diagrams and more than 1,000 custom icons.",
+    ],
+  },
+  {
+    company: "Freelance Design",
+    role: "Multidisciplinary Designer",
+    period: "Feb 2015 — Present",
+    location: "Worldwide",
+    clients: [
+      [
+        "Berocca",
+        "Packaging design on a new range of packaging across all Berocca products.",
+        "HH Global",
+        [
+          [
+            "Audi & Volkswagen",
+            "Production design on specification sheets and brochures across multiple vehicle models.",
+          ],
+        ],
+      ],
+      [
+        "54 Hundred",
+        "Complete brand identity for a video production company founded in Miami, FL.",
+      ],
+      [
+        "Chick-fil-A",
+        "Experience design for a new kids’ in-restaurant adventure. Spearheaded a major project to introduce themes including philanthropy and farm-to-table through children’s interactions with in-store machines. The project began as a sketch and developed into a working model tested throughout Chick-fil-A stores in the U.S. Also created in-house design solutions for retail and restaurant visual display systems.",
+        "VGS / Studio D",
+      ],
+      [
+        "3M",
+        "In-aisle, end-cap and freestanding retail displays for nationwide Home Depot stores.",
+        "Barrows",
+        [
+          ["Rémy Martin", "Point-of-sale design and key visual development."],
+          ["Prada / Ray-Ban", "Digital, presentation and display design."],
+          [
+            "3M / Heineken / Dove / Suave / Axe / Lipton Tea",
+            "Retail display design.",
+          ],
+        ],
+      ],
+      ["Opperman Weiss / Chobani", "Packaging and digital design for the Indulgence line and Olympic badge packaging initiative."],
+      ["NSG SWAT / Morgans Hotel Group", "Branding, custom illustration and banner advertising."],
+      ["9999 / Axe", "Packaging structure development."],
+      ["Joe Fresh", "Look book, gift guide, store and window graphics."],
+      ["M.A.C", "Holiday retail display design with 3D modeling and CAD."],
+      ["Macy’s / Foot Locker / Slate.com / Knowlita", "Campaign graphics, digital content, presentations, illustration and brand applications."],
+    ],
+  },
+  {
+    company: "Brightbird",
+    role: "Contract Designer",
+    period: "Sep 2014 — Dec 2014",
+    location: "Netherlands",
+    description:
+      "Worked across the complete design process, from sketch development and advanced 3D modeling to physical model revisions and production. Product categories ranged from kitchen appliances to footwear.",
+  },
+  {
+    company: "Workshop Collective",
+    role: "Lead Designer",
+    period: "Nov 2013 — Sep 2014",
+    location: "Miami, FL",
+    description:
+      "Collaborated with a team of marketing, social media and art directors creating designs for brands including Estrella Damm, DeKuyper, Morgans Hotel Group, Jugofresh and Lucky Buddha. Work included advertising campaigns, brand development, logo creation, printed collateral, website development and social media campaigns.",
+  },
+  {
+    company: "Product Design Internships",
+    role: "Industrial & Footwear Design",
+    period: "Early career",
+    location: "United States",
+    description:
+      "Product-design internship experience across footwear, consumer products and brand innovation studios.",
+    clients: [
+      ["Del Toro", "Shoe Design Intern — Miami, FL"],
+      ["Timberland", "Shoe Design Intern — Stratham, NH"],
+      ["LPK", "Product Design Intern — Cincinnati, OH"],
+      ["Hasbro", "Product Design Intern — Providence, RI"],
+      ["Gillette", "Product Design Intern — Boston, MA"],
+    ],
+  },
+];
+
+const skills = [
+  "Figma",
+  "Adobe Creative Cloud",
+  "SolidWorks",
+  "3D Studio Max",
+  "Rhino",
+  "AutoCAD",
+  "ZBrush",
+  "KeyShot",
+  "Sketching",
+  "3D modeling & rendering",
+  "Model making",
+  "Pattern creation",
+  "Project management",
+  "Design strategy",
+  "Photography",
+  "Fluent in English and Spanish",
+];
+
+const awards = [
+  "Dean’s List",
+  "Faculty Select",
+  "CCS Scholarship based on Merit",
+  "Dean’s Scholarship based on Merit",
+  "Gold Key Portfolio",
+];
+---
+
+<section id="cv" class="cv-section" aria-labelledby="cv-title">
+  <div class="cv-primary">
+    <header class="cv-header">
+      <div>
+        <p class="cv-kicker">03 / Curriculum vitae</p>
+        <h2 id="cv-title">Experience</h2>
+      </div>
+
+      <p class="cv-intro">
+        Multidisciplinary design leadership across digital products, brand systems,
+        packaging, experiences and physical product development.
+      </p>
+
+      <section class="cv-education" aria-labelledby="education-title">
+        <p class="supporting-kicker">Education</p>
+        <h3 id="education-title">College for Creative Studies</h3>
+        <p>BFA Product Design · GPA 3.6 · Detroit, 2012</p>
+        <p class="supporting-note">Sponsored projects: Nike, Motorola, Black &amp; Decker</p>
+        <h3>Design and Architecture Senior High</h3>
+        <p>Product Design · Miami, 2008</p>
+      </section>
+
+      <a
+        class="cv-download"
+        href="/BRodriguez-Resume-2026.pdf"
+        download="Brian-Rodriguez-Resume-2026.pdf"
+      >
+        <span>Download résumé</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+    </header>
+
+    <div class="experience-list">
+      {experience.map((item, index) => (
+        <details class="experience-item" open={index === 0}>
+          <summary>
+            <span class="experience-index">{String(index + 1).padStart(2, "0")}</span>
+            <span class="experience-company">{item.company}</span>
+            <span class="experience-role">{item.role}</span>
+            <span class="experience-meta">
+              <span>{item.period}</span>
+              <span>{item.location}</span>
+            </span>
+            <span class="experience-toggle" aria-hidden="true"></span>
+          </summary>
+
+          <div
+            class:list={[
+              "experience-body",
+              { "experience-body--stacked": item.company === "Freelance Design" },
+            ]}
+          >
+            {item.description ? <p>{item.description}</p> : null}
+            {item.bullets ? (
+              <ul class="experience-bullets">
+                {item.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            ) : null}
+            {item.clients ? (
+              <ul class="client-list">
+                {item.clients.map(([client, work, studio, additionalClients = []]) => (
+                  <li>
+                    {studio ? <span class="client-studio">{studio}</span> : null}
+                    <strong>{client}</strong>
+                    <span>{work}</span>
+                    {additionalClients.map(([additionalClient, additionalWork]) => (
+                      <div class="client-secondary">
+                        <strong>{additionalClient}</strong>
+                        <span>{additionalWork}</span>
+                      </div>
+                    ))}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <div class="cv-supporting">
+    <section aria-labelledby="skills-title">
+      <p class="supporting-kicker">Skills &amp; proficiencies</p>
+      <h3 id="skills-title" class="sr-only">Skills and proficiencies</h3>
+      <ul class="skills-list">
+        {skills.map((skill) => <li>{skill}</li>)}
+      </ul>
+    </section>
+
+    <section aria-labelledby="awards-title">
+      <p class="supporting-kicker">Awards</p>
+      <h3 id="awards-title" class="sr-only">Awards</h3>
+      <ul class="awards-list">
+        {awards.map((award) => <li>{award}</li>)}
+      </ul>
+    </section>
+  </div>
+</section>
+
+<style>
+  .cv-section {
+    color: var(--ink);
+    background: var(--paper);
+    border-bottom: var(--rule);
+    scroll-margin-top: 0;
+  }
+
+  .cv-primary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: stretch;
+    background: var(--paper);
+  }
+
+  .cv-header {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: clamp(2rem, 3.5vw, 3.75rem) clamp(1.5rem, 2.5vw, 2.75rem);
+    background: var(--signal);
+    border-right: var(--rule);
+  }
+
+  .cv-kicker,
+  .supporting-kicker {
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .cv-header h2 {
+    margin: clamp(2.5rem, 5vw, 5rem) 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 4.4vw, 5rem);
+    font-weight: 700;
+    line-height: 0.72;
+    letter-spacing: -0.08em;
+    text-transform: uppercase;
+  }
+
+  .cv-intro {
+    max-width: 24rem;
+    margin-top: clamp(2rem, 4vw, 4rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.45vw, 1.55rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .cv-education {
+    margin-top: clamp(2rem, 3vw, 3rem);
+    padding-top: 1rem;
+    border-top: var(--rule);
+  }
+
+  .cv-education h3 {
+    margin: 1rem 0 0.25rem;
+    font-family: var(--font-display);
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .cv-education > p:not(.supporting-kicker) {
+    font-size: 0.67rem;
+    line-height: 1.45;
+  }
+
+  .cv-education .supporting-note {
+    margin-top: 0.45rem;
+    color: rgba(8, 8, 8, 0.65);
+  }
+
+  .cv-download {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    margin-top: clamp(2rem, 4vw, 4rem);
+    color: #fff;
+    background: var(--ink);
+    border: var(--rule);
+    text-decoration: none;
+    font-size: 0.67rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+      color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .cv-download:hover,
+  .cv-download:focus-visible {
+    color: var(--ink);
+    background: var(--paper);
+    outline: none;
+  }
+
+  .experience-item {
+    position: relative;
+    border-bottom: var(--rule);
+  }
+
+  .experience-list {
+    min-width: 0;
+    background: var(--paper);
+  }
+
+  .experience-item summary {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 2rem minmax(10rem, 1.2fr) minmax(9rem, 0.8fr) minmax(8.5rem, 0.7fr) 1.25rem;
+    gap: 0.75rem;
+    align-items: center;
+    min-height: 4.5rem;
+    padding: 0.65rem clamp(1rem, 2vw, 2rem);
+    background: var(--paper);
+    cursor: pointer;
+    list-style: none;
+    transition:
+      color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .experience-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .experience-item summary:hover,
+  .experience-item summary:focus-visible {
+    color: #fff;
+    background: #1b1b1b;
+    outline: none;
+  }
+
+  .experience-item[open] summary {
+    color: #fff;
+    background: var(--ink);
+  }
+
+  .experience-index {
+    font-size: 0.61rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+  }
+
+  .experience-company {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.8vw, 2rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+  }
+
+  .experience-role {
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .experience-meta {
+    display: grid;
+    gap: 0.25rem;
+    color: currentColor;
+    font-size: 0.54rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.68;
+  }
+
+  .experience-toggle {
+    position: relative;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .experience-toggle::before,
+  .experience-toggle::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 0.5px);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .experience-toggle::after {
+    transform: rotate(90deg);
+  }
+
+  .experience-item[open] .experience-toggle::after {
+    transform: rotate(0deg);
+  }
+
+  .experience-body {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.6fr);
+    gap: 2rem;
+    padding: clamp(1.5rem, 3vw, 3rem) var(--page-gutter);
+    background: #e8e4db;
+    border-top: var(--rule);
+  }
+
+  .experience-body > p {
+    max-width: 38rem;
+    font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+    line-height: 1.6;
+  }
+
+  .experience-body--stacked {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-body--stacked > p {
+    max-width: 48rem;
+  }
+
+  .experience-bullets {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--rule);
+    border-left: var(--rule);
+  }
+
+  .experience-bullets li {
+    position: relative;
+    padding: 0.8rem 0.85rem 0.8rem 2rem;
+    border-right: var(--rule);
+    border-bottom: var(--rule);
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+
+  .experience-bullets li::before {
+    content: "●";
+    position: absolute;
+    top: 0.95rem;
+    left: 0.8rem;
+    font-size: 0.38rem;
+  }
+
+  .client-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--rule);
+    border-left: var(--rule);
+  }
+
+  .client-list li {
+    display: grid;
+    gap: 0.35rem;
+    min-height: 6rem;
+    align-content: start;
+    padding: 0.85rem;
+    border-right: var(--rule);
+    border-bottom: var(--rule);
+  }
+
+  .client-list strong {
+    font-size: 0.67rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .client-list span {
+    color: #5c5952;
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .client-list .client-studio {
+    color: #6a665e;
+    font-size: 0.54rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .client-secondary {
+    position: relative;
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.45rem;
+    padding-top: 0.85rem;
+  }
+
+  .client-secondary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58%;
+    height: 1px;
+    background: rgba(8, 8, 8, 0.45);
+  }
+
+  .cv-supporting {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    background: var(--paper);
+  }
+
+  .cv-supporting > section {
+    min-width: 0;
+    padding: clamp(1.75rem, 3.5vw, 3.5rem) var(--page-gutter);
+    border-right: var(--rule);
+  }
+
+  .cv-supporting > section:last-child {
+    border-right: 0;
+  }
+
+  .cv-supporting h3 {
+    margin: 1.5rem 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.55vw, 1.65rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+
+  .cv-supporting section > p:not(.supporting-kicker) {
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .supporting-note {
+    margin-top: 0.55rem;
+    color: #656159;
+  }
+
+  .skills-list,
+  .awards-list {
+    display: grid;
+    gap: 0;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--rule);
+    border-left: var(--rule);
+  }
+
+  .skills-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-list li,
+  .awards-list li {
+    min-width: 0;
+    padding: 0.55rem 0.65rem;
+    border-right: var(--rule);
+    border-bottom: var(--rule);
+    font-size: 0.66rem;
+    font-weight: 650;
+    line-height: 1.25;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 1120px) {
+    .experience-item summary {
+      grid-template-columns: 2rem minmax(0, 1fr) minmax(9rem, 0.75fr) 1.25rem;
+    }
+
+    .experience-role {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .experience-meta {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+    }
+
+    .experience-toggle {
+      grid-column: 4;
+      grid-row: 1 / span 2;
+    }
+
+    .experience-body {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-supporting {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .cv-section {
+      scroll-margin-top: var(--mobile-header-height);
+    }
+
+    .cv-primary {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-header {
+      border-right: 0;
+      border-bottom: var(--rule);
+    }
+
+    .cv-header h2 {
+      margin-top: 3rem;
+    }
+
+    .experience-item summary {
+      grid-template-columns: 1.6rem minmax(0, 1fr) 1.2rem;
+      gap: 0.8rem;
+      min-height: 5.35rem;
+      padding-inline: 1rem;
+    }
+
+    .experience-role {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .experience-meta {
+      grid-column: 2;
+      grid-row: 3;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .experience-toggle {
+      grid-column: 3;
+      grid-row: 1 / span 3;
+    }
+
+    .experience-body {
+      padding-inline: 1rem;
+    }
+
+    .client-list {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-supporting {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-supporting > section,
+    .cv-supporting > section:first-child {
+      grid-column: auto;
+      border-right: 0;
+      border-bottom: var(--rule);
+    }
+
+    .cv-supporting > section:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>
+
+<script>
+  const setupExperienceAccordions = () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    document
+      .querySelectorAll<HTMLDetailsElement>(".experience-item")
+      .forEach((details) => {
+        if (details.dataset.animated === "true") return;
+
+        const summary = details.querySelector<HTMLElement>("summary");
+        const body = details.querySelector<HTMLElement>(".experience-body");
+
+        if (!summary || !body) return;
+        details.dataset.animated = "true";
+
+        let heightAnimation: Animation | null = null;
+        let targetOpen = details.open;
+
+        const finish = (open: boolean) => {
+          details.open = open;
+          details.style.height = "";
+          details.style.overflow = "";
+          heightAnimation = null;
+        };
+
+        const animate = (open: boolean) => {
+          if (reducedMotion.matches) {
+            finish(open);
+            return;
+          }
+
+          const startHeight = details.getBoundingClientRect().height;
+
+          heightAnimation?.cancel();
+
+          details.style.height = `${startHeight}px`;
+          details.style.overflow = "hidden";
+
+          if (open) details.open = true;
+
+          const endHeight = open
+            ? summary.offsetHeight + body.offsetHeight
+            : summary.offsetHeight;
+          const travel = Math.abs(endHeight - startHeight);
+          const duration = Math.min(950, Math.max(480, 400 + travel * 0.38));
+
+          const nextHeightAnimation = details.animate(
+            {
+              height: [`${startHeight}px`, `${endHeight}px`],
+            },
+            {
+              duration,
+              easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+            },
+          );
+          heightAnimation = nextHeightAnimation;
+
+          nextHeightAnimation.onfinish = () => finish(open);
+          nextHeightAnimation.oncancel = () => {
+            if (heightAnimation === nextHeightAnimation) heightAnimation = null;
+          };
+        };
+
+        summary.addEventListener("click", (event) => {
+          event.preventDefault();
+          targetOpen = !targetOpen;
+          animate(targetOpen);
+        });
+      });
+  };
+
+  setupExperienceAccordions();
+  document.addEventListener("astro:page-load", setupExperienceAccordions);
+</script>

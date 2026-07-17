@@ -1,57 +1,93 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
-/* Base */
 :root {
-  --font-ui: "Geist", "Inter", "Segoe UI", sans-serif;
-  --font-display: "Geist", "Inter", "Segoe UI", sans-serif;
+  --font-ui: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --ink: #080808;
+  --paper: #f2efe7;
+  --signal: #f03a22;
+  --rule: 1px solid var(--ink);
+  --sidebar-width: 6.75rem;
+  --mobile-header-height: 3.75rem;
+  --page-gutter: clamp(1rem, 3vw, 3.5rem);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--ink);
 }
 
 body {
-  background: #0b0b0f;
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
   font-family: var(--font-ui);
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
 }
 
-/* Layout helpers */
-.container-page {
-  @apply max-w-6xl mx-auto px-6;
+body,
+button,
+a {
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+h1,
+h2,
+h3,
+dl,
+dd {
+  margin: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  color: var(--ink);
+  background: var(--signal);
+}
+
+.site-main {
+  min-width: 0;
+  margin-left: var(--sidebar-width);
+  overflow: clip;
+}
+
+.container-page,
+.case-container {
+  width: 100%;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
 }
 
 .section-pad {
-  @apply py-16;
+  padding-block: clamp(3rem, 6vw, 6rem);
 }
 
-.case-container {
-  @apply max-w-6xl mx-auto px-6;
-}
-
-/* =========================================
-   Markdown / Content Collections rendering
-   (THE FIX for touching consecutive images)
-========================================= */
-
-/* Make images block-level so margins actually create space */
 .project-content :where(img) {
   display: block;
   width: 100%;
   height: auto;
 }
 
-/* If markdown outputs <p><img><img></p>, this forces a gap */
 .project-content :where(img + img) {
   margin-top: 48px;
 }
 
-/* If images are wrapped in <p>, put spacing on the images */
 .project-content :where(p > img) {
   margin: 48px 0;
 }
 
-/* Optional: if your pipeline outputs <picture> (common with optimizers) */
 .project-content :where(picture) {
   display: block;
 }
@@ -60,10 +96,32 @@ body {
   margin-top: 48px;
 }
 
-/* Optional: if figures appear */
 .project-content :where(figure) {
   margin: 48px 0;
 }
+
 .project-content :where(figure + figure) {
   margin-top: 48px;
+}
+
+@media (max-width: 760px) {
+  .site-main {
+    margin-left: 0;
+    padding-top: var(--mobile-header-height);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

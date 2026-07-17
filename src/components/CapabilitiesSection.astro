@@ -1,0 +1,611 @@
+---
+const capabilities = [
+  {
+    title: "UI/UX",
+    label: "Digital systems",
+    image: "/capabilities/UIUX.png",
+    imageAlt: "Illustration of a digital interface emerging from a mobile device",
+    summary:
+      "End-to-end digital product design for complex tools and services. I translate research and business requirements into intuitive flows, scalable interface systems and production-ready experiences, working from early strategy through prototyping, testing and developer handoff.",
+    services: [
+      "Product strategy & discovery",
+      "Information architecture & user flows",
+      "Wireframes & interactive prototypes",
+      "Interface & interaction design",
+      "Design systems & component libraries",
+      "Usability testing & developer handoff",
+    ],
+  },
+  {
+    title: "Industrial Design",
+    label: "Physical products",
+    image: "/capabilities/PD.png",
+    imageAlt: "Illustration of three-dimensional forms, a pencil and a sketch",
+    summary:
+      "Physical product development that moves from research and early sketch exploration into refined form, CAD, materials and working prototypes. The process balances user needs, manufacturability and a distinct visual point of view through production direction.",
+    services: [
+      "Research & opportunity framing",
+      "Concept sketching & form development",
+      "CAD & surface modeling",
+      "CMF & material direction",
+      "Physical prototyping & model making",
+      "Visualization & production handoff",
+    ],
+  },
+  {
+    title: "Illustration",
+    label: "Visual storytelling",
+    image: "/capabilities/Brush.png",
+    imageAlt: "Illustration of a paint brush resting inside an artist palette",
+    summary:
+      "Custom illustration systems that give brands, products and stories a recognizable visual voice. Work ranges from editorial and campaign imagery to icons, storyboards and scalable asset libraries, with every style shaped around the audience and application.",
+    services: [
+      "Brand & campaign illustration",
+      "Editorial & narrative artwork",
+      "Icon & asset systems",
+      "Storyboards & concept frames",
+      "Digital painting & image-making",
+      "Custom visual language development",
+    ],
+  },
+];
+---
+
+<section id="capabilities" class="capabilities-section" aria-labelledby="capabilities-title">
+  <header class="section-intro">
+    <p class="section-kicker">03 / Capabilities</p>
+    <h2 id="capabilities-title">Design that moves between dimensions.</h2>
+    <p class="section-note">Choose a sector</p>
+  </header>
+
+  <div
+    class="capabilities-carousel"
+    data-capability-carousel
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Design capabilities"
+  >
+    {capabilities.map((capability, index) => (
+      <article
+        class:list={["capability-card", { "is-active": index === 0 }]}
+        data-capability-card
+      >
+        <button
+          class="capability-trigger"
+          type="button"
+          aria-expanded={index === 0 ? "true" : "false"}
+          aria-controls={`capability-panel-${index}`}
+          data-capability-trigger
+        >
+          <span class="sr-only">View {capability.title} capabilities</span>
+        </button>
+
+        <div class="capability-card-content">
+          <span class="capability-index">{String(index + 1).padStart(2, "0")}</span>
+          <span class="capability-visual">
+            <img src={capability.image} alt={capability.imageAlt} loading="lazy" decoding="async" />
+          </span>
+          <div class="capability-information">
+            <span class="capability-heading">
+              <span>{capability.label}</span>
+              <strong>{capability.title}</strong>
+            </span>
+
+            <div
+              id={`capability-panel-${index}`}
+              class="capability-panel"
+              aria-hidden={index === 0 ? "false" : "true"}
+              data-capability-panel
+            >
+              <div class="capability-panel-inner">
+                <div class="capability-panel-content">
+                  <p>{capability.summary}</p>
+                  <ul>
+                    {capability.services.map((service) => <li>{service}</li>)}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="capability-state" aria-hidden="true"></span>
+        </div>
+      </article>
+    ))}
+  </div>
+
+</section>
+
+<style>
+  .capabilities-section {
+    color: var(--ink);
+    background: var(--paper);
+    border-top: var(--rule);
+    scroll-margin-top: 1rem;
+  }
+
+  .section-intro {
+    display: grid;
+    grid-template-columns: minmax(7rem, 0.7fr) minmax(0, 2fr) minmax(10rem, 0.8fr);
+    gap: 1.25rem;
+    align-items: start;
+    padding: clamp(1rem, 1.6vw, 1.5rem) var(--page-gutter);
+    border-bottom: var(--rule);
+  }
+
+  .section-kicker,
+  .section-note {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .section-note {
+    justify-self: end;
+    color: #5f5d57;
+  }
+
+  h2 {
+    max-width: none;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.15vw, 2.35rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .capabilities-carousel {
+    display: grid;
+    grid-template-columns: 2fr 0.72fr 0.72fr;
+    min-height: 23rem;
+    border-left: var(--rule);
+    transition: grid-template-columns 620ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .capabilities-carousel:has(.capability-card:nth-child(2).is-active) {
+    grid-template-columns: 0.72fr 2fr 0.72fr;
+  }
+
+  .capabilities-carousel:has(.capability-card:nth-child(3).is-active) {
+    grid-template-columns: 0.72fr 0.72fr 2fr;
+  }
+
+  .capability-card {
+    position: relative;
+    min-width: 0;
+    background: var(--paper);
+    border-right: var(--rule);
+    border-bottom: var(--rule);
+    transition: background-color 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .capability-card.is-active {
+    background: #e8e4db;
+  }
+
+  .capability-trigger {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: background-color 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .capability-card:not(.is-active) .capability-trigger:hover,
+  .capability-card:not(.is-active) .capability-trigger:focus-visible {
+    background: rgba(8, 8, 8, 0.055);
+    outline: none;
+  }
+
+  .capability-trigger:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: -2px;
+  }
+
+  .capability-card-content {
+    position: relative;
+    min-height: 23rem;
+    overflow: hidden;
+  }
+
+  .capability-index {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    font-size: 0.58rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+  }
+
+  .capability-visual {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: grid;
+    width: calc(100% - 2rem);
+    height: calc(100% - 10.5rem);
+    overflow: hidden;
+    place-items: center;
+    transition:
+      top 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      left 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      width 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      height 620ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .capability-card.is-active .capability-visual {
+    top: 1rem;
+    left: 1rem;
+    width: 34%;
+    height: calc(100% - 2rem);
+  }
+
+  .capability-visual img {
+    display: block;
+    width: auto;
+    height: clamp(8rem, 12vw, 11rem);
+    max-width: 100%;
+    object-fit: contain;
+    transition:
+      height 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      transform 620ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .capability-card.is-active .capability-visual img {
+    height: clamp(10rem, 16vw, 13.5rem);
+  }
+
+  .capability-card:not(.is-active) .capability-visual img {
+    transform: scale(0.95);
+  }
+
+  .capability-information {
+    position: absolute;
+    top: calc(100% - 8.5rem);
+    left: 1rem;
+    display: flex;
+    width: calc(100% - 2rem);
+    height: 7.5rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    border-left: 1px solid transparent;
+    transition:
+      top 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      left 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      width 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      height 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      padding 620ms cubic-bezier(0.65, 0, 0.35, 1),
+      border-color 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .capability-card.is-active .capability-information {
+    top: 1rem;
+    left: calc(34% + 2rem);
+    width: calc(66% - 3rem);
+    justify-content: flex-start;
+    padding-left: 1rem;
+    height: calc(100% - 2rem);
+    border-left-color: var(--ink);
+  }
+
+  .capability-heading {
+    display: grid;
+    gap: 0.25rem;
+    padding-top: 0.75rem;
+    border-top: var(--rule);
+  }
+
+  .capability-card:not(.is-active) .capability-heading {
+    min-height: 5.75rem;
+  }
+
+  .capability-card.is-active .capability-heading {
+    padding-top: 0;
+    padding-bottom: 0.8rem;
+    border-top-color: transparent;
+  }
+
+  .capability-heading > span {
+    color: #666159;
+    font-size: 0.55rem;
+    font-weight: 750;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .capability-heading strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 2.25rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+  }
+
+  .capability-state {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .capability-state::before,
+  .capability-state::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 0.5px);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .capability-state::after {
+    transform: rotate(90deg);
+  }
+
+  .capability-card.is-active .capability-state::after {
+    transform: rotate(0deg);
+  }
+
+  .capability-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    border-top: 1px solid transparent;
+    transition:
+      grid-template-rows 520ms cubic-bezier(0.65, 0, 0.35, 1),
+      opacity 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .capability-card.is-active .capability-panel {
+    grid-template-rows: 1fr;
+    flex: 1 1 auto;
+    opacity: 1;
+    border-top-color: var(--ink);
+  }
+
+  .capability-panel-inner {
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .capability-panel-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+    height: 100%;
+    align-content: start;
+    padding: 0.85rem 0 0;
+  }
+
+  .capability-panel-content > p {
+    font-size: 0.74rem;
+    line-height: 1.5;
+  }
+
+  .capability-panel-content ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--rule);
+    border-left: var(--rule);
+  }
+
+  .capability-panel-content li {
+    padding: 0.48rem 0.55rem;
+    border-right: var(--rule);
+    border-bottom: var(--rule);
+    font-size: 0.61rem;
+    font-weight: 650;
+    line-height: 1.25;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 900px) {
+    .section-intro {
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    .section-note {
+      justify-self: start;
+    }
+
+    h2 {
+      white-space: normal;
+    }
+
+    .capabilities-carousel,
+    .capabilities-carousel:has(.capability-card:nth-child(2).is-active),
+    .capabilities-carousel:has(.capability-card:nth-child(3).is-active) {
+      display: block;
+      min-height: 0;
+    }
+
+    .capability-card-content,
+    .capability-card.is-active .capability-card-content {
+      display: grid;
+      grid-template-columns: 6rem minmax(0, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+      min-height: 7rem;
+      align-items: center;
+      padding: 0.75rem 1rem;
+    }
+
+    .capability-index {
+      top: 0.65rem;
+    }
+
+    .capability-visual {
+      position: static;
+      width: auto;
+      height: auto;
+      min-height: 5.5rem;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .capability-card.is-active .capability-visual {
+      position: static;
+      width: auto;
+      height: auto;
+    }
+
+    .capability-visual img,
+    .capability-card.is-active .capability-visual img {
+      height: 5.5rem;
+    }
+
+    .capability-information,
+    .capability-card.is-active .capability-information {
+      position: static;
+      width: auto;
+      height: auto;
+      grid-column: 2;
+      grid-row: 1;
+      justify-content: center;
+      padding-left: 1rem;
+      border-left: var(--rule);
+    }
+
+    .capability-state {
+      top: 3rem;
+      bottom: auto;
+    }
+
+    .capability-panel-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .capability-card-content,
+    .capability-card.is-active .capability-card-content {
+      grid-template-columns: 4.75rem minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .capability-visual img,
+    .capability-card.is-active .capability-visual img {
+      height: 4.75rem;
+    }
+
+    .capability-panel-content ul {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .capabilities-carousel,
+    .capability-card,
+    .capability-trigger,
+    .capability-visual,
+    .capability-information,
+    .capability-visual img,
+    .capability-state::after,
+    .capability-panel {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>
+
+<script>
+  const setupCapabilityCarousels = () => {
+    document
+      .querySelectorAll<HTMLElement>("[data-capability-carousel]")
+      .forEach((carousel) => {
+        if (carousel.dataset.ready === "true") return;
+        carousel.dataset.ready = "true";
+
+        const cards = Array.from(
+          carousel.querySelectorAll<HTMLElement>("[data-capability-card]"),
+        );
+        const triggers = cards.map((card) =>
+          card.querySelector<HTMLButtonElement>("[data-capability-trigger]"),
+        );
+        const panels = cards.map((card) =>
+          card.querySelector<HTMLElement>("[data-capability-panel]"),
+        );
+
+        if (!cards.length || triggers.some((trigger) => !trigger)) return;
+
+        let activeIndex = Math.max(
+          0,
+          cards.findIndex((card) => card.classList.contains("is-active")),
+        );
+
+        const selectCapability = (index: number, focus = false) => {
+          const nextIndex = (index + cards.length) % cards.length;
+
+          if (nextIndex === activeIndex) {
+            if (focus) triggers[activeIndex]?.focus();
+            return;
+          }
+
+          activeIndex = nextIndex;
+
+          cards.forEach((card, cardIndex) => {
+            const isActive = cardIndex === activeIndex;
+            card.classList.toggle("is-active", isActive);
+            triggers[cardIndex]?.setAttribute("aria-expanded", String(isActive));
+            panels[cardIndex]?.setAttribute("aria-hidden", String(!isActive));
+          });
+
+          if (focus) triggers[activeIndex]?.focus();
+        };
+
+        triggers.forEach((trigger, index) => {
+          trigger?.addEventListener("click", () => selectCapability(index));
+          trigger?.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight") {
+              event.preventDefault();
+              selectCapability(activeIndex + 1, true);
+            } else if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              selectCapability(activeIndex - 1, true);
+            } else if (event.key === "Home") {
+              event.preventDefault();
+              selectCapability(0, true);
+            } else if (event.key === "End") {
+              event.preventDefault();
+              selectCapability(cards.length - 1, true);
+            }
+          });
+        });
+
+      });
+  };
+
+  setupCapabilityCarousels();
+  document.addEventListener("astro:page-load", setupCapabilityCarousels);
+</script>
