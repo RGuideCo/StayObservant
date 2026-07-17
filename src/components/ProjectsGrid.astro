@@ -23,10 +23,8 @@ const filterTags = [
 ];
 ---
 
-<section id="work" class="work-section" aria-labelledby="work-title">
+<section id="work" class="work-section" aria-label="Selected work">
   <header class="work-header">
-    <h2 id="work-title" class="work-kicker">01 / Selected work</h2>
-
     <div class="filter-group">
       <div class="project-filters" data-project-filters aria-label="Filter projects">
         <button type="button" class="project-filter-btn is-active" data-filter="all">All</button>
@@ -112,22 +110,8 @@ const filterTags = [
   }
 
   .work-header {
-    --work-header-pad: clamp(1.15rem, 2vw, 1.75rem);
-    position: relative;
-    padding: var(--work-header-pad) var(--page-gutter);
+    padding: clamp(1.15rem, 2vw, 1.75rem) var(--page-gutter);
     border-bottom: var(--rule);
-  }
-
-  .work-kicker {
-    position: absolute;
-    top: calc((var(--work-header-pad) - 0.72rem) / 2);
-    left: var(--page-gutter);
-    margin: 0;
-    font-size: 0.6rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
   }
 
   .filter-group {

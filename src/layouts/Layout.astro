@@ -1,9 +1,12 @@
 ---
 import "../styles/global.css";
 import SiteSidebar from "../components/SiteSidebar.astro";
-import logoUrl from "../assets/Logo.svg";
+import logoSvg from "../assets/Logo.svg?raw";
 
 const { title = "Stay Observant" } = Astro.props;
+const faviconUrl = `data:image/svg+xml,${encodeURIComponent(
+  logoSvg.replace('fill="currentColor"', 'fill="#777777"')
+)}`;
 ---
 
 <!doctype html>
@@ -11,7 +14,7 @@ const { title = "Stay Observant" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href={logoUrl.src} />
+    <link rel="icon" type="image/svg+xml" href={faviconUrl} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
