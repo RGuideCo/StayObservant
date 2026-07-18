@@ -1,5 +1,18 @@
 export const projects = [
   {
+    slug: "nike-ko",
+    title: "Nike KO",
+    description:
+      "A connected boxing ecosystem that turns training and competition data into feedback, identity, and a richer athlete experience.",
+    image: "/optimized/Projects/NikeKO/thumb.webp",
+    tags: ["Industrial Design", "UI/UX", "Experience Design", "Branding"],
+    role: "Industrial Designer",
+    medium: "Connected Product Ecosystem",
+
+    sections: [],
+  },
+
+  {
     slug: "chick-fil-a",
     title: "Chick-Fil-A",
     description:

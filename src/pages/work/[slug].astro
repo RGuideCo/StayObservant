@@ -977,6 +977,679 @@ const project = entry.data;
     display: none;
   }
 
+  /* Interactive graphic novel */
+  .project-content .project-flipbook {
+    --flipbook-accent: #ba1723;
+    margin: 2.75rem 0 0;
+    padding: 0 0 1rem;
+    overflow: visible;
+    color: #18181b;
+    background: transparent;
+    border: 0;
+  }
+
+  .project-content .flipbook-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.7fr);
+    align-items: end;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .project-content .flipbook-eyebrow {
+    display: block;
+    color: #71717a;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .project-content .flipbook-title {
+    margin-top: 0.18rem;
+    color: #09090b;
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.25vw, 2rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+
+  .project-content .flipbook-hint {
+    justify-self: end;
+    max-width: 20rem;
+    color: #71717a;
+    font-size: 0.7rem;
+    line-height: 1.45;
+    text-align: right;
+  }
+
+  .project-content .flipbook-stage {
+    position: relative;
+    aspect-ratio: 51 / 33;
+    overflow: visible;
+    touch-action: pan-y;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    perspective: 1800px;
+    isolation: isolate;
+  }
+
+  .project-content .flipbook-stage::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    right: 7%;
+    bottom: -1.3rem;
+    left: 7%;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(24, 24, 27, 0.24);
+    filter: blur(16px);
+    transform: scaleY(0.72);
+    pointer-events: none;
+    transition: right 420ms cubic-bezier(0.22, 1, 0.36, 1), left 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-content .project-flipbook.is-cover-page .flipbook-stage::after {
+    right: 28%;
+    left: 28%;
+  }
+
+  .project-content .flipbook-stage:focus-visible {
+    outline: 2px solid var(--flipbook-accent);
+    outline-offset: 8px;
+  }
+
+  .project-content .flipbook-sheets,
+  .project-content .flipbook-page {
+    position: absolute;
+    inset: 0;
+  }
+
+  .project-content .flipbook-sheets {
+    z-index: 2;
+    transform-style: preserve-3d;
+  }
+
+  .project-content .flipbook-page {
+    z-index: 1;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    background: transparent;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform, opacity, filter;
+  }
+
+  .project-content .flipbook-page.is-active {
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .project-content .flipbook-page:not(.is-cover)::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 50%;
+    z-index: 3;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(255, 255, 255, 0.55), rgba(0, 0, 0, 0.12));
+    box-shadow: 0 0 22px rgba(0, 0, 0, 0.18);
+    pointer-events: none;
+  }
+
+  .project-content .project-flipbook .flipbook-page img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: contain;
+    user-select: none;
+    background: #fff;
+    box-shadow:
+      0 2px 3px rgba(24, 24, 27, 0.16),
+      0 18px 35px rgba(24, 24, 27, 0.2),
+      0 38px 70px rgba(24, 24, 27, 0.16);
+  }
+
+  .project-content .project-flipbook .flipbook-page.is-cover img {
+    width: auto;
+    max-width: 50%;
+    margin-inline: auto;
+  }
+
+  .project-content .project-flipbook .flipbook-page.is-cover::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0.38rem;
+    right: calc(25% - 0.42rem);
+    bottom: -0.42rem;
+    left: calc(25% + 0.42rem);
+    background: #e7e2da;
+    box-shadow:
+      3px 2px 0 #f8f5ef,
+      7px 5px 0 #d4cec5,
+      12px 10px 18px rgba(24, 24, 27, 0.18);
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+  }
+
+  .project-content .project-flipbook .flipbook-page.is-cover.is-cover-turning::before {
+    opacity: 0;
+  }
+
+  .project-content .flipbook-turn-sheet {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    transform-style: preserve-3d;
+    will-change: transform, filter;
+    pointer-events: none;
+  }
+
+  .project-content .flipbook-turn-sheet.is-forward {
+    left: 50%;
+    transform-origin: left center;
+  }
+
+  .project-content .flipbook-turn-sheet.is-backward {
+    left: 0;
+    transform-origin: right center;
+  }
+
+  .project-content .flipbook-turn-face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    border-radius: inherit;
+    backface-visibility: hidden;
+  }
+
+  .project-content .flipbook-turn-face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(9, 9, 11, 0.28), transparent 16%, transparent 72%, rgba(255, 255, 255, 0.2));
+    opacity: 0.62;
+    pointer-events: none;
+  }
+
+  .project-content .flipbook-turn-face--back {
+    transform: rotateY(180deg);
+  }
+
+  .project-content .flipbook-turn-sheet.is-forward .flipbook-turn-face--front,
+  .project-content .flipbook-turn-sheet.is-backward .flipbook-turn-face--back {
+    background-position: right center;
+  }
+
+  .project-content .flipbook-turn-sheet.is-forward .flipbook-turn-face--back,
+  .project-content .flipbook-turn-sheet.is-backward .flipbook-turn-face--front {
+    background-position: left center;
+  }
+
+  .project-content .flipbook-turn-sheet.is-backward .flipbook-turn-face::after {
+    background: linear-gradient(270deg, rgba(9, 9, 11, 0.28), transparent 16%, transparent 72%, rgba(255, 255, 255, 0.2));
+  }
+
+  .project-content .flipbook-cover-turn {
+    backface-visibility: hidden;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    will-change: transform, opacity, filter;
+  }
+
+  .project-content .flipbook-edge {
+    --peel-size: clamp(3.25rem, 7.5vw, 5.6rem);
+    position: absolute;
+    z-index: 6;
+    top: 0;
+    bottom: 0;
+    width: 18%;
+    padding: 0;
+    color: #18181b;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    overflow: visible;
+    transition: right 420ms cubic-bezier(0.22, 1, 0.36, 1), left 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-content .flipbook-edge--prev {
+    left: 0;
+  }
+
+  .project-content .flipbook-edge--next {
+    right: 0;
+  }
+
+  .project-content .project-flipbook.is-cover-page .flipbook-edge--prev {
+    left: 25%;
+  }
+
+  .project-content .project-flipbook.is-cover-page .flipbook-edge--next {
+    right: 25%;
+  }
+
+  .project-content .flipbook-edge::before,
+  .project-content .flipbook-edge::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: var(--peel-size);
+    height: var(--peel-size);
+    opacity: 0;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    pointer-events: none;
+    transition:
+      opacity 240ms ease,
+      transform 460ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-content .flipbook-edge::before {
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.38);
+    filter: blur(4px);
+  }
+
+  .project-content .flipbook-edge::after {
+    z-index: 2;
+    background: linear-gradient(225deg, #fff 0 38%, #f4f0e9 39% 52%, #ba1723 53% 56%, #d7d0c6 57% 72%, #8d867d 100%);
+    filter: drop-shadow(-8px 10px 8px rgba(0, 0, 0, 0.34));
+  }
+
+  .project-content .flipbook-edge--next::before,
+  .project-content .flipbook-edge--next::after {
+    right: 0;
+    transform: scale(0.08) rotate(2deg);
+    transform-origin: 100% 0;
+  }
+
+  .project-content .flipbook-edge--prev::before,
+  .project-content .flipbook-edge--prev::after {
+    left: 0;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    transform: scale(0.08) rotate(-2deg);
+    transform-origin: 0 0;
+  }
+
+  .project-content .flipbook-edge:hover:not(:disabled)::before,
+  .project-content .flipbook-edge:hover:not(:disabled)::after,
+  .project-content .flipbook-edge:focus-visible:not(:disabled)::before,
+  .project-content .flipbook-edge:focus-visible:not(:disabled)::after,
+  .project-content .project-flipbook:not(.is-last-page) .flipbook-stage:hover .flipbook-edge--next:not(:disabled)::before,
+  .project-content .project-flipbook:not(.is-last-page) .flipbook-stage:hover .flipbook-edge--next:not(:disabled)::after,
+  .project-content .project-flipbook.is-last-page .flipbook-stage:hover .flipbook-edge--prev:not(:disabled)::before,
+  .project-content .project-flipbook.is-last-page .flipbook-stage:hover .flipbook-edge--prev:not(:disabled)::after {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  .project-content .flipbook-edge span {
+    position: absolute;
+    z-index: 3;
+    top: calc(var(--peel-size) * 0.42);
+    display: grid;
+    width: 1.7rem;
+    height: 1.7rem;
+    place-items: center;
+    opacity: 0;
+    color: #18181b;
+    background: transparent;
+    border: 0;
+    font-size: 0.85rem;
+    transform: translateY(-50%) scale(0.6);
+    transition: opacity 240ms ease, transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-content .flipbook-edge--prev span {
+    left: calc(var(--peel-size) * 0.2);
+  }
+
+  .project-content .flipbook-edge--next span {
+    right: calc(var(--peel-size) * 0.2);
+  }
+
+  .project-content .flipbook-edge:hover:not(:disabled) span,
+  .project-content .flipbook-edge:focus-visible:not(:disabled) span,
+  .project-content .project-flipbook:not(.is-last-page) .flipbook-stage:hover .flipbook-edge--next:not(:disabled) span,
+  .project-content .project-flipbook.is-last-page .flipbook-stage:hover .flipbook-edge--prev:not(:disabled) span {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+
+  .project-content .flipbook-edge:disabled {
+    cursor: default;
+  }
+
+  .project-content .flipbook-edge:focus-visible {
+    outline: 0;
+  }
+
+  /* StPageFlip renders each half of the supplied spreads as a real soft page. */
+  .project-content .flipbook-stage {
+    display: grid;
+    min-height: 22rem;
+    place-items: center;
+    overflow: visible;
+    perspective: none;
+    isolation: auto;
+  }
+
+  .project-content .flipbook-stage::after {
+    content: none;
+  }
+
+  .project-content .flipbook-book {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    filter:
+      drop-shadow(0 3px 5px rgba(20, 24, 28, 0.16))
+      drop-shadow(0 18px 24px rgba(20, 24, 28, 0.2));
+    box-shadow: none;
+    transform: translateX(0);
+    transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .project-content .project-flipbook.is-cover-page .flipbook-book {
+    pointer-events: none;
+  }
+
+  .project-content .project-flipbook.is-cover-page:not(.is-cover-opening) .flipbook-book {
+    transform: translateX(-25%);
+  }
+
+  .project-content .flipbook-book .stf__wrapper,
+  .project-content .flipbook-book .stf__block {
+    overflow: visible;
+  }
+
+  .project-content .flipbook-leaf {
+    overflow: hidden;
+    margin: 0;
+    background: #fff;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .project-content .flipbook-leaf img {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 0;
+    width: 200%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    object-fit: fill;
+    background: #fff;
+    box-shadow: none;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .project-content .flipbook-leaf--right img {
+    transform: translateX(-50%);
+  }
+
+  .project-content .flipbook-leaf--cover img {
+    width: 100%;
+  }
+
+  .project-content .flipbook-leaf--back {
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.84);
+    background: linear-gradient(145deg, #6d0810, #102d38);
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.08em;
+  }
+
+  .project-content .flipbook-book .stf__outerShadow,
+  .project-content .flipbook-book .stf__innerShadow,
+  .project-content .flipbook-book .stf__hardShadow,
+  .project-content .flipbook-book .stf__hardInnerShadow {
+    pointer-events: none;
+  }
+
+  .project-content .flipbook-cover-guard {
+    --cover-peel: clamp(3rem, 6vw, 4.8rem);
+    position: absolute;
+    z-index: 12;
+    top: 0;
+    bottom: 0;
+    left: 25%;
+    display: block;
+    width: 50%;
+    padding: 0;
+    overflow: visible;
+    color: #18181b;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    opacity: 1;
+    transition:
+      left 380ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 160ms ease;
+  }
+
+  .project-content .flipbook-cover-guard::before,
+  .project-content .flipbook-cover-guard::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--cover-peel);
+    height: var(--cover-peel);
+    clip-path: polygon(100% 0, 16% 0, 100% 84%);
+    pointer-events: none;
+    transform: scale(0.2);
+    transform-origin: 100% 0;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease;
+  }
+
+  .project-content .flipbook-cover-guard::before {
+    z-index: 1;
+    background: rgba(9, 9, 11, 0.26);
+    filter: blur(4px);
+  }
+
+  .project-content .flipbook-cover-guard::after {
+    z-index: 2;
+    background: linear-gradient(225deg, #fff 0 42%, #e9e4dc 43% 68%, #aaa39a 100%);
+    filter: drop-shadow(-5px 7px 5px rgba(9, 9, 11, 0.24));
+  }
+
+  .project-content .flipbook-cover-guard span {
+    position: absolute;
+    z-index: 3;
+    top: calc(var(--cover-peel) * 0.38);
+    right: calc(var(--cover-peel) * 0.18);
+    opacity: 0;
+    font-size: 0.8rem;
+    transform: scale(0.7);
+    transition: transform 240ms ease, opacity 180ms ease;
+  }
+
+  .project-content .flipbook-cover-guard:hover::before,
+  .project-content .flipbook-cover-guard:hover::after,
+  .project-content .flipbook-cover-guard:focus-visible::before,
+  .project-content .flipbook-cover-guard:focus-visible::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .project-content .flipbook-cover-guard:hover span,
+  .project-content .flipbook-cover-guard:focus-visible span {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .project-content .flipbook-cover-guard:focus-visible {
+    outline: 2px solid var(--flipbook-accent);
+    outline-offset: 6px;
+  }
+
+  .project-content .flipbook-cover-guard::before,
+  .project-content .flipbook-cover-guard::after {
+    content: none;
+  }
+
+  .project-content .flipbook-cover-guard span {
+    display: none;
+  }
+
+  .project-content .project-flipbook.is-cover-opening .flipbook-cover-guard {
+    left: 50%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .project-content .project-flipbook:not(.is-cover-page) .flipbook-cover-guard {
+    display: none;
+  }
+
+  .project-content .flipbook-controls {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.35rem;
+  }
+
+  .project-content .flipbook-control {
+    display: inline-flex;
+    min-height: 2.6rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.8rem;
+    color: #27272a;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(24, 24, 27, 0.34);
+    font: inherit;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 220ms ease, background-color 220ms ease, opacity 220ms ease;
+  }
+
+  .project-content .flipbook-control:hover:not(:disabled),
+  .project-content .flipbook-control:focus-visible {
+    color: var(--flipbook-accent);
+    background: transparent;
+    border-bottom-color: var(--flipbook-accent);
+    outline: none;
+  }
+
+  .project-content .flipbook-control:disabled {
+    opacity: 0.28;
+    cursor: default;
+  }
+
+  .project-content .flipbook-progress {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .project-content .flipbook-page-title {
+    overflow: hidden;
+    color: #52525b;
+    font-size: 0.68rem;
+    line-height: 1.3;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .project-content .flipbook-dots {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .project-content .flipbook-dots button {
+    width: 0.55rem;
+    height: 0.55rem;
+    padding: 0;
+    background: rgba(24, 24, 27, 0.2);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: width 220ms ease, background-color 220ms ease;
+  }
+
+  .project-content .flipbook-dots button.is-active {
+    width: 1.45rem;
+    background: var(--flipbook-accent);
+  }
+
+  .project-content .flipbook-dots button:focus-visible {
+    outline: 2px solid #18181b;
+    outline-offset: 3px;
+  }
+
+  .project-content .flipbook-counter {
+    color: #71717a;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .project-content .flipbook-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (hover: none) {
+    .project-content .flipbook-edge:not(:disabled)::before,
+    .project-content .flipbook-edge:not(:disabled)::after {
+      opacity: 0.72;
+      transform: scale(0.42) rotate(0deg);
+    }
+
+    .project-content .flipbook-edge:not(:disabled) span {
+      opacity: 0.78;
+      transform: translateY(-50%) scale(0.8);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-content .flipbook-edge,
+    .project-content .flipbook-edge::before,
+    .project-content .flipbook-edge::after,
+    .project-content .flipbook-edge span {
+      transition: none;
+    }
+  }
+
   @keyframes filmstrip-scroll {
     from {
       transform: translateX(0);
@@ -1085,10 +1758,61 @@ const project = entry.data;
     .case-hero-bottom ul {
       display: none;
     }
+
+    .project-content .project-flipbook {
+      margin-inline: 0;
+      padding: 0 0 0.75rem;
+    }
+
+    .project-content .flipbook-header {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+
+    .project-content .flipbook-hint {
+      display: none;
+    }
+
+    .project-content .flipbook-edge {
+      --peel-size: 3.1rem;
+      width: 24%;
+    }
+
+    .project-content .flipbook-controls {
+      grid-template-columns: 2.6rem minmax(0, 1fr) 2.6rem;
+      gap: 0.5rem;
+    }
+
+    .project-content .flipbook-control {
+      width: 2.6rem;
+      padding: 0;
+    }
+
+    .project-content .flipbook-control span:not([aria-hidden="true"]) {
+      display: none;
+    }
+
+    .project-content .flipbook-progress {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.45rem;
+    }
+
+    .project-content .flipbook-page-title {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      font-size: 0.6rem;
+    }
+
+    .project-content .flipbook-dots,
+    .project-content .flipbook-counter {
+      grid-row: 2;
+    }
   }
 </style>
 
 <script>
+  import { PageFlip } from "page-flip";
+
   (() => {
     const init = () => {
       const content = document.querySelector(".project-content");
@@ -1376,6 +2100,521 @@ const project = entry.data;
       buildConceptSplits();
 
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const pageFlipRoots = content.querySelectorAll("[data-flipbook]");
+      pageFlipRoots.forEach((root) => {
+        const book = root.querySelector("[data-pageflip-book]");
+        const stage = root.querySelector("[data-flipbook-stage]");
+        const leaves = Array.from(root.querySelectorAll(".flipbook-leaf"));
+        if (!book || !stage || leaves.length < 3) return;
+
+        const previousButtons = Array.from(root.querySelectorAll("[data-flipbook-prev]"));
+        const nextButtons = Array.from(root.querySelectorAll("[data-flipbook-next]"));
+        const dots = Array.from(root.querySelectorAll("[data-flipbook-dot]"));
+        const currentLabel = root.querySelector("[data-flipbook-current]");
+        const totalLabel = root.querySelector("[data-flipbook-total]");
+        const pageTitle = root.querySelector("[data-flipbook-title]");
+        const status = root.querySelector("[data-flipbook-status]");
+        const coverButton = root.querySelector("[data-flipbook-cover]");
+        const storyTitles = [
+          "Cover — Antonio Wade: From Detroit to Brazil",
+          "Deep in Detroit — Training Begins",
+          "Metrics Recorded — The World Opens",
+          "Relentless Training — Destination Brazil",
+          "The Olympic Stage — Live Performance",
+          "Gold — The Torch Is Passed",
+        ];
+        const storyPages = [0, 1, 3, 5, 7, 9];
+        let storyIndex = 0;
+        let controlsLocked = false;
+        let coverAligning = false;
+
+        const formatPageNumber = (value) => String(value).padStart(2, "0");
+        const storyIndexForPage = (pageIndex) =>
+          pageIndex === 0 ? 0 : Math.min(storyTitles.length - 1, Math.ceil(pageIndex / 2));
+
+        const updateControls = () => {
+          previousButtons.forEach((button) => {
+            button.disabled = controlsLocked || storyIndex === 0;
+          });
+          nextButtons.forEach((button) => {
+            button.disabled = controlsLocked || storyIndex === storyTitles.length - 1;
+          });
+        };
+
+        const renderStory = (pageIndex) => {
+          storyIndex = storyIndexForPage(Number(pageIndex) || 0);
+          root.classList.toggle("is-cover-page", storyIndex === 0);
+          root.classList.toggle("is-last-page", storyIndex === storyTitles.length - 1);
+          if (storyIndex !== 0) root.classList.remove("is-cover-opening");
+
+          dots.forEach((dot, index) => {
+            const isActive = index === storyIndex;
+            dot.classList.toggle("is-active", isActive);
+            dot.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          const title = storyTitles[storyIndex];
+          if (currentLabel) currentLabel.textContent = formatPageNumber(storyIndex + 1);
+          if (totalLabel) totalLabel.textContent = formatPageNumber(storyTitles.length);
+          if (pageTitle) pageTitle.textContent = title;
+          if (status) status.textContent = `Page ${storyIndex + 1} of ${storyTitles.length}: ${title}`;
+          updateControls();
+        };
+
+        const pageFlip = new PageFlip(book, {
+          width: 1275,
+          height: 1650,
+          size: "stretch",
+          minWidth: 250,
+          maxWidth: 650,
+          minHeight: 324,
+          maxHeight: 841,
+          autoSize: true,
+          usePortrait: true,
+          showCover: true,
+          showPageCorners: true,
+          disableFlipByClick: true,
+          drawShadow: true,
+          maxShadowOpacity: 0.22,
+          flippingTime: prefersReduced ? 240 : 920,
+          mobileScrollSupport: true,
+          swipeDistance: 28,
+          startZIndex: 2,
+        });
+
+        pageFlip.on("init", (event) => renderStory(event.data.page));
+        pageFlip.on("flip", (event) => renderStory(event.data));
+        pageFlip.on("changeState", (event) => {
+          controlsLocked = event.data === "flipping" || event.data === "user_fold";
+          root.classList.toggle("is-turning", controlsLocked);
+          updateControls();
+        });
+        pageFlip.loadFromHTML(leaves);
+
+        const flipToStory = async (targetStoryIndex) => {
+          const targetIndex = Math.min(Math.max(targetStoryIndex, 0), storyTitles.length - 1);
+          if (controlsLocked || coverAligning || targetIndex === storyIndex) return;
+
+          if (storyIndex === 0 && targetIndex > 0) {
+            coverAligning = true;
+            controlsLocked = true;
+            root.classList.add("is-cover-opening");
+            updateControls();
+            await new Promise((resolve) => window.setTimeout(resolve, prefersReduced ? 20 : 420));
+            pageFlip.flip(storyPages[targetIndex], "top");
+            coverAligning = false;
+            return;
+          }
+
+          pageFlip.flip(storyPages[targetIndex], "top");
+        };
+
+        previousButtons.forEach((button) => {
+          button.addEventListener("click", () => pageFlip.flipPrev("top"));
+        });
+        nextButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            if (storyIndex === 0) flipToStory(1);
+            else pageFlip.flipNext("top");
+          });
+        });
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => flipToStory(index));
+        });
+        coverButton?.addEventListener("click", () => flipToStory(1));
+
+        stage.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            pageFlip.flipPrev("top");
+          } else if (event.key === "ArrowRight") {
+            event.preventDefault();
+            if (storyIndex === 0) flipToStory(1);
+            else pageFlip.flipNext("top");
+          } else if (event.key === "Home") {
+            event.preventDefault();
+            pageFlip.flip(0, "top");
+          } else if (event.key === "End") {
+            event.preventDefault();
+            flipToStory(storyTitles.length - 1);
+          }
+        });
+
+        root.dataset.flipbookReady = "true";
+        renderStory(0);
+      });
+
+      const flipbooks = content.querySelectorAll("[data-flipbook]");
+      flipbooks.forEach((root) => {
+        if (root.dataset.flipbookReady === "true") return;
+
+        const pages = Array.from(root.querySelectorAll("[data-flipbook-page]"));
+        const stage = root.querySelector("[data-flipbook-stage]");
+        const previousButtons = Array.from(root.querySelectorAll("[data-flipbook-prev]"));
+        const nextButtons = Array.from(root.querySelectorAll("[data-flipbook-next]"));
+        const dots = Array.from(root.querySelectorAll("[data-flipbook-dot]"));
+        const currentLabel = root.querySelector("[data-flipbook-current]");
+        const totalLabel = root.querySelector("[data-flipbook-total]");
+        const pageTitle = root.querySelector("[data-flipbook-title]");
+        const status = root.querySelector("[data-flipbook-status]");
+
+        if (!pages.length || !stage) return;
+
+        let currentIndex = 0;
+        let isTurning = false;
+        let pointerStartX;
+
+        const formatPageNumber = (value) => String(value).padStart(2, "0");
+
+        const clearPageStyles = (page) => {
+          ["transform", "transform-origin", "opacity", "filter", "z-index", "clip-path"].forEach((property) => {
+            page.style.removeProperty(property);
+          });
+        };
+
+        const warmPage = (index) => {
+          const image = pages[index]?.querySelector("img");
+          if (!image || image.complete) return Promise.resolve();
+          image.loading = "eager";
+          return image.decode().catch(() => undefined);
+        };
+
+        const render = () => {
+          pages.forEach((page, index) => {
+            const isActive = index === currentIndex;
+            page.hidden = !isActive;
+            page.classList.toggle("is-active", isActive);
+            page.setAttribute("aria-hidden", isActive ? "false" : "true");
+            clearPageStyles(page);
+          });
+
+          root.classList.toggle(
+            "is-cover-page",
+            pages[currentIndex]?.classList.contains("is-cover") === true
+          );
+          root.classList.toggle("is-last-page", currentIndex === pages.length - 1);
+
+          previousButtons.forEach((button) => {
+            button.disabled = currentIndex === 0;
+          });
+          nextButtons.forEach((button) => {
+            button.disabled = currentIndex === pages.length - 1;
+          });
+
+          dots.forEach((dot, index) => {
+            const isActive = index === currentIndex;
+            dot.classList.toggle("is-active", isActive);
+            dot.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          const title = pages[currentIndex]?.dataset.pageTitle || `Page ${currentIndex + 1}`;
+          if (currentLabel) currentLabel.textContent = formatPageNumber(currentIndex + 1);
+          if (totalLabel) totalLabel.textContent = formatPageNumber(pages.length);
+          if (pageTitle) pageTitle.textContent = title;
+          if (status) status.textContent = `Page ${currentIndex + 1} of ${pages.length}: ${title}`;
+
+          warmPage(currentIndex - 1);
+          warmPage(currentIndex + 1);
+        };
+
+        const animateCoverTurn = async (fromPage, toPage) => {
+          const opening = fromPage.classList.contains("is-cover");
+          const coverPage = opening ? fromPage : toPage;
+          const coverImage = coverPage.querySelector("img");
+          if (!coverImage) return;
+
+          fromPage.style.zIndex = opening ? "3" : "2";
+          toPage.style.zIndex = opening ? "2" : "3";
+          coverImage.classList.add("flipbook-cover-turn");
+
+          const slideKeyframes = opening
+            ? [{ transform: "translateX(0%)" }, { transform: "translateX(25%)" }]
+            : [{ transform: "translateX(25%)" }, { transform: "translateX(0%)" }];
+          let slideAnimation;
+
+          if (opening) {
+            toPage.style.opacity = "0";
+            slideAnimation = coverPage.animate(slideKeyframes, {
+              duration: 380,
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+              fill: "forwards",
+            });
+            await Promise.race([
+              slideAnimation.finished,
+              new Promise((resolve) => window.setTimeout(resolve, 430)),
+            ]);
+            coverPage.classList.add("is-cover-turning");
+            toPage.style.opacity = "1";
+          } else {
+            coverPage.classList.add("is-cover-turning");
+            coverPage.style.transform = "translateX(25%)";
+          }
+
+          const coverAnimation = coverImage.animate(
+            opening
+              ? [
+                  { transform: "rotateY(0deg) scaleX(1)", opacity: 1, filter: "brightness(1)" },
+                  { transform: "rotateY(-48deg) scaleX(0.98)", opacity: 1, filter: "brightness(0.9)", offset: 0.28 },
+                  { transform: "rotateY(-92deg) scaleX(0.92)", opacity: 0.94, filter: "brightness(0.7)", offset: 0.54 },
+                  { transform: "rotateY(-180deg) scaleX(1)", opacity: 0, filter: "brightness(0.82)" },
+                ]
+              : [
+                  { transform: "rotateY(-180deg) scaleX(1)", opacity: 0, filter: "brightness(0.82)" },
+                  { transform: "rotateY(-88deg) scaleX(0.92)", opacity: 0.94, filter: "brightness(0.7)", offset: 0.46 },
+                  { transform: "rotateY(-42deg) scaleX(0.98)", opacity: 1, filter: "brightness(0.9)", offset: 0.74 },
+                  { transform: "rotateY(0deg) scaleX(1)", opacity: 1, filter: "brightness(1)" },
+                ],
+            {
+              duration: 760,
+              easing: "cubic-bezier(0.45, 0, 0.55, 1)",
+              fill: "forwards",
+            }
+          );
+
+          await Promise.race([
+            coverAnimation.finished,
+            new Promise((resolve) => window.setTimeout(resolve, 820)),
+          ]);
+
+          if (opening) {
+            coverPage.style.opacity = "0";
+          } else {
+            fromPage.style.opacity = "0";
+            coverPage.classList.remove("is-cover-turning");
+            slideAnimation = coverPage.animate(slideKeyframes, {
+              duration: 380,
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+              fill: "forwards",
+            });
+            await Promise.race([
+              slideAnimation.finished,
+              new Promise((resolve) => window.setTimeout(resolve, 430)),
+            ]);
+            coverPage.style.transform = "translateX(0%)";
+          }
+
+          coverAnimation.cancel();
+          slideAnimation?.cancel();
+          coverImage.classList.remove("flipbook-cover-turn");
+          coverPage.classList.remove("is-cover-turning");
+        };
+
+        const animateSpreadTurn = async (fromPage, toPage, direction) => {
+          const fromImage = fromPage.querySelector("img");
+          const toImage = toPage.querySelector("img");
+          if (!fromImage || !toImage) return;
+
+          const isForward = direction > 0;
+          const sheet = document.createElement("div");
+          const front = document.createElement("div");
+          const back = document.createElement("div");
+
+          sheet.className = `flipbook-turn-sheet ${isForward ? "is-forward" : "is-backward"}`;
+          front.className = "flipbook-turn-face flipbook-turn-face--front";
+          back.className = "flipbook-turn-face flipbook-turn-face--back";
+          front.style.backgroundImage = `url("${fromImage.currentSrc || fromImage.src}")`;
+          back.style.backgroundImage = `url("${toImage.currentSrc || toImage.src}")`;
+          sheet.append(front, back);
+          stage.append(sheet);
+
+          fromPage.style.zIndex = "3";
+          toPage.style.zIndex = "2";
+          fromPage.style.clipPath = isForward ? "inset(0 50% 0 0)" : "inset(0 0 0 50%)";
+
+          const rotation = isForward ? -180 : 180;
+          const turnDuration = 980;
+          const curlRadius = isForward ? "0 8% 8% 0" : "8% 0 0 8%";
+          const curlShadow = isForward
+            ? "-18px 8px 30px rgba(9, 9, 11, 0.3)"
+            : "18px 8px 30px rgba(9, 9, 11, 0.3)";
+          const curlSkew = isForward ? 0.55 : -0.55;
+          const sheetAnimation = sheet.animate(
+            [
+              {
+                transform: "rotateY(0deg) translateZ(0) scaleX(1) skewY(0deg)",
+                borderRadius: "0",
+                boxShadow: "0 0 0 rgba(9, 9, 11, 0)",
+                filter: "brightness(1)",
+                offset: 0,
+              },
+              {
+                transform: `rotateY(${rotation * 0.13}deg) translateZ(5px) scaleX(0.99) skewY(${curlSkew * 0.3}deg)`,
+                borderRadius: curlRadius,
+                boxShadow: curlShadow,
+                filter: "brightness(0.96)",
+                offset: 0.16,
+              },
+              {
+                transform: `rotateY(${rotation * 0.36}deg) translateZ(18px) scaleX(0.94) skewY(${curlSkew}deg)`,
+                borderRadius: curlRadius,
+                boxShadow: curlShadow,
+                filter: "brightness(0.86)",
+                offset: 0.38,
+              },
+              {
+                transform: `rotateY(${rotation * 0.5}deg) translateZ(30px) scaleX(0.78) skewY(0deg)`,
+                borderRadius: curlRadius,
+                boxShadow: curlShadow,
+                filter: "brightness(0.76)",
+                offset: 0.5,
+              },
+              {
+                transform: `rotateY(${rotation * 0.72}deg) translateZ(18px) scaleX(0.9) skewY(${-curlSkew}deg)`,
+                borderRadius: curlRadius,
+                boxShadow: curlShadow,
+                filter: "brightness(0.84)",
+                offset: 0.68,
+              },
+              {
+                transform: `rotateY(${rotation * 0.92}deg) translateZ(5px) scaleX(0.98) skewY(${-curlSkew * 0.3}deg)`,
+                borderRadius: curlRadius,
+                boxShadow: "0 4px 12px rgba(9, 9, 11, 0.14)",
+                filter: "brightness(0.96)",
+                offset: 0.88,
+              },
+              {
+                transform: `rotateY(${rotation}deg) translateZ(0) scaleX(1) skewY(0deg)`,
+                borderRadius: "0",
+                boxShadow: "0 0 0 rgba(9, 9, 11, 0)",
+                filter: "brightness(1)",
+                offset: 1,
+              },
+            ],
+            {
+              duration: turnDuration,
+              easing: "cubic-bezier(0.45, 0, 0.55, 1)",
+              fill: "forwards",
+            }
+          );
+          const frontFaceAnimation = front.animate(
+            [
+              { opacity: 1, offset: 0 },
+              { opacity: 1, offset: 0.495 },
+              { opacity: 0, offset: 0.505 },
+              { opacity: 0, offset: 1 },
+            ],
+            { duration: turnDuration, easing: "linear", fill: "forwards" }
+          );
+          const backFaceAnimation = back.animate(
+            [
+              { opacity: 0, offset: 0 },
+              { opacity: 0, offset: 0.495 },
+              { opacity: 1, offset: 0.505 },
+              { opacity: 1, offset: 1 },
+            ],
+            { duration: turnDuration, easing: "linear", fill: "forwards" }
+          );
+          const staticHalfAnimation = fromPage.animate(
+            [
+              { opacity: 1, offset: 0 },
+              { opacity: 1, offset: 0.5 },
+              { opacity: 0, offset: 0.66 },
+              { opacity: 0, offset: 1 },
+            ],
+            { duration: turnDuration, easing: "linear", fill: "forwards" }
+          );
+
+          await Promise.race([
+            Promise.allSettled([
+              sheetAnimation.finished,
+              frontFaceAnimation.finished,
+              backFaceAnimation.finished,
+              staticHalfAnimation.finished,
+            ]),
+            new Promise((resolve) => window.setTimeout(resolve, turnDuration + 80)),
+          ]);
+          sheetAnimation.cancel();
+          frontFaceAnimation.cancel();
+          backFaceAnimation.cancel();
+          staticHalfAnimation.cancel();
+          sheet.remove();
+        };
+
+        const turnTo = async (requestedIndex) => {
+          const targetIndex = Math.min(Math.max(requestedIndex, 0), pages.length - 1);
+          if (targetIndex === currentIndex || isTurning) return;
+
+          const direction = targetIndex > currentIndex ? 1 : -1;
+          const fromPage = pages[currentIndex];
+          const toPage = pages[targetIndex];
+          if (!fromPage || !toPage) return;
+
+          isTurning = true;
+          root.classList.add("is-turning");
+          [...previousButtons, ...nextButtons].forEach((button) => {
+            button.disabled = true;
+          });
+
+          await Promise.race([
+            warmPage(targetIndex),
+            new Promise((resolve) => window.setTimeout(resolve, 450)),
+          ]);
+
+          toPage.hidden = false;
+          toPage.classList.add("is-active");
+          toPage.setAttribute("aria-hidden", "false");
+
+          if (!prefersReduced) {
+            const includesCover = fromPage.classList.contains("is-cover") || toPage.classList.contains("is-cover");
+            if (includesCover) {
+              await animateCoverTurn(fromPage, toPage, direction);
+            } else {
+              await animateSpreadTurn(fromPage, toPage, direction);
+            }
+          }
+
+          currentIndex = targetIndex;
+          root.classList.remove("is-turning");
+          isTurning = false;
+          render();
+        };
+
+        previousButtons.forEach((button) => {
+          button.addEventListener("click", () => turnTo(currentIndex - 1));
+        });
+        nextButtons.forEach((button) => {
+          button.addEventListener("click", () => turnTo(currentIndex + 1));
+        });
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => turnTo(index));
+        });
+
+        stage.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            turnTo(currentIndex - 1);
+          } else if (event.key === "ArrowRight") {
+            event.preventDefault();
+            turnTo(currentIndex + 1);
+          } else if (event.key === "Home") {
+            event.preventDefault();
+            turnTo(0);
+          } else if (event.key === "End") {
+            event.preventDefault();
+            turnTo(pages.length - 1);
+          }
+        });
+
+        stage.addEventListener("pointerdown", (event) => {
+          if (event.button !== 0) return;
+          pointerStartX = event.clientX;
+        });
+        stage.addEventListener("pointerup", (event) => {
+          if (typeof pointerStartX !== "number") return;
+          const travel = event.clientX - pointerStartX;
+          pointerStartX = undefined;
+          if (Math.abs(travel) < 44) return;
+          turnTo(currentIndex + (travel < 0 ? 1 : -1));
+        });
+        stage.addEventListener("pointercancel", () => {
+          pointerStartX = undefined;
+        });
+
+        root.dataset.flipbookReady = "true";
+        render();
+      });
+
       const sliders = content.querySelectorAll("[data-scroll-slider]");
       sliders.forEach((sliderRoot) => {
         const slides = Array.from(sliderRoot.querySelectorAll("[data-slide]"));
