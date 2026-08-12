@@ -3,7 +3,7 @@ title: "RGuide"
 description: "Designing and engineering a map-first travel platform—and the data, publishing, media, localization, and growth systems that make it scale."
 tags: ["UI/UX", "Product Design", "Development", "Data Systems"]
 cover: "/Projects/RGuide/rguide-imac-mockup.webp"
-hero: "/Projects/RGuide/rguide-barcelona.jpg"
+hero: "/Projects/RGuide/rguide-world-4k.webp"
 role: "Founder · Product & Engineering"
 tools: ["Next.js", "TypeScript", "Supabase", "PostGIS", "MapLibre", "Cloudflare R2"]
 deliverables: ["Product strategy", "UX/UI", "Design system", "Data model", "Publishing pipelines", "Production build"]
