@@ -507,58 +507,6 @@ The repository contains dedicated workflows for editorial guides, destination de
   <figcaption>A guide is simultaneously editorial content, a map layer, a set of sourced places, and a deep-linkable route.</figcaption>
 </figure>
 
-<section class="rguide-component-deck" data-rguide-component-deck aria-labelledby="rguide-component-deck-title">
-  <header>
-    <div>
-      <span>Interface component study</span>
-      <h3 id="rguide-component-deck-title">One system, two scales.</h3>
-    </div>
-    <p>The live product is broken into coordinated components rather than separate pages. These cropped views isolate the pieces that carry a traveler from broad discovery into a guide they can use in place.</p>
-  </header>
-  <div class="rguide-component-controls" role="tablist" aria-label="Interface component slides">
-    <button type="button" role="tab" aria-selected="true" aria-controls="rguide-component-slide-explorer" id="rguide-component-tab-explorer" data-rguide-component-tab="0">
-      <b>01</b><span>Explorer building blocks</span><small>World scale</small>
-    </button>
-    <button type="button" role="tab" aria-selected="false" aria-controls="rguide-component-slide-guide" id="rguide-component-tab-guide" data-rguide-component-tab="1" tabindex="-1">
-      <b>02</b><span>Guide building blocks</span><small>Street scale</small>
-    </button>
-  </div>
-  <div class="rguide-component-slides">
-    <article class="rguide-component-slide is-active" id="rguide-component-slide-explorer" role="tabpanel" aria-labelledby="rguide-component-tab-explorer" data-rguide-component-slide="0">
-      <div class="rguide-component-grid rguide-component-grid--explorer">
-        <figure class="rguide-component-crop rguide-component-crop--world-nav" role="img" aria-label="RGuide destination navigation listing continents and their available guides">
-          <figcaption><b>01</b><span>Destination rail</span><small>Geographic hierarchy</small></figcaption>
-        </figure>
-        <figure class="rguide-component-crop rguide-component-crop--world-map" role="img" aria-label="RGuide world map centered on Europe and Africa">
-          <figcaption><b>02</b><span>Spatial canvas</span><small>Orientation and scope</small></figcaption>
-        </figure>
-        <figure class="rguide-component-crop rguide-component-crop--world-toolbar" role="img" aria-label="RGuide world guide heading and category toolbar">
-          <figcaption><b>03</b><span>Category controls</span><small>Typed discovery</small></figcaption>
-        </figure>
-        <figure class="rguide-component-crop rguide-component-crop--world-cards" role="img" aria-label="RGuide editorial guide result cards with imagery, categories, places, and sources">
-          <figcaption><b>04</b><span>Guide index</span><small>Editorial results</small></figcaption>
-        </figure>
-      </div>
-    </article>
-    <article class="rguide-component-slide" id="rguide-component-slide-guide" role="tabpanel" aria-labelledby="rguide-component-tab-guide" data-rguide-component-slide="1" hidden>
-      <div class="rguide-component-grid rguide-component-grid--guide">
-        <figure class="rguide-component-crop rguide-component-crop--barcelona-map" role="img" aria-label="Barcelona neighborhood map with numbered guide stops and district labels">
-          <figcaption><b>01</b><span>Neighborhood map</span><small>Stops in context</small></figcaption>
-        </figure>
-        <figure class="rguide-component-crop rguide-component-crop--guide-header" role="img" aria-label="Barcelona late-night food guide header with title, category, place count, and save controls">
-          <figcaption><b>02</b><span>Guide header</span><small>Identity and actions</small></figcaption>
-        </figure>
-        <figure class="rguide-component-crop rguide-component-crop--guide-copy" role="img" aria-label="Source-backed Barcelona guide description and contextual stay action">
-          <figcaption><b>03</b><span>Editorial context</span><small>Why the guide matters</small></figcaption>
-        </figure>
-        <figure class="rguide-component-crop rguide-component-crop--guide-place" role="img" aria-label="Expanded Barcelona place card with photography and practical venue detail">
-          <figcaption><b>04</b><span>Place detail</span><small>From route to action</small></figcaption>
-        </figure>
-      </div>
-    </article>
-  </div>
-</section>
-
 The interface uses one consistent mental model across scales. The left side answers **where am I?** The map answers **how does it relate spatially?** The guide rail answers **what is worth doing and why?** Selecting a destination, neighborhood, category, guide, or place updates the other surfaces rather than creating disconnected navigation modes.
 
 ### Interaction and Routing Work Together
@@ -1090,266 +1038,6 @@ The same architecture supports product growth without turning the core explorer 
     width: 100%;
     height: auto;
     margin: 0;
-  }
-
-  .rguide-component-deck {
-    container-type: inline-size;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.14);
-    border: var(--rule);
-  }
-
-  .rguide-component-deck > header {
-    display: grid;
-    grid-template-columns: minmax(17rem, 0.75fr) minmax(22rem, 1.25fr);
-    gap: 1rem clamp(2rem, 6cqw, 6rem);
-    align-items: end;
-    padding: clamp(1.15rem, 2.5cqw, 1.75rem);
-    border-bottom: var(--rule);
-  }
-
-  .rguide-component-deck > header > div {
-    display: grid;
-    gap: 0.55rem;
-  }
-
-  .rguide-component-deck > header span,
-  .rguide-component-controls small,
-  .rguide-component-crop figcaption small {
-    font-size: 0.58rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    line-height: 1.3;
-    text-transform: uppercase;
-  }
-
-  .rguide-component-deck > header span {
-    color: var(--signal);
-  }
-
-  .project-content .rguide-component-deck h3 {
-    max-width: 12ch;
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(2.25rem, 4.5cqw, 4.2rem);
-    line-height: 0.94;
-    letter-spacing: -0.06em;
-  }
-
-  .project-content .rguide-component-deck > header > p {
-    max-width: 42rem;
-    margin: 0;
-    color: #5f5d57;
-    font-size: clamp(0.8rem, 1.15cqw, 0.98rem);
-    line-height: 1.55;
-  }
-
-  .rguide-component-controls {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    background: #dedad1;
-    border-bottom: var(--rule);
-  }
-
-  .rguide-component-controls button {
-    display: grid;
-    position: relative;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 0.75rem;
-    align-items: center;
-    min-height: 3.7rem;
-    padding: 0.75rem 1rem;
-    color: var(--ink);
-    background: transparent;
-    border: 0;
-    border-right: var(--rule);
-    cursor: pointer;
-    font: inherit;
-    text-align: left;
-  }
-
-  .rguide-component-controls button:last-child {
-    border-right: 0;
-  }
-
-  .rguide-component-controls button::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 0.22rem;
-    background: var(--signal);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .rguide-component-controls button[aria-selected="true"] {
-    color: #fff;
-    background: var(--ink);
-  }
-
-  .rguide-component-controls button[aria-selected="true"]::after {
-    transform: scaleX(1);
-  }
-
-  .rguide-component-controls button:focus-visible {
-    z-index: 1;
-    outline: 3px solid var(--signal);
-    outline-offset: -3px;
-  }
-
-  .rguide-component-controls b {
-    color: var(--signal);
-    font-family: var(--font-display);
-    font-size: 0.76rem;
-    letter-spacing: 0.04em;
-  }
-
-  .rguide-component-controls span {
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-  .rguide-component-controls small {
-    color: #71717a;
-  }
-
-  .rguide-component-controls button[aria-selected="true"] small {
-    color: rgba(255, 255, 255, 0.58);
-  }
-
-  .rguide-component-slide.is-active {
-    animation: rguide-component-slide-in 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .rguide-component-grid {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-auto-rows: clamp(10rem, 18cqw, 14rem);
-    gap: 1px;
-    padding: 1px;
-    background: #09090b;
-  }
-
-  .project-content .rguide-component-crop {
-    position: relative;
-    min-width: 0;
-    overflow: hidden;
-    margin: 0;
-    background-color: #09090b;
-    background-image: var(--rguide-component-image);
-    background-repeat: no-repeat;
-    background-position: var(--rguide-component-position);
-    background-size: var(--rguide-component-size);
-    isolation: isolate;
-  }
-
-  .rguide-component-crop::after {
-    content: "";
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 56%, rgba(9, 9, 11, 0.12));
-    pointer-events: none;
-  }
-
-  .rguide-component-crop figcaption {
-    position: absolute;
-    z-index: 1;
-    right: 0.7rem;
-    bottom: 0.7rem;
-    left: 0.7rem;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 0.15rem 0.55rem;
-    align-items: center;
-    padding: 0.6rem;
-    color: var(--ink);
-    background: rgba(242, 239, 231, 0.94);
-    border: 1px solid rgba(9, 9, 11, 0.65);
-    backdrop-filter: blur(0.35rem);
-  }
-
-  .rguide-component-crop figcaption b {
-    grid-row: 1 / span 2;
-    color: var(--signal);
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-  }
-
-  .rguide-component-crop figcaption span {
-    font-size: 0.7rem;
-    font-weight: 800;
-    line-height: 1.2;
-    text-transform: uppercase;
-  }
-
-  .rguide-component-crop figcaption small {
-    color: #71717a;
-    font-size: 0.48rem;
-  }
-
-  .rguide-component-crop--world-nav {
-    --rguide-component-image: url("/Projects/RGuide/rguide-world-4k.webp");
-    --rguide-component-size: 385% auto;
-    --rguide-component-position: 0% 52%;
-    grid-column: span 3;
-    grid-row: span 2;
-  }
-
-  .rguide-component-crop--world-map {
-    --rguide-component-image: url("/Projects/RGuide/rguide-world-4k.webp");
-    --rguide-component-size: 310% auto;
-    --rguide-component-position: 44% 50%;
-    grid-column: span 5;
-    grid-row: span 2;
-  }
-
-  .rguide-component-crop--world-toolbar {
-    --rguide-component-image: url("/Projects/RGuide/rguide-world-4k.webp");
-    --rguide-component-size: 250% auto;
-    --rguide-component-position: 100% 0%;
-    grid-column: span 4;
-  }
-
-  .rguide-component-crop--world-cards {
-    --rguide-component-image: url("/Projects/RGuide/rguide-world-4k.webp");
-    --rguide-component-size: 250% auto;
-    --rguide-component-position: 100% 58%;
-    grid-column: span 4;
-  }
-
-  .rguide-component-crop--barcelona-map {
-    --rguide-component-image: url("/Projects/RGuide/rguide-barcelona.jpg");
-    --rguide-component-size: 205% auto;
-    --rguide-component-position: 0% 50%;
-    grid-column: span 5;
-    grid-row: span 2;
-  }
-
-  .rguide-component-crop--guide-header {
-    --rguide-component-image: url("/Projects/RGuide/rguide-barcelona.jpg");
-    --rguide-component-size: 205% auto;
-    --rguide-component-position: 100% 0%;
-    grid-column: span 7;
-  }
-
-  .rguide-component-crop--guide-copy {
-    --rguide-component-image: url("/Projects/RGuide/rguide-barcelona.jpg");
-    --rguide-component-size: 205% auto;
-    --rguide-component-position: 100% 47%;
-    grid-column: span 4;
-  }
-
-  .rguide-component-crop--guide-place {
-    --rguide-component-image: url("/Projects/RGuide/rguide-barcelona.jpg");
-    --rguide-component-size: 205% auto;
-    --rguide-component-position: 100% 92%;
-    grid-column: span 3;
   }
 
   .rguide-timeline {
@@ -2741,7 +2429,6 @@ The same architecture supports product growth without turning the core explorer 
       .rguide-schema,
       .rguide-pipeline,
       .rguide-product-shot,
-      .rguide-component-deck,
       .rguide-principles,
       .rguide-traffic
     ) {
@@ -2752,15 +2439,13 @@ The same architecture supports product growth without turning the core explorer 
       .rguide-timeline,
       .rguide-schema,
       .rguide-pipeline,
-      .rguide-product-shot,
-      .rguide-component-deck
+      .rguide-product-shot
     ) + p {
     margin-top: var(--rguide-space-copy);
   }
 
   .project-content > .rguide-impact + .rguide-opening,
-  .project-content > .rguide-opening + .rguide-online-mockup,
-  .project-content > .rguide-product-shot + .rguide-component-deck {
+  .project-content > .rguide-opening + .rguide-online-mockup {
     margin-top: var(--rguide-space-component);
   }
 
@@ -2804,70 +2489,6 @@ The same architecture supports product growth without turning the core explorer 
   @keyframes rguide-detail-in {
     from { opacity: 0; transform: translateY(0.45rem); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes rguide-component-slide-in {
-    from { opacity: 0; transform: translateY(0.6rem); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @container (max-width: 54rem) {
-    .rguide-component-deck > header {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      align-items: start;
-    }
-
-    .project-content .rguide-component-deck h3 {
-      max-width: none;
-    }
-  }
-
-  @container (max-width: 48rem) {
-    .rguide-component-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-auto-rows: clamp(11.5rem, 34cqw, 15rem);
-    }
-
-    .rguide-component-crop--world-nav,
-    .rguide-component-crop--world-map,
-    .rguide-component-crop--world-toolbar,
-    .rguide-component-crop--world-cards,
-    .rguide-component-crop--barcelona-map,
-    .rguide-component-crop--guide-header,
-    .rguide-component-crop--guide-copy,
-    .rguide-component-crop--guide-place {
-      grid-column: span 1;
-      grid-row: span 1;
-    }
-  }
-
-  @container (max-width: 33rem) {
-    .rguide-component-controls {
-      grid-template-columns: 1fr;
-    }
-
-    .rguide-component-controls button {
-      border-right: 0;
-      border-bottom: var(--rule);
-    }
-
-    .rguide-component-controls button:last-child {
-      border-bottom: 0;
-    }
-
-    .rguide-component-grid {
-      grid-template-columns: 1fr;
-      grid-auto-rows: clamp(11rem, 64cqw, 14rem);
-    }
-
-    .rguide-component-crop--world-nav {
-      --rguide-component-size: 310% auto;
-    }
-
-    .rguide-component-crop--world-map {
-      --rguide-component-size: 250% auto;
-    }
   }
 
   @container (max-width: 46rem) {
@@ -3313,8 +2934,7 @@ The same architecture supports product growth without turning the core explorer 
     .rguide-schema-row-flow > i,
     .rguide-schema-drop > i,
     .rguide-schema-view-flow > i,
-    .rguide-timeline.is-updating .rguide-timeline-detail > *,
-    .rguide-component-slide.is-active {
+    .rguide-timeline.is-updating .rguide-timeline-detail > * {
       animation: none;
     }
 
@@ -3328,8 +2948,7 @@ The same architecture supports product growth without turning the core explorer 
     .rguide-timeline-track button i,
     .rguide-live-link,
     .rguide-live-link::before,
-    .rguide-live-link .material-symbols-outlined,
-    .rguide-component-controls button::after {
+    .rguide-live-link .material-symbols-outlined {
       transition: none;
     }
   }
