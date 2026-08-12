@@ -462,11 +462,43 @@ Content quality depends on operations, not only copy. I created a repeatable pip
 
 The repository contains dedicated workflows for editorial guides, destination descriptions, city boundaries, venue hours, weekly events, R2 media, translation batches, cache refreshes, and verification. These are small operational products inside the product: each one defines inputs, quality gates, failure handling, and a deterministic output.
 
-### Resilience Is Part of the Content Model
-
-The live interface prefers normalized views and current render caches. Static descriptions, guide payloads, boundary snapshots, and destination-image fallbacks protect the experience when a database or media request is temporarily unavailable. The fallback never becomes the authoring system; it is a deliberately derived safety layer.
-
-That distinction made it possible to migrate away from legacy blob tables without sacrificing the stable card shape already used by the frontend.
+<section class="rguide-resilience" aria-labelledby="rguide-resilience-title">
+  <header>
+    <span>Product resilience</span>
+    <h3 id="rguide-resilience-title">Built to stay useful when a service fails.</h3>
+    <p>A travel guide should not disappear because a database or image service is temporarily slow. RGuide prepares a verified version of published content so the essential experience can remain available.</p>
+  </header>
+  <div class="rguide-resilience-paths">
+    <article>
+      <div class="rguide-resilience-path-heading">
+        <i class="material-symbols-outlined" aria-hidden="true">cloud_done</i>
+        <span>Normal operation</span>
+        <b>01</b>
+      </div>
+      <h4>Serve the newest published version.</h4>
+      <p>Structured destination, venue, hours, source, and media records are assembled into a frontend-ready guide. The interface requests only the city or guide the traveler is viewing.</p>
+      <div class="rguide-resilience-flow" aria-label="Structured records flow to a published view and then to the explorer">
+        <span>Structured records</span><i aria-hidden="true">→</i><span>Published view</span><i aria-hidden="true">→</i><span>Explorer</span>
+      </div>
+    </article>
+    <article>
+      <div class="rguide-resilience-path-heading">
+        <i class="material-symbols-outlined" aria-hidden="true">offline_bolt</i>
+        <span>If a service is interrupted</span>
+        <b>02</b>
+      </div>
+      <h4>Use the last verified version.</h4>
+      <p>Saved guide content, map boundaries, destination descriptions, and image fallbacks keep the page usable while the live service recovers.</p>
+      <div class="rguide-resilience-flow" aria-label="Verified guide data, boundary snapshots, and image fallbacks flow to the same explorer">
+        <span>Verified content</span><i aria-hidden="true">+</i><span>Saved map and media</span><i aria-hidden="true">→</i><span>Same explorer</span>
+      </div>
+    </article>
+  </div>
+  <footer>
+    <strong>Why this mattered</strong>
+    <p>Both paths deliver content in the same predictable structure. That let me replace the original all-in-one JSON records with a normalized data model in stages—without redesigning the guide cards, routes, or map interactions. The backup remains a read-only copy of published content, never a second place to edit it.</p>
+  </footer>
+</section>
 
 ## Translating the System Into an Experience
 
@@ -1698,6 +1730,156 @@ The same architecture supports product growth without turning the core explorer 
     font-size: 0.7rem;
   }
 
+  .rguide-resilience {
+    container-type: inline-size;
+    margin: clamp(2.5rem, 5vw, 4.5rem) 0 clamp(4rem, 8vw, 7rem);
+    background: rgba(255, 255, 255, 0.14);
+    border: var(--rule);
+  }
+
+  .rguide-resilience > header {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.8fr) minmax(22rem, 1.2fr);
+    gap: 1rem clamp(2rem, 6cqw, 6rem);
+    padding: clamp(1.25rem, 3cqw, 2rem);
+  }
+
+  .rguide-resilience > header > span,
+  .rguide-resilience-path-heading > span,
+  .rguide-resilience > footer > strong {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .rguide-resilience > header > span {
+    grid-column: 1 / -1;
+    color: var(--signal);
+  }
+
+  .project-content .rguide-resilience h3 {
+    max-width: 12ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5.2cqw, 4.8rem);
+    line-height: 0.92;
+    letter-spacing: -0.06em;
+  }
+
+  .project-content .rguide-resilience > header > p {
+    max-width: 42rem;
+    align-self: end;
+    margin: 0;
+    color: #5f5d57;
+    font-size: clamp(0.88rem, 1.25cqw, 1.05rem);
+    line-height: 1.55;
+  }
+
+  .rguide-resilience-paths {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--rule);
+    border-bottom: var(--rule);
+  }
+
+  .rguide-resilience-paths article {
+    display: flex;
+    min-height: 19rem;
+    flex-direction: column;
+    padding: clamp(1rem, 2.5cqw, 1.75rem);
+  }
+
+  .rguide-resilience-paths article:first-child {
+    border-right: var(--rule);
+  }
+
+  .rguide-resilience-path-heading {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .rguide-resilience-path-heading > i {
+    color: var(--signal);
+    font-size: 1.8rem;
+    font-weight: 300;
+  }
+
+  .rguide-resilience-path-heading > span {
+    color: var(--signal);
+  }
+
+  .rguide-resilience-path-heading > b {
+    color: #8a8881;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .project-content .rguide-resilience h4 {
+    max-width: 16ch;
+    margin: clamp(2.75rem, 5cqw, 4.5rem) 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3.2cqw, 2.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+  }
+
+  .project-content .rguide-resilience-paths article > p {
+    max-width: 34rem;
+    margin: 1rem 0 0;
+    color: #5f5d57;
+    font-size: clamp(0.76rem, 1cqw, 0.9rem);
+    line-height: 1.55;
+  }
+
+  .rguide-resilience-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1.5rem;
+  }
+
+  .rguide-resilience-flow > span {
+    padding: 0.45rem 0.55rem;
+    background: rgba(255, 255, 255, 0.32);
+    border: var(--rule);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .rguide-resilience-flow > i {
+    color: var(--signal);
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 800;
+  }
+
+  .rguide-resilience > footer {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.45fr) minmax(0, 1.55fr);
+    gap: 1.5rem;
+    padding: clamp(1.1rem, 2.5cqw, 1.75rem);
+  }
+
+  .rguide-resilience > footer > strong {
+    color: var(--signal);
+  }
+
+  .project-content .rguide-resilience > footer > p {
+    max-width: 58rem;
+    margin: 0;
+    font-size: clamp(0.84rem, 1.15cqw, 0.98rem);
+    line-height: 1.55;
+  }
+
   .rguide-principles {
     counter-reset: rguide-principle;
     display: grid;
@@ -2238,6 +2420,40 @@ The same architecture supports product growth without turning the core explorer 
   @keyframes rguide-detail-in {
     from { opacity: 0; transform: translateY(0.45rem); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @container (max-width: 58rem) {
+    .rguide-resilience > header {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .project-content .rguide-resilience h3 {
+      max-width: 13ch;
+      font-size: clamp(2.7rem, 9cqw, 4.6rem);
+    }
+
+    .rguide-resilience-paths {
+      grid-template-columns: 1fr;
+    }
+
+    .rguide-resilience-paths article {
+      min-height: 0;
+    }
+
+    .rguide-resilience-paths article:first-child {
+      border-right: 0;
+      border-bottom: var(--rule);
+    }
+
+    .rguide-resilience-flow {
+      margin-top: 2.5rem;
+    }
+
+    .rguide-resilience > footer {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
   }
 
   @container (max-width: 52rem) {
