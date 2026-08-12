@@ -500,12 +500,179 @@ The repository contains dedicated workflows for editorial guides, destination de
   </footer>
 </section>
 
-## Translating the System Into an Experience
-
-<figure class="rguide-product-shot rguide-product-shot--feature">
-  <img src="/Projects/RGuide/rguide-barcelona.jpg" alt="RGuide Barcelona late-night food guide showing synchronized map markers, source-backed copy, image strip, and place details" width="1280" height="720" loading="lazy" decoding="async" />
-  <figcaption>A guide is simultaneously editorial content, a map layer, a set of sourced places, and a deep-linkable route.</figcaption>
-</figure>
+<section class="rguide-design-system" aria-labelledby="rguide-design-system-title">
+  <header class="rguide-ds-intro">
+    <div>
+      <span>Production interface system</span>
+      <h3 id="rguide-design-system-title">A reusable product language.</h3>
+    </div>
+    <p>The wireframes isolate the logic behind the interface before the visual system is applied: geographic orientation stays visible, guides remain comparable, and every editorial claim resolves into a useful place.</p>
+  </header>
+  <article class="rguide-ds-sheet" aria-labelledby="rguide-ds-structure-title">
+    <header class="rguide-ds-sheet-header">
+      <span>Plate 01 / Structure</span>
+      <h4 id="rguide-ds-structure-title">Two scales, one mental model</h4>
+      <small>From product shell to guide detail</small>
+    </header>
+    <div class="rguide-ds-wireframes">
+      <figure class="rguide-ds-specimen rguide-ds-specimen--home-shell">
+        <figcaption><b>01</b><span><strong>Explorer layout</strong><small>Homepage / persistent geographic context</small></span></figcaption>
+        <div class="rguide-ds-layout-theory">
+          <ol class="rguide-ds-theory-key">
+            <li><b>01</b><span><strong>Browse by hierarchy</strong><small>The left rail narrows the world into regions, countries, cities, and neighborhoods.</small></span></li>
+            <li><b>02</b><span><strong>Keep position visible</strong><small>The map remains present while the traveler changes scope or compares options.</small></span></li>
+            <li><b>03</b><span><strong>Filter consistently</strong><small>The same category system follows the traveler through every geographic level.</small></span></li>
+            <li><b>04</b><span><strong>Compare before opening</strong><small>The guide index summarizes the choice before revealing the full editorial route.</small></span></li>
+          </ol>
+          <article class="rguide-ds-home-wireframe" aria-label="Annotated wireframe showing the RGuide homepage as navigation, map, filters, and guide index">
+            <ol class="rguide-ds-callouts rguide-ds-callouts--home" aria-hidden="true">
+              <li style="--x:14%;--line:4.3rem">01</li><li style="--x:46%;--line:6.5rem">02</li><li style="--x:73%;--line:8.4rem">03</li><li style="--x:91%;--line:14.5rem">04</li>
+            </ol>
+            <aside class="rguide-ds-home-nav">
+              <small class="rguide-ds-wf-label">Destination hierarchy</small>
+              <div class="rguide-ds-home-heading"><i></i><i></i></div>
+              <div class="rguide-ds-home-rows">
+                <span><i></i><em><b></b><small></small></em></span>
+                <span><i></i><em><b></b><small></small></em></span>
+                <span><i></i><em><b></b><small></small></em></span>
+                <span><i></i><em><b></b><small></small></em></span>
+              </div>
+            </aside>
+            <div class="rguide-ds-home-map">
+              <small class="rguide-ds-wf-label">Persistent map</small>
+              <div class="rguide-ds-map-streets" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <b style="--x:31%;--y:31%"></b><b style="--x:67%;--y:24%"></b><b style="--x:48%;--y:66%"></b><b style="--x:76%;--y:55%"></b>
+              <div class="rguide-ds-map-controls" aria-hidden="true"><i>+</i><i>−</i></div>
+            </div>
+            <section class="rguide-ds-home-index">
+              <header><small class="rguide-ds-wf-label">Guide index</small><div><i></i><i></i></div><span><i></i><i></i></span></header>
+              <nav><small>Shared filters</small><div><i></i><i></i><i></i><i></i></div></nav>
+              <div class="rguide-ds-home-cards">
+                <small class="rguide-ds-wf-label">Comparable guide cards</small>
+                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
+                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
+                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
+              </div>
+            </section>
+          </article>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--guide-shell">
+        <figcaption><b>02</b><span><strong>Guide module</strong><small>MapListCardShell / editorial information hierarchy</small></span></figcaption>
+        <div class="rguide-ds-guide-theory">
+          <ol class="rguide-ds-theory-key">
+            <li><b>01</b><span><strong>Orient</strong><small>Name the guide, its category, scope, and available actions.</small></span></li>
+            <li><b>02</b><span><strong>Keep context</strong><small>Expose adjacent guides without ejecting the traveler from the city.</small></span></li>
+            <li><b>03</b><span><strong>Explain and prove</strong><small>Pair editorial rationale with sources and an ordered visual route.</small></span></li>
+            <li><b>04</b><span><strong>Resolve to action</strong><small>Turn the guide’s argument into a specific place a traveler can use.</small></span></li>
+          </ol>
+          <article class="rguide-ds-wireframe" aria-label="Annotated wireframe showing the four layers of an RGuide guide module">
+            <header class="rguide-ds-wf-identity">
+              <div class="rguide-ds-wf-title"><i></i><i></i></div>
+              <div class="rguide-ds-wf-actions"><i></i><i></i><i></i></div>
+            </header>
+            <section class="rguide-ds-wf-related">
+              <small>Related guides in current destination</small>
+              <div><i></i><i></i><i></i><i></i></div>
+            </section>
+            <section class="rguide-ds-wf-context">
+              <div class="rguide-ds-wf-context-copy">
+                <small>Editorial rationale</small>
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <div class="rguide-ds-wf-proof">
+                <small>Sources</small>
+                <span><i></i><i></i><i></i></span>
+              </div>
+              <div class="rguide-ds-wf-stops">
+                <small>Ordered places</small>
+                <ol><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li></ol>
+              </div>
+            </section>
+            <section class="rguide-ds-wf-place">
+              <div class="rguide-ds-wf-photo"><i class="material-symbols-outlined" aria-hidden="true">image</i></div>
+              <div class="rguide-ds-wf-place-copy"><strong></strong><i></i><i></i><i></i><span></span></div>
+              <div class="rguide-ds-wf-place-actions"><i></i><i></i><i></i></div>
+            </section>
+          </article>
+        </div>
+      </figure>
+    </div>
+  </article>
+  <article class="rguide-ds-sheet" aria-labelledby="rguide-ds-foundations-title">
+    <header class="rguide-ds-sheet-header">
+      <span>Plate 02 / Foundations</span>
+      <h4 id="rguide-ds-foundations-title">Tokens and controls</h4>
+      <small>Small rules establish system-wide behavior</small>
+    </header>
+    <div class="rguide-ds-foundations">
+      <figure class="rguide-ds-specimen rguide-ds-specimen--categories">
+        <figcaption><b>01</b><span><strong>Category tokens</strong><small>Label · icon · map color · POI color</small></span></figcaption>
+        <div class="rguide-ds-category-list" aria-label="RGuide category tokens">
+          <span style="--category:#f59e0b"><i class="material-symbols-outlined" aria-hidden="true">restaurant</i><b>Food</b><small>#F59E0B</small></span>
+          <span style="--category:#6366f1"><i class="material-symbols-outlined" aria-hidden="true">nightlife</i><b>Nightlife</b><small>#6366F1</small></span>
+          <span style="--category:#f43f5e"><i class="material-symbols-outlined" aria-hidden="true">museum</i><b>Culture</b><small>#F43F5E</small></span>
+          <span style="--category:#0891b2"><i class="material-symbols-outlined" aria-hidden="true">bed</i><b>Stay</b><small>#0891B2</small></span>
+          <span style="--category:#10b981"><i class="material-symbols-outlined" aria-hidden="true">park</i><b>Nature</b><small>#10B981</small></span>
+          <span style="--category:#f97316"><i class="material-symbols-outlined" aria-hidden="true">local_activity</i><b>Activities</b><small>#F97316</small></span>
+          <span style="--category:#2563eb"><i class="material-symbols-outlined" aria-hidden="true">route</i><b>Routes</b><small>#2563EB</small></span>
+          <span style="--category:#7c3aed"><i class="material-symbols-outlined" aria-hidden="true">info</i><b>Essentials</b><small>#7C3AED</small></span>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--actions">
+        <figcaption><b>02</b><span><strong>Action family</strong><small>Rest · hover · selected</small></span></figcaption>
+        <div class="rguide-ds-actions" aria-label="Guide action button states">
+          <button type="button" aria-label="Add guide"><i class="material-symbols-outlined" aria-hidden="true">add</i></button>
+          <button type="button" aria-label="Save guide"><i class="material-symbols-outlined" aria-hidden="true">favorite</i></button>
+          <button type="button" class="is-active" aria-label="Saved guide"><i class="material-symbols-outlined" aria-hidden="true">favorite</i></button>
+          <button type="button" aria-label="Expand guide"><i class="material-symbols-outlined" aria-hidden="true">expand_more</i></button>
+          <button type="button" class="rguide-ds-action-square" aria-label="Search"><i class="material-symbols-outlined" aria-hidden="true">search</i></button>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--markers">
+        <figcaption><b>03</b><span><strong>Map markers</strong><small>Guide stop · selected stop · nested POI</small></span></figcaption>
+        <div class="rguide-ds-markers" aria-label="Map marker hierarchy">
+          <span class="rguide-ds-marker" style="--marker:#f59e0b">1</span>
+          <span class="rguide-ds-marker is-selected" style="--marker:#f59e0b">5</span>
+          <span class="rguide-ds-marker" style="--marker:#6366f1">8</span>
+          <span class="rguide-ds-marker rguide-ds-marker--nested" style="--marker:#f59e0b">A</span>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--route">
+        <figcaption><b>04</b><span><strong>Route hierarchy</strong><small>The navigation model becomes the URL model</small></span></figcaption>
+        <nav class="rguide-ds-route" aria-label="Example geographic route">
+          <span>World</span><i aria-hidden="true">→</i><span>Europe</span><i aria-hidden="true">→</i><span>Spain</span><i aria-hidden="true">→</i><strong>Barcelona</strong>
+        </nav>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--sources">
+        <figcaption><b>05</b><span><strong>Source proof</strong><small>Editorial claims keep visible provenance</small></span></figcaption>
+        <div class="rguide-ds-source-row">
+          <span>Sourced</span><i aria-hidden="true"></i>
+          <div aria-label="Source publishers"><b>E</b><b>G</b><b>G</b></div>
+          <strong>Eater, local publishers +2</strong>
+          <i class="material-symbols-outlined" aria-hidden="true">expand_more</i>
+        </div>
+      </figure>
+    </div>
+  </article>
+  <article class="rguide-ds-sheet rguide-ds-sheet--proof" aria-labelledby="rguide-ds-proof-title">
+    <header class="rguide-ds-sheet-header">
+      <span>Plate 03 / In production</span>
+      <h4 id="rguide-ds-proof-title">The system in use</h4>
+      <small>City orientation → expanded editorial guide</small>
+    </header>
+    <div class="rguide-ds-product-proof">
+      <figure class="rguide-ds-product-view">
+        <figcaption><b>01</b><span><strong>City view</strong><small>Barcelona / orientation and guide comparison</small></span></figcaption>
+        <img src="/Projects/RGuide/rguide-barcelona-city.png" alt="RGuide Barcelona city view with destination context, map, filters, neighborhoods, and guide index" width="1600" height="900" loading="lazy" decoding="async" />
+      </figure>
+      <figure class="rguide-ds-product-view">
+        <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Editorial rationale / sources / ordered places</small></span></figcaption>
+        <img src="/Projects/RGuide/rguide-barcelona.jpg" alt="RGuide Barcelona late-night food guide showing synchronized map markers, source-backed copy, ordered places, and place details" width="1280" height="720" loading="lazy" decoding="async" />
+      </figure>
+    </div>
+  </article>
+</section>
 
 The interface uses one consistent mental model across scales. The left side answers **where am I?** The map answers **how does it relate spatially?** The guide rail answers **what is worth doing and why?** Selecting a destination, neighborhood, category, guide, or place updates the other surfaces rather than creating disconnected navigation modes.
 
@@ -1038,6 +1205,1387 @@ The same architecture supports product growth without turning the core explorer 
     width: 100%;
     height: auto;
     margin: 0;
+  }
+
+  .rguide-design-system {
+    container-type: inline-size;
+    border-bottom: var(--rule);
+  }
+
+  .rguide-ds-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    padding: clamp(1.5rem, 3cqw, 2.5rem) 0;
+  }
+
+  .rguide-ds-intro > div {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .rguide-ds-intro span,
+  .rguide-ds-sheet-header span,
+  .rguide-ds-sheet-header small,
+  .rguide-ds-specimen figcaption small {
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-intro span,
+  .rguide-ds-sheet-header span {
+    color: var(--signal);
+  }
+
+  .project-content .rguide-ds-intro h3 {
+    max-width: none;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--rguide-type-display);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-display);
+    letter-spacing: var(--rguide-tracking-display);
+    white-space: nowrap;
+  }
+
+  .project-content .rguide-ds-intro > p {
+    max-width: 64rem;
+    margin: 0;
+    color: #5f5d57;
+    font-size: clamp(0.82rem, 1.25cqw, 1rem);
+    line-height: 1.55;
+  }
+
+  .rguide-ds-sheet {
+    border-top: var(--rule);
+  }
+
+  .rguide-ds-sheet-header {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1.25rem;
+    align-items: baseline;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(9, 9, 11, 0.18);
+  }
+
+  .project-content .rguide-ds-sheet-header h4 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--rguide-type-section-title);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-heading);
+    letter-spacing: var(--rguide-tracking-heading);
+    text-transform: none;
+  }
+
+  .rguide-ds-sheet-header small {
+    color: #71717a;
+  }
+
+  .rguide-ds-foundations,
+  .rguide-ds-components {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(3rem, 6cqw, 6rem) clamp(1.5rem, 3.5cqw, 3.5rem);
+    padding: clamp(3rem, 6cqw, 6rem) 0 clamp(3.5rem, 7cqw, 7rem);
+  }
+
+  .rguide-ds-wireframes {
+    display: grid;
+    gap: clamp(4rem, 8cqw, 7rem);
+    padding: clamp(3rem, 6cqw, 6rem) 0 clamp(4rem, 8cqw, 7rem);
+  }
+
+  .rguide-ds-layout-theory,
+  .rguide-ds-guide-theory {
+    --guide-annotation-gap: clamp(2rem, 4cqw, 4rem);
+    display: grid;
+    grid-template-columns: minmax(13rem, 0.34fr) minmax(0, 0.66fr);
+    gap: var(--guide-annotation-gap);
+    align-items: stretch;
+  }
+
+  .rguide-ds-guide-theory > .rguide-ds-theory-key {
+    grid-template-rows: 7rem 6rem minmax(14rem, 1fr) 11rem;
+    height: 100%;
+  }
+
+  .rguide-ds-guide-theory > .rguide-ds-theory-key li {
+    position: relative;
+    align-content: center;
+  }
+
+  .rguide-ds-guide-theory > .rguide-ds-theory-key li::after {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: var(--guide-annotation-gap);
+    height: 1px;
+    content: "";
+    background: rgba(240, 58, 34, 0.72);
+  }
+
+  .rguide-ds-guide-theory > .rguide-ds-theory-key li::before {
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - 0.22rem);
+    right: -0.35rem;
+    width: 0;
+    height: 0;
+    content: "";
+    border-top: 0.22rem solid transparent;
+    border-right: 0.35rem solid var(--signal);
+    border-bottom: 0.22rem solid transparent;
+  }
+
+  .rguide-ds-home-wireframe {
+    --wf-line: rgba(9, 9, 11, 0.54);
+    --wf-soft: rgba(9, 9, 11, 0.1);
+    display: grid;
+    position: relative;
+    grid-template-columns: minmax(7rem, 0.28fr) minmax(8rem, 0.32fr) minmax(10rem, 0.4fr);
+    min-height: 29rem;
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--wf-line);
+    box-shadow: 0 1.5rem 3.5rem rgba(9, 9, 11, 0.08);
+  }
+
+  .rguide-ds-home-nav,
+  .rguide-ds-home-map,
+  .rguide-ds-home-index,
+  .rguide-ds-home-cards,
+  .rguide-ds-home-index nav {
+    position: relative;
+  }
+
+  .rguide-ds-home-nav {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 1.15rem;
+    padding: 2.45rem 0.9rem 0.9rem;
+    border-right: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-label {
+    color: rgba(9, 9, 11, 0.6);
+    font-size: 0.46rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-home-heading {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .rguide-ds-home-heading i,
+  .rguide-ds-home-cards article small,
+  .rguide-ds-home-cards article b {
+    display: block;
+    background: rgba(9, 9, 11, 0.22);
+  }
+
+  .rguide-ds-home-heading i:first-child { width: 82%; height: 1rem; background: rgba(9, 9, 11, 0.72); }
+  .rguide-ds-home-heading i:last-child { width: 58%; height: 0.36rem; }
+
+  .rguide-ds-home-rows {
+    display: grid;
+    align-content: start;
+  }
+
+  .rguide-ds-home-rows > span {
+    display: grid;
+    grid-template-columns: 1.25rem minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: center;
+    min-height: 4.2rem;
+    border-top: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-rows > span:last-child { border-bottom: 1px solid var(--wf-line); }
+
+  .rguide-ds-home-rows > span > i {
+    display: block;
+    width: 1.15rem;
+    height: 1.15rem;
+    border: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-rows em {
+    display: grid;
+    gap: 0.38rem;
+    font-style: normal;
+  }
+
+  .rguide-ds-home-rows b,
+  .rguide-ds-home-rows small {
+    display: block;
+    height: 0.38rem;
+    background: rgba(9, 9, 11, 0.22);
+  }
+
+  .rguide-ds-home-rows b { width: 74%; background: rgba(9, 9, 11, 0.6); }
+  .rguide-ds-home-rows small { width: 52%; }
+
+  .rguide-ds-home-map {
+    overflow: hidden;
+    padding: 2.45rem 0.85rem 0.85rem;
+    background: rgba(9, 9, 11, 0.025);
+    border-right: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-map > .rguide-ds-wf-label {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.85rem;
+  }
+
+  .rguide-ds-map-streets {
+    position: absolute;
+    inset: 2.45rem 0.85rem 0.85rem;
+    overflow: hidden;
+    border: 1px solid rgba(9, 9, 11, 0.28);
+  }
+
+  .rguide-ds-map-streets i {
+    position: absolute;
+    display: block;
+    background: rgba(9, 9, 11, 0.13);
+  }
+
+  .rguide-ds-map-streets i:nth-child(1),
+  .rguide-ds-map-streets i:nth-child(2),
+  .rguide-ds-map-streets i:nth-child(3) {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  .rguide-ds-map-streets i:nth-child(1) { left: 25%; }
+  .rguide-ds-map-streets i:nth-child(2) { left: 50%; }
+  .rguide-ds-map-streets i:nth-child(3) { left: 75%; }
+
+  .rguide-ds-map-streets i:nth-child(n + 4) {
+    right: 0;
+    left: 0;
+    height: 1px;
+  }
+
+  .rguide-ds-map-streets i:nth-child(4) { top: 20%; }
+  .rguide-ds-map-streets i:nth-child(5) { top: 40%; }
+  .rguide-ds-map-streets i:nth-child(6) { top: 60%; }
+  .rguide-ds-map-streets i:nth-child(7) { top: 80%; }
+
+  .rguide-ds-map-controls {
+    position: absolute;
+    right: 1.15rem;
+    bottom: 1.15rem;
+    display: grid;
+    z-index: 2;
+  }
+
+  .rguide-ds-map-controls i {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--wf-line);
+    font-size: 0.7rem;
+    font-style: normal;
+  }
+
+  .rguide-ds-map-controls i + i {
+    margin-top: -1px;
+  }
+
+  .rguide-ds-home-map b {
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    display: inline-flex;
+    width: 0.7rem;
+    height: 0.7rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: rgba(9, 9, 11, 0.68);
+    border: 0.12rem solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(9,9,11,.25);
+  }
+
+  .rguide-ds-home-index {
+    display: grid;
+    grid-template-rows: 5rem 4.5rem 1fr;
+  }
+
+  .rguide-ds-home-index > header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.45rem 0.8rem;
+    align-content: center;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-index > header > .rguide-ds-wf-label { grid-column: 1 / -1; }
+
+  .rguide-ds-home-index > header > div {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .rguide-ds-home-index > header > div i {
+    display: block;
+    height: 0.34rem;
+    background: rgba(9,9,11,.2);
+  }
+
+  .rguide-ds-home-index > header > div i:first-child { width: 78%; height: 0.75rem; background: rgba(9,9,11,.68); }
+  .rguide-ds-home-index > header > div i:last-child { width: 46%; }
+
+  .rguide-ds-home-index > header > span {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .rguide-ds-home-index > header > span i,
+  .rguide-ds-home-cards article > em i {
+    display: block;
+    width: 1.35rem;
+    height: 1.35rem;
+    border: 1px solid var(--wf-line);
+    border-radius: 50%;
+  }
+
+  .rguide-ds-home-index nav {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.45rem;
+    padding: 0.62rem 0.65rem;
+    border-bottom: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-index nav > small {
+    color: rgba(9, 9, 11, 0.6);
+    font-size: 0.42rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-home-index nav > div {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .rguide-ds-home-index nav > div i {
+    min-height: 1.35rem;
+    border: 1px solid var(--wf-line);
+    border-right: 0;
+  }
+
+  .rguide-ds-home-index nav > div i:last-child {
+    border-right: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-cards {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    padding: 2.65rem 0.8rem 0.8rem;
+  }
+
+  .rguide-ds-home-cards > .rguide-ds-wf-label {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.8rem;
+  }
+
+  .rguide-ds-home-cards article {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    min-height: 5.1rem;
+    border: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-cards article > figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    color: rgba(9,9,11,.32);
+    background: repeating-linear-gradient(135deg, transparent 0 0.55rem, rgba(9,9,11,.045) 0.55rem 1.1rem);
+    border-right: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-home-cards article > figure i { font-size: 1rem; }
+
+  .rguide-ds-home-cards article > span {
+    display: grid;
+    gap: 0.45rem;
+    align-content: center;
+    padding: 0.65rem;
+  }
+
+  .rguide-ds-home-cards article > em {
+    display: flex;
+    gap: 0.25rem;
+    align-items: start;
+    padding: 0.55rem 0.45rem 0 0;
+    font-style: normal;
+  }
+
+  .rguide-ds-home-cards article > em i {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .rguide-ds-home-cards article b { width: 82%; height: 0.52rem; background: rgba(9,9,11,.62); }
+  .rguide-ds-home-cards article small { width: 55%; height: 0.25rem; }
+  .rguide-ds-home-cards article small:last-child { width: 70%; }
+
+  .rguide-ds-product-proof {
+    display: grid;
+    gap: clamp(3rem, 6cqw, 5rem);
+    padding: clamp(3rem, 6cqw, 5rem) 0 clamp(4rem, 8cqw, 7rem);
+  }
+
+  .project-content .rguide-ds-product-view {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .rguide-ds-product-view figcaption {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: start;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(9,9,11,.28);
+  }
+
+  .rguide-ds-product-view figcaption > b {
+    color: var(--signal);
+    font-family: var(--font-display);
+    font-size: 0.66rem;
+  }
+
+  .rguide-ds-product-view figcaption > span {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .rguide-ds-product-view figcaption strong {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-product-view figcaption small {
+    color: #71717a;
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-product-view img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #09090b;
+    box-shadow: 0 1.5rem 3rem rgba(9,9,11,.12);
+  }
+
+  .project-content .rguide-ds-specimen {
+    display: grid;
+    min-width: 0;
+    gap: clamp(1.5rem, 3cqw, 2.5rem);
+    align-content: start;
+    margin: 0;
+  }
+
+  .rguide-ds-specimen figcaption {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: start;
+    padding-top: 0.7rem;
+    border-top: 1px solid rgba(9, 9, 11, 0.28);
+  }
+
+  .rguide-ds-specimen figcaption > b {
+    color: var(--signal);
+    font-family: var(--font-display);
+    font-size: 0.66rem;
+    line-height: 1.2;
+  }
+
+  .rguide-ds-specimen figcaption > span {
+    display: grid;
+    gap: 0.22rem;
+  }
+
+  .rguide-ds-specimen figcaption strong {
+    font-size: 0.72rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-specimen figcaption small {
+    color: #71717a;
+    font-size: 0.49rem;
+  }
+
+  .rguide-ds-specimen--categories { grid-column: span 7; }
+  .rguide-ds-specimen--actions { grid-column: span 5; }
+  .rguide-ds-specimen--markers { grid-column: span 4; }
+  .rguide-ds-specimen--route { grid-column: span 8; }
+  .rguide-ds-specimen--sources { grid-column: 3 / span 8; }
+
+  .rguide-ds-category-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
+  }
+
+  .rguide-ds-category-list > span {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.15rem 0.5rem;
+    align-items: center;
+    min-width: 0;
+    padding: 0.65rem 0;
+    border-bottom: 0.18rem solid var(--category);
+  }
+
+  .rguide-ds-category-list .material-symbols-outlined {
+    grid-row: 1 / span 2;
+    color: var(--category);
+    font-size: 1.35rem;
+  }
+
+  .rguide-ds-category-list b {
+    font-size: 0.66rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-category-list small {
+    color: #71717a;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.48rem;
+  }
+
+  .rguide-ds-actions,
+  .rguide-ds-markers {
+    display: flex;
+    min-height: 6rem;
+    gap: clamp(0.55rem, 1.2cqw, 1rem);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rguide-ds-actions button,
+  .rguide-ds-guide-actions button {
+    display: inline-flex;
+    width: 2.6rem;
+    height: 2.6rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: #111827;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid #d5d8df;
+    border-radius: 50%;
+    box-shadow: 0 0.45rem 1rem rgba(9, 9, 11, 0.08);
+    font: inherit;
+  }
+
+  .rguide-ds-actions button.is-active {
+    color: #fff;
+    background: var(--signal);
+    border-color: var(--signal);
+  }
+
+  .rguide-ds-actions button.rguide-ds-action-square {
+    margin-left: 0.65rem;
+    color: #fff;
+    background: #09090b;
+    border-color: #09090b;
+    border-radius: 0.25rem;
+  }
+
+  .rguide-ds-actions .material-symbols-outlined,
+  .rguide-ds-guide-actions .material-symbols-outlined {
+    font-size: 1.15rem;
+  }
+
+  .rguide-ds-marker {
+    display: inline-flex;
+    width: 2.35rem;
+    height: 2.35rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: var(--marker);
+    border: 0.2rem solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(9, 9, 11, 0.2), 0 0.55rem 1.1rem rgba(9, 9, 11, 0.15);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+  .rguide-ds-marker.is-selected {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 0.22rem color-mix(in srgb, var(--marker) 28%, transparent);
+  }
+
+  .rguide-ds-marker--nested {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.8rem;
+    background: #c2410c;
+    border: 0;
+    border-radius: 0;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+
+  .rguide-ds-route {
+    display: flex;
+    min-height: 6rem;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.68rem, 1.2cqw, 0.85rem);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-route i {
+    color: var(--signal);
+    font-style: normal;
+  }
+
+  .rguide-ds-route strong {
+    padding: 0.48rem 0.65rem;
+    color: #fff;
+    background: #09090b;
+  }
+
+  .rguide-ds-source-row {
+    display: grid;
+    grid-template-columns: auto 2.25rem auto minmax(0, 1fr) auto;
+    gap: 0.7rem;
+    align-items: center;
+    min-height: 5rem;
+    padding: 0.85rem 1rem;
+    background: rgba(255, 255, 255, 0.58);
+    border-top: 1px solid #d5d8df;
+    border-bottom: 1px solid #d5d8df;
+  }
+
+  .rguide-ds-source-row > span {
+    color: #6b7280;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-source-row > i:not(.material-symbols-outlined) {
+    height: 1px;
+    background: #d5d8df;
+  }
+
+  .rguide-ds-source-row > div { display: flex; }
+
+  .rguide-ds-source-row > div b {
+    display: inline-flex;
+    width: 1.45rem;
+    height: 1.45rem;
+    align-items: center;
+    justify-content: center;
+    margin-left: -0.15rem;
+    color: #111827;
+    background: #fff;
+    border: 1px solid #d5d8df;
+    font-size: 0.56rem;
+  }
+
+  .rguide-ds-source-row > div b:first-child {
+    margin-left: 0;
+    color: var(--signal);
+  }
+
+  .rguide-ds-source-row > strong {
+    min-width: 0;
+    overflow: hidden;
+    color: #374151;
+    font-size: 0.68rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rguide-ds-source-row .material-symbols-outlined {
+    color: #9ca3af;
+    font-size: 1rem;
+  }
+
+  .rguide-ds-specimen--destination { grid-column: span 4; }
+  .rguide-ds-specimen--filter { grid-column: span 8; }
+  .rguide-ds-specimen--guide-shell { grid-column: 1 / -1; }
+
+  .rguide-ds-destination {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.8rem;
+    align-items: center;
+    min-height: 6.4rem;
+    padding: 1rem 1.1rem;
+    color: #fff;
+    background: #101010;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+    font: inherit;
+    text-align: left;
+  }
+
+  .rguide-ds-destination > .material-symbols-outlined:first-child { font-size: 2.1rem; }
+  .rguide-ds-destination > .material-symbols-outlined:last-child { color: rgba(255,255,255,.4); font-size: 1.25rem; }
+  .rguide-ds-destination span { display: grid; gap: 0.25rem; }
+  .rguide-ds-destination strong { font-size: 1rem; }
+  .rguide-ds-destination small { color: rgba(255,255,255,.62); font-size: 0.68rem; }
+
+  .rguide-ds-filter {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    min-height: 6.4rem;
+    border-top: 1px solid #d5d8df;
+    border-bottom: 1px solid #d5d8df;
+  }
+
+  .rguide-ds-filter button {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    color: #111827;
+    background: rgba(255, 255, 255, 0.58);
+    border: 0;
+    border-right: 1px solid #d5d8df;
+    font: inherit;
+    font-size: 0.62rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-filter button:last-child { border-right: 0; }
+  .rguide-ds-filter button.is-active { color: #fff; background: #f59e0b; }
+  .rguide-ds-filter .material-symbols-outlined { font-size: 1.15rem; }
+
+  .rguide-ds-guide-card {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #d5d8df;
+    border-top: 0.28rem solid #f59e0b;
+    box-shadow: 0 1.75rem 4rem rgba(9, 9, 11, 0.14);
+  }
+
+  .rguide-ds-guide-card > header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    padding: clamp(1rem, 2cqw, 1.5rem);
+    background: #f59e0b;
+  }
+
+  .project-content .rguide-ds-guide-card h5 {
+    max-width: 34ch;
+    margin: 0;
+    font-size: clamp(1.15rem, 2.6cqw, 2rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .project-content .rguide-ds-guide-card > header p {
+    margin: 0.45rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-guide-card > header p span { color: #fff; font-weight: 800; }
+  .rguide-ds-guide-actions { display: flex; gap: 0.45rem; }
+  .rguide-ds-guide-actions button { width: 2.25rem; height: 2.25rem; box-shadow: none; }
+
+  .rguide-ds-related {
+    display: grid;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    background: #111827;
+  }
+
+  .rguide-ds-related > span {
+    font-size: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-related > div { display: flex; gap: 0.45rem; overflow: hidden; }
+
+  .rguide-ds-related b {
+    flex: 0 0 auto;
+    padding: 0.45rem 0.65rem;
+    color: #fff;
+    background: #f59e0b;
+    font-size: 0.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-guide-body {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1rem 1.5rem;
+    padding: clamp(1rem, 2.5cqw, 2rem);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(8, 145, 178, 0.11));
+  }
+
+  .rguide-ds-description > span,
+  .rguide-ds-photo-strip > span {
+    color: #6b7280;
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .project-content .rguide-ds-description p {
+    margin: 0.65rem 0 0;
+    color: #374151;
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .rguide-ds-photo-strip ol {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.35rem;
+    margin: 0.65rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rguide-ds-photo-strip li {
+    position: relative;
+    min-width: 0;
+    aspect-ratio: 1.35;
+    overflow: hidden;
+    background: #111827;
+  }
+
+  .rguide-ds-photo-strip img,
+  .rguide-ds-photo-strip li > span { width: 100%; height: 100%; object-fit: cover; }
+
+  .rguide-ds-photo-strip li > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.38);
+    font-size: 1.2rem;
+  }
+
+  .rguide-ds-photo-strip li > b {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    width: 1.2rem;
+    height: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: #f59e0b;
+    font-size: 0.52rem;
+  }
+
+  .rguide-ds-source-row--card {
+    grid-column: 1 / -1;
+    min-height: 3.5rem;
+    padding-inline: 0;
+    background: transparent;
+  }
+
+  .rguide-ds-place-card {
+    grid-column: 1 / -1;
+    display: grid;
+    position: relative;
+    grid-template-columns: minmax(7rem, 0.65fr) minmax(0, 1.35fr);
+    min-height: 11rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid #d5d8df;
+    border-left: 0.24rem solid #f59e0b;
+  }
+
+  .rguide-ds-place-card > img {
+    width: 100%;
+    height: 100%;
+    min-height: 11rem;
+    object-fit: cover;
+  }
+
+  .rguide-ds-place-card > div {
+    align-self: center;
+    padding: 1.25rem 3.5rem 1.25rem 1.25rem;
+  }
+
+  .rguide-ds-place-card > div strong {
+    display: inline-block;
+    margin-bottom: 0.55rem;
+    padding: 0.35rem 0.55rem;
+    color: #fff;
+    background: #f59e0b;
+    font-size: 0.82rem;
+  }
+
+  .project-content .rguide-ds-place-card p {
+    margin: 0;
+    color: #374151;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .rguide-ds-place-number,
+  .rguide-ds-place-price {
+    position: absolute;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .rguide-ds-place-number {
+    top: 0.7rem;
+    left: 0.7rem;
+    width: 1.65rem;
+    height: 1.65rem;
+    color: #fff;
+    background: #f59e0b;
+    border-radius: 0.35rem;
+  }
+
+  .rguide-ds-place-price {
+    top: 1rem;
+    right: 1rem;
+    width: 2.15rem;
+    height: 2.15rem;
+    background: #fff;
+    border: 1px solid #d5d8df;
+    border-radius: 50%;
+  }
+
+  .rguide-ds-guide-theory {
+    display: grid;
+    grid-template-columns: minmax(13rem, 0.34fr) minmax(0, 0.66fr);
+    gap: clamp(2rem, 4cqw, 4rem);
+    align-items: start;
+  }
+
+  .rguide-ds-theory-key {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-content .rguide-ds-theory-key li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(9, 9, 11, 0.24);
+  }
+
+  .rguide-ds-theory-key li:last-child {
+    border-bottom: 1px solid rgba(9, 9, 11, 0.24);
+  }
+
+  .rguide-ds-theory-key li > b {
+    display: inline-flex;
+    width: 1.35rem;
+    height: 1.35rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--signal);
+    background: #f4f0e7;
+    border: 1px solid var(--signal);
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+  }
+
+  .rguide-ds-theory-key li > span {
+    display: grid;
+    gap: 0.32rem;
+  }
+
+  .rguide-ds-theory-key strong {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-theory-key small {
+    color: #66645f;
+    font-size: 0.62rem;
+    line-height: 1.45;
+  }
+
+  .project-content .rguide-ds-wireframe {
+    --wf-line: rgba(9, 9, 11, 0.54);
+    --wf-soft: rgba(9, 9, 11, 0.13);
+    position: relative;
+    overflow: visible;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--wf-line);
+    box-shadow: 0 1.5rem 3.5rem rgba(9, 9, 11, 0.08);
+  }
+
+  .project-content .rguide-ds-callouts {
+    position: absolute;
+    z-index: 8;
+    inset: 0;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    list-style: none;
+  }
+
+  .project-content .rguide-ds-callouts li {
+    position: absolute;
+    display: inline-flex;
+    width: 1.4rem;
+    height: 1.4rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    color: var(--signal);
+    background: #f4f0e7;
+    border: 1px solid var(--signal);
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-size: 0.54rem;
+    line-height: 1;
+  }
+
+  .rguide-ds-callouts--home li {
+    top: -1.85rem;
+    left: var(--x);
+    transform: translateX(-50%);
+  }
+
+  .rguide-ds-callouts--home li::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: var(--line, 2.35rem);
+    content: "";
+    background: var(--signal);
+  }
+
+  .rguide-ds-callouts--home li::before {
+    position: absolute;
+    top: calc(100% + var(--line, 2.35rem) - 0.13rem);
+    left: calc(50% - 0.13rem);
+    z-index: 1;
+    width: 0.26rem;
+    height: 0.26rem;
+    content: "";
+    background: var(--signal);
+    border-radius: 50%;
+  }
+
+  .rguide-ds-callouts--guide li {
+    top: var(--y);
+    left: -2.2rem;
+    transform: translateY(-50%);
+  }
+
+  .rguide-ds-callouts--guide li::after {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 2rem;
+    height: 1px;
+    content: "";
+    background: var(--signal);
+  }
+
+  .rguide-ds-callouts--guide li::before {
+    position: absolute;
+    top: calc(50% - 0.13rem);
+    left: calc(100% + 1.87rem);
+    z-index: 1;
+    width: 0.26rem;
+    height: 0.26rem;
+    content: "";
+    background: var(--signal);
+    border-radius: 50%;
+  }
+
+  .rguide-ds-wf-number {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    width: 1.65rem;
+    height: 1.65rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: var(--signal);
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+  }
+
+  .rguide-ds-wf-identity {
+    display: grid;
+    position: relative;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    min-height: 7rem;
+    padding: 1.35rem;
+    border-bottom: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-title {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .rguide-ds-wf-title i {
+    display: block;
+    height: 1rem;
+    background: rgba(9, 9, 11, 0.72);
+  }
+
+  .rguide-ds-wf-title i:first-child {
+    width: min(92%, 28rem);
+    height: 1.3rem;
+  }
+
+  .rguide-ds-wf-title i:last-child {
+    width: min(58%, 17rem);
+    height: 0.42rem;
+    background: rgba(9, 9, 11, 0.3);
+  }
+
+  .rguide-ds-wf-actions {
+    display: flex;
+    gap: 0.45rem;
+  }
+
+  .rguide-ds-wf-actions i,
+  .rguide-ds-wf-place-actions i {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: 1px solid var(--wf-line);
+    border-radius: 50%;
+  }
+
+  .rguide-ds-wf-related {
+    display: grid;
+    position: relative;
+    gap: 0.65rem;
+    min-height: 6rem;
+    padding: 1rem 1.25rem;
+    background: var(--wf-soft);
+    border-bottom: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-related > small,
+  .rguide-ds-wf-context small {
+    color: rgba(9, 9, 11, 0.6);
+    font-size: 0.48rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-wf-related > div {
+    display: flex;
+    gap: 0.45rem;
+    overflow: hidden;
+  }
+
+  .rguide-ds-wf-related > div i {
+    display: block;
+    width: 6.5rem;
+    height: 1.55rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-context {
+    display: grid;
+    position: relative;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.56fr);
+    gap: 1.5rem;
+    padding: 1.5rem 1.25rem 1.25rem;
+    border-bottom: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-context-copy,
+  .rguide-ds-wf-proof,
+  .rguide-ds-wf-stops {
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
+  }
+
+  .rguide-ds-wf-context-copy > i {
+    display: block;
+    height: 0.48rem;
+    background: rgba(9, 9, 11, 0.2);
+  }
+
+  .rguide-ds-wf-context-copy > i:nth-of-type(1) { width: 96%; }
+  .rguide-ds-wf-context-copy > i:nth-of-type(2) { width: 88%; }
+  .rguide-ds-wf-context-copy > i:nth-of-type(3) { width: 92%; }
+  .rguide-ds-wf-context-copy > i:nth-of-type(4) { width: 62%; }
+
+  .rguide-ds-wf-proof > span {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .rguide-ds-wf-proof > span i {
+    display: block;
+    width: 1.45rem;
+    height: 1.45rem;
+    border: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-stops {
+    grid-column: 1 / -1;
+    margin-top: 0.65rem;
+  }
+
+  .rguide-ds-wf-stops ol {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rguide-ds-wf-stops li {
+    display: flex;
+    aspect-ratio: 1.5;
+    align-items: center;
+    justify-content: center;
+    color: rgba(9, 9, 11, 0.58);
+    background: var(--wf-soft);
+    border: 1px solid var(--wf-line);
+    font-size: 0.58rem;
+    font-weight: 800;
+  }
+
+  .rguide-ds-wf-place {
+    display: grid;
+    position: relative;
+    grid-template-columns: minmax(8rem, 0.38fr) minmax(0, 0.62fr) auto;
+    min-height: 11rem;
+    padding-left: 0;
+  }
+
+  .rguide-ds-wf-photo {
+    display: flex;
+    min-height: 11rem;
+    align-items: center;
+    justify-content: center;
+    color: rgba(9, 9, 11, 0.34);
+    background: repeating-linear-gradient(135deg, transparent 0 0.8rem, rgba(9,9,11,.035) 0.8rem 1.6rem);
+    border-right: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-photo .material-symbols-outlined {
+    font-size: 2rem;
+  }
+
+  .rguide-ds-wf-place-copy {
+    display: grid;
+    gap: 0.55rem;
+    align-content: center;
+    padding: 1.25rem;
+  }
+
+  .rguide-ds-wf-place-copy > strong {
+    display: block;
+    width: 7rem;
+    height: 1.1rem;
+    background: rgba(9, 9, 11, 0.7);
+  }
+
+  .rguide-ds-wf-place-copy > i {
+    display: block;
+    height: 0.45rem;
+    background: rgba(9, 9, 11, 0.18);
+  }
+
+  .rguide-ds-wf-place-copy > i:nth-of-type(2) { width: 92%; }
+  .rguide-ds-wf-place-copy > i:nth-of-type(3) { width: 68%; }
+
+  .rguide-ds-wf-place-copy > span {
+    width: 4.5rem;
+    height: 1.35rem;
+    margin-top: 0.35rem;
+    border: 1px solid var(--wf-line);
+  }
+
+  .rguide-ds-wf-place-actions {
+    display: flex;
+    gap: 0.35rem;
+    align-items: start;
+    padding: 1rem;
+  }
+
+  .rguide-ds-wf-place-actions i {
+    width: 1.55rem;
+    height: 1.55rem;
   }
 
   .rguide-timeline {
@@ -1763,9 +3311,10 @@ The same architecture supports product growth without turning the core explorer 
     max-width: 12ch;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2.6rem, 5.2cqw, 4.8rem);
-    line-height: 0.92;
-    letter-spacing: -0.06em;
+    font-size: var(--rguide-type-display);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-display);
+    letter-spacing: var(--rguide-tracking-display);
   }
 
   .project-content .rguide-resilience > header > p {
@@ -1823,9 +3372,10 @@ The same architecture supports product growth without turning the core explorer 
     max-width: 16ch;
     margin: clamp(2.75rem, 5cqw, 4.5rem) 0 0;
     font-family: var(--font-display);
-    font-size: clamp(1.7rem, 3.2cqw, 2.8rem);
-    line-height: 0.96;
-    letter-spacing: -0.055em;
+    font-size: var(--rguide-type-card-title);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-heading);
+    letter-spacing: var(--rguide-tracking-heading);
   }
 
   .project-content .rguide-resilience-paths article > p {
@@ -1957,9 +3507,10 @@ The same architecture supports product growth without turning the core explorer 
     max-width: 9ch;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 6cqw, 5.5rem);
-    line-height: 0.9;
-    letter-spacing: -0.065em;
+    font-size: var(--rguide-type-display);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-display);
+    letter-spacing: var(--rguide-tracking-display);
   }
 
   .project-content .rguide-build-proof > header > p {
@@ -2019,9 +3570,10 @@ The same architecture supports product growth without turning the core explorer 
     max-width: 12ch;
     margin: 0.55rem 0 0;
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 2.6cqw, 2.5rem);
-    line-height: 0.96;
-    letter-spacing: -0.055em;
+    font-size: var(--rguide-type-card-title);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-heading);
+    letter-spacing: var(--rguide-tracking-heading);
   }
 
   .project-content .rguide-proof-grid p {
@@ -2100,9 +3652,10 @@ The same architecture supports product growth without turning the core explorer 
   .project-content .rguide-traffic h3 {
     max-width: 15ch;
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 4vw, 3.8rem);
-    line-height: 0.96;
-    letter-spacing: -0.06em;
+    font-size: var(--rguide-type-display);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-display);
+    letter-spacing: var(--rguide-tracking-display);
   }
 
   .project-content .rguide-traffic > header p {
@@ -2255,9 +3808,10 @@ The same architecture supports product growth without turning the core explorer 
   .project-content .rguide-closing-film h2 {
     margin: 0;
     color: var(--ink);
-    font-size: clamp(2.8rem, 6vw, 5.9rem);
-    line-height: 0.84;
-    letter-spacing: -0.075em;
+    font-size: var(--rguide-type-display);
+    font-weight: var(--rguide-weight-heading);
+    line-height: var(--rguide-leading-display);
+    letter-spacing: var(--rguide-tracking-display);
     white-space: nowrap;
   }
 
@@ -2388,6 +3942,14 @@ The same architecture supports product growth without turning the core explorer 
 
   /* RGuide vertical rhythm: section / subsection / component / copy */
   .project-content {
+    --rguide-type-display: clamp(2.35rem, 5.2vw, 4.25rem);
+    --rguide-type-section-title: clamp(1.55rem, 2vw, 2.05rem);
+    --rguide-type-card-title: clamp(1.4rem, 1.8vw, 1.8rem);
+    --rguide-weight-heading: 700;
+    --rguide-leading-display: 0.94;
+    --rguide-leading-heading: 1.08;
+    --rguide-tracking-display: -0.055em;
+    --rguide-tracking-heading: -0.035em;
     --rguide-space-section: clamp(2.5rem, 3.5vw, 3rem);
     --rguide-space-subsection: clamp(2rem, 3vw, 2.5rem);
     --rguide-space-component: clamp(1.25rem, 2vw, 1.75rem);
@@ -2429,6 +3991,7 @@ The same architecture supports product growth without turning the core explorer 
       .rguide-schema,
       .rguide-pipeline,
       .rguide-product-shot,
+      .rguide-design-system,
       .rguide-principles,
       .rguide-traffic
     ) {
@@ -2439,13 +4002,16 @@ The same architecture supports product growth without turning the core explorer 
       .rguide-timeline,
       .rguide-schema,
       .rguide-pipeline,
-      .rguide-product-shot
+      .rguide-product-shot,
+      .rguide-design-system
     ) + p {
     margin-top: var(--rguide-space-copy);
   }
 
   .project-content > .rguide-impact + .rguide-opening,
-  .project-content > .rguide-opening + .rguide-online-mockup {
+  .project-content > .rguide-opening + .rguide-online-mockup,
+  .project-content > h2 + .rguide-design-system,
+  .project-content > .rguide-product-shot + .rguide-design-system {
     margin-top: var(--rguide-space-component);
   }
 
@@ -2491,6 +4057,185 @@ The same architecture supports product growth without turning the core explorer 
     to { opacity: 1; transform: translateY(0); }
   }
 
+  @container (max-width: 54rem) {
+    .rguide-ds-intro {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .project-content .rguide-ds-intro h3 {
+      max-width: none;
+    }
+
+    .rguide-ds-foundations,
+    .rguide-ds-components {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rguide-ds-specimen--categories,
+    .rguide-ds-specimen--actions,
+    .rguide-ds-specimen--markers,
+    .rguide-ds-specimen--route,
+    .rguide-ds-specimen--sources,
+    .rguide-ds-specimen--destination,
+    .rguide-ds-specimen--filter {
+      grid-column: span 1;
+    }
+
+    .rguide-ds-specimen--guide-shell {
+      grid-column: 1 / -1;
+    }
+
+    .rguide-ds-category-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rguide-ds-layout-theory,
+    .rguide-ds-guide-theory {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .rguide-ds-guide-theory > .rguide-ds-theory-key {
+      grid-template-rows: none;
+      height: auto;
+    }
+
+    .rguide-ds-guide-theory > .rguide-ds-theory-key li::before,
+    .rguide-ds-guide-theory > .rguide-ds-theory-key li::after {
+      display: none;
+    }
+
+    .rguide-ds-theory-key {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 1.5rem;
+    }
+  }
+
+  @container (max-width: 34rem) {
+    .project-content .rguide-ds-intro h3 {
+      white-space: normal;
+    }
+
+    .rguide-ds-sheet-header {
+      grid-template-columns: 1fr auto;
+    }
+
+    .rguide-ds-sheet-header h4 {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+
+    .rguide-ds-sheet-header small {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .rguide-ds-foundations,
+    .rguide-ds-components {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding-inline: 0;
+    }
+
+    .rguide-ds-specimen--categories,
+    .rguide-ds-specimen--actions,
+    .rguide-ds-specimen--markers,
+    .rguide-ds-specimen--route,
+    .rguide-ds-specimen--sources,
+    .rguide-ds-specimen--destination,
+    .rguide-ds-specimen--filter,
+    .rguide-ds-specimen--guide-shell {
+      grid-column: 1;
+    }
+
+    .rguide-ds-filter {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rguide-ds-filter button:nth-child(2) {
+      border-right: 0;
+    }
+
+    .rguide-ds-filter button:nth-child(-n + 2) {
+      border-bottom: 1px solid #d5d8df;
+    }
+
+    .rguide-ds-guide-card > header,
+    .rguide-ds-guide-body {
+      grid-template-columns: 1fr;
+    }
+
+    .rguide-ds-guide-actions {
+      justify-self: start;
+    }
+
+    .rguide-ds-source-row {
+      grid-template-columns: auto 1.5rem auto minmax(0, 1fr);
+    }
+
+    .rguide-ds-source-row > .material-symbols-outlined {
+      display: none;
+    }
+
+    .rguide-ds-place-card {
+      grid-template-columns: 1fr;
+    }
+
+    .rguide-ds-place-card > img {
+      max-height: 12rem;
+    }
+
+    .rguide-ds-theory-key {
+      grid-template-columns: 1fr;
+    }
+
+    .rguide-ds-home-wireframe {
+      grid-template-columns: minmax(7.5rem, 0.42fr) minmax(8rem, 0.58fr);
+      min-height: 0;
+    }
+
+    .rguide-ds-home-nav,
+    .rguide-ds-home-map {
+      min-height: 20rem;
+    }
+
+    .rguide-ds-home-map {
+      border-right: 0;
+    }
+
+    .rguide-ds-home-index {
+      grid-column: 1 / -1;
+      min-height: 25rem;
+      border-top: 1px solid var(--wf-line);
+    }
+
+    .rguide-ds-wf-context,
+    .rguide-ds-wf-place {
+      grid-template-columns: 1fr;
+    }
+
+    .rguide-ds-wf-place {
+      padding-left: 0;
+    }
+
+    .rguide-ds-callouts {
+      display: none;
+    }
+
+    .rguide-ds-wf-photo {
+      min-height: 8rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--wf-line);
+    }
+
+    .rguide-ds-wf-place-actions {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
   @container (max-width: 46rem) {
     .rguide-resilience > header {
       grid-template-columns: 1fr;
@@ -2499,7 +4244,6 @@ The same architecture supports product growth without turning the core explorer 
 
     .project-content .rguide-resilience h3 {
       max-width: 13ch;
-      font-size: clamp(2.7rem, 9cqw, 4.6rem);
     }
 
     .rguide-resilience-paths {
@@ -2533,7 +4277,6 @@ The same architecture supports product growth without turning the core explorer 
 
     .project-content .rguide-build-proof h2 {
       max-width: 11ch;
-      font-size: clamp(2.8rem, 11cqw, 4.6rem);
     }
 
     .project-content .rguide-build-proof > header > p {
@@ -2558,10 +4301,6 @@ The same architecture supports product growth without turning the core explorer 
       margin-bottom: 2.75rem;
     }
 
-    .project-content .rguide-proof-grid h3 {
-      font-size: clamp(1.75rem, 6cqw, 2.5rem);
-    }
-
     .rguide-build-proof > footer {
       grid-template-columns: 1fr;
       gap: 0.75rem;
@@ -2577,7 +4316,6 @@ The same architecture supports product growth without turning the core explorer 
 
     .project-content .rguide-traffic h3 {
       max-width: 18ch;
-      font-size: clamp(2.8rem, 6cqw, 4.8rem);
     }
 
     .rguide-traffic dl {
@@ -2587,10 +4325,6 @@ The same architecture supports product growth without turning the core explorer 
   }
 
   @container (max-width: 42rem) {
-    .project-content .rguide-traffic h3 {
-      font-size: clamp(2.35rem, 10cqw, 3.7rem);
-    }
-
     .rguide-traffic dl {
       grid-template-columns: 1fr;
     }
@@ -2610,9 +4344,6 @@ The same architecture supports product growth without turning the core explorer 
       max-width: none;
     }
 
-    .project-content .rguide-closing-film h2 {
-      font-size: clamp(2.65rem, 5.25cqw, 5.5rem);
-    }
   }
 
   @container (max-width: 42rem) {
@@ -2625,14 +4356,10 @@ The same architecture supports product growth without turning the core explorer 
       max-width: 48rem;
     }
 
-    .project-content .rguide-closing-film h2 {
-      font-size: clamp(3rem, 8cqw, 5.5rem);
-    }
   }
 
   @container (max-width: 36rem) {
     .project-content .rguide-closing-film h2 {
-      font-size: clamp(2.75rem, 12cqw, 4.2rem);
       white-space: normal;
     }
   }
@@ -2876,7 +4603,6 @@ The same architecture supports product growth without turning the core explorer 
     }
 
     .project-content .rguide-closing-film h2 {
-      font-size: clamp(2.75rem, 14vw, 4.2rem);
       white-space: normal;
     }
 
