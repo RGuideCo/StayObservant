@@ -2602,6 +2602,21 @@ The same architecture supports product growth without turning the core explorer 
 
   @container (max-width: 76rem) {
     .rguide-closing-film > header {
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.9fr);
+      gap: clamp(1.25rem, 2.5cqw, 2.5rem);
+    }
+
+    .rguide-closing-hierarchy {
+      max-width: none;
+    }
+
+    .project-content .rguide-closing-film h2 {
+      font-size: clamp(2.65rem, 5.25cqw, 5.5rem);
+    }
+  }
+
+  @container (max-width: 42rem) {
+    .rguide-closing-film > header {
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
