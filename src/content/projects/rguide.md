@@ -562,17 +562,40 @@ The same architecture supports product growth without turning the core explorer 
   </figcaption>
 </figure>
 
-## What the Build Proved
-
-RGuide demonstrates how product design, data architecture, and content operations reinforce one another. The interface did not need to become more complicated as the system grew from a prototype into 749 published entries. The underlying model became clearer.
-
-The most important implementation principle was to keep three concerns separate:
-
-1. **Canonical truth** lives in normalized destination, venue, event, source, hours, and media records.
-2. **Editorial meaning** lives in entries and ordered stops that explain why those facts matter to a traveler.
-3. **Presentation speed** lives in scoped APIs, derived views, render caches, responsive media, and local fallbacks.
-
-That separation made the platform more reliable to publish, faster to navigate, easier to localize, and ready to support more cities and contributors without rebuilding the product around every new destination.
+<section class="rguide-build-proof" aria-labelledby="rguide-build-proof-title">
+  <header>
+    <span>Implementation outcome</span>
+    <h2 id="rguide-build-proof-title">What the build proved.</h2>
+    <p>RGuide proved that a travel platform can grow without making the traveler experience harder to use. From the first prototype to 749 published entries, the interface kept the same clear pattern while the system underneath became more structured and reusable.</p>
+  </header>
+  <div class="rguide-proof-grid">
+    <article>
+      <div><i class="material-symbols-outlined" aria-hidden="true">database</i><b>01</b></div>
+      <span>Reusable foundation</span>
+      <h3>Facts are stored once.</h3>
+      <p>Destinations, venues, events, hours, sources, and images each have one shared record instead of being copied into every guide.</p>
+      <small>Correct a fact once; every guide that uses it receives the update.</small>
+    </article>
+    <article>
+      <div><i class="material-symbols-outlined" aria-hidden="true">edit_note</i><b>02</b></div>
+      <span>Editorial layer</span>
+      <h3>Guides add the meaning.</h3>
+      <p>Editors can explain why a place matters, when to visit, and where it belongs in a route without rewriting its underlying facts.</p>
+      <small>Shared data stays accurate while every guide keeps its own point of view.</small>
+    </article>
+    <article>
+      <div><i class="material-symbols-outlined" aria-hidden="true">speed</i><b>03</b></div>
+      <span>Fast delivery</span>
+      <h3>The interface stays simple.</h3>
+      <p>Focused APIs, ready-to-render views, responsive images, caches, and fallbacks keep the map fast as the catalog grows.</p>
+      <small>Travelers see a consistent product—not the complexity behind it.</small>
+    </article>
+  </div>
+  <footer>
+    <strong>The result</strong>
+    <p>RGuide can add cities, languages, content, and contributors without redesigning the product for every destination. Editors get a dependable publishing system, and travelers get the same clear journey from world to street.</p>
+  </footer>
+</section>
 
 <section class="rguide-closing-film" aria-labelledby="rguide-closing-film-title">
   <header>
@@ -1719,6 +1742,143 @@ That separation made the platform more reliable to publish, faster to navigate, 
     color: #5f5d57;
   }
 
+  .rguide-build-proof {
+    container-type: inline-size;
+    margin-top: clamp(4rem, 8vw, 7rem);
+    background: rgba(255, 255, 255, 0.14);
+    border: var(--rule);
+  }
+
+  .rguide-build-proof > header {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.75fr) minmax(22rem, 1.25fr);
+    gap: 1rem clamp(2rem, 6cqw, 6rem);
+    padding: clamp(1.25rem, 3cqw, 2rem);
+  }
+
+  .rguide-build-proof > header > span,
+  .rguide-proof-grid article > span,
+  .rguide-build-proof > footer > strong {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .rguide-build-proof > header > span {
+    grid-column: 1 / -1;
+    color: var(--signal);
+  }
+
+  .project-content .rguide-build-proof h2 {
+    max-width: 9ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6cqw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+  }
+
+  .project-content .rguide-build-proof > header > p {
+    max-width: 44rem;
+    align-self: end;
+    margin: 0;
+    color: #5f5d57;
+    font-size: clamp(0.9rem, 1.35cqw, 1.12rem);
+    line-height: 1.55;
+  }
+
+  .rguide-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--rule);
+    border-bottom: var(--rule);
+  }
+
+  .rguide-proof-grid article {
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+    padding: clamp(1rem, 2.5cqw, 1.75rem);
+    border-right: var(--rule);
+  }
+
+  .rguide-proof-grid article:last-child {
+    border-right: 0;
+  }
+
+  .rguide-proof-grid article > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: auto;
+  }
+
+  .rguide-proof-grid article > div i {
+    color: var(--signal);
+    font-size: clamp(2rem, 3cqw, 3rem);
+    font-weight: 300;
+  }
+
+  .rguide-proof-grid article > div b {
+    color: #8a8881;
+    font-family: var(--font-display);
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+  }
+
+  .rguide-proof-grid article > span {
+    margin-top: 2rem;
+    color: var(--signal);
+  }
+
+  .project-content .rguide-proof-grid h3 {
+    max-width: 12ch;
+    margin: 0.55rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.6cqw, 2.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+  }
+
+  .project-content .rguide-proof-grid p {
+    margin: 1rem 0 0;
+    color: #5f5d57;
+    font-size: clamp(0.76rem, 1cqw, 0.9rem);
+    line-height: 1.55;
+  }
+
+  .project-content .rguide-proof-grid small {
+    display: block;
+    margin-top: 1.25rem;
+    padding-top: 0.8rem;
+    color: var(--ink);
+    border-top: 1px solid rgba(17, 17, 19, 0.24);
+    font-size: 0.67rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .rguide-build-proof > footer {
+    display: grid;
+    grid-template-columns: minmax(8rem, 0.45fr) minmax(0, 1.55fr);
+    gap: 1.5rem;
+    align-items: start;
+    padding: clamp(1.1rem, 2.5cqw, 1.75rem);
+  }
+
+  .rguide-build-proof > footer > strong {
+    color: var(--signal);
+  }
+
+  .project-content .rguide-build-proof > footer > p {
+    max-width: 58rem;
+    margin: 0;
+    font-size: clamp(0.85rem, 1.2cqw, 1rem);
+    line-height: 1.55;
+  }
+
   .rguide-traffic {
     container-type: inline-size;
     margin-top: clamp(3rem, 7vw, 6rem);
@@ -2078,6 +2238,49 @@ That separation made the platform more reliable to publish, faster to navigate, 
   @keyframes rguide-detail-in {
     from { opacity: 0; transform: translateY(0.45rem); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @container (max-width: 52rem) {
+    .rguide-build-proof > header {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .project-content .rguide-build-proof h2 {
+      max-width: 11ch;
+      font-size: clamp(2.8rem, 11cqw, 4.6rem);
+    }
+
+    .project-content .rguide-build-proof > header > p {
+      max-width: 40rem;
+    }
+
+    .rguide-proof-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .rguide-proof-grid article {
+      min-height: 0;
+      border-right: 0;
+      border-bottom: var(--rule);
+    }
+
+    .rguide-proof-grid article:last-child {
+      border-bottom: 0;
+    }
+
+    .rguide-proof-grid article > div {
+      margin-bottom: 2.75rem;
+    }
+
+    .project-content .rguide-proof-grid h3 {
+      font-size: clamp(1.75rem, 6cqw, 2.5rem);
+    }
+
+    .rguide-build-proof > footer {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
   }
 
   @container (max-width: 90rem) {
