@@ -578,7 +578,7 @@ That separation made the platform more reliable to publish, faster to navigate, 
   <header>
     <div>
       <span>Live product walkthrough · 32 sec</span>
-      <h2 id="rguide-closing-film-title">From world to street.</h2>
+      <h2 id="rguide-closing-film-title">World to street.</h2>
     </div>
     <div class="rguide-closing-hierarchy">
       <span>Navigation hierarchy</span>
@@ -1911,9 +1911,10 @@ That separation made the platform more reliable to publish, faster to navigate, 
   .project-content .rguide-closing-film h2 {
     margin: 0;
     color: var(--ink);
-    font-size: clamp(2.8rem, 7vw, 6.8rem);
+    font-size: clamp(2.8rem, 6vw, 5.9rem);
     line-height: 0.84;
     letter-spacing: -0.075em;
+    white-space: nowrap;
   }
 
   .rguide-closing-hierarchy {
@@ -2317,6 +2318,7 @@ That separation made the platform more reliable to publish, faster to navigate, 
 
     .project-content .rguide-closing-film h2 {
       font-size: clamp(2.75rem, 14vw, 4.2rem);
+      white-space: normal;
     }
 
     .rguide-journey {
