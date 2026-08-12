@@ -2386,6 +2386,75 @@ The same architecture supports product growth without turning the core explorer 
     line-height: 1.45;
   }
 
+  /* RGuide vertical rhythm: section / subsection / component / copy */
+  .project-content {
+    --rguide-space-section: clamp(2.5rem, 3.5vw, 3rem);
+    --rguide-space-subsection: clamp(2rem, 3vw, 2.5rem);
+    --rguide-space-component: clamp(1.25rem, 2vw, 1.75rem);
+    --rguide-space-copy: clamp(0.75rem, 1.25vw, 1rem);
+  }
+
+  .project-content > section,
+  .project-content > figure,
+  .project-content > div,
+  .project-content > img {
+    margin-block: 0;
+  }
+
+  .project-content > .rguide-opening {
+    padding-bottom: 0;
+  }
+
+  .project-content > h2:not(:first-child) {
+    margin-top: var(--rguide-space-section);
+    padding-top: clamp(1rem, 1.5vw, 1.25rem);
+  }
+
+  .project-content > h3:not(:first-child) {
+    margin-top: var(--rguide-space-subsection);
+    padding-top: clamp(0.8rem, 1.25vw, 1rem);
+  }
+
+  .project-content > :is(h2, h3) + :is(p, ul, ol) {
+    margin-top: var(--rguide-space-copy);
+  }
+
+  .project-content > :is(p, ul, ol) + :is(p, ul, ol) {
+    margin-top: var(--rguide-space-copy);
+  }
+
+  .project-content > :is(p, ul, ol, h2, h3) + :is(
+      .rguide-timeline,
+      .rguide-system,
+      .rguide-schema,
+      .rguide-pipeline,
+      .rguide-product-shot,
+      .rguide-principles,
+      .rguide-traffic
+    ) {
+    margin-top: var(--rguide-space-component);
+  }
+
+  .project-content > :is(
+      .rguide-timeline,
+      .rguide-schema,
+      .rguide-pipeline,
+      .rguide-product-shot
+    ) + p {
+    margin-top: var(--rguide-space-copy);
+  }
+
+  .project-content > .rguide-impact + .rguide-opening,
+  .project-content > .rguide-opening + .rguide-online-mockup {
+    margin-top: var(--rguide-space-component);
+  }
+
+  .project-content > p + .rguide-resilience,
+  .project-content > .rguide-traffic + .rguide-build-proof,
+  .project-content > .rguide-build-proof + .rguide-closing-film {
+    margin-top: var(--rguide-space-section);
+  }
+
   @keyframes rguide-schema-flow-x {
     0% { left: -0.22rem; opacity: 0; }
     2% { left: -0.22rem; opacity: 1; }
@@ -2422,7 +2491,7 @@ The same architecture supports product growth without turning the core explorer 
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @container (max-width: 58rem) {
+  @container (max-width: 46rem) {
     .rguide-resilience > header {
       grid-template-columns: 1fr;
       gap: 1.25rem;
