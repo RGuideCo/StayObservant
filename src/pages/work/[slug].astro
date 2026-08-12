@@ -2277,6 +2277,56 @@ const project = entry.data;
         }
       }
 
+      const rguideComponentDeck = content.querySelector("[data-rguide-component-deck]");
+      if (rguideComponentDeck) {
+        const componentTabs = Array.from(
+          rguideComponentDeck.querySelectorAll("[data-rguide-component-tab]")
+        );
+        const componentSlides = Array.from(
+          rguideComponentDeck.querySelectorAll("[data-rguide-component-slide]")
+        );
+
+        const showComponentSlide = (requestedIndex, shouldFocus = false) => {
+          if (!componentTabs.length || !componentSlides.length) return;
+          const activeIndex = ((requestedIndex % componentTabs.length) + componentTabs.length) % componentTabs.length;
+
+          componentTabs.forEach((tab, index) => {
+            const isActive = index === activeIndex;
+            tab.setAttribute("aria-selected", isActive ? "true" : "false");
+            tab.setAttribute("tabindex", isActive ? "0" : "-1");
+            if (isActive && shouldFocus && tab instanceof HTMLElement) tab.focus();
+          });
+
+          componentSlides.forEach((slide, index) => {
+            const isActive = index === activeIndex;
+            slide.toggleAttribute("hidden", !isActive);
+            slide.classList.toggle("is-active", isActive);
+          });
+        };
+
+        componentTabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => showComponentSlide(index));
+          tab.addEventListener("keydown", (event) => {
+            if (!(event instanceof KeyboardEvent)) return;
+            if (event.key === "ArrowRight") {
+              event.preventDefault();
+              showComponentSlide(index + 1, true);
+            } else if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              showComponentSlide(index - 1, true);
+            } else if (event.key === "Home") {
+              event.preventDefault();
+              showComponentSlide(0, true);
+            } else if (event.key === "End") {
+              event.preventDefault();
+              showComponentSlide(componentTabs.length - 1, true);
+            }
+          });
+        });
+
+        showComponentSlide(0);
+      }
+
       const rguideTraffic = content.querySelector("[data-rguide-traffic]");
       if (rguideTraffic) {
         const canvas = rguideTraffic.querySelector("[data-rguide-traffic-canvas]");
