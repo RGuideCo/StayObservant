@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 
 const entries = await getCollection("projects");
-const preferredOrder = ["boca-paila", "sidestreat", "chick-fil-a", "chobani", "nike-ko"];
+const preferredOrder = ["rguide", "chick-fil-a", "boca-paila", "chobani", "sidestreat", "3m-home-depot", "morgans", "nike-ko"];
 const projects = entries
   .map((entry) => ({ slug: entry.slug, ...entry.data }))
   .sort((a, b) => {

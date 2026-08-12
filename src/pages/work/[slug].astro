@@ -38,7 +38,15 @@ const project = entry.data;
         <span>Case study / {project.role ?? "Design"}</span>
       </div>
 
-      <h1 class="project-hero-title">{project.title}</h1>
+      <h1 class="project-hero-title">
+        {
+          project.heroTitleLines?.length
+            ? project.heroTitleLines.map((line, index) => (
+                <>{index > 0 ? <br /> : null}{line}</>
+              ))
+            : project.title
+        }
+      </h1>
 
       <div class="case-hero-bottom">
         <p>{project.description}</p>
@@ -179,7 +187,7 @@ const project = entry.data;
     padding: 1.5rem var(--page-gutter) 0;
     color: #fff;
     font-size: clamp(3.25rem, 7.4vw, 7.8rem);
-    line-height: 0.73;
+    line-height: 0.82;
     text-transform: uppercase;
   }
 
@@ -230,10 +238,9 @@ const project = entry.data;
 
   .project-shell {
     display: grid;
-    grid-template-columns: minmax(9rem, 12rem) minmax(0, 980px);
+    grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);
     align-items: start;
-    justify-content: center;
-    gap: 1.6rem;
+    gap: clamp(1.6rem, 3vw, 3rem);
   }
 
   .project-shell .project-content {
@@ -2100,6 +2107,432 @@ const project = entry.data;
       buildConceptSplits();
 
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const rguideCounters = Array.from(content.querySelectorAll("[data-rguide-count]"));
+      if (rguideCounters.length) {
+        const numberFormatter = new Intl.NumberFormat("en-US");
+        const revealCount = (counter) => {
+          if (counter.dataset.counted === "true") return;
+
+          const target = Number(counter.dataset.rguideCount);
+          if (!Number.isFinite(target)) return;
+
+          counter.dataset.counted = "true";
+          if (prefersReduced) {
+            counter.textContent = numberFormatter.format(target);
+            return;
+          }
+
+          const startedAt = performance.now();
+          const duration = 1100;
+          counter.textContent = "0";
+
+          const tick = (now) => {
+            const progress = Math.min((now - startedAt) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            counter.textContent = numberFormatter.format(Math.round(target * eased));
+            if (progress < 1) window.requestAnimationFrame(tick);
+          };
+
+          window.requestAnimationFrame(tick);
+        };
+
+        if ("IntersectionObserver" in window) {
+          const counterObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                revealCount(entry.target);
+                counterObserver.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.35 }
+          );
+          rguideCounters.forEach((counter) => counterObserver.observe(counter));
+        } else {
+          rguideCounters.forEach(revealCount);
+        }
+      }
+
+      const rguideImpactStage = content.querySelector("[data-rguide-impact]");
+      if (rguideImpactStage) {
+        if ("IntersectionObserver" in window) {
+          const impactObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                rguideImpactStage.classList.add("is-visible");
+                impactObserver.disconnect();
+              });
+            },
+            { threshold: 0.28 }
+          );
+          impactObserver.observe(rguideImpactStage);
+        } else {
+          rguideImpactStage.classList.add("is-visible");
+        }
+      }
+
+      const rguideSchema = content.querySelector("[data-rguide-schema]");
+      if (rguideSchema && !prefersReduced) {
+        if ("IntersectionObserver" in window) {
+          const schemaObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                rguideSchema.classList.add("is-visible");
+                schemaObserver.disconnect();
+              });
+            },
+            { threshold: 0.18 }
+          );
+          schemaObserver.observe(rguideSchema);
+        } else {
+          rguideSchema.classList.add("is-visible");
+        }
+      }
+
+      const rguideTimeline = content.querySelector("[data-rguide-timeline]");
+      if (rguideTimeline) {
+        const phases = Array.from(rguideTimeline.querySelectorAll("[data-rguide-phase]"));
+        const phaseNumber = rguideTimeline.querySelector("[data-rguide-phase-number]");
+        const phaseTitle = rguideTimeline.querySelector("[data-rguide-phase-title]");
+        const phaseCopy = rguideTimeline.querySelector("[data-rguide-phase-copy]");
+        const phaseSystem = rguideTimeline.querySelector("[data-rguide-phase-system]");
+        const track = rguideTimeline.querySelector(".rguide-timeline-track");
+        let activeIndex = 0;
+        let timer = null;
+        let autoplayCancelled = prefersReduced;
+
+        const stopTimeline = () => {
+          if (!timer) return;
+          window.clearInterval(timer);
+          timer = null;
+        };
+
+        const showPhase = (index, shouldScroll = false) => {
+          const nextIndex = Math.min(Math.max(index, 0), phases.length - 1);
+          const phase = phases[nextIndex];
+          if (!phase) return;
+
+          activeIndex = nextIndex;
+          phases.forEach((button, buttonIndex) => {
+            button.setAttribute("aria-pressed", buttonIndex === activeIndex ? "true" : "false");
+          });
+
+          if (phaseNumber) phaseNumber.textContent = phase.dataset.phase || "";
+          if (phaseTitle) phaseTitle.textContent = phase.dataset.title || "";
+          if (phaseCopy) phaseCopy.textContent = phase.dataset.copy || "";
+          if (phaseSystem) phaseSystem.textContent = phase.dataset.system || "";
+
+          const progress = phases.length > 1 ? (activeIndex / (phases.length - 1)) * 100 : 100;
+          rguideTimeline.style.setProperty("--rguide-progress", `${progress}%`);
+
+          rguideTimeline.classList.remove("is-updating");
+          void rguideTimeline.offsetWidth;
+          rguideTimeline.classList.add("is-updating");
+
+          if (shouldScroll && track && track.scrollWidth > track.clientWidth) {
+            const targetLeft = phase.offsetLeft + phase.offsetWidth / 2 - track.clientWidth / 2;
+            track.scrollTo({
+              left: Math.max(0, targetLeft),
+              behavior: prefersReduced ? "auto" : "smooth",
+            });
+          }
+        };
+
+        const startTimeline = () => {
+          if (autoplayCancelled || timer || activeIndex >= phases.length - 1) return;
+          timer = window.setInterval(() => {
+            if (activeIndex >= phases.length - 1) {
+              stopTimeline();
+              return;
+            }
+            showPhase(activeIndex + 1, true);
+          }, 1350);
+        };
+
+        phases.forEach((phase, index) => {
+          phase.addEventListener("click", () => {
+            autoplayCancelled = true;
+            stopTimeline();
+            showPhase(index, true);
+          });
+        });
+
+        showPhase(0);
+
+        if (!prefersReduced && "IntersectionObserver" in window) {
+          const timelineObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.target !== rguideTimeline) return;
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.45) startTimeline();
+                else stopTimeline();
+              });
+            },
+            { threshold: [0.2, 0.45, 0.75] }
+          );
+          timelineObserver.observe(rguideTimeline);
+        }
+      }
+
+      const rguideTraffic = content.querySelector("[data-rguide-traffic]");
+      if (rguideTraffic) {
+        const canvas = rguideTraffic.querySelector("[data-rguide-traffic-canvas]");
+        const tooltip = rguideTraffic.querySelector("[data-rguide-traffic-tooltip]");
+        const values = (rguideTraffic.dataset.points || "")
+          .split(",")
+          .map((value) => Number(value.trim()))
+          .filter((value) => Number.isFinite(value));
+        const labels = (rguideTraffic.dataset.labels || "").split(",");
+        const requestedActualCount = Number(rguideTraffic.dataset.actualCount);
+        const actualCount = Number.isFinite(requestedActualCount)
+          ? Math.min(Math.max(Math.round(requestedActualCount), 2), values.length)
+          : values.length;
+
+        if (canvas instanceof HTMLCanvasElement && values.length > 1) {
+          const context = canvas.getContext("2d");
+          let chartProgress = prefersReduced ? 1 : 0;
+          let animationFrame = 0;
+          let renderedPoints = [];
+          let hoveredIndex = -1;
+
+          const drawTraffic = (progress = chartProgress) => {
+            if (!context) return;
+
+            const bounds = canvas.getBoundingClientRect();
+            if (!bounds.width || !bounds.height) return;
+
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            const pixelWidth = Math.round(bounds.width * pixelRatio);
+            const pixelHeight = Math.round(bounds.height * pixelRatio);
+            if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+              canvas.width = pixelWidth;
+              canvas.height = pixelHeight;
+            }
+
+            context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+            context.clearRect(0, 0, bounds.width, bounds.height);
+
+            const compact = bounds.width < 560;
+            const padding = {
+              top: 18,
+              right: 12,
+              bottom: compact ? 30 : 34,
+              left: compact ? 22 : 34,
+            };
+            const plotWidth = Math.max(bounds.width - padding.left - padding.right, 1);
+            const plotHeight = Math.max(bounds.height - padding.top - padding.bottom, 1);
+            const highestValue = Math.max(...values);
+            const magnitude = Math.pow(10, Math.floor(Math.log10(Math.max(highestValue, 1))));
+            const maximum = Math.ceil(highestValue / magnitude) * magnitude;
+            const dotInterval = plotWidth / (values.length - 1);
+            const styles = window.getComputedStyle(document.documentElement);
+            const signal = styles.getPropertyValue("--signal").trim() || "#f03a22";
+            const paper = styles.getPropertyValue("--paper").trim() || "#f2efe7";
+
+            renderedPoints = values.map((value, index) => ({
+              x: padding.left + dotInterval * index,
+              y: padding.top + plotHeight - (value / maximum) * plotHeight,
+              value,
+              label: labels[index] || "",
+            }));
+
+            context.save();
+            context.strokeStyle = "rgba(8, 8, 8, 0.14)";
+            context.fillStyle = "rgba(8, 8, 8, 0.5)";
+            context.lineWidth = 1;
+            context.font = `700 ${compact ? 8 : 9}px Geist, Arial, sans-serif`;
+            context.textBaseline = "middle";
+
+            for (let index = 0; index <= 4; index += 1) {
+              const y = padding.top + (plotHeight / 4) * index;
+              const value = Math.round(maximum - (maximum / 4) * index);
+              context.beginPath();
+              context.moveTo(padding.left, y);
+              context.lineTo(bounds.width - padding.right, y);
+              context.stroke();
+              if (!compact || index === 0 || index === 4) {
+                context.fillText(String(value), 0, y);
+              }
+            }
+
+            const labelIndexes = compact ? [0, 5, 10, 15, 19] : [0, 4, 8, 12, 15, 19];
+            context.textBaseline = "alphabetic";
+            labelIndexes.forEach((index) => {
+              const point = renderedPoints[index];
+              if (!point) return;
+              const align = index === 0 ? "left" : index === values.length - 1 ? "right" : "center";
+              context.textAlign = align;
+              context.fillText(point.label, point.x, bounds.height - 5);
+            });
+            context.restore();
+
+            const revealX = padding.left + plotWidth * Math.min(Math.max(progress, 0), 1);
+            const observedPoints = renderedPoints.slice(0, actualCount);
+            const projectedPoints = renderedPoints.slice(actualCount - 1);
+            context.save();
+            context.beginPath();
+            context.rect(padding.left - 8, padding.top - 8, revealX - padding.left + 16, plotHeight + 16);
+            context.clip();
+
+            const areaGradient = context.createLinearGradient(0, padding.top, 0, padding.top + plotHeight);
+            areaGradient.addColorStop(0, "rgba(240, 58, 34, 0.2)");
+            areaGradient.addColorStop(1, "rgba(240, 58, 34, 0)");
+            context.beginPath();
+            context.moveTo(renderedPoints[0].x, padding.top + plotHeight);
+            renderedPoints.forEach((point, index) => {
+              if (index === 0) context.lineTo(point.x, point.y);
+              else context.lineTo(point.x, point.y);
+            });
+            context.lineTo(renderedPoints[renderedPoints.length - 1].x, padding.top + plotHeight);
+            context.closePath();
+            context.fillStyle = areaGradient;
+            context.fill();
+
+            if (projectedPoints.length > 1) {
+              const projectionFade = context.createLinearGradient(
+                projectedPoints[0].x,
+                0,
+                projectedPoints[projectedPoints.length - 1].x,
+                0
+              );
+              projectionFade.addColorStop(0, "rgba(0, 0, 0, 0)");
+              projectionFade.addColorStop(0.72, "rgba(0, 0, 0, 0.5)");
+              projectionFade.addColorStop(1, "rgba(0, 0, 0, 0.96)");
+
+              context.save();
+              context.globalCompositeOperation = "destination-out";
+              context.beginPath();
+              context.moveTo(projectedPoints[0].x, padding.top + plotHeight);
+              projectedPoints.forEach((point, index) => {
+                if (index === 0) context.lineTo(point.x, point.y);
+                else context.lineTo(point.x, point.y);
+              });
+              context.lineTo(
+                projectedPoints[projectedPoints.length - 1].x,
+                padding.top + plotHeight
+              );
+              context.closePath();
+              context.fillStyle = projectionFade;
+              context.fill();
+              context.restore();
+            }
+
+            context.beginPath();
+            observedPoints.forEach((point, index) => {
+              if (index === 0) context.moveTo(point.x, point.y);
+              else context.lineTo(point.x, point.y);
+            });
+            context.strokeStyle = signal;
+            context.lineWidth = 2;
+            context.lineJoin = "round";
+            context.lineCap = "round";
+            context.stroke();
+
+            if (projectedPoints.length > 1) {
+              context.beginPath();
+              projectedPoints.forEach((point, index) => {
+                if (index === 0) context.moveTo(point.x, point.y);
+                else context.lineTo(point.x, point.y);
+              });
+              context.setLineDash([7, 7]);
+              context.strokeStyle = signal;
+              context.lineWidth = 2;
+              context.stroke();
+              context.setLineDash([]);
+            }
+            context.restore();
+
+            renderedPoints.forEach((point, index) => {
+              const pointProgress = index / (renderedPoints.length - 1);
+              if (pointProgress > progress + 0.025) return;
+
+              const arrival = Math.min(Math.max((progress - pointProgress) * 16, 0), 1);
+              const radius = (index === hoveredIndex ? 6 : 3.8) * (0.5 + arrival * 0.5);
+              const isProjected = index >= actualCount;
+              context.beginPath();
+              context.arc(point.x, point.y, radius, 0, Math.PI * 2);
+              context.fillStyle = isProjected ? paper : signal;
+              context.fill();
+              context.strokeStyle = signal;
+              context.lineWidth = index === hoveredIndex ? 3 : 2;
+              context.stroke();
+            });
+          };
+
+          const startTrafficAnimation = () => {
+            if (chartProgress >= 1 || prefersReduced) {
+              chartProgress = 1;
+              drawTraffic(1);
+              return;
+            }
+
+            const startedAt = performance.now();
+            const duration = 1800;
+            const animate = (now) => {
+              const elapsed = Math.min((now - startedAt) / duration, 1);
+              chartProgress = 1 - Math.pow(1 - elapsed, 3);
+              drawTraffic(chartProgress);
+              if (elapsed < 1) animationFrame = window.requestAnimationFrame(animate);
+            };
+            animationFrame = window.requestAnimationFrame(animate);
+          };
+
+          canvas.addEventListener("pointermove", (event) => {
+            if (!renderedPoints.length || chartProgress < 0.98) return;
+            const canvasBounds = canvas.getBoundingClientRect();
+            const stageBounds = canvas.parentElement?.getBoundingClientRect();
+            const pointerX = event.clientX - canvasBounds.left;
+            const nextIndex = renderedPoints.reduce((nearest, point, index) =>
+              Math.abs(point.x - pointerX) < Math.abs(renderedPoints[nearest].x - pointerX)
+                ? index
+                : nearest, 0);
+            hoveredIndex = nextIndex;
+            drawTraffic(1);
+
+            if (tooltip instanceof HTMLOutputElement && stageBounds) {
+              const point = renderedPoints[nextIndex];
+              const isProjected = nextIndex >= actualCount;
+              tooltip.hidden = false;
+              tooltip.innerHTML = `<small>${point.label} · ${isProjected ? "projected" : "observed"}</small><b>${point.value.toLocaleString("en-US")} cumulative pageviews</b>`;
+              tooltip.style.left = `${canvasBounds.left - stageBounds.left + point.x}px`;
+              tooltip.style.top = `${canvasBounds.top - stageBounds.top + point.y}px`;
+            }
+          });
+
+          canvas.addEventListener("pointerleave", () => {
+            hoveredIndex = -1;
+            drawTraffic(chartProgress);
+            if (tooltip instanceof HTMLOutputElement) tooltip.hidden = true;
+          });
+
+          if ("ResizeObserver" in window) {
+            const trafficResizeObserver = new ResizeObserver(() => drawTraffic(chartProgress));
+            trafficResizeObserver.observe(canvas);
+          }
+
+          drawTraffic(chartProgress);
+          if (prefersReduced || !("IntersectionObserver" in window)) {
+            startTrafficAnimation();
+          } else {
+            const trafficObserver = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (!entry.isIntersecting) return;
+                  startTrafficAnimation();
+                  trafficObserver.disconnect();
+                });
+              },
+              { threshold: 0.3 }
+            );
+            trafficObserver.observe(rguideTraffic);
+          }
+
+          window.addEventListener("pagehide", () => window.cancelAnimationFrame(animationFrame), { once: true });
+        }
+      }
 
       const pageFlipRoots = content.querySelectorAll("[data-flipbook]");
       pageFlipRoots.forEach((root) => {

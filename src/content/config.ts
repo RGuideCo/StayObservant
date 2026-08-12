@@ -13,6 +13,7 @@ const projects = defineCollection({
 
     // Optional big image at top of the case study
     hero: z.string().optional(),
+    heroTitleLines: z.array(z.string()).optional(),
 
     // Optional metadata
     role: z.string().optional(),
