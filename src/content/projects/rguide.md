@@ -1880,6 +1880,7 @@ That separation made the platform more reliable to publish, faster to navigate, 
   }
 
   .rguide-closing-film {
+    container-type: inline-size;
     display: grid;
     gap: clamp(1.5rem, 3vw, 2.5rem);
     margin-top: clamp(4rem, 9vw, 8rem);
@@ -2076,6 +2077,28 @@ That separation made the platform more reliable to publish, faster to navigate, 
   @keyframes rguide-detail-in {
     from { opacity: 0; transform: translateY(0.45rem); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @container (max-width: 76rem) {
+    .rguide-closing-film > header {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .rguide-closing-hierarchy {
+      max-width: 48rem;
+    }
+
+    .project-content .rguide-closing-film h2 {
+      font-size: clamp(3rem, 8cqw, 5.5rem);
+    }
+  }
+
+  @container (max-width: 36rem) {
+    .project-content .rguide-closing-film h2 {
+      font-size: clamp(2.75rem, 12cqw, 4.2rem);
+      white-space: normal;
+    }
   }
 
   .rguide-timeline.is-updating .rguide-timeline-detail > * {
