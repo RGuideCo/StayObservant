@@ -668,7 +668,7 @@ The repository contains dedicated workflows for editorial guides, destination de
       </figure>
       <figure class="rguide-ds-product-view">
         <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Editorial rationale / sources / ordered places</small></span></figcaption>
-        <img src="/Projects/RGuide/rguide-barcelona.jpg" alt="RGuide Barcelona late-night food guide showing synchronized map markers, source-backed copy, ordered places, and place details" width="1280" height="720" loading="lazy" decoding="async" />
+        <img src="/Projects/RGuide/rguide-barcelona-expanded.png" alt="RGuide Barcelona late-night food guide showing synchronized map markers, source-backed copy, ordered places, and place details" width="1600" height="900" loading="lazy" decoding="async" />
       </figure>
     </div>
   </article>
