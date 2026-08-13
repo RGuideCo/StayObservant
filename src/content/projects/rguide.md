@@ -664,7 +664,7 @@ The repository contains dedicated workflows for editorial guides, destination de
     <div class="rguide-ds-product-proof">
       <figure class="rguide-ds-product-view">
         <figcaption><b>01</b><span><strong>City view</strong><small>Barcelona / orientation and guide comparison</small></span></figcaption>
-        <img src="/Projects/RGuide/rguide-barcelona-city.png" alt="RGuide Barcelona city view with destination context, map, filters, neighborhoods, and guide index" width="1600" height="900" loading="lazy" decoding="async" />
+        <img src="/Projects/RGuide/rguide-barcelona-city-hd.png" alt="RGuide Barcelona city view with destination context, map, filters, neighborhoods, and guide index" width="1600" height="900" loading="lazy" decoding="async" />
       </figure>
       <figure class="rguide-ds-product-view">
         <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Editorial rationale / sources / ordered places</small></span></figcaption>
