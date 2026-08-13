@@ -1679,6 +1679,19 @@ The same architecture supports product growth without turning the core explorer 
     padding: clamp(3rem, 6cqw, 5rem) 0 clamp(4rem, 8cqw, 7rem);
   }
 
+  .rguide-ds-sheet--proof .rguide-ds-sheet-header {
+    padding-bottom: 0.25rem;
+  }
+
+  .rguide-ds-sheet--proof .rguide-ds-product-proof {
+    padding-top: 0.75rem;
+  }
+
+  .rguide-ds-sheet--proof .rguide-ds-product-view:first-child figcaption {
+    padding-top: 0;
+    border-top: 0;
+  }
+
   .project-content .rguide-ds-product-view {
     display: grid;
     gap: 1rem;
