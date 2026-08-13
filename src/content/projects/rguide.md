@@ -508,10 +508,10 @@ The repository contains dedicated workflows for editorial guides, destination de
     </div>
     <p>The wireframes isolate the logic behind the interface before the visual system is applied: geographic orientation stays visible, guides remain comparable, and every editorial claim resolves into a useful place.</p>
   </header>
-  <article class="rguide-ds-sheet" aria-labelledby="rguide-ds-structure-title">
+  <article class="rguide-ds-sheet rguide-ds-sheet--structure" aria-labelledby="rguide-ds-structure-title">
     <header class="rguide-ds-sheet-header">
       <span>Plate 01 / Structure</span>
-      <h4 id="rguide-ds-structure-title">Two scales, one mental model</h4>
+      <h4 id="rguide-ds-structure-title">Two scales, one model</h4>
       <small>From product shell to guide detail</small>
     </header>
     <div class="rguide-ds-wireframes">
@@ -1305,6 +1305,20 @@ The same architecture supports product growth without turning the core explorer 
     display: grid;
     gap: clamp(4rem, 8cqw, 7rem);
     padding: clamp(3rem, 6cqw, 6rem) 0 clamp(4rem, 8cqw, 7rem);
+  }
+
+  .rguide-ds-sheet--structure .rguide-ds-sheet-header {
+    padding-bottom: 0.25rem;
+    border-bottom: 0;
+  }
+
+  .rguide-ds-sheet--structure .rguide-ds-wireframes {
+    padding-top: 0.75rem;
+  }
+
+  .rguide-ds-sheet--structure .rguide-ds-specimen--home-shell > figcaption {
+    padding-top: 0;
+    border-top: 0;
   }
 
   .rguide-ds-layout-theory,
