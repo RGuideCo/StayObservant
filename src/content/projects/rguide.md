@@ -1309,7 +1309,7 @@ The same architecture supports product growth without turning the core explorer 
 
   .rguide-ds-sheet--structure .rguide-ds-sheet-header {
     padding-bottom: 0.25rem;
-    border-bottom: 0;
+    border-bottom: 1px solid rgba(9, 9, 11, 0.18);
   }
 
   .rguide-ds-sheet--structure .rguide-ds-wireframes {
