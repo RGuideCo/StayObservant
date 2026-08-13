@@ -664,11 +664,17 @@ The repository contains dedicated workflows for editorial guides, destination de
     <div class="rguide-ds-product-proof">
       <figure class="rguide-ds-product-view">
         <figcaption><b>01</b><span><strong>City view</strong><small>Barcelona / orientation and guide comparison</small></span></figcaption>
-        <img src="/Projects/RGuide/rguide-barcelona-city-hd.png" alt="RGuide Barcelona city view with destination context, map, filters, neighborhoods, and guide index" width="1600" height="900" loading="lazy" decoding="async" />
+        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open City view at full size">
+          <img src="/Projects/RGuide/rguide-barcelona-city-hd.png" alt="RGuide Barcelona city view with destination context, map, filters, neighborhoods, and guide index" width="1600" height="900" loading="lazy" decoding="async" />
+          <span class="rguide-ds-product-zoom-cue" aria-hidden="true"><span class="material-symbols-outlined">open_in_full</span><b>View full size</b></span>
+        </button>
       </figure>
       <figure class="rguide-ds-product-view">
         <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Editorial rationale / sources / ordered places</small></span></figcaption>
-        <img src="/Projects/RGuide/rguide-barcelona-expanded-hd.png" alt="RGuide Barcelona late-night food guide showing synchronized map markers, source-backed copy, ordered places, and place details" width="1600" height="900" loading="lazy" decoding="async" />
+        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open Expanded guide at full size">
+          <img src="/Projects/RGuide/rguide-barcelona-expanded-hd.png" alt="RGuide Barcelona late-night food guide showing synchronized map markers, source-backed copy, ordered places, and place details" width="1600" height="900" loading="lazy" decoding="async" />
+          <span class="rguide-ds-product-zoom-cue" aria-hidden="true"><span class="material-symbols-outlined">open_in_full</span><b>View full size</b></span>
+        </button>
       </figure>
     </div>
   </article>
@@ -1706,7 +1712,77 @@ The same architecture supports product growth without turning the core explorer 
     width: 100%;
     height: auto;
     background: #09090b;
+  }
+
+  .rguide-ds-product-zoom {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: #09090b;
     box-shadow: 0 1.5rem 3rem rgba(9,9,11,.12);
+    color: #fff;
+    cursor: zoom-in;
+    font: inherit;
+    text-align: left;
+  }
+
+  .rguide-ds-product-zoom img {
+    transition: transform 320ms cubic-bezier(.2,.7,.2,1), opacity 320ms ease;
+  }
+
+  .rguide-ds-product-zoom-cue {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.7rem 0.9rem;
+    background: #09090b;
+    box-shadow: 0 0.5rem 1.5rem rgba(9,9,11,.2);
+    color: #fff;
+    transition: background 220ms ease, color 220ms ease, transform 220ms ease;
+  }
+
+  .rguide-ds-product-zoom-cue .material-symbols-outlined {
+    font-size: 1.15rem;
+    font-variation-settings: "wght" 500;
+  }
+
+  .rguide-ds-product-zoom-cue b {
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .rguide-ds-product-zoom:focus-visible {
+    outline: 3px solid var(--signal);
+    outline-offset: 4px;
+  }
+
+  @media (hover: hover) {
+    .rguide-ds-product-zoom:hover img {
+      opacity: 0.94;
+      transform: scale(1.012);
+    }
+
+    .rguide-ds-product-zoom:hover .rguide-ds-product-zoom-cue {
+      background: var(--signal);
+      transform: translate(-0.2rem, -0.2rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rguide-ds-product-zoom img,
+    .rguide-ds-product-zoom-cue {
+      transition: none;
+    }
   }
 
   .project-content .rguide-ds-specimen {

@@ -1673,8 +1673,8 @@ const project = entry.data;
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.86);
+    padding: clamp(1rem, 3vw, 2.5rem);
+    background: rgba(9, 9, 11, 0.92);
     cursor: zoom-out;
   }
 
@@ -1682,14 +1682,56 @@ const project = entry.data;
     display: flex;
   }
 
+  .project-lightbox__dialog {
+    position: relative;
+    display: grid;
+    place-items: center;
+    max-width: min(94vw, 1600px);
+    max-height: 92vh;
+    cursor: default;
+  }
+
   .project-lightbox img {
     display: block;
-    max-width: min(94vw, 1600px);
-    max-height: 90vh;
+    max-width: 100%;
+    max-height: 88vh;
     width: auto;
     height: auto;
-    border-radius: 0.75rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    background: #09090b;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  .project-lightbox__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    background: #f4f1e9;
+    color: #09090b;
+    cursor: pointer;
+    transition: background 180ms ease, color 180ms ease;
+  }
+
+  .project-lightbox__close:hover,
+  .project-lightbox__close:focus-visible {
+    background: #ff3b30;
+    color: #fff;
+  }
+
+  .project-lightbox__close:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  .project-lightbox__close .material-symbols-outlined {
+    font-size: 1.5rem;
+    font-variation-settings: "wght" 500;
   }
 
   @media (max-width: 1100px) {
@@ -3231,30 +3273,64 @@ const project = entry.data;
       const lightbox = document.createElement("div");
       lightbox.className = "project-lightbox";
       lightbox.setAttribute("aria-hidden", "true");
-      lightbox.innerHTML = '<img alt="" />';
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      lightbox.setAttribute("aria-label", "Expanded project image");
+      lightbox.innerHTML = `
+        <div class="project-lightbox__dialog" role="document">
+          <button type="button" class="project-lightbox__close" aria-label="Close expanded image">
+            <span class="material-symbols-outlined" aria-hidden="true">close</span>
+          </button>
+          <img alt="" />
+        </div>
+      `;
       const lightboxImg = lightbox.querySelector("img");
+      const lightboxClose = lightbox.querySelector(".project-lightbox__close");
+      let activeLightboxTrigger = null;
+      let previousBodyOverflow = "";
       document.body.appendChild(lightbox);
 
       const closeLightbox = () => {
+        if (!lightbox.classList.contains("is-open")) return;
         lightbox.classList.remove("is-open");
         lightbox.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = previousBodyOverflow;
         if (lightboxImg) {
           lightboxImg.setAttribute("src", "");
           lightboxImg.setAttribute("alt", "");
         }
+        if (activeLightboxTrigger instanceof HTMLElement) activeLightboxTrigger.focus();
+        activeLightboxTrigger = null;
       };
 
-      const openLightbox = (src, alt) => {
+      const openLightbox = (src, alt, trigger = null) => {
         if (!src || !lightboxImg) return;
+        activeLightboxTrigger = trigger instanceof HTMLElement ? trigger : null;
+        previousBodyOverflow = document.body.style.overflow;
         lightboxImg.setAttribute("src", src);
         lightboxImg.setAttribute("alt", alt || "Expanded project image");
         lightbox.classList.add("is-open");
         lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        if (lightboxClose instanceof HTMLElement) lightboxClose.focus();
       };
 
-      lightbox.addEventListener("click", closeLightbox);
+      content.addEventListener("click", (event) => {
+        const trigger = event.target instanceof Element
+          ? event.target.closest("[data-project-lightbox-trigger]")
+          : null;
+        if (!trigger || !content.contains(trigger)) return;
+        const img = trigger.querySelector("img");
+        if (!img) return;
+        openLightbox(img.getAttribute("src") || "", img.getAttribute("alt") || "", trigger);
+      });
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+      lightboxClose?.addEventListener("click", closeLightbox);
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") closeLightbox();
+        if (event.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
       });
     };
 
