@@ -962,14 +962,19 @@ const project = entry.data;
   /* Joy Machine concept split section */
   .project-content .concept-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: center;
+    grid-template-columns: minmax(0, 1.12fr) minmax(16rem, 0.88fr);
+    gap: clamp(1.5rem, 3.5vw, 3.25rem);
+    align-items: start;
+    margin: 2.5rem 0 3.5rem;
+    padding: 1rem 0 1.25rem;
+    border-top: var(--rule);
+    border-bottom: var(--rule);
   }
 
   .project-content .concept-slider-main {
     position: relative;
     min-height: 320px;
+    background: #e7e3db;
   }
 
   .project-content .concept-slide {
@@ -985,58 +990,74 @@ const project = entry.data;
   }
 
   .project-content .concept-slide .project-image-bar {
+    position: static;
+    min-height: 2.35rem;
+    color: #18181b;
+    background: transparent;
+    border-top: var(--rule);
+    backdrop-filter: none;
     transform: translateY(0);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
   }
 
   .project-content .concept-thumbs {
-    margin-top: 0.75rem;
+    margin-top: 0;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.45rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
   }
 
   .project-content .concept-thumbs button {
-    width: 56px;
-    height: 56px;
-    border: 1px solid rgba(0, 0, 0, 0.14);
-    border-radius: 999px;
+    position: relative;
+    width: 72px;
+    height: 48px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0;
     overflow: hidden;
-    background: #fff;
+    background: #e7e3db;
     padding: 0;
     cursor: pointer;
     transition:
-      border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+      border-color 180ms ease,
+      opacity 180ms ease;
   }
 
   .project-content .concept-thumbs button:hover {
-    border-color: rgba(0, 0, 0, 0.45);
-    transform: translateY(-1px);
+    border-color: #18181b;
+    opacity: 0.82;
   }
 
   .project-content .concept-thumbs button.is-active {
-    border-color: rgba(0, 0, 0, 0.65);
+    border-color: var(--signal);
+    box-shadow: inset 0 -3px 0 var(--signal);
   }
 
   .project-content .concept-thumbs img {
     margin: 0;
     border: 0;
-    border-radius: 999px;
+    border-radius: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
   .project-content .concept-copy {
-    border-left: 1px solid rgba(0, 0, 0, 0.14);
-    padding-left: 1rem;
-    align-self: center;
+    padding-top: 0.25rem;
+    align-self: start;
   }
 
   .project-content .concept-copy > h3 {
-    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
-    text-transform: none;
+    margin: 0 0 1rem;
+    color: var(--signal);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
   }
 
   .project-content .concept-copy ul {
@@ -1055,6 +1076,58 @@ const project = entry.data;
     display: block;
     margin-bottom: 0.25rem;
     color: #09090b;
+  }
+
+  .project-content .carousel-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    min-height: 2.85rem;
+    border-top: var(--rule);
+  }
+
+  .project-content .carousel-index {
+    color: #71717a;
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .project-content .carousel-control {
+    display: grid;
+    width: 2.85rem;
+    height: 2.85rem;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    border-left: var(--rule);
+    border-radius: 0;
+    color: #18181b;
+    background: transparent;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: color 180ms ease, background-color 180ms ease;
+  }
+
+  .project-content .carousel-control:hover,
+  .project-content .carousel-control:focus-visible {
+    color: #fff;
+    background: var(--signal);
+  }
+
+  .project-content .carousel-control:disabled {
+    color: rgba(24, 24, 27, 0.28);
+    background: transparent;
+    cursor: default;
+  }
+
+  .project-content .carousel-control:focus-visible,
+  .project-content .concept-thumbs button:focus-visible,
+  .project-content .model-slide-thumb:focus-visible,
+  .project-content .model-contact-sheet .project-image-frame:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
   }
 
   .project-content .concept-copy h3 + p {
@@ -1140,15 +1213,16 @@ const project = entry.data;
   .project-content .model-slideshow {
     margin-top: 0;
     position: relative;
-    padding-top: 1.6rem;
+    padding-top: 2rem;
   }
 
   .project-content .model-build-block {
-    margin-top: 0.65rem;
-    padding: 1.2rem 1.1rem 1.3rem;
+    margin-top: clamp(2.75rem, 5vw, 4.5rem);
+    padding: 1.25rem 0 1.5rem;
     border-radius: 0;
-    background: #e7e3db;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: transparent;
+    border-top: var(--rule);
+    border-bottom: var(--rule);
   }
 
   .project-content .model-build-block > * + * {
@@ -1161,15 +1235,20 @@ const project = entry.data;
 
   .project-content .model-block-title {
     margin: 0;
-    text-align: center;
-    font-size: clamp(1.1rem, 1.35vw, 1.28rem);
+    max-width: 18ch;
+    text-align: left;
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 3vw, 2.8rem);
     font-weight: 700;
-    text-transform: none;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
   }
 
   .project-content .model-block-copy {
-    margin-top: 0;
-    text-align: center;
+    max-width: 48rem;
+    margin-top: 0.75rem;
+    text-align: left;
     color: #52525b;
   }
 
@@ -1217,35 +1296,51 @@ const project = entry.data;
     margin: 0;
   }
 
+  .project-content .model-slide .project-image-bar {
+    position: static;
+    min-height: 2.4rem;
+    color: #18181b;
+    background: transparent;
+    border-top: var(--rule);
+    backdrop-filter: none;
+    transform: none;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
   .project-content .model-slide-thumbs {
-    margin-top: 0.75rem;
+    margin-top: 0;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.45rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
   }
 
   .project-content .model-slide-thumb {
-    width: 56px;
-    height: 56px;
-    border: 1px solid rgba(0, 0, 0, 0.14);
-    border-radius: 999px;
+    width: 76px;
+    height: 52px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0;
     overflow: hidden;
-    background: #fff;
+    background: #e7e3db;
     cursor: pointer;
     padding: 0;
     transition:
-      border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+      border-color 180ms ease,
+      opacity 180ms ease;
   }
 
   .project-content .model-slide-thumb:hover {
-    border-color: rgba(0, 0, 0, 0.45);
-    transform: translateY(-1px);
+    border-color: #18181b;
+    opacity: 0.82;
   }
 
   .project-content .model-slide-thumb.is-active {
-    border-color: rgba(0, 0, 0, 0.65);
+    border-color: var(--signal);
+    box-shadow: inset 0 -3px 0 var(--signal);
   }
 
   .project-content .model-slide-thumb img {
@@ -1253,19 +1348,20 @@ const project = entry.data;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 999px;
+    border-radius: 0;
   }
 
   .project-content .model-contact-sheet {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(84px, 1fr);
+    gap: 0.45rem;
     margin-top: 0;
-    padding: 2rem 0.9rem 1.2rem;
-    min-height: 170px;
+    padding: 2rem 0 1rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
     background: transparent;
     border: 0;
   }
@@ -1274,13 +1370,13 @@ const project = entry.data;
   .project-content .model-slideshow::before {
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
     font-size: 0.63rem;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(24, 24, 27, 0.52);
+    color: var(--signal);
     white-space: nowrap;
   }
 
@@ -1311,23 +1407,32 @@ const project = entry.data;
   }
 
   .project-content .model-contact-sheet .project-image-frame {
-    --dock-scale: 1;
-    flex: 0 0 auto;
-    width: calc(94px * var(--dock-scale));
+    width: 100%;
     margin: 0;
-    border-radius: 0.5rem;
+    border-radius: 0;
     cursor: pointer;
-    will-change: width;
+    scroll-snap-align: start;
+    background: #e7e3db;
     transition:
-      width 380ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 380ms cubic-bezier(0.22, 1, 0.36, 1);
+      border-color 180ms ease,
+      opacity 180ms ease;
+  }
+
+  .project-content .model-contact-sheet .project-image-frame:hover {
+    border-color: #18181b;
+    opacity: 0.82;
+  }
+
+  .project-content .model-contact-sheet .project-image-frame.is-active {
+    border-color: var(--signal);
+    box-shadow: inset 0 -3px 0 var(--signal);
   }
 
   .project-content .model-contact-sheet .project-image-frame img {
     width: 100%;
-    height: calc(72px * var(--dock-scale));
+    height: 72px;
     object-fit: cover;
-    transition: height 380ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: none;
   }
 
   .project-content .model-contact-sheet .project-image-bar {
@@ -2119,7 +2224,7 @@ const project = entry.data;
     }
 
     .project-content .model-contact-sheet .project-image-frame img {
-      height: calc(64px * var(--dock-scale));
+      height: 64px;
     }
 
     .project-shell {
@@ -2424,6 +2529,30 @@ const project = entry.data;
           thumbs.setAttribute("role", "tablist");
           thumbs.setAttribute("aria-label", "Concept drawing slideshow");
 
+          const controls = document.createElement("div");
+          controls.className = "carousel-controls";
+
+          const indexLabel = document.createElement("span");
+          indexLabel.className = "carousel-index";
+          indexLabel.setAttribute("data-carousel-index", "");
+          indexLabel.setAttribute("aria-live", "polite");
+
+          const previous = document.createElement("button");
+          previous.type = "button";
+          previous.className = "carousel-control";
+          previous.setAttribute("data-carousel-prev", "");
+          previous.setAttribute("aria-label", "Show previous concept drawing");
+          previous.textContent = "←";
+
+          const next = document.createElement("button");
+          next.type = "button";
+          next.className = "carousel-control";
+          next.setAttribute("data-carousel-next", "");
+          next.setAttribute("aria-label", "Show next concept drawing");
+          next.textContent = "→";
+
+          controls.append(indexLabel, previous, next);
+
           conceptImages.forEach((sourceImg, index) => {
             const src = sourceImg.getAttribute("src") || "";
             const alt = sourceImg.getAttribute("alt") || `Concept drawing ${index + 1}`;
@@ -2462,6 +2591,7 @@ const project = entry.data;
           });
 
           left.appendChild(sliderMain);
+          left.appendChild(controls);
           left.appendChild(thumbs);
 
           const right = document.createElement("aside");
@@ -3444,6 +3574,9 @@ const project = entry.data;
       sliders.forEach((sliderRoot) => {
         const slides = Array.from(sliderRoot.querySelectorAll("[data-slide]"));
         const thumbs = Array.from(sliderRoot.querySelectorAll("[data-thumb]"));
+        const previous = sliderRoot.querySelector("[data-carousel-prev]");
+        const next = sliderRoot.querySelector("[data-carousel-next]");
+        const indexLabel = sliderRoot.querySelector("[data-carousel-index]");
         if (!slides.length || !thumbs.length || slides.length !== thumbs.length) return;
 
         let activeIndex = 0;
@@ -3451,12 +3584,15 @@ const project = entry.data;
         let inView = false;
 
         const show = (index) => {
-          activeIndex = index;
-          slides.forEach((slide, i) => slide.classList.toggle("is-active", i === index));
+          activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
+          slides.forEach((slide, i) => slide.classList.toggle("is-active", i === activeIndex));
           thumbs.forEach((thumb, i) => {
-            thumb.classList.toggle("is-active", i === index);
-            thumb.setAttribute("aria-selected", i === index ? "true" : "false");
+            thumb.classList.toggle("is-active", i === activeIndex);
+            thumb.setAttribute("aria-selected", i === activeIndex ? "true" : "false");
           });
+          if (indexLabel) indexLabel.textContent = `Concept ${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+          if (previous instanceof HTMLButtonElement) previous.disabled = activeIndex === 0;
+          if (next instanceof HTMLButtonElement) next.disabled = activeIndex === slides.length - 1;
         };
 
         const stop = () => {
@@ -3473,8 +3609,18 @@ const project = entry.data;
               return;
             }
             show(activeIndex + 1);
-          }, 1800);
+          }, 3200);
         };
+
+        previous?.addEventListener("click", () => {
+          show(activeIndex - 1);
+          stop();
+        });
+
+        next?.addEventListener("click", () => {
+          show(activeIndex + 1);
+          stop();
+        });
 
         thumbs.forEach((thumb, index) => {
           thumb.addEventListener("click", () => {
@@ -3511,6 +3657,28 @@ const project = entry.data;
         if (!slides.length || !thumbsWrap) return;
 
         let activeIndex = 0;
+        const controls = document.createElement("div");
+        controls.className = "carousel-controls";
+
+        const indexLabel = document.createElement("span");
+        indexLabel.className = "carousel-index";
+        indexLabel.setAttribute("aria-live", "polite");
+
+        const previous = document.createElement("button");
+        previous.type = "button";
+        previous.className = "carousel-control";
+        previous.setAttribute("aria-label", "Show previous model view");
+        previous.textContent = "←";
+
+        const next = document.createElement("button");
+        next.type = "button";
+        next.className = "carousel-control";
+        next.setAttribute("aria-label", "Show next model view");
+        next.textContent = "→";
+
+        controls.append(indexLabel, previous, next);
+        root.insertBefore(controls, thumbsWrap);
+
         const originalSlides = slides.map((slide) => {
           const img = slide.querySelector("img");
           const bar = slide.querySelector(".project-image-bar");
@@ -3556,9 +3724,22 @@ const project = entry.data;
           activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
           restoreSlide(activeIndex);
           root.classList.remove("is-previewing");
+          root
+            .closest(".model-build-block")
+            ?.querySelectorAll(".model-contact-sheet .project-image-frame.is-active")
+            .forEach((frame) => frame.classList.remove("is-active"));
           slides.forEach((slide, i) => slide.classList.toggle("is-active", i === activeIndex));
-          thumbs.forEach((thumb, i) => thumb.classList.toggle("is-active", i === activeIndex));
+          thumbs.forEach((thumb, i) => {
+            thumb.classList.toggle("is-active", i === activeIndex);
+            thumb.setAttribute("aria-selected", i === activeIndex ? "true" : "false");
+          });
+          indexLabel.textContent = `View ${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+          previous.disabled = activeIndex === 0;
+          next.disabled = activeIndex === slides.length - 1;
         };
+
+        previous.addEventListener("click", () => show(activeIndex - 1));
+        next.addEventListener("click", () => show(activeIndex + 1));
 
         root.addEventListener("model-preview", (event) => {
           if (!(event instanceof CustomEvent)) return;
@@ -3578,6 +3759,9 @@ const project = entry.data;
           slides.forEach((slide, index) => slide.classList.toggle("is-active", index === 0));
           thumbs.forEach((thumb) => thumb.classList.remove("is-active"));
           root.classList.add("is-previewing");
+          indexLabel.textContent = "Process view";
+          previous.disabled = true;
+          next.disabled = slides.length < 2;
         });
 
         show(0);
@@ -3637,32 +3821,6 @@ const project = entry.data;
           frame.setAttribute("tabindex", "0");
           frame.setAttribute("aria-label", `Show ${img?.getAttribute("alt") || "model image"} in the large viewer`);
         });
-        const resetDock = () => {
-          frames.forEach((frame) => {
-            frame.style.setProperty("--dock-scale", "1");
-            frame.style.zIndex = "1";
-            frame.style.boxShadow = "none";
-          });
-        };
-
-        sheet.addEventListener("mousemove", (event) => {
-          const pointerX = event.clientX;
-          const maxDistance = 210;
-          frames.forEach((frame) => {
-            const rect = frame.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const distance = Math.abs(pointerX - centerX);
-            const normalized = Math.min(distance / maxDistance, 1);
-            const influence = Math.cos((normalized * Math.PI) / 2) ** 2;
-            const scale = 1 + influence * 0.52;
-            frame.style.setProperty("--dock-scale", scale.toFixed(3));
-            frame.style.boxShadow =
-              influence > 0.06 ? "0 8px 16px rgba(0, 0, 0, 0.14)" : "none";
-          });
-        });
-
-        sheet.addEventListener("mouseleave", resetDock);
-        resetDock();
 
         sheet.addEventListener("click", (event) => {
           const frame = event.target instanceof Element ? event.target.closest(".project-image-frame") : null;
@@ -3673,6 +3831,7 @@ const project = entry.data;
           const slideshow = block?.querySelector("[data-model-slideshow]");
           if (!slideshow) return;
           const label = frame.querySelector(".project-image-bar")?.textContent || "";
+          frames.forEach((item) => item.classList.toggle("is-active", item === frame));
           slideshow.dispatchEvent(
             new CustomEvent("model-preview", {
               detail: {
