@@ -9,23 +9,40 @@ tools: ["Sketching", "3D Visualization", "Interaction Design"]
 deliverables: ["Concept development", "Interaction model", "UI direction", "Prototype visuals"]
 ---
 
-> **Project Summary**
->
-> The project explores how to create meaningful engagement for children as traditional play spaces in restaurants continue to shrink or disappear. The goal was to design interactive experiences that capture kids’ attention while reinforcing positive brand values and creating memorable moments within the restaurant environment.
->
-> Two concept directions were developed. The first encourages generosity by giving children the choice to donate instead of taking a toy, with the experience designed to celebrate and reward that decision in a fun, voluntary way. The second focuses on Chick-Fil-A’s fresh lemonade and farm-to-table story, transforming the journey of fresh lemons into a playful interactive machine that lets kids engage with the ingredients and process behind something they see on the menu.
->
-> **Project Timeline**
->
-> - **Concept Exploration**  
->   <span class="timeline-group timeline-group--altruism">Altruism Toy Dispensers</span>  
->   <span class="timeline-link-row timeline-link-row--altruism"><a href="#joy-machine">Joy Machine</a> <a href="#humble-wonder-machine">Humble Wonder Machine</a> <a href="#eggs-in-the-basket">Eggs in the Basket</a> <a href="#hug-me-moo">Hug Me Moo</a> <a href="#run-token-run">Run Token Run</a></span>  
->   <span class="timeline-group timeline-group--farm">Farm to Table</span>  
->   <span class="timeline-link-row timeline-link-row--farm"><a href="#lemon-maze">Lemon Maze</a> <a href="#lemon-squeezy">Lemon Squeezy</a></span>
-> - **50% Model and Testing**  
->   Mid-fidelity concept development and interaction testing across the selected directions.
-> - **Final Model**  
->   Refined visual and interaction direction prepared for presentation and implementation planning.
+<section class="cfa-project-overview" aria-labelledby="cfa-project-overview-title">
+  <div class="cfa-project-overview__intro">
+    <div>
+      <p class="cfa-project-overview__kicker">Project overview</p>
+      <div class="cfa-project-overview__title" id="cfa-project-overview-title" role="heading" aria-level="2">Designing play beyond the playground.</div>
+    </div>
+    <div class="cfa-project-overview__copy">
+      <p>As traditional restaurant play spaces shrink or disappear, the project asks how Chick-fil-A could create meaningful child engagement within a smaller footprint—capturing attention, reinforcing positive brand values, and creating a memorable family experience.</p>
+      <p>Two territories shaped the work: generosity, where children could donate a reward and be celebrated for the choice; and farm-to-table storytelling, where the path of a fresh lemon became a visible, mechanical experience.</p>
+    </div>
+  </div>
+
+  <div class="cfa-project-overview__timeline" aria-label="Project development path">
+    <div class="cfa-project-overview__phase">
+      <span class="cfa-project-overview__number">01</span>
+      <div class="cfa-project-overview__phase-title">Explore</div>
+      <div>
+        <p>Seven concepts across two complementary experience territories.</p>
+        <div class="cfa-project-overview__links"><span>Generosity</span><a href="#joy-machine">Joy Machine</a><a href="#humble-wonder-machine">Humble Wonder</a><a href="#eggs-in-the-basket">Eggs in a Basket</a><a href="#hug-me-moo">Hug Me Moo</a><a href="#run-token-run">Run Token Run</a></div>
+        <div class="cfa-project-overview__links"><span>Freshness</span><a href="#lemon-maze">Lemon Maze</a><a href="#lemon-squeezy">Lemon Squeezy</a></div>
+      </div>
+    </div>
+    <div class="cfa-project-overview__phase">
+      <span class="cfa-project-overview__number">02</span>
+      <div class="cfa-project-overview__phase-title">Test</div>
+      <p>50% physical models brought Eggs in a Basket and Lemon Squeezy into family testing at Chick-fil-A headquarters.</p>
+    </div>
+    <div class="cfa-project-overview__phase">
+      <span class="cfa-project-overview__number">03</span>
+      <div class="cfa-project-overview__phase-title">Resolve</div>
+      <p>Lemon Squeezy advanced into a 90% working prototype, with a 95% reliability target for the final reward interaction.</p>
+    </div>
+  </div>
+</section>
 
 ## Joy Machine
 The Joy Machine is an interactive experience where kids insert a Chick-Fil-A token and choose between picking a toy or book, or donating instead. If they choose to give back, they can take a selfie, apply a fun branded filter, and see their photo added to a live Hall of Fame celebrating their decision. Designed with bright visuals, large buttons, and kid-friendly proportions, the machine makes the experience simple, exciting, and rewarding while also tracking participation and engagement behind the scenes.
