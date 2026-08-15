@@ -581,6 +581,157 @@ const project = entry.data;
     border-color: #ffd7a6;
   }
 
+  /* Shared editorial treatment for every project-summary block */
+  .project-content > blockquote {
+    margin: 0;
+    padding: clamp(1.5rem, 3vw, 2.4rem) 0 0;
+    border-top: var(--rule);
+    border-bottom: var(--rule);
+    border-radius: 0;
+    background: transparent;
+    color: #18181b;
+  }
+
+  .project-content > blockquote > p {
+    max-width: 48rem;
+    color: #27272a;
+  }
+
+  .project-content > blockquote > p:first-child {
+    margin-bottom: 1rem;
+    color: var(--signal);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .project-content > blockquote > p:first-child strong {
+    color: inherit;
+  }
+
+  .project-content > blockquote > p:nth-child(2) {
+    max-width: 52rem;
+    font-size: clamp(1.08rem, 1.55vw, 1.32rem);
+    line-height: 1.58;
+    letter-spacing: -0.012em;
+  }
+
+  .project-content > blockquote > p:has(> strong:only-child):not(:first-child) {
+    margin-top: clamp(1.8rem, 3vw, 2.6rem);
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+    color: #18181b;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .project-content > blockquote > p:has(> strong:only-child):not(:first-child) strong {
+    color: inherit;
+  }
+
+  .project-content > blockquote > ul {
+    position: relative;
+    margin: 1rem 0 0;
+    padding: 0;
+    border: 0;
+    border-top: var(--rule);
+    list-style: none;
+    counter-reset: project-phase;
+  }
+
+  .project-content > blockquote > ul::before {
+    display: none;
+  }
+
+  .project-content > blockquote > ul > li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.25rem minmax(9rem, 0.48fr) minmax(0, 1.52fr);
+    gap: clamp(0.8rem, 2vw, 1.6rem);
+    align-items: start;
+    margin: 0;
+    padding: 1rem 0;
+    color: #3f3f46;
+    line-height: 1.55;
+    counter-increment: project-phase;
+  }
+
+  .project-content > blockquote > ul > li + li {
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+  }
+
+  .project-content > blockquote > ul > li::before {
+    content: counter(project-phase, decimal-leading-zero);
+    position: static;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--signal);
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: 0.11em;
+  }
+
+  .project-content > blockquote > ul > li strong {
+    display: block;
+    margin: 0;
+    color: #18181b;
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-content > blockquote > ul > li > br {
+    display: none;
+  }
+
+  .project-content > blockquote > ul > li a {
+    display: inline;
+    margin: 0 0.65rem 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: #18181b;
+    background: transparent;
+    font-size: 0.78rem;
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.25);
+    text-underline-offset: 3px;
+  }
+
+  .project-content > blockquote > ul > li a:hover {
+    color: #18181b;
+    background: transparent;
+    text-decoration-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .project-content > blockquote .timeline-group {
+    margin: 0.7rem 0 0.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: #71717a;
+    background: transparent;
+    font-size: 0.61rem;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 620px) {
+    .project-content > blockquote > ul > li {
+      grid-template-columns: 2.25rem minmax(6.5rem, 0.58fr) minmax(0, 1.42fr);
+      gap: 0.7rem;
+    }
+  }
+
   .project-content .cfa-project-overview {
     margin: 0;
     padding: clamp(1.5rem, 3vw, 2.4rem) 0 0;
