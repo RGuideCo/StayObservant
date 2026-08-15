@@ -247,6 +247,9 @@ Following the 50% family test, Lemon Squeezy was selected for a more resolved wo
     <figure class="model-slide">
       <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/SiteVisit/02-front-mechanism.webp" alt="High-resolution front view of the Lemon Squeezy mechanism, crank, lemon path, screen, and pedal" /><span class="project-image-bar">Interaction and Mechanism Detail</span></span>
     </figure>
+    <figure class="model-slide">
+      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/SiteVisit/03-lemon-path-detail.webp" alt="High-resolution site-visit photograph of the Lemon Squeezy lemon path and working mechanism" /><span class="project-image-bar">Lemon Path and Working Mechanism</span></span>
+    </figure>
     <div class="model-slide-thumbs" data-model-thumbs aria-label="Lemon Squeezy site-visit photo thumbnails"></div>
   </section>
 
