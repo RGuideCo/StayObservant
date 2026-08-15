@@ -872,6 +872,28 @@ const project = entry.data;
     color: #18181b;
   }
 
+  .project-content .cfa-site-visit-video {
+    margin: 1.25rem auto 0;
+    max-width: 560px;
+  }
+
+  .project-content .cfa-site-visit-video video {
+    display: block;
+    width: 100%;
+    max-height: min(78vh, 780px);
+    object-fit: contain;
+    background: #111;
+  }
+
+  .project-content .cfa-site-visit-video figcaption {
+    margin-top: 0.55rem;
+    text-align: center;
+    color: #52525b;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .project-content .model-slide {
     display: none;
     margin: 0;
@@ -962,6 +984,16 @@ const project = entry.data;
 
   .project-content .model-slideshow--prototype::before {
     content: "90% Working Prototype";
+  }
+
+  .project-content .model-slideshow--prototype .project-image-frame {
+    background: #d8d3ca;
+  }
+
+  .project-content .model-slideshow--prototype .project-image-frame img {
+    width: 100%;
+    height: min(78vh, 860px);
+    object-fit: contain;
   }
 
   .project-content .model-contact-sheet--testing::before {

@@ -220,46 +220,25 @@ Two concepts were selected to move forward into mock store testing with families
 Following the 50% family test, Lemon Squeezy was selected for a more resolved working prototype. The team rebuilt the concept at child scale, integrating the enclosure, transparent mechanical sequence, digital guidance, foot-pedal interaction, and sticker reward into one system. Development focused on making every action more visible, intuitive, eventful, and smooth, with a 95% success target for the final “winning” moment.
 
 <section class="model-build-block" data-model-stage="lemon-90">
-  <h3 class="model-block-title">From Test Model to Working Experience</h3>
-  <p class="model-block-copy">The process moved from technical definition and frame fabrication through mechanism integration, enclosure fitting, and full-system assembly.</p>
+  <h3 class="model-block-title">Working Prototype at the CFA Site Visit</h3>
+  <p class="model-block-copy">The selected site-visit documentation shows the resolved child-scale model, its transparent mechanical sequence, digital guidance, foot-pedal interaction, and reward system at full clarity.</p>
 
-  <section class="model-contact-sheet" aria-label="Lemon Squeezy 90% prototype fabrication progression">
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/01-technical-development.webp" alt="Technical drawings defining the Lemon Squeezy enclosure, frame, and internal mechanism" /><span class="project-image-bar">Technical Development</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/02-frame-and-enclosure.webp" alt="Metal frame and white enclosure being fitted during Lemon Squeezy fabrication" /><span class="project-image-bar">Frame and Enclosure</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/03-mechanism-assembly.webp" alt="Internal Lemon Squeezy mechanism assembled before the transparent housing was installed" /><span class="project-image-bar">Mechanism Assembly</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/04-track-components.webp" alt="Red molded tracks and funnels prepared for the Lemon Squeezy mechanical sequence" /><span class="project-image-bar">Track Components</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/05-working-mechanism.webp" alt="Working Lemon Squeezy mechanism installed inside its transparent child-scale frame" /><span class="project-image-bar">Working Mechanism</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/06-full-system-integration.webp" alt="Lemon Squeezy mechanical and digital modules combined in the first full assembly" /><span class="project-image-bar">Full-System Integration</span></span>
-  </section>
-
-  <section class="model-slideshow model-slideshow--prototype" data-model-slideshow aria-label="Lemon Squeezy resolved working prototype">
+  <section class="model-slideshow model-slideshow--prototype" data-model-slideshow aria-label="Lemon Squeezy working prototype site-visit photographs">
     <figure class="model-slide is-active">
-      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/07-final-model-side.webp" alt="Resolved Lemon Squeezy prototype showing the illustrated enclosure and transparent mechanical side" /><span class="project-image-bar">Resolved Prototype — Side View</span></span>
+      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/SiteVisit/01-full-model.webp" alt="High-resolution site-visit photograph of the complete Lemon Squeezy prototype" /><span class="project-image-bar">Complete Working Prototype</span></span>
     </figure>
     <figure class="model-slide">
-      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/08-final-model-front.webp" alt="Resolved Lemon Squeezy prototype showing its visible lemon path, crank, pedal, and screen" /><span class="project-image-bar">Resolved Prototype — Front View</span></span>
+      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/SiteVisit/02-front-mechanism.webp" alt="High-resolution front view of the Lemon Squeezy mechanism, crank, lemon path, screen, and pedal" /><span class="project-image-bar">Interaction and Mechanism Detail</span></span>
     </figure>
-    <figure class="model-slide">
-      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/09-lemon-loading.webp" alt="A lemon being loaded into the first step of the Lemon Squeezy interaction" /><span class="project-image-bar">Step 1 — Pick a Lemon</span></span>
-    </figure>
-    <figure class="model-slide">
-      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/10-mechanical-payoff.webp" alt="Lemon arriving through the final red funnel in the visible mechanical sequence" /><span class="project-image-bar">Visible Mechanical Payoff</span></span>
-    </figure>
-    <figure class="model-slide">
-      <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/11-sticker-reward.webp" alt="Integrated Chick-fil-A Kids sticker reward slot on the finished prototype" /><span class="project-image-bar">Sticker Reward</span></span>
-    </figure>
-    <div class="model-slide-thumbs" data-model-thumbs aria-label="Resolved Lemon Squeezy prototype thumbnails"></div>
+    <div class="model-slide-thumbs" data-model-thumbs aria-label="Lemon Squeezy site-visit photo thumbnails"></div>
   </section>
 
-  <h4 class="model-block-focus">Testing the Full Interaction</h4>
-  <p class="model-block-copy">Family testing showed that the visible lemons and transparent mechanism created immediate curiosity and group participation. Observation also revealed where the crank, intermediate actions, guidance, and reward needed stronger cues—feedback used to refine reach, pacing, smoothness, and the final celebration.</p>
-
-  <section class="model-contact-sheet model-contact-sheet--testing" aria-label="Lemon Squeezy 90% prototype family testing">
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/12-guided-user-test.webp" alt="Parent guiding a child through the Lemon Squeezy prototype" /><span class="project-image-bar">Guided User Test</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/13-group-user-test.webp" alt="Children gathering around the transparent Lemon Squeezy mechanism during testing" /><span class="project-image-bar">Group Observation</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/14-crank-interaction-test.webp" alt="Child testing the hand crank while an adult observes the interaction" /><span class="project-image-bar">Crank Interaction Test</span></span>
-    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/Model90/15-overhead-interaction-test.webp" alt="Overhead view of multiple children exploring the Lemon Squeezy prototype together" /><span class="project-image-bar">Multi-User Interaction</span></span>
-  </section>
+  <figure class="cfa-site-visit-video">
+    <video controls playsinline preload="metadata" poster="/optimized/Projects/ChickFilA/LemonSqueezey/SiteVisit/02-front-mechanism.webp">
+      <source src="/optimized/Projects/ChickFilA/LemonSqueezey/SiteVisit/lemon-squeezy-interaction.mp4" type="video/mp4" />
+    </video>
+    <figcaption>Site-visit interaction recording · 66 seconds</figcaption>
+  </figure>
 </section>
 
 <section class="model-build-block" data-model-stage="eggs-50">
