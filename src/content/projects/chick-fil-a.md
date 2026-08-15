@@ -189,7 +189,7 @@ Early sketches define enclosure geometry, diagonal movement paths, and interacti
 ## 50% Model and Testing
 Two concepts were selected to move forward into mock store testing with families at Chick-Fil-A headquarters: **Eggs in the Basket** and **Lemon Squeezy**. This phase focused on validating interaction clarity, usability at kid scale, and overall excitement in a live environment before final direction.
 
-<section class="model-build-block">
+<section class="model-build-block" data-model-stage="lemon-50">
   <h3 class="model-block-title">Lemon Squeezy</h3>
 
   <section class="model-contact-sheet" aria-label="Lemon Squeezy 50% model progression">
@@ -219,7 +219,7 @@ Two concepts were selected to move forward into mock store testing with families
 ## Lemon Squeezy: 90% Prototype / 95% Reliability Target
 Following the 50% family test, Lemon Squeezy was selected for a more resolved working prototype. The team rebuilt the concept at child scale, integrating the enclosure, transparent mechanical sequence, digital guidance, foot-pedal interaction, and sticker reward into one system. Development focused on making every action more visible, intuitive, eventful, and smooth, with a 95% success target for the final “winning” moment.
 
-<section class="model-build-block">
+<section class="model-build-block" data-model-stage="lemon-90">
   <h3 class="model-block-title">From Test Model to Working Experience</h3>
   <p class="model-block-copy">The process moved from technical definition and frame fabrication through mechanism integration, enclosure fitting, and full-system assembly.</p>
 
@@ -262,7 +262,7 @@ Following the 50% family test, Lemon Squeezy was selected for a more resolved wo
   </section>
 </section>
 
-<section class="model-build-block">
+<section class="model-build-block" data-model-stage="eggs-50">
   <h3 class="model-block-title">Eggs in a Basket</h3>
   <p class="model-block-copy">Process documentation for Eggs in a Basket tracks enclosure assembly, component integration, and interaction testing as the concept moved into physical prototyping.</p>
 

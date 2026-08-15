@@ -3158,6 +3158,10 @@ const project = entry.data;
         observer.observe(sliderRoot);
       });
 
+      const eggsModel = content.querySelector('[data-model-stage="eggs-50"]');
+      const lemonModel = content.querySelector('[data-model-stage="lemon-50"]');
+      if (eggsModel && lemonModel) lemonModel.before(eggsModel);
+
       const modelSlideshows = content.querySelectorAll("[data-model-slideshow]");
       modelSlideshows.forEach((root) => {
         const slides = Array.from(root.querySelectorAll(".model-slide"));
@@ -3165,6 +3169,27 @@ const project = entry.data;
         if (!slides.length || !thumbsWrap) return;
 
         let activeIndex = 0;
+        const originalSlides = slides.map((slide) => {
+          const img = slide.querySelector("img");
+          const bar = slide.querySelector(".project-image-bar");
+          return {
+            src: img?.getAttribute("src") || "",
+            alt: img?.getAttribute("alt") || "",
+            label: bar?.textContent || "",
+          };
+        });
+
+        const restoreSlide = (index) => {
+          const slide = slides[index];
+          const original = originalSlides[index];
+          const img = slide?.querySelector("img");
+          const bar = slide?.querySelector(".project-image-bar");
+          if (img) {
+            img.src = original.src;
+            img.alt = original.alt;
+          }
+          if (bar) bar.textContent = original.label;
+        };
 
         const thumbs = slides.map((slide, index) => {
           const btn = document.createElement("button");
@@ -3187,9 +3212,31 @@ const project = entry.data;
 
         const show = (index) => {
           activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
+          restoreSlide(activeIndex);
+          root.classList.remove("is-previewing");
           slides.forEach((slide, i) => slide.classList.toggle("is-active", i === activeIndex));
           thumbs.forEach((thumb, i) => thumb.classList.toggle("is-active", i === activeIndex));
         };
+
+        root.addEventListener("model-preview", (event) => {
+          if (!(event instanceof CustomEvent)) return;
+          const detail = event.detail;
+          if (!detail || typeof detail.src !== "string") return;
+
+          const previewSlide = slides[0];
+          const previewImg = previewSlide.querySelector("img");
+          const previewBar = previewSlide.querySelector(".project-image-bar");
+          if (!previewImg) return;
+
+          previewImg.src = detail.src;
+          previewImg.alt = typeof detail.alt === "string" ? detail.alt : "";
+          if (previewBar) previewBar.textContent = typeof detail.label === "string" ? detail.label : "";
+
+          activeIndex = 0;
+          slides.forEach((slide, index) => slide.classList.toggle("is-active", index === 0));
+          thumbs.forEach((thumb) => thumb.classList.remove("is-active"));
+          root.classList.add("is-previewing");
+        });
 
         show(0);
       });
@@ -3242,6 +3289,12 @@ const project = entry.data;
       const contactSheets = content.querySelectorAll(".model-contact-sheet");
       contactSheets.forEach((sheet) => {
         const frames = Array.from(sheet.querySelectorAll(".project-image-frame"));
+        frames.forEach((frame) => {
+          const img = frame.querySelector("img");
+          frame.setAttribute("role", "button");
+          frame.setAttribute("tabindex", "0");
+          frame.setAttribute("aria-label", `Show ${img?.getAttribute("alt") || "model image"} in the large viewer`);
+        });
         const resetDock = () => {
           frames.forEach((frame) => {
             frame.style.setProperty("--dock-scale", "1");
@@ -3274,7 +3327,31 @@ const project = entry.data;
           if (!frame || !sheet.contains(frame)) return;
           const img = frame.querySelector("img");
           if (!img) return;
-          openLightbox(img.getAttribute("src") || "", img.getAttribute("alt") || "");
+          const block = sheet.closest(".model-build-block");
+          const slideshow = block?.querySelector("[data-model-slideshow]");
+          if (!slideshow) return;
+          const label = frame.querySelector(".project-image-bar")?.textContent || "";
+          slideshow.dispatchEvent(
+            new CustomEvent("model-preview", {
+              detail: {
+                src: img.getAttribute("src") || "",
+                alt: img.getAttribute("alt") || "",
+                label,
+              },
+            })
+          );
+          slideshow.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            block: "center",
+          });
+        });
+
+        sheet.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          const frame = event.target instanceof Element ? event.target.closest(".project-image-frame") : null;
+          if (!frame || !sheet.contains(frame)) return;
+          event.preventDefault();
+          frame.click();
         });
       });
 
