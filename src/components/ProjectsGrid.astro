@@ -119,6 +119,22 @@ const filterTags = [
     border-bottom: var(--rule);
   }
 
+  :global(html.has-js.is-page-loading) .work-header,
+  :global(html.has-js) .work-header.motion-reveal {
+    opacity: 1;
+    clip-path: inset(0 0 100%);
+    transform: translateY(-1.5rem);
+    transition:
+      clip-path 540ms cubic-bezier(0.76, 0, 0.24, 1),
+      transform 580ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  :global(html.has-js) .work-header.motion-reveal.is-revealed {
+    opacity: 1;
+    clip-path: inset(0);
+    transform: translateY(0);
+  }
+
   .filter-group {
     margin: 0;
   }
@@ -149,8 +165,29 @@ const filterTags = [
     text-align: center;
     transition:
       color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 380ms cubic-bezier(0.22, 1, 0.36, 1);
+      background-color 380ms cubic-bezier(0.22, 1, 0.36, 1),
+      clip-path 440ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
   }
+
+  :global(html.has-js) .work-header.motion-reveal .project-filter-btn {
+    clip-path: inset(0 0 100%);
+    transform: translateY(-0.9rem);
+  }
+
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn {
+    clip-path: inset(0);
+    transform: translateY(0);
+  }
+
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(1) { transition-delay: 0ms, 0ms, 80ms, 80ms; }
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(2) { transition-delay: 0ms, 0ms, 125ms, 125ms; }
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(3) { transition-delay: 0ms, 0ms, 170ms, 170ms; }
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(4) { transition-delay: 0ms, 0ms, 215ms, 215ms; }
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(5) { transition-delay: 0ms, 0ms, 260ms, 260ms; }
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(6) { transition-delay: 0ms, 0ms, 305ms, 305ms; }
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(7) { transition-delay: 0ms, 0ms, 350ms, 350ms; }
+  :global(html.has-js) .work-header.motion-reveal.is-revealed .project-filter-btn:nth-child(8) { transition-delay: 0ms, 0ms, 395ms, 395ms; }
 
   .project-filter-btn:hover,
   .project-filter-btn:focus-visible,
@@ -179,6 +216,82 @@ const filterTags = [
     border-right: var(--rule);
     border-bottom: var(--rule);
     text-decoration: none;
+  }
+
+  :global(html.has-js.is-page-loading) .project-card,
+  :global(html.has-js) .project-card.motion-reveal {
+    opacity: 1;
+    clip-path: var(--mosaic-clip, inset(0 0 100% 0));
+    transform: translate3d(var(--mosaic-x, 0), var(--mosaic-y, 2.5rem), 0)
+      scale(0.985)
+      rotate(var(--mosaic-rotate, 0deg));
+    transition:
+      transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+      clip-path 700ms cubic-bezier(0.76, 0, 0.24, 1);
+    transition-delay: calc(var(--reveal-order, 0) * 50ms);
+    will-change: transform, clip-path;
+  }
+
+  :global(html.has-js) .project-card.motion-reveal.is-revealed {
+    opacity: 1;
+    clip-path: inset(0);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+
+  :global(html.has-js) .project-card:nth-child(1) {
+    --mosaic-x: -2.75rem;
+    --mosaic-y: 0;
+    --mosaic-rotate: -0.7deg;
+    --mosaic-clip: inset(0 100% 0 0);
+  }
+
+  :global(html.has-js) .project-card:nth-child(2) {
+    --mosaic-x: 0;
+    --mosaic-y: -2.75rem;
+    --mosaic-rotate: 0.4deg;
+    --mosaic-clip: inset(100% 0 0 0);
+  }
+
+  :global(html.has-js) .project-card:nth-child(3) {
+    --mosaic-x: 2.75rem;
+    --mosaic-y: 0;
+    --mosaic-rotate: 0.7deg;
+    --mosaic-clip: inset(0 0 0 100%);
+  }
+
+  :global(html.has-js) .project-card:nth-child(4) {
+    --mosaic-x: -2.5rem;
+    --mosaic-y: 0;
+    --mosaic-rotate: 0.5deg;
+    --mosaic-clip: inset(0 100% 0 0);
+  }
+
+  :global(html.has-js) .project-card:nth-child(5) {
+    --mosaic-x: 0;
+    --mosaic-y: 2.75rem;
+    --mosaic-rotate: -0.5deg;
+    --mosaic-clip: inset(0 0 100% 0);
+  }
+
+  :global(html.has-js) .project-card:nth-child(6) {
+    --mosaic-x: 2.5rem;
+    --mosaic-y: 0;
+    --mosaic-rotate: 0.7deg;
+    --mosaic-clip: inset(0 0 0 100%);
+  }
+
+  :global(html.has-js) .project-card:nth-child(7) {
+    --mosaic-x: -2.75rem;
+    --mosaic-y: 0;
+    --mosaic-rotate: -0.6deg;
+    --mosaic-clip: inset(0 100% 0 0);
+  }
+
+  :global(html.has-js) .project-card:nth-child(8) {
+    --mosaic-x: 0;
+    --mosaic-y: 2.75rem;
+    --mosaic-rotate: 0.5deg;
+    --mosaic-clip: inset(0 0 100% 0);
   }
 
   .project-card[hidden] {

@@ -18,11 +18,123 @@ const faviconUrl = `data:image/svg+xml,${encodeURIComponent(
     <link rel="icon" type="image/svg+xml" href={faviconUrl} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add("has-js", "is-page-loading");
+    </script>
   </head>
   <body>
     <SiteSidebar />
     <main class="site-main">
       <slot />
     </main>
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const revealSelectors = [
+          ".work-header",
+          ".project-card",
+          ".sketchbook-header",
+          ".sketchbook-stage",
+          ".capabilities-section > *",
+          ".cv-header",
+          ".experience-item",
+          ".cv-supporting > *",
+          ".contact-topline > *",
+          ".contact-main > *",
+          ".contact-footer > *",
+          ".project-meta-item",
+          ".project-content > *",
+        ];
+
+        const prepareReveals = () => {
+          const items = Array.from(document.querySelectorAll(revealSelectors.join(",")));
+          items.forEach((item) => {
+            item.classList.add("motion-reveal");
+            const siblings = Array.from(item.parentElement?.children || []);
+            const index = siblings.indexOf(item);
+            item.style.setProperty("--reveal-order", String(Math.min(Math.max(index, 0), 5)));
+          });
+
+          if (reducedMotion || !("IntersectionObserver" in window)) {
+            items.forEach((item) => item.classList.add("is-revealed"));
+            return;
+          }
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-revealed");
+              observer.unobserve(entry.target);
+            });
+          }, { rootMargin: "0px 0px -7%", threshold: 0.08 });
+
+          items.forEach((item) => {
+            if (item.matches(".work-header")) {
+              const revealCategories = () => {
+                window.setTimeout(() => item.classList.add("is-revealed"), 50);
+              };
+
+              if (root.classList.contains("is-hero-expanded")) revealCategories();
+              else window.addEventListener("hero:expanded", revealCategories, { once: true });
+
+              window.setTimeout(() => item.classList.add("is-revealed"), 1800);
+            } else if (item.matches(".project-card")) {
+              const revealProject = () => {
+                window.setTimeout(() => item.classList.add("is-revealed"), 100);
+              };
+
+              if (root.classList.contains("is-hero-ready")) revealProject();
+              else window.addEventListener("hero:revealed", revealProject, { once: true });
+
+              window.setTimeout(() => item.classList.add("is-revealed"), 2200);
+            } else {
+              observer.observe(item);
+            }
+          });
+        };
+
+        const start = async () => {
+          prepareReveals();
+          const revealPage = () => {
+            root.classList.remove("is-page-loading");
+            root.classList.add("is-page-ready");
+            window.dispatchEvent(new CustomEvent("site:ready"));
+          };
+
+          if (reducedMotion) {
+            revealPage();
+            return;
+          }
+
+          const criticalImage = document.querySelector('img[fetchpriority="high"]');
+          if (criticalImage && !criticalImage.complete) {
+            await Promise.race([
+              new Promise((resolve) => {
+                criticalImage.addEventListener("load", resolve, { once: true });
+                criticalImage.addEventListener("error", resolve, { once: true });
+              }),
+              new Promise((resolve) => setTimeout(resolve, 900)),
+            ]);
+          } else {
+            try { await criticalImage?.decode?.(); } catch {}
+          }
+
+          requestAnimationFrame(() => requestAnimationFrame(revealPage));
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", start, { once: true });
+        } else start();
+
+        window.addEventListener("pageshow", (event) => {
+          if (!event.persisted) return;
+          root.classList.remove("is-page-loading");
+          root.classList.add("is-page-ready");
+        });
+      })();
+    </script>
   </body>
 </html>

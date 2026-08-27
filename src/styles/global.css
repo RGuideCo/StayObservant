@@ -63,6 +63,48 @@ a {
   overflow: clip;
 }
 
+.has-js .motion-reveal {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--reveal-order, 0) * 55ms);
+}
+
+.has-js .motion-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.has-js.is-page-loading .case-hero-image {
+  opacity: 0;
+  transform: scale(1.08);
+}
+
+.has-js.is-page-ready .case-hero-image {
+  animation: case-image-in 1200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.has-js.is-page-loading .case-hero-content {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+.has-js.is-page-ready .case-hero-content {
+  animation: case-content-in 780ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes case-image-in {
+  from { opacity: 0; transform: scale(1.08); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes case-content-in {
+  from { opacity: 0; transform: translateY(2rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .container-page,
 .case-container {
   width: 100%;
@@ -110,6 +152,7 @@ a {
     margin-left: 0;
     padding-top: var(--mobile-header-height);
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -124,5 +167,12 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .motion-reveal,
+  .case-hero-image,
+  .case-hero-content {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

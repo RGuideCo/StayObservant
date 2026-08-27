@@ -112,6 +112,30 @@ const icons = {
     flex: none;
   }
 
+  :global(html.has-js.is-page-loading) .sidebar-mark,
+  :global(html.has-js.is-page-loading) .sidebar-nav-link {
+    opacity: 0;
+    transform: scale(0.45);
+  }
+
+  :global(html.has-js.is-page-ready) .sidebar-mark,
+  :global(html.has-js.is-page-ready) .sidebar-nav-link {
+    animation: toolbar-pop 440ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  :global(html.has-js.is-page-ready) .sidebar-mark { animation-delay: 60ms; }
+  :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(1) { animation-delay: 125ms; }
+  :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(2) { animation-delay: 175ms; }
+  :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(3) { animation-delay: 225ms; }
+  :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(4) { animation-delay: 275ms; }
+  :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(5) { animation-delay: 325ms; }
+
+  @keyframes toolbar-pop {
+    0% { opacity: 0; transform: scale(0.45); }
+    72% { opacity: 1; transform: scale(1.12); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
   .sidebar-mark :global(svg) {
     width: 100%;
     height: 100%;
