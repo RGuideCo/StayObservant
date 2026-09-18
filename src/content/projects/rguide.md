@@ -162,7 +162,7 @@ deliverables: ["Product strategy", "UX/UI", "Design system", "Data model", "Publ
 
 ## From Prototype to Platform
 
-The product moved from a local-data map prototype to a production platform in 105 calendar days. Select a milestone—or watch the build advance—to follow the change in emphasis.
+The product moved from a local-data map prototype to a production platform in 105 calendar days.
 
 <section class="rguide-timeline" data-rguide-timeline aria-label="Interactive RGuide product evolution">
   <header>
@@ -198,8 +198,6 @@ The product moved from a local-data map prototype to a production platform in 10
 The governing decision stayed consistent: **increase the structure behind the interface without increasing the complexity in front of the traveler.**
 
 ## The System at a Glance
-
-The system is organized in layers. Open any layer below to see what it owns and why the separation matters.
 
 <div class="rguide-system" aria-label="Interactive RGuide system architecture">
   <details open>
@@ -413,9 +411,9 @@ This structure supports both reuse and editorial specificity. A venue owns its a
 
 ### A Typed Taxonomy Instead of Generic Tags
 
-Food, nightlife, stay, nature, culture, activities, routes, and essentials need different filters. The schema therefore uses typed fields—lodging type, food service type, cuisine, nightlife type, music genre, price tier, and curated attribute vocabularies—rather than a single undifferentiated tag array.
+Different kinds of places call for different ways to filter them. A hotel is not evaluated like a restaurant, and a nightlife venue is not described like a trail or cultural site. The schema reflects those differences with fields tailored to the questions each category raises. It can distinguish how a place serves food, what kind of lodging it offers, whether a bar is centered on cocktails or music, and how its price and other curated attributes should be understood. This keeps the system more useful than a single list of generic tags.
 
-That structure powers useful questions in the interface: *Which neighborhoods are strongest for cocktail bars? Which stays are social but not party hostels? Which restaurants are reliable after midnight?* The filtering model is a direct expression of the content model.
+That structure lets the interface answer practical questions. *Which neighborhoods are best for cocktail bars? Where can you find a social stay that is not a party hostel? Which restaurants are dependable after midnight?* The filters come directly from the way the content is modeled.
 
 ## Building the Publishing Engine
 
