@@ -3419,7 +3419,7 @@ The same architecture supports product growth without turning the core explorer 
 
   .project-content .rguide-resilience h4 {
     max-width: 16ch;
-    margin: clamp(2.75rem, 5cqw, 4.5rem) 0 0;
+    margin: clamp(1.75rem, 3cqw, 3rem) 0 0;
     font-family: var(--font-display);
     font-size: var(--rguide-type-card-title);
     font-weight: var(--rguide-weight-heading);
