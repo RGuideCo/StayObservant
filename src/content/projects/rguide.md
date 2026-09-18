@@ -281,7 +281,7 @@ The system is organized in layers. Open any layer below to see what it owns and 
 
 ## Designing the Data Model
 
-The decisive implementation shift was separating authored meaning from rendered presentation. Early content could move quickly as local objects, but every new guide repeated destinations, venue facts, images, and sources. That made scale fragile: a venue closure or changed opening time could require edits in many unrelated lists.
+The key implementation change was separating authored content from its rendered presentation. Initially, content moved quickly as local objects, but each guide duplicated destinations, venue details, images, and sources. This made scaling fragile: a venue closure or change in opening hours could require updates across multiple unrelated lists.
 
 The normalized model gives each fact one owner and lets guides compose those facts into an editorial point of view.
 
