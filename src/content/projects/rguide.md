@@ -464,7 +464,7 @@ The repository contains dedicated workflows for editorial guides, destination de
   <header>
     <span>Product resilience</span>
     <h3 id="rguide-resilience-title">Built to stay useful when a service fails.</h3>
-    <p>A travel guide should not disappear because a database or image service is temporarily slow. RGuide prepares a verified version of published content so the essential experience can remain available.</p>
+    <p>A travel guide should not disappear because a database or image service is temporarily slow.<br />RGuide prepares a verified version of published content so the essential experience can remain available.</p>
   </header>
   <div class="rguide-resilience-paths">
     <article>
