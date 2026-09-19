@@ -1,0 +1,671 @@
+{
+  "capturedAt": "2026-09-19T09:13:38Z",
+  "source": "RGuide production database via read-only Supabase queries",
+  "metrics": {
+    "publishedEntries": 1011,
+    "publishedGuideStops": 8545,
+    "unmergedVenueRecords": 7486,
+    "sourceRelationships": 15020,
+    "venueHoursRecords": 37623,
+    "publishedTranslationRecords": 9774,
+    "citiesWithPublishedEntries": 78
+  },
+  "definitions": {
+    "publishedEntries": "entries.status = published",
+    "publishedGuideStops": "entry_stops joined to published entries",
+    "unmergedVenueRecords": "venues.merged_into_venue_id is null",
+    "cities": "City destinations referenced by published entries.city_id, or destination_id when city_id is null",
+    "translations": "Published rows across destination, entry, stop, venue and event translation tables"
+  },
+  "cities": [
+    {
+      "name": "Addis Ababa",
+      "entries": 8,
+      "coordinates": [
+        9.02,
+        38.75
+      ]
+    },
+    {
+      "name": "Amsterdam",
+      "entries": 24,
+      "coordinates": [
+        52.3676,
+        4.9041
+      ]
+    },
+    {
+      "name": "Athens",
+      "entries": 9,
+      "coordinates": [
+        37.9838,
+        23.7275
+      ]
+    },
+    {
+      "name": "Auckland",
+      "entries": 8,
+      "coordinates": [
+        -36.8509,
+        174.7645
+      ]
+    },
+    {
+      "name": "Bangkok",
+      "entries": 9,
+      "coordinates": [
+        13.7563,
+        100.5018
+      ]
+    },
+    {
+      "name": "Barcelona",
+      "entries": 56,
+      "coordinates": [
+        41.3874,
+        2.1686
+      ]
+    },
+    {
+      "name": "Belgrade",
+      "entries": 8,
+      "coordinates": [
+        44.7866,
+        20.4489
+      ]
+    },
+    {
+      "name": "Berlin",
+      "entries": 54,
+      "coordinates": [
+        52.52,
+        13.405
+      ]
+    },
+    {
+      "name": "Bogota",
+      "entries": 8,
+      "coordinates": [
+        4.711,
+        -74.0721
+      ]
+    },
+    {
+      "name": "Bristol",
+      "entries": 8,
+      "coordinates": [
+        51.4545,
+        -2.5879
+      ]
+    },
+    {
+      "name": "Budapest",
+      "entries": 8,
+      "coordinates": [
+        47.5,
+        19.04
+      ]
+    },
+    {
+      "name": "Buenos Aires",
+      "entries": 8,
+      "coordinates": [
+        -34.6037,
+        -58.3816
+      ]
+    },
+    {
+      "name": "Cairo",
+      "entries": 8,
+      "coordinates": [
+        30.06,
+        31.25
+      ]
+    },
+    {
+      "name": "Cape Town",
+      "entries": 8,
+      "coordinates": [
+        -33.9249,
+        18.4241
+      ]
+    },
+    {
+      "name": "Copenhagen",
+      "entries": 10,
+      "coordinates": [
+        55.68,
+        12.57
+      ]
+    },
+    {
+      "name": "Cusco",
+      "entries": 8,
+      "coordinates": [
+        -13.5319,
+        -71.9675
+      ]
+    },
+    {
+      "name": "Danang",
+      "entries": 8,
+      "coordinates": [
+        16.0544,
+        108.2022
+      ]
+    },
+    {
+      "name": "Dubai",
+      "entries": 9,
+      "coordinates": [
+        25.2048,
+        55.2708
+      ]
+    },
+    {
+      "name": "Dublin",
+      "entries": 9,
+      "coordinates": [
+        53.33,
+        -6.25
+      ]
+    },
+    {
+      "name": "Edinburgh",
+      "entries": 8,
+      "coordinates": [
+        55.9533,
+        -3.1883
+      ]
+    },
+    {
+      "name": "Florence",
+      "entries": 9,
+      "coordinates": [
+        43.7696,
+        11.2558
+      ]
+    },
+    {
+      "name": "Guadalajara",
+      "entries": 8,
+      "coordinates": [
+        20.6597,
+        -103.3496
+      ]
+    },
+    {
+      "name": "Hamburg",
+      "entries": 10,
+      "coordinates": [
+        53.5511,
+        9.9937
+      ]
+    },
+    {
+      "name": "Hanoi",
+      "entries": 9,
+      "coordinates": [
+        21.02,
+        105.84
+      ]
+    },
+    {
+      "name": "Ho Chi Minh City",
+      "entries": 9,
+      "coordinates": [
+        10.7769,
+        106.7009
+      ]
+    },
+    {
+      "name": "Hong Kong",
+      "entries": 9,
+      "coordinates": [
+        22.3193,
+        114.1694
+      ]
+    },
+    {
+      "name": "Houston",
+      "entries": 8,
+      "coordinates": [
+        29.7604,
+        -95.3698
+      ]
+    },
+    {
+      "name": "Istanbul",
+      "entries": 8,
+      "coordinates": [
+        41.0082,
+        28.9784
+      ]
+    },
+    {
+      "name": "Jaipur",
+      "entries": 8,
+      "coordinates": [
+        26.9124,
+        75.7873
+      ]
+    },
+    {
+      "name": "Kraków",
+      "entries": 9,
+      "coordinates": [
+        50.0647,
+        19.945
+      ]
+    },
+    {
+      "name": "Kuala Lumpur",
+      "entries": 9,
+      "coordinates": [
+        3.139,
+        101.6869
+      ]
+    },
+    {
+      "name": "Kyoto",
+      "entries": 9,
+      "coordinates": [
+        35.0116,
+        135.7681
+      ]
+    },
+    {
+      "name": "Lagos",
+      "entries": 8,
+      "coordinates": [
+        6.5244,
+        3.3792
+      ]
+    },
+    {
+      "name": "Las Vegas",
+      "entries": 8,
+      "coordinates": [
+        36.1699,
+        -115.1398
+      ]
+    },
+    {
+      "name": "Lima",
+      "entries": 8,
+      "coordinates": [
+        -12.0464,
+        -77.0428
+      ]
+    },
+    {
+      "name": "Lisbon",
+      "entries": 9,
+      "coordinates": [
+        38.7223,
+        -9.1393
+      ]
+    },
+    {
+      "name": "London",
+      "entries": 75,
+      "coordinates": [
+        51.5072,
+        -0.1276
+      ]
+    },
+    {
+      "name": "Los Angeles",
+      "entries": 9,
+      "coordinates": [
+        34.0522,
+        -118.2437
+      ]
+    },
+    {
+      "name": "Madrid",
+      "entries": 39,
+      "coordinates": [
+        40.4168,
+        -3.7038
+      ]
+    },
+    {
+      "name": "Manchester",
+      "entries": 9,
+      "coordinates": [
+        53.4808,
+        -2.2426
+      ]
+    },
+    {
+      "name": "Marrakesh",
+      "entries": 8,
+      "coordinates": [
+        31.6295,
+        -7.9811
+      ]
+    },
+    {
+      "name": "Medellin",
+      "entries": 9,
+      "coordinates": [
+        6.2442,
+        -75.5812
+      ]
+    },
+    {
+      "name": "Melbourne",
+      "entries": 9,
+      "coordinates": [
+        -37.8136,
+        144.9631
+      ]
+    },
+    {
+      "name": "Mexico City",
+      "entries": 10,
+      "coordinates": [
+        19.4326,
+        -99.1332
+      ]
+    },
+    {
+      "name": "Miami",
+      "entries": 9,
+      "coordinates": [
+        25.7617,
+        -80.1918
+      ]
+    },
+    {
+      "name": "Milan",
+      "entries": 9,
+      "coordinates": [
+        45.4642,
+        9.19
+      ]
+    },
+    {
+      "name": "Mumbai",
+      "entries": 8,
+      "coordinates": [
+        19.076,
+        72.8777
+      ]
+    },
+    {
+      "name": "Munich",
+      "entries": 10,
+      "coordinates": [
+        48.1351,
+        11.582
+      ]
+    },
+    {
+      "name": "Nairobi",
+      "entries": 8,
+      "coordinates": [
+        -1.2921,
+        36.8219
+      ]
+    },
+    {
+      "name": "New Delhi",
+      "entries": 8,
+      "coordinates": [
+        28.64,
+        77.22
+      ]
+    },
+    {
+      "name": "New York City",
+      "entries": 39,
+      "coordinates": [
+        40.7128,
+        -74.006
+      ]
+    },
+    {
+      "name": "Oaxaca",
+      "entries": 9,
+      "coordinates": [
+        17.0732,
+        -96.7266
+      ]
+    },
+    {
+      "name": "Orlando",
+      "entries": 8,
+      "coordinates": [
+        28.5383,
+        -81.3792
+      ]
+    },
+    {
+      "name": "Osaka",
+      "entries": 9,
+      "coordinates": [
+        34.6937,
+        135.5023
+      ]
+    },
+    {
+      "name": "Oslo",
+      "entries": 8,
+      "coordinates": [
+        59.91,
+        10.75
+      ]
+    },
+    {
+      "name": "Paris",
+      "entries": 55,
+      "coordinates": [
+        48.8566,
+        2.3522
+      ]
+    },
+    {
+      "name": "Prague",
+      "entries": 9,
+      "coordinates": [
+        50.0755,
+        14.4378
+      ]
+    },
+    {
+      "name": "Queenstown",
+      "entries": 8,
+      "coordinates": [
+        -45.0312,
+        168.6626
+      ]
+    },
+    {
+      "name": "Rome",
+      "entries": 30,
+      "coordinates": [
+        41.9028,
+        12.4964
+      ]
+    },
+    {
+      "name": "San Francisco",
+      "entries": 13,
+      "coordinates": [
+        37.7749,
+        -122.4194
+      ]
+    },
+    {
+      "name": "Santiago",
+      "entries": 8,
+      "coordinates": [
+        -33.46,
+        -70.65
+      ]
+    },
+    {
+      "name": "Seoul",
+      "entries": 9,
+      "coordinates": [
+        37.5665,
+        126.978
+      ]
+    },
+    {
+      "name": "Shanghai",
+      "entries": 9,
+      "coordinates": [
+        31.2304,
+        121.4737
+      ]
+    },
+    {
+      "name": "Singapore",
+      "entries": 9,
+      "coordinates": [
+        1.3521,
+        103.8198
+      ]
+    },
+    {
+      "name": "Stockholm",
+      "entries": 8,
+      "coordinates": [
+        59.33,
+        18.06
+      ]
+    },
+    {
+      "name": "Sydney",
+      "entries": 9,
+      "coordinates": [
+        -33.8688,
+        151.2093
+      ]
+    },
+    {
+      "name": "Taipei",
+      "entries": 10,
+      "coordinates": [
+        25.05,
+        121.53
+      ]
+    },
+    {
+      "name": "Tbilisi",
+      "entries": 8,
+      "coordinates": [
+        41.69,
+        44.83
+      ]
+    },
+    {
+      "name": "Tirana",
+      "entries": 8,
+      "coordinates": [
+        41.33,
+        19.82
+      ]
+    },
+    {
+      "name": "Tokyo",
+      "entries": 40,
+      "coordinates": [
+        35.6762,
+        139.6503
+      ]
+    },
+    {
+      "name": "Toronto",
+      "entries": 9,
+      "coordinates": [
+        43.6532,
+        -79.3832
+      ]
+    },
+    {
+      "name": "Valencia",
+      "entries": 9,
+      "coordinates": [
+        39.4699,
+        -0.3763
+      ]
+    },
+    {
+      "name": "Venice",
+      "entries": 9,
+      "coordinates": [
+        45.4408,
+        12.3155
+      ]
+    },
+    {
+      "name": "Vienna",
+      "entries": 10,
+      "coordinates": [
+        48.2082,
+        16.3738
+      ]
+    },
+    {
+      "name": "Warsaw",
+      "entries": 8,
+      "coordinates": [
+        52.23,
+        21.01
+      ]
+    },
+    {
+      "name": "Wellington",
+      "entries": 8,
+      "coordinates": [
+        -41.2866,
+        174.7756
+      ]
+    },
+    {
+      "name": "Zanzibar",
+      "entries": 8,
+      "coordinates": [
+        -6.1659,
+        39.2026
+      ]
+    },
+    {
+      "name": "Zurich",
+      "entries": 9,
+      "coordinates": [
+        47.3769,
+        8.5417
+      ]
+    }
+  ],
+  "traffic": {
+    "source": "Previously saved Vercel Web Analytics snapshot; current dashboard requires authentication",
+    "from": "2026-04-27",
+    "to": "2026-08-10",
+    "pageviews": 7912,
+    "uniqueVisitors": 1115,
+    "cumulativeWeeklyPageviews": [
+      0,
+      1176,
+      2420,
+      2703,
+      3862,
+      4401,
+      4658,
+      5094,
+      5541,
+      5935,
+      6103,
+      6871,
+      7360,
+      7455,
+      7710,
+      7912
+    ]
+  }
+}

@@ -31,8 +31,7 @@ deliverables: ["A working travel platform"]
 </nav>
 
 <header class="rg-chapter" aria-labelledby="the-question">
-  <span class="rg-chapter-number" aria-hidden="true">01</span>
-  <div><p class="rg-eyebrow">Define the problem</p><h2 id="the-question">Give a recommendation a sense of place.</h2><p class="rg-chapter-lead">A good recommendation tells you why somewhere is worth visiting. A map tells you where it is. I wanted those two things to work together, from the first look at a city to the moment you choose a place.</p></div>
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">01</span>Define the problem</p><h2 id="the-question">Give a recommendation a sense of place.</h2><p class="rg-chapter-lead">A good recommendation tells you why somewhere is worth visiting. A map tells you where it is. I wanted those two things to work together, from the first look at a city to the moment you choose a place.</p></div>
 </header>
 <div class="rg-brief">
   <div class="rg-prose">
@@ -47,8 +46,7 @@ deliverables: ["A working travel platform"]
 </div>
 
 <header class="rg-chapter" aria-labelledby="the-experience">
-  <span class="rg-chapter-number" aria-hidden="true">02</span>
-  <div><p class="rg-eyebrow">Design the experience</p><h2 id="the-experience">Keep the place in view.</h2><p class="rg-chapter-lead">The central decision was to let the guide and the map share the screen. People can compare recommendations, open a guide, and look at an individual stop while keeping a sense of the city around them.</p></div>
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">02</span>Design the experience</p><h2 id="the-experience">Keep the place in view.</h2><p class="rg-chapter-lead">The central decision was to let the guide and the map share the screen. People can compare recommendations, open a guide, and look at an individual stop while keeping a sense of the city around them.</p></div>
 </header>
 <section class="rguide-design-system" aria-labelledby="rguide-design-system-title">
   <header class="rguide-ds-intro">
@@ -56,28 +54,8 @@ deliverables: ["A working travel platform"]
       <span>The interaction model</span>
       <h3 id="rguide-design-system-title">A familiar way to explore</h3>
     </div>
-    <p>The Barcelona views show the finished experience. Below them, the wireframes explain the layout and the details that make it consistent.</p>
+    <p>I began with the relationship between the map and the guide, then worked through the details that make the interface consistent. The Barcelona views show how those decisions came together.</p>
   </header>
-  <article class="rguide-ds-sheet rguide-ds-sheet--proof" aria-labelledby="rguide-ds-proof-title">
-    <header class="rguide-ds-sheet-header">
-      <h4 id="rguide-ds-proof-title">The finished interface</h4>
-      <small>Barcelona, from browsing to choosing</small>
-    </header>
-    <div class="rguide-ds-product-proof">
-      <figure class="rguide-ds-product-view">
-        <figcaption><b>01</b><span><strong>City view</strong><small>Compare recommendations without losing the map</small></span></figcaption>
-        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open City view at full size">
-          <img src="/Projects/RGuide/rguide-barcelona-city-hd.png" alt="The Barcelona explorer with its map beside the available city guides" width="1600" height="900" loading="lazy" decoding="async" />
-        </button>
-      </figure>
-      <figure class="rguide-ds-product-view">
-        <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Understand the recommendation, then explore each stop</small></span></figcaption>
-        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open Expanded guide at full size">
-          <img src="/Projects/RGuide/rguide-barcelona-expanded-hd.png" alt="A Barcelona food guide open beside its numbered stops on the map" width="1600" height="900" loading="lazy" decoding="async" />
-        </button>
-      </figure>
-    </div>
-  </article>
   <article class="rguide-ds-sheet rguide-ds-sheet--structure" aria-labelledby="rguide-ds-structure-title">
     <header class="rguide-ds-sheet-header">
       <h4 id="rguide-ds-structure-title">From the city to the detail</h4>
@@ -223,6 +201,26 @@ deliverables: ["A working travel platform"]
       </figure>
     </div>
   </article>
+  <article class="rguide-ds-sheet rguide-ds-sheet--proof" aria-labelledby="rguide-ds-proof-title">
+    <header class="rguide-ds-sheet-header">
+      <h4 id="rguide-ds-proof-title">The finished interface</h4>
+      <small>Barcelona, from browsing to choosing</small>
+    </header>
+    <div class="rguide-ds-product-proof">
+      <figure class="rguide-ds-product-view">
+        <figcaption><b>01</b><span><strong>City view</strong><small>Compare recommendations without losing the map</small></span></figcaption>
+        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open City view at full size">
+          <img src="/Projects/RGuide/rguide-barcelona-city-hd.png" alt="The Barcelona explorer with its map beside the available city guides" width="1600" height="900" loading="lazy" decoding="async" />
+        </button>
+      </figure>
+      <figure class="rguide-ds-product-view">
+        <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Understand the recommendation, then explore each stop</small></span></figcaption>
+        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open Expanded guide at full size">
+          <img src="/Projects/RGuide/rguide-barcelona-expanded-hd.png" alt="A Barcelona food guide open beside its numbered stops on the map" width="1600" height="900" loading="lazy" decoding="async" />
+        </button>
+      </figure>
+    </div>
+  </article>
 
 </section>
 
@@ -233,8 +231,7 @@ deliverables: ["A working travel platform"]
 </div>
 
 <header class="rg-chapter" aria-labelledby="the-content">
-  <span class="rg-chapter-number" aria-hidden="true">03</span>
-  <div><p class="rg-eyebrow">Design the content</p><h2 id="the-content">One place. More than one story.</h2><p class="rg-chapter-lead">A restaurant might belong in several guides, each for a different reason. Its address and opening hours should stay consistent, while each guide can explain what makes it relevant.</p></div>
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">03</span>Design the content</p><h2 id="the-content">One place. More than one story.</h2><p class="rg-chapter-lead">A restaurant might belong in several guides, each for a different reason. Its address and opening hours should stay consistent, while each guide can explain what makes it relevant.</p></div>
 </header>
 <div class="rg-comparison" aria-label="How the content model changed">
   <article><span class="rg-eyebrow">The first version</span><h3>Each guide carried its own facts</h3><p>Local content objects let me build quickly. But the same venue appeared in multiple lists. A change in opening hours meant finding and updating every copy.</p></article>
@@ -376,8 +373,7 @@ deliverables: ["A working travel platform"]
 </div>
 
 <header class="rg-chapter" aria-labelledby="the-publishing">
-  <span class="rg-chapter-number" aria-hidden="true">04</span>
-  <div><p class="rg-eyebrow">Design the publishing process</p><h2 id="the-publishing">Make good content repeatable.</h2><p class="rg-chapter-lead">As the catalog grew, writing a guide became only part of the work. I built a publishing process that connects the research to the right places and checks the result before it reaches the site.</p></div>
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">04</span>Design the publishing process</p><h2 id="the-publishing">Make good content repeatable.</h2><p class="rg-chapter-lead">As the catalog grew, writing a guide became only part of the work. I built a publishing process that connects the research to the right places and checks the result before it reaches the site.</p></div>
 </header>
 <div class="rguide-pipeline" aria-label="The six stages of publishing a guide">
   <div><span>01</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">travel_explore</i><strong>Research</strong><p>Start with a useful question and find sources that support the recommendations.</p></div>
@@ -427,8 +423,7 @@ deliverables: ["A working travel platform"]
 </section>
 
 <header class="rg-chapter" aria-labelledby="the-platform">
-  <span class="rg-chapter-number" aria-hidden="true">05</span>
-  <div><p class="rg-eyebrow">Build for everyday use</p><h2 id="the-platform">Make the complexity earn its place.</h2><p class="rg-chapter-lead">The engineering decisions had to support the experience. I focused on loading what a person needs at that moment and keeping the guide useful as the amount of content grows.</p></div>
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">05</span>Build for everyday use</p><h2 id="the-platform">Make the complexity earn its place.</h2><p class="rg-chapter-lead">The engineering decisions had to support the experience. I focused on loading what a person needs at that moment and keeping the guide useful as the amount of content grows.</p></div>
 </header>
 <div class="rguide-principles">
   <article><span>Load what is in view</span><p>A city page requests its own content. It does not need to fetch every guide in the catalog.</p></article>
@@ -456,74 +451,104 @@ deliverables: ["A working travel platform"]
 </div>
 
 <header class="rg-chapter" aria-labelledby="the-result">
-  <span class="rg-chapter-number" aria-hidden="true">06</span>
-  <div><p class="rg-eyebrow">Reflect on the result</p><h2 id="the-result">An idea that became a working product.</h2><p class="rg-chapter-lead">The initial build ran from April to August 2026. Over 105 calendar days, I took RGuide from a map prototype to a published platform covering 47 cities.</p></div>
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">06</span>Reflect on the result</p><h2 id="the-result">An idea that became a working product.</h2><p class="rg-chapter-lead">The initial build ran from April to August 2026. Over 105 calendar days, I took RGuide from a map prototype to a published platform covering 47 cities.</p></div>
 </header>
-<section class="rguide-impact" data-rguide-impact aria-label="RGuide production data snapshot from August 11, 2026">
-  <div class="rguide-city-map" role="img" aria-label="World map marking cities with published RGuide content">
+<section class="rguide-impact" data-rguide-impact aria-label="RGuide production data snapshot from September 19, 2026">
+  <div class="rguide-city-map" role="img" aria-label="World map marking 78 cities with published RGuide content as of September 19, 2026">
     <img src="/Projects/RGuide/world-outline.svg" alt="" aria-hidden="true" />
-    <i style="--x: 51.36%; --y: 20.91%; --delay: 0ms" data-city="Amsterdam"></i>
-    <i style="--x: 56.59%; --y: 28.9%; --delay: 45ms" data-city="Athens"></i>
-    <i style="--x: 77.92%; --y: 42.36%; --delay: 90ms" data-city="Bangkok"></i>
-    <i style="--x: 50.6%; --y: 27.01%; --delay: 135ms" data-city="Barcelona"></i>
-    <i style="--x: 53.72%; --y: 20.82%; --delay: 180ms" data-city="Berlin"></i>
-    <i style="--x: 29.42%; --y: 47.38%; --delay: 225ms" data-city="Bogota"></i>
-    <i style="--x: 33.78%; --y: 69.22%; --delay: 270ms" data-city="Buenos Aires"></i>
-    <i style="--x: 53.49%; --y: 19.07%; --delay: 315ms" data-city="Copenhagen"></i>
-    <i style="--x: 30.01%; --y: 57.52%; --delay: 360ms" data-city="Cusco"></i>
-    <i style="--x: 65.35%; --y: 36%; --delay: 405ms" data-city="Dubai"></i>
-    <i style="--x: 48.26%; --y: 20.36%; --delay: 450ms" data-city="Dublin"></i>
-    <i style="--x: 53.13%; --y: 25.68%; --delay: 495ms" data-city="Florence"></i>
-    <i style="--x: 79.4%; --y: 38.32%; --delay: 0ms" data-city="Hanoi"></i>
-    <i style="--x: 81.71%; --y: 37.6%; --delay: 45ms" data-city="Hong Kong"></i>
-    <i style="--x: 58.05%; --y: 27.22%; --delay: 90ms" data-city="Istanbul"></i>
-    <i style="--x: 78.25%; --y: 48.26%; --delay: 135ms" data-city="Kuala Lumpur"></i>
-    <i style="--x: 87.71%; --y: 30.55%; --delay: 180ms" data-city="Kyoto"></i>
-    <i style="--x: 18.02%; --y: 29.91%; --delay: 225ms" data-city="Las Vegas"></i>
-    <i style="--x: 28.6%; --y: 56.69%; --delay: 270ms" data-city="Lima"></i>
-    <i style="--x: 47.46%; --y: 28.49%; --delay: 315ms" data-city="Lisbon"></i>
-    <i style="--x: 49.96%; --y: 21.38%; --delay: 360ms" data-city="London"></i>
-    <i style="--x: 17.15%; --y: 31.08%; --delay: 405ms" data-city="Los Angeles"></i>
-    <i style="--x: 48.97%; --y: 27.55%; --delay: 450ms" data-city="Madrid"></i>
-    <i style="--x: 29.01%; --y: 46.53%; --delay: 495ms" data-city="Medellin"></i>
-    <i style="--x: 90.27%; --y: 71.01%; --delay: 0ms" data-city="Melbourne"></i>
-    <i style="--x: 22.46%; --y: 39.2%; --delay: 45ms" data-city="Mexico City"></i>
-    <i style="--x: 27.72%; --y: 35.69%; --delay: 90ms" data-city="Miami"></i>
-    <i style="--x: 52.55%; --y: 24.74%; --delay: 135ms" data-city="Milan"></i>
-    <i style="--x: 53.22%; --y: 23.26%; --delay: 180ms" data-city="Munich"></i>
-    <i style="--x: 29.44%; --y: 27.38%; --delay: 225ms" data-city="New York City"></i>
-    <i style="--x: 27.39%; --y: 34.15%; --delay: 270ms" data-city="Orlando"></i>
-    <i style="--x: 87.64%; --y: 30.73%; --delay: 315ms" data-city="Osaka"></i>
-    <i style="--x: 50.65%; --y: 22.86%; --delay: 360ms" data-city="Paris"></i>
-    <i style="--x: 54.01%; --y: 22.18%; --delay: 405ms" data-city="Prague"></i>
-    <i style="--x: 53.47%; --y: 26.72%; --delay: 450ms" data-city="Rome"></i>
-    <i style="--x: 15.99%; --y: 29.01%; --delay: 495ms" data-city="San Francisco"></i>
-    <i style="--x: 30.37%; --y: 68.59%; --delay: 0ms" data-city="Santiago"></i>
-    <i style="--x: 85.27%; --y: 29.13%; --delay: 45ms" data-city="Seoul"></i>
-    <i style="--x: 83.74%; --y: 32.65%; --delay: 90ms" data-city="Shanghai"></i>
-    <i style="--x: 78.84%; --y: 49.25%; --delay: 135ms" data-city="Singapore"></i>
-    <i style="--x: 92%; --y: 68.82%; --delay: 180ms" data-city="Sydney"></i>
-    <i style="--x: 83.77%; --y: 36.09%; --delay: 225ms" data-city="Taipei"></i>
-    <i style="--x: 88.79%; --y: 30.18%; --delay: 270ms" data-city="Tokyo"></i>
-    <i style="--x: 27.95%; --y: 25.75%; --delay: 315ms" data-city="Toronto"></i>
-    <i style="--x: 53.42%; --y: 24.76%; --delay: 360ms" data-city="Venice"></i>
-    <i style="--x: 54.55%; --y: 23.22%; --delay: 405ms" data-city="Vienna"></i>
-    <i style="--x: 52.37%; --y: 23.68%; --delay: 450ms" data-city="Zurich"></i>
+    <i style="--x: 60.76%; --y: 44.99%" data-city="Addis Ababa" title="Addis Ababa: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 51.36%; --y: 20.91%" data-city="Amsterdam" title="Amsterdam: 24 published entries" aria-hidden="true"></i>
+    <i style="--x: 56.59%; --y: 28.90%" data-city="Athens" title="Athens: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 98.55%; --y: 70.47%" data-city="Auckland" title="Auckland: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 77.92%; --y: 42.36%" data-city="Bangkok" title="Bangkok: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 50.60%; --y: 27.01%" data-city="Barcelona" title="Barcelona: 56 published entries" aria-hidden="true"></i>
+    <i style="--x: 55.68%; --y: 25.12%" data-city="Belgrade" title="Belgrade: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 53.72%; --y: 20.82%" data-city="Berlin" title="Berlin: 54 published entries" aria-hidden="true"></i>
+    <i style="--x: 29.42%; --y: 47.38%" data-city="Bogota" title="Bogota: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 49.28%; --y: 21.41%" data-city="Bristol" title="Bristol: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 55.29%; --y: 23.61%" data-city="Budapest" title="Budapest: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 33.78%; --y: 69.22%" data-city="Buenos Aires" title="Buenos Aires: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 58.68%; --y: 33.30%" data-city="Cairo" title="Cairo: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 55.12%; --y: 68.85%" data-city="Cape Town" title="Cape Town: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 53.49%; --y: 19.07%" data-city="Copenhagen" title="Copenhagen: 10 published entries" aria-hidden="true"></i>
+    <i style="--x: 30.01%; --y: 57.52%" data-city="Cusco" title="Cusco: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 80.06%; --y: 41.08%" data-city="Danang" title="Danang: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 65.35%; --y: 36.00%" data-city="Dubai" title="Dubai: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 48.26%; --y: 20.37%" data-city="Dublin" title="Dublin: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 49.11%; --y: 18.91%" data-city="Edinburgh" title="Edinburgh: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 53.13%; --y: 25.68%" data-city="Florence" title="Florence: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 21.29%; --y: 38.52%" data-city="Guadalajara" title="Guadalajara: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 52.78%; --y: 20.25%" data-city="Hamburg" title="Hamburg: 10 published entries" aria-hidden="true"></i>
+    <i style="--x: 79.40%; --y: 38.32%" data-city="Hanoi" title="Hanoi: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 79.64%; --y: 44.01%" data-city="Ho Chi Minh City" title="Ho Chi Minh City: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 81.71%; --y: 37.60%" data-city="Hong Kong" title="Hong Kong: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 23.51%; --y: 33.47%" data-city="Houston" title="Houston: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 58.05%; --y: 27.22%" data-city="Istanbul" title="Istanbul: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 71.05%; --y: 35.05%" data-city="Jaipur" title="Jaipur: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 55.54%; --y: 22.19%" data-city="Kraków" title="Kraków: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 78.25%; --y: 48.26%" data-city="Kuala Lumpur" title="Kuala Lumpur: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 87.71%; --y: 30.55%" data-city="Kyoto" title="Kyoto: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 50.94%; --y: 46.38%" data-city="Lagos" title="Lagos: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 18.02%; --y: 29.91%" data-city="Las Vegas" title="Las Vegas: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 28.60%; --y: 56.69%" data-city="Lima" title="Lima: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 47.46%; --y: 28.49%" data-city="Lisbon" title="Lisbon: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 49.96%; --y: 21.38%" data-city="London" title="London: 75 published entries" aria-hidden="true"></i>
+    <i style="--x: 17.15%; --y: 31.08%" data-city="Los Angeles" title="Los Angeles: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 48.97%; --y: 27.55%" data-city="Madrid" title="Madrid: 39 published entries" aria-hidden="true"></i>
+    <i style="--x: 49.38%; --y: 20.29%" data-city="Manchester" title="Manchester: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 47.78%; --y: 32.43%" data-city="Marrakesh" title="Marrakesh: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 29.01%; --y: 46.53%" data-city="Medellin" title="Medellin: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 90.27%; --y: 71.01%" data-city="Melbourne" title="Melbourne: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 22.46%; --y: 39.20%" data-city="Mexico City" title="Mexico City: 10 published entries" aria-hidden="true"></i>
+    <i style="--x: 27.72%; --y: 35.69%" data-city="Miami" title="Miami: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 52.55%; --y: 24.74%" data-city="Milan" title="Milan: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 70.24%; --y: 39.40%" data-city="Mumbai" title="Mumbai: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 53.22%; --y: 23.26%" data-city="Munich" title="Munich: 10 published entries" aria-hidden="true"></i>
+    <i style="--x: 60.23%; --y: 50.72%" data-city="Nairobi" title="Nairobi: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 71.45%; --y: 34.09%" data-city="New Delhi" title="New Delhi: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 29.44%; --y: 27.38%" data-city="New York City" title="New York City: 39 published entries" aria-hidden="true"></i>
+    <i style="--x: 23.13%; --y: 40.51%" data-city="Oaxaca" title="Oaxaca: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 27.39%; --y: 34.15%" data-city="Orlando" title="Orlando: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 87.64%; --y: 30.73%" data-city="Osaka" title="Osaka: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 52.99%; --y: 16.72%" data-city="Oslo" title="Oslo: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 50.65%; --y: 22.86%" data-city="Paris" title="Paris: 55 published entries" aria-hidden="true"></i>
+    <i style="--x: 54.01%; --y: 22.18%" data-city="Prague" title="Prague: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 96.85%; --y: 75.02%" data-city="Queenstown" title="Queenstown: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 53.47%; --y: 26.72%" data-city="Rome" title="Rome: 30 published entries" aria-hidden="true"></i>
+    <i style="--x: 15.99%; --y: 29.01%" data-city="San Francisco" title="San Francisco: 13 published entries" aria-hidden="true"></i>
+    <i style="--x: 30.37%; --y: 68.59%" data-city="Santiago" title="Santiago: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 85.27%; --y: 29.13%" data-city="Seoul" title="Seoul: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 83.74%; --y: 32.65%" data-city="Shanghai" title="Shanghai: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 78.84%; --y: 49.25%" data-city="Singapore" title="Singapore: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 55.02%; --y: 17.04%" data-city="Stockholm" title="Stockholm: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 92.00%; --y: 68.82%" data-city="Sydney" title="Sydney: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 83.76%; --y: 36.08%" data-city="Taipei" title="Taipei: 10 published entries" aria-hidden="true"></i>
+    <i style="--x: 62.45%; --y: 26.84%" data-city="Tbilisi" title="Tbilisi: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 55.51%; --y: 27.04%" data-city="Tirana" title="Tirana: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 88.79%; --y: 30.18%" data-city="Tokyo" title="Tokyo: 40 published entries" aria-hidden="true"></i>
+    <i style="--x: 27.95%; --y: 25.75%" data-city="Toronto" title="Toronto: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 49.90%; --y: 28.07%" data-city="Valencia" title="Valencia: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 53.42%; --y: 24.76%" data-city="Venice" title="Venice: 9 published entries" aria-hidden="true"></i>
+    <i style="--x: 54.55%; --y: 23.22%" data-city="Vienna" title="Vienna: 10 published entries" aria-hidden="true"></i>
+    <i style="--x: 55.84%; --y: 20.98%" data-city="Warsaw" title="Warsaw: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 98.55%; --y: 72.94%" data-city="Wellington" title="Wellington: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 60.89%; --y: 53.43%" data-city="Zanzibar" title="Zanzibar: 8 published entries" aria-hidden="true"></i>
+    <i style="--x: 52.37%; --y: 23.68%" data-city="Zurich" title="Zurich: 9 published entries" aria-hidden="true"></i>
   </div>
   <header>
-    <span>August 2026 snapshot</span>
-    <strong class="rguide-impact-title">47 cities.<br />One way to explore.</strong>
-    <p>A working platform, built around the same relationship between guides and places.</p>
+    <span>September 2026 snapshot</span>
+    <h3 class="rguide-impact-title">Data driven exploration</h3>
+    <p>Published guides now cover 78 cities. Behind each recommendation is a shared record that keeps its details connected to the wider guide.</p>
   </header>
   <div class="rguide-impact-data">
-    <div><strong data-rguide-count="749">749</strong><span>Published entries</span></div>
-    <div><strong data-rguide-count="5979">5,979</strong><span>Guide stops</span></div>
-    <div><strong data-rguide-count="4950">4,950</strong><span>Shared venue records</span></div>
-    <div><strong data-rguide-count="11362">11,362</strong><span>Links to sources</span></div>
-    <div><strong data-rguide-count="24813">24,813</strong><span>Hours records</span></div>
-    <div><strong data-rguide-count="7364">7,364</strong><span>Translated records</span></div>
+    <div><strong>1,011</strong><span>Published entries</span></div>
+    <div><strong>8,545</strong><span>Published guide stops</span></div>
+    <div><strong>7,486</strong><span>Shared venue records</span></div>
+    <div><strong>15,020</strong><span>Links to sources</span></div>
+    <div><strong>37,623</strong><span>Hours records</span></div>
+    <div><strong>9,774</strong><span>Translated records</span></div>
   </div>
-  <footer><span aria-hidden="true"></span><b>Production data · August 11, 2026</b><small>Map: <a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_world_map_without_borders.svg">Ebrahim / Natural Earth · CC BY-SA 4.0</a></small></footer>
+  <footer><span aria-hidden="true"></span><b>Production database · September 19, 2026</b><small>Map: <a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_world_map_without_borders.svg">Ebrahim / Natural Earth · CC BY-SA 4.0</a></small></footer>
 </section>
 <section class="rguide-timeline" data-rguide-timeline aria-label="Interactive RGuide product evolution">
   <header>
@@ -575,12 +600,38 @@ deliverables: ["A working travel platform"]
     </dl>
   </header>
   <div class="rguide-traffic-stage">
-    <canvas
-      data-rguide-traffic-canvas
-      role="img"
-      aria-label="Cumulative pageviews rise from zero on April 27 to 7,912 on August 10, 2026."
-    ></canvas>
-    <output class="rguide-traffic-tooltip" data-rguide-traffic-tooltip hidden></output>
+    <div class="rguide-traffic-plot">
+      <div class="rguide-traffic-axis" aria-hidden="true"><span>8,000</span><span>6,000</span><span>4,000</span><span>2,000</span><span>0</span></div>
+      <svg class="rguide-traffic-svg" viewBox="0 0 1000 300" preserveAspectRatio="none" role="img" aria-labelledby="rg-chart-title rg-chart-description">
+        <title id="rg-chart-title">Recorded pageviews</title>
+        <desc id="rg-chart-description">Cumulative pageviews rise from zero on April 27 to 7,912 on August 10, 2026. This is the latest saved analytics snapshot, not a projection.</desc>
+        <defs><linearGradient id="rg-chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f03a22" stop-opacity=".2" /><stop offset="100%" stop-color="#f03a22" stop-opacity="0" /></linearGradient></defs>
+        <path class="rg-chart-grid" d="M 0 0 H 1000" />
+        <path class="rg-chart-grid" d="M 0 75 H 1000" />
+        <path class="rg-chart-grid" d="M 0 150 H 1000" />
+        <path class="rg-chart-grid" d="M 0 225 H 1000" />
+        <path class="rg-chart-grid" d="M 0 300 H 1000" />
+        <path d="M 0.00 300.00 L 66.67 255.90 L 133.33 209.25 L 200.00 198.64 L 266.67 155.17 L 333.33 134.96 L 400.00 125.32 L 466.67 108.97 L 533.33 92.21 L 600.00 77.44 L 666.67 71.14 L 733.33 42.34 L 800.00 24.00 L 866.67 20.44 L 933.33 10.88 L 1000.00 3.30 L 1000 300 L 0 300 Z" fill="url(#rg-chart-fill)" />
+        <path class="rg-chart-line" d="M 0.00 300.00 L 66.67 255.90 L 133.33 209.25 L 200.00 198.64 L 266.67 155.17 L 333.33 134.96 L 400.00 125.32 L 466.67 108.97 L 533.33 92.21 L 600.00 77.44 L 666.67 71.14 L 733.33 42.34 L 800.00 24.00 L 866.67 20.44 L 933.33 10.88 L 1000.00 3.30" />
+        <path class="rg-chart-dot" d="M 0.00 300.00 h 0.01" tabindex="0" role="img" aria-label="Apr 27: 0 pageviews"><title>Apr 27: 0 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 66.67 255.90 h 0.01" tabindex="0" role="img" aria-label="May 04: 1,176 pageviews"><title>May 04: 1,176 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 133.33 209.25 h 0.01" tabindex="0" role="img" aria-label="May 11: 2,420 pageviews"><title>May 11: 2,420 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 200.00 198.64 h 0.01" tabindex="0" role="img" aria-label="May 18: 2,703 pageviews"><title>May 18: 2,703 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 266.67 155.17 h 0.01" tabindex="0" role="img" aria-label="May 25: 3,862 pageviews"><title>May 25: 3,862 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 333.33 134.96 h 0.01" tabindex="0" role="img" aria-label="Jun 01: 4,401 pageviews"><title>Jun 01: 4,401 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 400.00 125.32 h 0.01" tabindex="0" role="img" aria-label="Jun 08: 4,658 pageviews"><title>Jun 08: 4,658 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 466.67 108.97 h 0.01" tabindex="0" role="img" aria-label="Jun 15: 5,094 pageviews"><title>Jun 15: 5,094 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 533.33 92.21 h 0.01" tabindex="0" role="img" aria-label="Jun 22: 5,541 pageviews"><title>Jun 22: 5,541 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 600.00 77.44 h 0.01" tabindex="0" role="img" aria-label="Jun 29: 5,935 pageviews"><title>Jun 29: 5,935 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 666.67 71.14 h 0.01" tabindex="0" role="img" aria-label="Jul 06: 6,103 pageviews"><title>Jul 06: 6,103 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 733.33 42.34 h 0.01" tabindex="0" role="img" aria-label="Jul 13: 6,871 pageviews"><title>Jul 13: 6,871 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 800.00 24.00 h 0.01" tabindex="0" role="img" aria-label="Jul 20: 7,360 pageviews"><title>Jul 20: 7,360 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 866.67 20.44 h 0.01" tabindex="0" role="img" aria-label="Jul 27: 7,455 pageviews"><title>Jul 27: 7,455 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 933.33 10.88 h 0.01" tabindex="0" role="img" aria-label="Aug 03: 7,710 pageviews"><title>Aug 03: 7,710 cumulative pageviews</title></path>
+        <path class="rg-chart-dot" d="M 1000.00 3.30 h 0.01" tabindex="0" role="img" aria-label="Aug 10: 7,912 pageviews"><title>Aug 10: 7,912 cumulative pageviews</title></path>
+      </svg>
+      <div class="rguide-traffic-dates" aria-hidden="true"><span>Apr 27, 2026</span><span>Jun 15</span><span>Aug 10, 2026</span></div>
+    </div>
   </div>
   <figcaption>
     <span class="rguide-traffic-key"><i aria-hidden="true"></i> Recorded pageviews</span>
