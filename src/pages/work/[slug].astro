@@ -33,7 +33,9 @@ const isRGuide = slug === "rguide";
         <p class="rg-cover-title">{project.description}</p>
         <p class="rg-cover-credit">Conceived, designed and built by Brian Rodriguez.</p>
       </div>
-      <img class="rg-cover-image" src={project.hero ?? project.cover} alt="RGuide on a desktop screen, with city guides beside an interactive map" width="2800" height="1920" fetchpriority="high" decoding="async" />
+      <div class="rg-cover-media">
+        <img class="rg-cover-image" src={project.hero ?? project.cover} alt="RGuide on a desktop screen, with city guides beside an interactive map" width="2800" height="1920" fetchpriority="high" decoding="async" />
+      </div>
     </header>
   ) : (
   <header class="case-hero">

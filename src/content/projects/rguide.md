@@ -48,6 +48,7 @@ deliverables: ["A working travel platform"]
 <header class="rg-chapter" aria-labelledby="the-experience">
   <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">02</span>Design the experience</p><h2 id="the-experience">Keep the place in view.</h2><p class="rg-chapter-lead">The central decision was to let the guide and the map share the screen. People can compare recommendations, open a guide, and look at an individual stop while keeping a sense of the city around them.</p></div>
 </header>
+<div class="rg-experience-body">
 <section class="rguide-design-system" aria-labelledby="rguide-design-system-title">
   <header class="rguide-ds-intro">
     <div>
@@ -229,6 +230,7 @@ deliverables: ["A working travel platform"]
   <article><span class="rg-eyebrow">Smaller screens</span><h3>The same journey, less space</h3><p>On mobile, panels and sheets reorganize the content around the map. The relationship between a guide and its places stays the same.</p></article>
   <article><span class="rg-eyebrow">Visual language</span><h3>Recognition before decoration</h3><p>A category keeps its color from the guide card to the map marker. Repeated controls make familiar actions easier to find.</p></article>
 </div>
+</div>
 
 <header class="rg-chapter" aria-labelledby="the-content">
   <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">03</span>Design the content</p><h2 id="the-content">One place. More than one story.</h2><p class="rg-chapter-lead">A restaurant might belong in several guides, each for a different reason. Its address and opening hours should stay consistent, while each guide can explain what makes it relevant.</p></div>
@@ -241,9 +243,7 @@ deliverables: ["A working travel platform"]
   <span class="rg-eyebrow">A practical example</span>
   <p>The same restaurant can appear in a neighborhood walk and a guide to eating after midnight. Its hours come from one record. The reason to visit belongs to each guide.</p>
 </div>
-<details class="rg-deep-dive">
-  <summary><span>See how the records connect</span><small>Content model</small></summary>
-  <figure class="rguide-schema" data-rguide-schema aria-labelledby="rguide-schema-title">
+<figure class="rguide-schema" data-rguide-schema aria-labelledby="rguide-schema-title">
   <header>
     <span id="rguide-schema-title">Inside the content model</span>
     <p>Shared place records connect to individual guides. Prepared copies bring those relationships to the screen.</p>
@@ -366,14 +366,13 @@ deliverables: ["A working travel platform"]
     <span><i></i>Prepared content</span>
   </figcaption>
 </figure>
-</details>
 <div class="rg-brief rg-brief--filters">
   <div class="rg-prose"><h3>Filters that reflect the choice</h3><p>Choosing a place to stay raises different questions from choosing a restaurant. I gave each category its own fields so the filters could reflect those differences.</p><p>For a stay, that might mean the type of lodging and its atmosphere. For a restaurant, it might mean the cuisine and when it serves food. The way the information is stored determines what the interface can help someone find.</p></div>
   <aside class="rg-design-note"><span class="rg-eyebrow">A useful question</span><p>Where can I stay that feels social without being a party hostel?</p></aside>
 </div>
 
 <header class="rg-chapter" aria-labelledby="the-publishing">
-  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">04</span>Design the publishing process</p><h2 id="the-publishing">Make good content repeatable.</h2><p class="rg-chapter-lead">As the catalog grew, writing a guide became only part of the work. I built a publishing process that connects the research to the right places and checks the result before it reaches the site.</p></div>
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">04</span>Design the publishing process</p><h2 id="the-publishing">Make good content repeatable.</h2><p class="rg-chapter-lead">As the catalog grew, writing a guide became only part of the work. I built a publishing process that connects the research to the right places and checks the result before it reaches the site. I applied the same checks when updating venue hours and preparing translations.</p></div>
 </header>
 <div class="rguide-pipeline" aria-label="The six stages of publishing a guide">
   <div><span>01</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">travel_explore</i><strong>Research</strong><p>Start with a useful question and find sources that support the recommendations.</p></div>
@@ -383,7 +382,6 @@ deliverables: ["A working travel platform"]
   <div><span>05</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">publish</i><strong>Publish</strong><p>Prepare the guide for the interface and refresh the saved version.</p></div>
   <div><span>06</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">verified</i><strong>Verify</strong><p>Check the published page, including its sources and the places shown on the map.</p></div>
 </div>
-<p class="rg-editorial-note">I used the same approach for recurring work such as updating venue hours and preparing translations. Each process has a defined input and a result that can be checked.</p>
 <section class="rguide-resilience" aria-labelledby="rguide-resilience-title">
   <header>
     <span>When a service slows down</span>
@@ -432,7 +430,7 @@ deliverables: ["A working travel platform"]
   <article><span>Fit the image to the screen</span><p>The media process creates smaller versions for cards, so a small image does not require a large download.</p></article>
 </div>
 <details class="rg-deep-dive">
-  <summary><span>Inside the build</span><small>Technical decisions</small></summary>
+  <summary><span><strong>Inside the build</strong><small class="rg-disclosure-closed">View the technical decisions</small><small class="rg-disclosure-open">Close the technical decisions</small></span></summary>
   <div class="rguide-system" aria-label="How the platform is built">
     <details open><summary><span>01</span><strong>The interface</strong><small>Next.js</small></summary><div><p>I used Next.js to connect page routes with the map experience. Selecting a guide updates the visible content and its address together. Local interface state keeps those interactions responsive.</p></div></details>
     <details><summary><span>02</span><strong>The records</strong><small>Supabase and PostGIS</small></summary><div><p>Supabase stores the shared content in Postgres. PostGIS connects places to their coordinates and geographic boundaries. Access policies allow public reading while controlling who can make changes.</p></div></details>

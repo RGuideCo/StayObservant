@@ -36,7 +36,8 @@
   letter-spacing: -0.035em;
 }
 .rg-cover-credit { max-width: 28ch; margin-top: 1.75rem; color: #b7b4ac; font-size: 0.86rem; line-height: 1.6; }
-.rg-cover-image { width: 100%; height: 100%; min-height: 0; max-height: 24.5rem; object-fit: cover; object-position: 49% center; }
+.rg-cover-media { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.rg-cover-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 49% center; }
 
 .case-body--rguide .case-page { max-width: 92rem; padding-top: 0; }
 .case-body--rguide .project-shell { display: block; }
@@ -68,10 +69,12 @@
 .rg-chapter-index a:hover { background: #e6e0d4; }
 .rguide-case :is(a, summary, button):focus-visible { outline: 2px solid var(--signal); outline-offset: 5px; }
 
-.rguide-case .rg-chapter { display: block; margin: clamp(4rem, 8vw, 7rem) 0 2.25rem; padding-top: 1.6rem; border-top: var(--rule); }
+.rguide-case .rg-chapter { display: block; margin: clamp(3.5rem, 6vw, 5rem) 0 2rem; padding-top: 1.6rem; border-top: var(--rule); }
+.rguide-case .rg-chapter-index + .rg-chapter { margin-top: 3rem; padding-top: 0; border-top: 0; }
 .rguide-case .rg-chapter .rg-eyebrow { display: flex; align-items: baseline; gap: 0.75rem; }
 .rg-chapter-number { font: inherit; letter-spacing: inherit; color: inherit; }
 .rguide-case .rg-chapter h2 { max-width: 21ch; margin: 0.7rem 0 1rem; padding: 0; border: 0; font-size: clamp(2.4rem, 4.7vw, 4.5rem); line-height: 1.03; letter-spacing: -0.05em; text-transform: none; scroll-margin-top: 2rem; }
+.rguide-case .rg-chapter #the-platform { max-width: none; font-size: clamp(2.25rem, 4.15vw, 4.1rem); }
 .rguide-case .rg-chapter-lead { max-width: 64ch; margin: 0; font-size: 1.1rem; line-height: 1.7; color: #59564e; }
 .rguide-case .rg-brief { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr); gap: clamp(2rem, 5vw, 5rem); margin-block: 2.5rem; align-items: start; }
 .rguide-case .rg-prose h3, .rguide-case .rg-decision-strip h3, .rguide-case .rg-comparison h3, .rguide-case .rg-growth h3 { margin: 0 0 1rem; padding: 0; font-size: 1.55rem; line-height: 1.2; letter-spacing: -0.035em; border: 0; }
@@ -84,13 +87,17 @@
 .rguide-case .rg-decision-strip h3 { margin-top: 1rem; }
 .rguide-case .rg-decision-strip p { font-size: 0.95rem; line-height: 1.65; color: #59564e; margin: 0; }
 
-.rguide-case .rguide-ds-intro { padding: 1.5rem 0 2rem; border-top: 1px solid #08080826; }
+.rguide-case .rg-experience-body { padding-inline: clamp(1.25rem, 3vw, 3rem); }
+.has-js .rguide-case > .motion-reveal { opacity: 1; transform: none; filter: none; transition: none; }
+.rguide-case .rguide-design-system { border-bottom: 0; }
+.rguide-case .rguide-ds-intro { padding: 0 0 1.75rem; border-top: 0; }
 .rguide-case .rguide-ds-intro h3 { white-space: normal; font-size: clamp(1.8rem, 2.8vw, 2.7rem); }
 .rguide-case .rguide-ds-intro > p { max-width: 65ch; font-size: 1rem; line-height: 1.7; }
-.rguide-case .rguide-ds-sheet-header { grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: center; padding: 1rem 0; }
+.project-content.rguide-case .rguide-ds-sheet-header { grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: center; padding: 1rem 0; border-bottom: 0; }
 .rguide-case .rguide-ds-sheet-header :is(h4, small) { grid-column: auto; grid-row: auto; }
 .rguide-case .rguide-ds-sheet-header small { font-size: 0.66rem; text-transform: none; letter-spacing: 0; font-weight: 500; }
-.rguide-case .rguide-ds-product-proof { gap: 2rem; padding: 1rem 0 3rem; }
+.rguide-case .rguide-ds-product-proof { gap: 2rem; padding: 1rem 0 1.5rem; }
+.rguide-case .rg-experience-body .rg-decision-strip { margin-top: 1rem; }
 .rguide-case .rguide-ds-product-view figcaption { padding-top: 0; border-top: 0; }
 .rguide-case .rguide-ds-product-view figcaption small { font-size: 0.72rem; line-height: 1.5; text-transform: none; letter-spacing: 0; font-weight: 400; }
 .rguide-case .rguide-ds-product-zoom { border: var(--rule); box-shadow: 0 0.7rem 1.6rem #08080812; }
@@ -103,33 +110,38 @@
 .rg-comparison > article { padding: clamp(1.5rem, 3vw, 2.5rem); }
 .rg-comparison > article + article { border-left: var(--rule); background: #e7e1d5; }
 .rguide-case .rg-comparison h3 { margin-top: 1.2rem; max-width: 20ch; }
-.rguide-case .rg-example { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; padding: 1.5rem 0; margin: 1rem 0 2rem; border-bottom: 1px solid #08080826; }
+.rguide-case .rg-example { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; padding: 1.5rem 0; margin: 0 0 0.5rem; border-bottom: 0; }
 .rguide-case .rg-example p { max-width: 64ch; font-size: 1rem; margin: 0; line-height: 1.7; }
-.rg-deep-dive { border-top: var(--rule); border-bottom: var(--rule); margin: 2rem 0; }
-.rg-deep-dive > summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; cursor: pointer; list-style: none; padding: 1.25rem 0; font-size: 1.1rem; font-weight: 600; }
+.rg-deep-dive { border: var(--rule); margin: 1.5rem 0 2rem; }
+.rg-deep-dive > summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; cursor: pointer; list-style: none; padding: 1.25rem 1.5rem; background: #e7e1d5; font-size: 1.1rem; font-weight: 600; transition: background 160ms ease; }
+.rg-deep-dive > summary > span { display: grid; gap: 0.3rem; }
 .rg-deep-dive > summary::-webkit-details-marker { display: none; }
-.rg-deep-dive > summary::after { content: "+"; color: var(--signal); font-size: 1.6rem; font-weight: 400; }
+.rg-deep-dive > summary::after { content: "+"; display: grid; place-items: center; flex: 0 0 2.5rem; height: 2.5rem; border-radius: 50%; color: var(--paper); background: var(--ink); font-size: 1.6rem; font-weight: 400; }
 .rg-deep-dive[open] > summary::after { content: "−"; }
-.rg-deep-dive > summary small { margin-left: auto; color: #67635b; font-weight: 400; font-size: 0.78rem; }
-.rg-deep-dive > summary:hover { color: #bd2b18; }
-.rguide-case .rg-deep-dive .rguide-schema { margin: 0 0 1.5rem; }
-.rguide-case .rg-deep-dive .rguide-system { margin: 0 0 1.5rem; }
+.rg-deep-dive > summary small { margin: 0; color: #59564e; font-weight: 400; font-size: 0.8rem; }
+.rg-deep-dive > summary:hover { background: #dbd3c4; }
+.rg-deep-dive:not([open]) .rg-disclosure-open, .rg-deep-dive[open] .rg-disclosure-closed { display: none; }
+.rguide-case .rguide-schema { margin: 0 0 2rem; }
+.rguide-case .rg-deep-dive .rguide-system { margin: 0; border-left: 0; }
+.rguide-case .rg-deep-dive .rguide-system details { border-right: 0; }
+.rguide-case .rg-deep-dive .rguide-system details:last-child { border-bottom: 0; }
+.rguide-case .rguide-system details > div { grid-template-columns: 1fr; }
 .rguide-case .rguide-system details > div p { max-width: 68ch; font-size: 1rem; line-height: 1.7; }
 
 .rguide-case .rguide-pipeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .rguide-case .rguide-pipeline > div { padding: 1.5rem; min-height: 0; }
 .rguide-case .rguide-pipeline > div p { font-size: 0.94rem; line-height: 1.65; }
-.rguide-case .rg-editorial-note { max-width: 70ch; margin: 1.5rem 0 2.5rem; font-size: 1rem; line-height: 1.7; color: #59564e; }
 .rguide-case .rguide-resilience { margin: 2rem 0 0; background: #e7e1d566; }
 .rguide-case .rguide-resilience > header { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; padding: clamp(1.5rem, 3vw, 2.5rem); }
 .rguide-case .rguide-resilience h3 { max-width: none; }
 .rguide-case .rguide-resilience > header > p { max-width: 68ch; margin-top: 0.5rem; font-size: 1rem; line-height: 1.7; }
 .rguide-case .rguide-resilience-paths article { min-height: 0; padding: 1.5rem; }
-.rguide-case .rguide-resilience h4 { max-width: 19ch; margin-top: 1.25rem; }
+.project-content.rguide-case .rguide-resilience h4 { max-width: none; margin-top: 1.25rem; font-size: clamp(1.25rem, 2vw, 1.95rem); }
 .rguide-case .rguide-resilience-paths article > p { font-size: 0.95rem; line-height: 1.7; }
 .rguide-case .rguide-resilience-flow { margin-top: auto; padding-top: 1.75rem; }
 .rguide-case .rguide-resilience > footer > p { font-size: 0.94rem; line-height: 1.7; }
-.rguide-case .rguide-principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rguide-case .rguide-principles { grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 0; }
+.rguide-case .rguide-principles article:nth-last-child(-n+2) { border-bottom: 0; }
 .rguide-case .rguide-principles article p { font-size: 1rem; line-height: 1.7; }
 .rguide-case .rg-growth { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.5fr); gap: clamp(2rem, 5vw, 4rem); margin-top: 3rem; }
 .rguide-case .rg-growth h3 { font-size: 2.2rem; margin: 1rem 0; max-width: 16ch; }
@@ -213,7 +225,7 @@
   .rg-cover h1 { font-size: clamp(4.8rem, 15vw, 7rem); margin-top: 1.5rem; }
   .rg-cover-title { max-width: 21ch; }
   .rg-cover-credit { max-width: none; margin-top: 1.5rem; }
-  .rg-cover-image { aspect-ratio: 2; height: auto; max-height: 18rem; object-fit: cover; }
+  .rg-cover-media { aspect-ratio: 2; max-height: 18rem; }
   .rg-project-facts { grid-template-columns: 1fr; margin-bottom: 2rem; }
   .rg-project-facts > div, .rg-project-facts > div + div { display: grid; grid-template-columns: 6rem 1fr; gap: 0.75rem; border-left: 0; padding: 0.9rem 0; }
   .rg-project-facts > div + div { border-top: 1px solid #08080826; }
@@ -228,18 +240,20 @@
   .rguide-case .rg-chapter { margin-top: 4rem; }
   .rguide-case .rg-chapter h2 { font-size: clamp(2.25rem, 8vw, 3.5rem); max-width: 19ch; scroll-margin-top: 5rem; }
   .rguide-case .rg-chapter-lead { font-size: 1rem; }
+  .rguide-case .rg-experience-body { padding-inline: 0.75rem; }
   .rguide-case .rg-brief, .rguide-case .rg-decision-strip, .rguide-case .rg-growth, .rg-reflection > div { grid-template-columns: 1fr; gap: 1.75rem; }
   .rguide-case .rg-comparison { grid-template-columns: 1fr; }
   .rg-comparison > article + article { border-left: 0; border-top: var(--rule); }
   .rguide-case .rg-example { grid-template-columns: 1fr; }
   .rg-deep-dive > summary { font-size: 1rem; }
-  .rg-deep-dive > summary small { display: none; }
-  .rguide-case .rguide-ds-sheet-header { grid-template-columns: 1fr; gap: 0.6rem; }
+  .rg-deep-dive > summary { padding: 1rem; }
+  .project-content.rguide-case .rguide-ds-sheet-header { grid-template-columns: 1fr; gap: 0.6rem; }
   .rguide-case .rguide-ds-sheet-header small { grid-column: 1; text-align: left; }
   .rguide-case .rguide-ds-theory-key { grid-template-columns: 1fr; }
   .rguide-case .rguide-pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .rguide-case .rguide-pipeline > div { padding: 1rem; }
   .rguide-case .rguide-principles { grid-template-columns: 1fr; }
+  .rguide-case .rguide-principles article:nth-last-child(2) { border-bottom: var(--rule); }
   .rguide-case .rguide-resilience-paths { grid-template-columns: 1fr; }
   .rguide-case .rguide-resilience-flow { flex-direction: column; align-items: stretch; gap: 0.65rem; }
   .rguide-case .rguide-resilience-flow > span { text-align: center; }
