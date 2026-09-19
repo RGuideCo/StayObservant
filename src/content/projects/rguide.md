@@ -580,6 +580,148 @@ deliverables: ["A working travel platform"]
     <small data-rguide-phase-system>Interaction</small>
   </div>
 </section>
+<section class="rguide-analytics" data-rguide-analytics aria-label="RGuide audience data">
+  <div class="rguide-analytics-toolbar" hidden>
+    <p class="rg-eyebrow">Recorded use</p>
+    <div class="rguide-analytics-tabs" role="tablist" aria-label="Choose an audience dataset">
+      <button type="button" id="rguide-search-tab" role="tab" aria-controls="rguide-search-panel" aria-selected="true">Google Search</button>
+      <button type="button" id="rguide-traffic-tab" role="tab" aria-controls="rguide-traffic-panel" aria-selected="false" tabindex="-1">Site traffic</button>
+    </div>
+  </div>
+  <div class="rguide-analytics-panel" id="rguide-search-panel" role="tabpanel" aria-labelledby="rguide-search-tab" tabindex="0">
+<figure class="rguide-traffic rguide-search" aria-labelledby="rguide-search-title">
+  <header>
+    <div>
+      <span>Recent search performance</span>
+      <h3 id="rguide-search-title">People found RGuide through search.</h3>
+      <p>From August 20 to September 16, Google Search brought 356 clicks to RGuide, compared with 90 in the previous 28 days. The chart shows how that discovery developed over the full reporting period.</p>
+    </div>
+    <div class="rguide-analytics-totals">
+      <p class="rguide-analytics-period">June 17 to September 16, 2026</p>
+      <dl>
+        <div><dt>Google Search clicks</dt><dd>494</dd></div>
+        <div><dt>Search impressions</dt><dd>237,348</dd></div>
+      </dl>
+    </div>
+  </header>
+  <div class="rguide-traffic-stage">
+    <div class="rguide-traffic-plot">
+      <div class="rguide-traffic-axis" aria-hidden="true"><span>24</span><span>18</span><span>12</span><span>6</span><span>0</span></div>
+      <svg class="rguide-traffic-svg" viewBox="0 0 1000 300" preserveAspectRatio="none" role="img" aria-labelledby="rg-search-chart-title rg-search-chart-description">
+        <title id="rg-search-chart-title">Daily clicks from Google Search</title>
+        <desc id="rg-search-chart-description">92 daily observations from June 17 to September 16, 2026, totaling 494 clicks. The latest 28 days recorded 356 clicks, compared with 90 in the preceding 28 days. The highest daily count was 22 on September 11.</desc>
+        <defs><linearGradient id="rg-search-chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f03a22" stop-opacity=".16" /><stop offset="100%" stop-color="#f03a22" stop-opacity="0" /></linearGradient></defs>
+        <path class="rg-chart-grid" d="M 0 0 H 1000" />
+        <path class="rg-chart-grid" d="M 0 75 H 1000" />
+        <path class="rg-chart-grid" d="M 0 150 H 1000" />
+        <path class="rg-chart-grid" d="M 0 225 H 1000" />
+        <path class="rg-chart-grid" d="M 0 300 H 1000" />
+        <path d="M 0.00 287.50 L 10.99 275.00 L 21.98 287.50 L 32.97 262.50 L 43.96 287.50 L 54.95 300.00 L 65.93 300.00 L 76.92 300.00 L 87.91 287.50 L 98.90 287.50 L 109.89 300.00 L 120.88 262.50 L 131.87 287.50 L 142.86 300.00 L 153.85 275.00 L 164.84 300.00 L 175.82 300.00 L 186.81 287.50 L 197.80 300.00 L 208.79 300.00 L 219.78 287.50 L 230.77 275.00 L 241.76 262.50 L 252.75 287.50 L 263.74 300.00 L 274.73 287.50 L 285.71 262.50 L 296.70 275.00 L 307.69 300.00 L 318.68 250.00 L 329.67 287.50 L 340.66 262.50 L 351.65 275.00 L 362.64 275.00 L 373.63 275.00 L 384.62 250.00 L 395.60 237.50 L 406.59 237.50 L 417.58 262.50 L 428.57 262.50 L 439.56 275.00 L 450.55 262.50 L 461.54 262.50 L 472.53 187.50 L 483.52 262.50 L 494.51 287.50 L 505.49 275.00 L 516.48 237.50 L 527.47 287.50 L 538.46 275.00 L 549.45 237.50 L 560.44 275.00 L 571.43 237.50 L 582.42 262.50 L 593.41 275.00 L 604.40 262.50 L 615.38 262.50 L 626.37 275.00 L 637.36 262.50 L 648.35 287.50 L 659.34 287.50 L 670.33 262.50 L 681.32 237.50 L 692.31 237.50 L 703.30 125.00 L 714.29 125.00 L 725.27 225.00 L 736.26 212.50 L 747.25 187.50 L 758.24 162.50 L 769.23 187.50 L 780.22 237.50 L 791.21 200.00 L 802.20 187.50 L 813.19 187.50 L 824.18 225.00 L 835.16 125.00 L 846.15 100.00 L 857.14 150.00 L 868.13 125.00 L 879.12 200.00 L 890.11 125.00 L 901.10 112.50 L 912.09 87.50 L 923.08 37.50 L 934.07 125.00 L 945.05 25.00 L 956.04 100.00 L 967.03 125.00 L 978.02 87.50 L 989.01 87.50 L 1000.00 75.00 L 1000 300 L 0 300 Z" fill="url(#rg-search-chart-fill)" />
+        <path class="rg-chart-line" d="M 0.00 287.50 L 10.99 275.00 L 21.98 287.50 L 32.97 262.50 L 43.96 287.50 L 54.95 300.00 L 65.93 300.00 L 76.92 300.00 L 87.91 287.50 L 98.90 287.50 L 109.89 300.00 L 120.88 262.50 L 131.87 287.50 L 142.86 300.00 L 153.85 275.00 L 164.84 300.00 L 175.82 300.00 L 186.81 287.50 L 197.80 300.00 L 208.79 300.00 L 219.78 287.50 L 230.77 275.00 L 241.76 262.50 L 252.75 287.50 L 263.74 300.00 L 274.73 287.50 L 285.71 262.50 L 296.70 275.00 L 307.69 300.00 L 318.68 250.00 L 329.67 287.50 L 340.66 262.50 L 351.65 275.00 L 362.64 275.00 L 373.63 275.00 L 384.62 250.00 L 395.60 237.50 L 406.59 237.50 L 417.58 262.50 L 428.57 262.50 L 439.56 275.00 L 450.55 262.50 L 461.54 262.50 L 472.53 187.50 L 483.52 262.50 L 494.51 287.50 L 505.49 275.00 L 516.48 237.50 L 527.47 287.50 L 538.46 275.00 L 549.45 237.50 L 560.44 275.00 L 571.43 237.50 L 582.42 262.50 L 593.41 275.00 L 604.40 262.50 L 615.38 262.50 L 626.37 275.00 L 637.36 262.50 L 648.35 287.50 L 659.34 287.50 L 670.33 262.50 L 681.32 237.50 L 692.31 237.50 L 703.30 125.00 L 714.29 125.00 L 725.27 225.00 L 736.26 212.50 L 747.25 187.50 L 758.24 162.50 L 769.23 187.50 L 780.22 237.50 L 791.21 200.00 L 802.20 187.50 L 813.19 187.50 L 824.18 225.00 L 835.16 125.00 L 846.15 100.00 L 857.14 150.00 L 868.13 125.00 L 879.12 200.00 L 890.11 125.00 L 901.10 112.50 L 912.09 87.50 L 923.08 37.50 L 934.07 125.00 L 945.05 25.00 L 956.04 100.00 L 967.03 125.00 L 978.02 87.50 L 989.01 87.50 L 1000.00 75.00" />
+        <path class="rg-chart-dot" d="M 0.00 287.50 h 0.01" data-date="2026-06-17" data-clicks="1"><title>2026-06-17: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 10.99 275.00 h 0.01" data-date="2026-06-18" data-clicks="2"><title>2026-06-18: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 21.98 287.50 h 0.01" data-date="2026-06-19" data-clicks="1"><title>2026-06-19: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 32.97 262.50 h 0.01" data-date="2026-06-20" data-clicks="3"><title>2026-06-20: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 43.96 287.50 h 0.01" data-date="2026-06-21" data-clicks="1"><title>2026-06-21: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 54.95 300.00 h 0.01" data-date="2026-06-22" data-clicks="0"><title>2026-06-22: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 65.93 300.00 h 0.01" data-date="2026-06-23" data-clicks="0"><title>2026-06-23: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 76.92 300.00 h 0.01" data-date="2026-06-24" data-clicks="0"><title>2026-06-24: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 87.91 287.50 h 0.01" data-date="2026-06-25" data-clicks="1"><title>2026-06-25: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 98.90 287.50 h 0.01" data-date="2026-06-26" data-clicks="1"><title>2026-06-26: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 109.89 300.00 h 0.01" data-date="2026-06-27" data-clicks="0"><title>2026-06-27: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 120.88 262.50 h 0.01" data-date="2026-06-28" data-clicks="3"><title>2026-06-28: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 131.87 287.50 h 0.01" data-date="2026-06-29" data-clicks="1"><title>2026-06-29: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 142.86 300.00 h 0.01" data-date="2026-06-30" data-clicks="0"><title>2026-06-30: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 153.85 275.00 h 0.01" data-date="2026-07-01" data-clicks="2"><title>2026-07-01: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 164.84 300.00 h 0.01" data-date="2026-07-02" data-clicks="0"><title>2026-07-02: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 175.82 300.00 h 0.01" data-date="2026-07-03" data-clicks="0"><title>2026-07-03: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 186.81 287.50 h 0.01" data-date="2026-07-04" data-clicks="1"><title>2026-07-04: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 197.80 300.00 h 0.01" data-date="2026-07-05" data-clicks="0"><title>2026-07-05: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 208.79 300.00 h 0.01" data-date="2026-07-06" data-clicks="0"><title>2026-07-06: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 219.78 287.50 h 0.01" data-date="2026-07-07" data-clicks="1"><title>2026-07-07: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 230.77 275.00 h 0.01" data-date="2026-07-08" data-clicks="2"><title>2026-07-08: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 241.76 262.50 h 0.01" data-date="2026-07-09" data-clicks="3"><title>2026-07-09: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 252.75 287.50 h 0.01" data-date="2026-07-10" data-clicks="1"><title>2026-07-10: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 263.74 300.00 h 0.01" data-date="2026-07-11" data-clicks="0"><title>2026-07-11: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 274.73 287.50 h 0.01" data-date="2026-07-12" data-clicks="1"><title>2026-07-12: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 285.71 262.50 h 0.01" data-date="2026-07-13" data-clicks="3"><title>2026-07-13: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 296.70 275.00 h 0.01" data-date="2026-07-14" data-clicks="2"><title>2026-07-14: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 307.69 300.00 h 0.01" data-date="2026-07-15" data-clicks="0"><title>2026-07-15: 0 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 318.68 250.00 h 0.01" data-date="2026-07-16" data-clicks="4"><title>2026-07-16: 4 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 329.67 287.50 h 0.01" data-date="2026-07-17" data-clicks="1"><title>2026-07-17: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 340.66 262.50 h 0.01" data-date="2026-07-18" data-clicks="3"><title>2026-07-18: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 351.65 275.00 h 0.01" data-date="2026-07-19" data-clicks="2"><title>2026-07-19: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 362.64 275.00 h 0.01" data-date="2026-07-20" data-clicks="2"><title>2026-07-20: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 373.63 275.00 h 0.01" data-date="2026-07-21" data-clicks="2"><title>2026-07-21: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 384.62 250.00 h 0.01" data-date="2026-07-22" data-clicks="4"><title>2026-07-22: 4 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 395.60 237.50 h 0.01" data-date="2026-07-23" data-clicks="5"><title>2026-07-23: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 406.59 237.50 h 0.01" data-date="2026-07-24" data-clicks="5"><title>2026-07-24: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 417.58 262.50 h 0.01" data-date="2026-07-25" data-clicks="3"><title>2026-07-25: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 428.57 262.50 h 0.01" data-date="2026-07-26" data-clicks="3"><title>2026-07-26: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 439.56 275.00 h 0.01" data-date="2026-07-27" data-clicks="2"><title>2026-07-27: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 450.55 262.50 h 0.01" data-date="2026-07-28" data-clicks="3"><title>2026-07-28: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 461.54 262.50 h 0.01" data-date="2026-07-29" data-clicks="3"><title>2026-07-29: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 472.53 187.50 h 0.01" data-date="2026-07-30" data-clicks="9"><title>2026-07-30: 9 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 483.52 262.50 h 0.01" data-date="2026-07-31" data-clicks="3"><title>2026-07-31: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 494.51 287.50 h 0.01" data-date="2026-08-01" data-clicks="1"><title>2026-08-01: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 505.49 275.00 h 0.01" data-date="2026-08-02" data-clicks="2"><title>2026-08-02: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 516.48 237.50 h 0.01" data-date="2026-08-03" data-clicks="5"><title>2026-08-03: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 527.47 287.50 h 0.01" data-date="2026-08-04" data-clicks="1"><title>2026-08-04: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 538.46 275.00 h 0.01" data-date="2026-08-05" data-clicks="2"><title>2026-08-05: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 549.45 237.50 h 0.01" data-date="2026-08-06" data-clicks="5"><title>2026-08-06: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 560.44 275.00 h 0.01" data-date="2026-08-07" data-clicks="2"><title>2026-08-07: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 571.43 237.50 h 0.01" data-date="2026-08-08" data-clicks="5"><title>2026-08-08: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 582.42 262.50 h 0.01" data-date="2026-08-09" data-clicks="3"><title>2026-08-09: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 593.41 275.00 h 0.01" data-date="2026-08-10" data-clicks="2"><title>2026-08-10: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 604.40 262.50 h 0.01" data-date="2026-08-11" data-clicks="3"><title>2026-08-11: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 615.38 262.50 h 0.01" data-date="2026-08-12" data-clicks="3"><title>2026-08-12: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 626.37 275.00 h 0.01" data-date="2026-08-13" data-clicks="2"><title>2026-08-13: 2 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 637.36 262.50 h 0.01" data-date="2026-08-14" data-clicks="3"><title>2026-08-14: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 648.35 287.50 h 0.01" data-date="2026-08-15" data-clicks="1"><title>2026-08-15: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 659.34 287.50 h 0.01" data-date="2026-08-16" data-clicks="1"><title>2026-08-16: 1 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 670.33 262.50 h 0.01" data-date="2026-08-17" data-clicks="3"><title>2026-08-17: 3 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 681.32 237.50 h 0.01" data-date="2026-08-18" data-clicks="5"><title>2026-08-18: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 692.31 237.50 h 0.01" data-date="2026-08-19" data-clicks="5"><title>2026-08-19: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 703.30 125.00 h 0.01" data-date="2026-08-20" data-clicks="14"><title>2026-08-20: 14 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 714.29 125.00 h 0.01" data-date="2026-08-21" data-clicks="14"><title>2026-08-21: 14 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 725.27 225.00 h 0.01" data-date="2026-08-22" data-clicks="6"><title>2026-08-22: 6 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 736.26 212.50 h 0.01" data-date="2026-08-23" data-clicks="7"><title>2026-08-23: 7 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 747.25 187.50 h 0.01" data-date="2026-08-24" data-clicks="9"><title>2026-08-24: 9 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 758.24 162.50 h 0.01" data-date="2026-08-25" data-clicks="11"><title>2026-08-25: 11 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 769.23 187.50 h 0.01" data-date="2026-08-26" data-clicks="9"><title>2026-08-26: 9 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 780.22 237.50 h 0.01" data-date="2026-08-27" data-clicks="5"><title>2026-08-27: 5 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 791.21 200.00 h 0.01" data-date="2026-08-28" data-clicks="8"><title>2026-08-28: 8 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 802.20 187.50 h 0.01" data-date="2026-08-29" data-clicks="9"><title>2026-08-29: 9 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 813.19 187.50 h 0.01" data-date="2026-08-30" data-clicks="9"><title>2026-08-30: 9 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 824.18 225.00 h 0.01" data-date="2026-08-31" data-clicks="6"><title>2026-08-31: 6 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 835.16 125.00 h 0.01" data-date="2026-09-01" data-clicks="14"><title>2026-09-01: 14 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 846.15 100.00 h 0.01" data-date="2026-09-02" data-clicks="16"><title>2026-09-02: 16 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 857.14 150.00 h 0.01" data-date="2026-09-03" data-clicks="12"><title>2026-09-03: 12 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 868.13 125.00 h 0.01" data-date="2026-09-04" data-clicks="14"><title>2026-09-04: 14 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 879.12 200.00 h 0.01" data-date="2026-09-05" data-clicks="8"><title>2026-09-05: 8 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 890.11 125.00 h 0.01" data-date="2026-09-06" data-clicks="14"><title>2026-09-06: 14 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 901.10 112.50 h 0.01" data-date="2026-09-07" data-clicks="15"><title>2026-09-07: 15 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 912.09 87.50 h 0.01" data-date="2026-09-08" data-clicks="17"><title>2026-09-08: 17 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 923.08 37.50 h 0.01" data-date="2026-09-09" data-clicks="21"><title>2026-09-09: 21 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 934.07 125.00 h 0.01" data-date="2026-09-10" data-clicks="14"><title>2026-09-10: 14 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 945.05 25.00 h 0.01" data-date="2026-09-11" data-clicks="22"><title>2026-09-11: 22 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 956.04 100.00 h 0.01" data-date="2026-09-12" data-clicks="16"><title>2026-09-12: 16 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 967.03 125.00 h 0.01" data-date="2026-09-13" data-clicks="14"><title>2026-09-13: 14 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 978.02 87.50 h 0.01" data-date="2026-09-14" data-clicks="17"><title>2026-09-14: 17 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 989.01 87.50 h 0.01" data-date="2026-09-15" data-clicks="17"><title>2026-09-15: 17 Google Search clicks</title></path>
+        <path class="rg-chart-dot" d="M 1000.00 75.00 h 0.01" data-date="2026-09-16" data-clicks="18"><title>2026-09-16: 18 Google Search clicks</title></path>
+      </svg>
+      <div class="rguide-traffic-dates" aria-hidden="true"><span>Jun 17, 2026</span><span>Aug 02</span><span>Sep 16, 2026</span></div>
+    </div>
+    <p class="rguide-analytics-note">Impressions count appearances in Google Search results. Clicks count interactions with those results, not unique visitors.</p>
+  </div>
+  <figcaption>
+    <span class="rguide-traffic-key"><i aria-hidden="true"></i> Daily Google Search clicks</span>
+    <span>Google Search Console. June 17 to September 16, 2026. Exported September 19.</span>
+  </figcaption>
+</figure>
+  </div>
+  <div class="rguide-analytics-panel" id="rguide-traffic-panel" role="tabpanel" aria-labelledby="rguide-traffic-tab" tabindex="0">
 <figure
   class="rguide-traffic"
   data-rguide-traffic
@@ -590,14 +732,17 @@ deliverables: ["A working travel platform"]
 >
   <header>
     <div>
-      <span>Recorded use</span>
+      <span>Site traffic during the initial build</span>
       <h3 id="rguide-traffic-title">People began using it</h3>
       <p>The saved analytics show 7,912 pageviews and 1,115 unique visitors during the initial build. These figures describe early use, not whether every recommendation helped someone make a better decision.</p>
     </div>
-    <dl>
-      <div><dt>Observed pageviews</dt><dd data-rguide-count="7912">7,912</dd></div>
-      <div><dt>Unique visitors</dt><dd data-rguide-count="1115">1,115</dd></div>
-    </dl>
+    <div class="rguide-analytics-totals">
+      <p class="rguide-analytics-period">April 27 to August 10, 2026</p>
+      <dl>
+        <div><dt>Observed pageviews</dt><dd>7,912</dd></div>
+        <div><dt>Unique visitors</dt><dd>1,115</dd></div>
+      </dl>
+    </div>
   </header>
   <div class="rguide-traffic-stage">
     <div class="rguide-traffic-plot">
@@ -632,16 +777,26 @@ deliverables: ["A working travel platform"]
       </svg>
       <div class="rguide-traffic-dates" aria-hidden="true"><span>Apr 27, 2026</span><span>Jun 15</span><span>Aug 10, 2026</span></div>
     </div>
+    <p class="rguide-analytics-note">The line shows cumulative pageviews. Unique visitors are reported separately for the same period.</p>
   </div>
   <figcaption>
     <span class="rguide-traffic-key"><i aria-hidden="true"></i> Recorded pageviews</span>
     <span>Source: saved Vercel Web Analytics snapshot, April to August 2026</span>
   </figcaption>
 </figure>
+  </div>
+</section>
 <div class="rg-reflection">
   <p class="rg-eyebrow">What I took from the project</p>
   <h3>The experience depends on what sits behind it.</h3>
-  <div><p>Building RGuide made one thing clear to me: the interface cannot do its job alone. A filter is only useful if the information behind it supports the choice. A guide is only dependable if its details can be maintained.</p><p>The most valuable work was getting those decisions to support each other. It gave me a platform I could keep developing, with a clear relationship between what someone sees and how it is managed.</p></div>
+  <div>
+    <ul>
+      <li>Building RGuide made one thing clear to me: the interface cannot do its job alone.</li>
+      <li>A filter is only useful if the information behind it supports the choice.</li>
+      <li>A guide is only dependable if its details can be maintained.</li>
+    </ul>
+    <p>The most valuable work was getting those decisions to support each other. It gave me a platform I could keep developing, with a clear relationship between what someone sees and how it is managed.</p>
+  </div>
 </div>
 <section class="rguide-closing-film" aria-labelledby="rguide-closing-film-title">
   <header>

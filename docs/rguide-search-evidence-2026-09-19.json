@@ -1,0 +1,504 @@
+{
+  "source": "Google Search Console Performance on Search export supplied by the site owner",
+  "archive": "rguide.co-Performance-on-Search-2026-09-19.zip",
+  "exportDate": "2026-09-19",
+  "filters": {
+    "searchType": "Web",
+    "date": "Last 3 months"
+  },
+  "reportingPeriod": {
+    "from": "2026-06-17",
+    "to": "2026-09-16",
+    "days": 92
+  },
+  "totals": {
+    "clicks": 494,
+    "impressions": 237348,
+    "ctrPercent": 0.2081332052513609
+  },
+  "comparison": {
+    "latest28Days": {
+      "from": "2026-08-20",
+      "to": "2026-09-16",
+      "days": 28,
+      "clicks": 356,
+      "impressions": 101780,
+      "ctr": 0.34977402240125766
+    },
+    "preceding28Days": {
+      "from": "2026-07-23",
+      "to": "2026-08-19",
+      "days": 28,
+      "clicks": 90,
+      "impressions": 61514,
+      "ctr": 0.1463081574926033
+    }
+  },
+  "method": "Totals are summed from Chart.csv. CTR is total clicks divided by total impressions. Comparisons use two consecutive non-overlapping 28-day periods. The chart shows each daily click count on a zero-based scale. Search clicks are not pageviews or unique visitors. Device totals independently reconcile to the daily totals.",
+  "deviceTotals": {
+    "clicks": 494,
+    "impressions": 237348
+  },
+  "daily": [
+    {
+      "date": "2026-06-17",
+      "clicks": 1,
+      "impressions": 1601
+    },
+    {
+      "date": "2026-06-18",
+      "clicks": 2,
+      "impressions": 1623
+    },
+    {
+      "date": "2026-06-19",
+      "clicks": 1,
+      "impressions": 1846
+    },
+    {
+      "date": "2026-06-20",
+      "clicks": 3,
+      "impressions": 2354
+    },
+    {
+      "date": "2026-06-21",
+      "clicks": 1,
+      "impressions": 2066
+    },
+    {
+      "date": "2026-06-22",
+      "clicks": 0,
+      "impressions": 1861
+    },
+    {
+      "date": "2026-06-23",
+      "clicks": 0,
+      "impressions": 1784
+    },
+    {
+      "date": "2026-06-24",
+      "clicks": 0,
+      "impressions": 1430
+    },
+    {
+      "date": "2026-06-25",
+      "clicks": 1,
+      "impressions": 1979
+    },
+    {
+      "date": "2026-06-26",
+      "clicks": 1,
+      "impressions": 1571
+    },
+    {
+      "date": "2026-06-27",
+      "clicks": 0,
+      "impressions": 1875
+    },
+    {
+      "date": "2026-06-28",
+      "clicks": 3,
+      "impressions": 2208
+    },
+    {
+      "date": "2026-06-29",
+      "clicks": 1,
+      "impressions": 1937
+    },
+    {
+      "date": "2026-06-30",
+      "clicks": 0,
+      "impressions": 2370
+    },
+    {
+      "date": "2026-07-01",
+      "clicks": 2,
+      "impressions": 2063
+    },
+    {
+      "date": "2026-07-02",
+      "clicks": 0,
+      "impressions": 1988
+    },
+    {
+      "date": "2026-07-03",
+      "clicks": 0,
+      "impressions": 1760
+    },
+    {
+      "date": "2026-07-04",
+      "clicks": 1,
+      "impressions": 1827
+    },
+    {
+      "date": "2026-07-05",
+      "clicks": 0,
+      "impressions": 2130
+    },
+    {
+      "date": "2026-07-06",
+      "clicks": 0,
+      "impressions": 2321
+    },
+    {
+      "date": "2026-07-07",
+      "clicks": 1,
+      "impressions": 2023
+    },
+    {
+      "date": "2026-07-08",
+      "clicks": 2,
+      "impressions": 3423
+    },
+    {
+      "date": "2026-07-09",
+      "clicks": 3,
+      "impressions": 2456
+    },
+    {
+      "date": "2026-07-10",
+      "clicks": 1,
+      "impressions": 2262
+    },
+    {
+      "date": "2026-07-11",
+      "clicks": 0,
+      "impressions": 3661
+    },
+    {
+      "date": "2026-07-12",
+      "clicks": 1,
+      "impressions": 2819
+    },
+    {
+      "date": "2026-07-13",
+      "clicks": 3,
+      "impressions": 2332
+    },
+    {
+      "date": "2026-07-14",
+      "clicks": 2,
+      "impressions": 2046
+    },
+    {
+      "date": "2026-07-15",
+      "clicks": 0,
+      "impressions": 1573
+    },
+    {
+      "date": "2026-07-16",
+      "clicks": 4,
+      "impressions": 1874
+    },
+    {
+      "date": "2026-07-17",
+      "clicks": 1,
+      "impressions": 1710
+    },
+    {
+      "date": "2026-07-18",
+      "clicks": 3,
+      "impressions": 1659
+    },
+    {
+      "date": "2026-07-19",
+      "clicks": 2,
+      "impressions": 1615
+    },
+    {
+      "date": "2026-07-20",
+      "clicks": 2,
+      "impressions": 1772
+    },
+    {
+      "date": "2026-07-21",
+      "clicks": 2,
+      "impressions": 1648
+    },
+    {
+      "date": "2026-07-22",
+      "clicks": 4,
+      "impressions": 2587
+    },
+    {
+      "date": "2026-07-23",
+      "clicks": 5,
+      "impressions": 2237
+    },
+    {
+      "date": "2026-07-24",
+      "clicks": 5,
+      "impressions": 2064
+    },
+    {
+      "date": "2026-07-25",
+      "clicks": 3,
+      "impressions": 1673
+    },
+    {
+      "date": "2026-07-26",
+      "clicks": 3,
+      "impressions": 1902
+    },
+    {
+      "date": "2026-07-27",
+      "clicks": 2,
+      "impressions": 2209
+    },
+    {
+      "date": "2026-07-28",
+      "clicks": 3,
+      "impressions": 2156
+    },
+    {
+      "date": "2026-07-29",
+      "clicks": 3,
+      "impressions": 2003
+    },
+    {
+      "date": "2026-07-30",
+      "clicks": 9,
+      "impressions": 2145
+    },
+    {
+      "date": "2026-07-31",
+      "clicks": 3,
+      "impressions": 1863
+    },
+    {
+      "date": "2026-08-01",
+      "clicks": 1,
+      "impressions": 2148
+    },
+    {
+      "date": "2026-08-02",
+      "clicks": 2,
+      "impressions": 3406
+    },
+    {
+      "date": "2026-08-03",
+      "clicks": 5,
+      "impressions": 1720
+    },
+    {
+      "date": "2026-08-04",
+      "clicks": 1,
+      "impressions": 1905
+    },
+    {
+      "date": "2026-08-05",
+      "clicks": 2,
+      "impressions": 2078
+    },
+    {
+      "date": "2026-08-06",
+      "clicks": 5,
+      "impressions": 2195
+    },
+    {
+      "date": "2026-08-07",
+      "clicks": 2,
+      "impressions": 1831
+    },
+    {
+      "date": "2026-08-08",
+      "clicks": 5,
+      "impressions": 2025
+    },
+    {
+      "date": "2026-08-09",
+      "clicks": 3,
+      "impressions": 2517
+    },
+    {
+      "date": "2026-08-10",
+      "clicks": 2,
+      "impressions": 2160
+    },
+    {
+      "date": "2026-08-11",
+      "clicks": 3,
+      "impressions": 2152
+    },
+    {
+      "date": "2026-08-12",
+      "clicks": 3,
+      "impressions": 2465
+    },
+    {
+      "date": "2026-08-13",
+      "clicks": 2,
+      "impressions": 2455
+    },
+    {
+      "date": "2026-08-14",
+      "clicks": 3,
+      "impressions": 1854
+    },
+    {
+      "date": "2026-08-15",
+      "clicks": 1,
+      "impressions": 1988
+    },
+    {
+      "date": "2026-08-16",
+      "clicks": 1,
+      "impressions": 2484
+    },
+    {
+      "date": "2026-08-17",
+      "clicks": 3,
+      "impressions": 2258
+    },
+    {
+      "date": "2026-08-18",
+      "clicks": 5,
+      "impressions": 3309
+    },
+    {
+      "date": "2026-08-19",
+      "clicks": 5,
+      "impressions": 2312
+    },
+    {
+      "date": "2026-08-20",
+      "clicks": 14,
+      "impressions": 2225
+    },
+    {
+      "date": "2026-08-21",
+      "clicks": 14,
+      "impressions": 2051
+    },
+    {
+      "date": "2026-08-22",
+      "clicks": 6,
+      "impressions": 2121
+    },
+    {
+      "date": "2026-08-23",
+      "clicks": 7,
+      "impressions": 2117
+    },
+    {
+      "date": "2026-08-24",
+      "clicks": 9,
+      "impressions": 2131
+    },
+    {
+      "date": "2026-08-25",
+      "clicks": 11,
+      "impressions": 2297
+    },
+    {
+      "date": "2026-08-26",
+      "clicks": 9,
+      "impressions": 2883
+    },
+    {
+      "date": "2026-08-27",
+      "clicks": 5,
+      "impressions": 2840
+    },
+    {
+      "date": "2026-08-28",
+      "clicks": 8,
+      "impressions": 2256
+    },
+    {
+      "date": "2026-08-29",
+      "clicks": 9,
+      "impressions": 2471
+    },
+    {
+      "date": "2026-08-30",
+      "clicks": 9,
+      "impressions": 2651
+    },
+    {
+      "date": "2026-08-31",
+      "clicks": 6,
+      "impressions": 3047
+    },
+    {
+      "date": "2026-09-01",
+      "clicks": 14,
+      "impressions": 3143
+    },
+    {
+      "date": "2026-09-02",
+      "clicks": 16,
+      "impressions": 3496
+    },
+    {
+      "date": "2026-09-03",
+      "clicks": 12,
+      "impressions": 4216
+    },
+    {
+      "date": "2026-09-04",
+      "clicks": 14,
+      "impressions": 4651
+    },
+    {
+      "date": "2026-09-05",
+      "clicks": 8,
+      "impressions": 5295
+    },
+    {
+      "date": "2026-09-06",
+      "clicks": 14,
+      "impressions": 5873
+    },
+    {
+      "date": "2026-09-07",
+      "clicks": 15,
+      "impressions": 5835
+    },
+    {
+      "date": "2026-09-08",
+      "clicks": 17,
+      "impressions": 5087
+    },
+    {
+      "date": "2026-09-09",
+      "clicks": 21,
+      "impressions": 4782
+    },
+    {
+      "date": "2026-09-10",
+      "clicks": 14,
+      "impressions": 3607
+    },
+    {
+      "date": "2026-09-11",
+      "clicks": 22,
+      "impressions": 4246
+    },
+    {
+      "date": "2026-09-12",
+      "clicks": 16,
+      "impressions": 4655
+    },
+    {
+      "date": "2026-09-13",
+      "clicks": 14,
+      "impressions": 4415
+    },
+    {
+      "date": "2026-09-14",
+      "clicks": 17,
+      "impressions": 5601
+    },
+    {
+      "date": "2026-09-15",
+      "clicks": 17,
+      "impressions": 4221
+    },
+    {
+      "date": "2026-09-16",
+      "clicks": 18,
+      "impressions": 3567
+    }
+  ]
+}

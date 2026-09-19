@@ -2653,6 +2653,55 @@ const isRGuide = slug === "rguide";
 
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+      const rguideAnalytics = content.querySelector<HTMLElement>("[data-rguide-analytics]");
+      if (rguideAnalytics) {
+        const toolbar = rguideAnalytics.querySelector<HTMLElement>(".rguide-analytics-toolbar");
+        const tablist = rguideAnalytics.querySelector<HTMLElement>('[role="tablist"]');
+        const tabs = Array.from(rguideAnalytics.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+        const panels = Array.from(rguideAnalytics.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+        const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let activeIndex = -1;
+
+        const selectDataset = (index: number, animate = true) => {
+          if (index === activeIndex || !tabs[index]) return;
+          activeIndex = index;
+          tabs.forEach((tab, tabIndex) => {
+            const selected = tabIndex === index;
+            tab.setAttribute("aria-selected", String(selected));
+            tab.tabIndex = selected ? 0 : -1;
+          });
+          panels.forEach((panel) => {
+            panel.getAnimations().forEach((animation) => animation.cancel());
+            panel.hidden = panel.id !== tabs[index].getAttribute("aria-controls");
+            if (!panel.hidden && animate && !motionPreference.matches) {
+              panel.animate([{ opacity: 0 }, { opacity: 1 }], {
+                duration: 320,
+                easing: "ease-out",
+              });
+            }
+          });
+          tablist?.style.setProperty("--active-tab", String(index));
+        };
+
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => selectDataset(index));
+          tab.addEventListener("keydown", (event) => {
+            let nextIndex = index;
+            if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+            else if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+            else if (event.key === "Home") nextIndex = 0;
+            else if (event.key === "End") nextIndex = tabs.length - 1;
+            else return;
+            event.preventDefault();
+            selectDataset(nextIndex);
+            tabs[nextIndex].focus();
+          });
+        });
+
+        selectDataset(0, false);
+        if (toolbar) toolbar.hidden = false;
+      }
+
       const rguideCounters = Array.from(content.querySelectorAll("[data-rguide-count]"));
       if (rguideCounters.length) {
         const numberFormatter = new Intl.NumberFormat("en-US");

@@ -162,10 +162,30 @@
 .rguide-traffic-svg .rg-chart-dot { stroke: var(--signal); stroke-width: 7; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .rguide-traffic-svg .rg-chart-dot:hover, .rguide-traffic-svg .rg-chart-dot:focus { stroke-width: 11; outline: none; }
 .rguide-traffic-dates { grid-column: 2; display: flex; justify-content: space-between; gap: 0.5rem; padding-top: 0.5rem; color: #67635b; font-size: 0.72rem; }
+.rguide-case .rguide-analytics { margin-block: 2.5rem; border: var(--rule); }
+.rguide-analytics-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem clamp(1.2rem, 3vw, 2rem); border-bottom: var(--rule); }
+.rguide-analytics [hidden] { display: none; }
+.rguide-analytics-tabs { --active-tab: 0; position: relative; display: grid; grid-template-columns: repeat(2, 1fr); padding: 0.25rem; border: 1px solid #08080855; isolation: isolate; }
+.rguide-analytics-tabs::before { content: ""; position: absolute; z-index: -1; top: 0.25rem; left: 0.25rem; width: calc((100% - 0.5rem) / 2); height: calc(100% - 0.5rem); background: var(--ink); transform: translateX(calc(var(--active-tab) * 100%)); transition: transform 280ms ease; }
+.rguide-analytics-tabs button { min-height: 2.75rem; padding: 0.65rem 1.25rem; border: 0; background: none; color: var(--ink); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: color 180ms ease; }
+.rguide-analytics-tabs button[aria-selected="true"] { color: var(--paper); }
+.rguide-analytics-tabs button:hover:not([aria-selected="true"]) { color: #bd2b18; }
+.rguide-analytics-panel:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+.rguide-case .rguide-analytics .rguide-traffic { margin: 0; border: 0; }
+.rguide-case .rguide-analytics .rguide-traffic > header { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; min-height: 18rem; }
+.rguide-case .rguide-analytics h3 { font-size: clamp(2rem, 3.3vw, 3.1rem); }
+.rguide-case .rguide-analytics .rguide-analytics-period { margin: 0 0 0.4rem; font-size: 0.8rem; }
+.rguide-case .rguide-search .rg-chart-dot { stroke-width: 4; }
+.rguide-case .rguide-search .rg-chart-dot:hover { stroke-width: 8; }
+.rguide-case .rguide-search .rg-chart-line { stroke-width: 2; }
+.rguide-case .rguide-analytics-note { max-width: 70ch; margin: 1.25rem 0 0; color: #67635b; font-size: 0.8rem; line-height: 1.6; }
 .rguide-case .rg-reflection { margin-block: 3rem; padding: clamp(1.5rem, 4vw, 3rem); color: var(--paper); background: var(--ink); }
 .rguide-case .rg-reflection .rg-eyebrow { color: #ff715d; }
 .rguide-case .rg-reflection h3 { max-width: 22ch; margin: 1.25rem 0 2rem; padding: 0; font-size: clamp(2rem, 3.6vw, 3.4rem); line-height: 1.1; letter-spacing: -0.045em; color: inherit; }
 .rg-reflection > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.rguide-case .rg-reflection ul { margin: 0; padding-left: 1.2rem; color: #c9c4b8; font-size: 1rem; line-height: 1.75; }
+.rguide-case .rg-reflection li + li { margin-top: 0.85rem; }
+.rguide-case .rg-reflection li::marker { color: #ff715d; }
 .rguide-case .rg-reflection p:not(.rg-eyebrow) { margin: 0; font-size: 1rem; line-height: 1.75; color: #c9c4b8; }
 .rguide-case .rguide-closing-film { margin-top: 3rem; }
 .rguide-case .rguide-closing-film h3 { margin: 0.75rem 0 0; font-size: var(--rguide-type-display); line-height: 1.04; letter-spacing: -0.05em; max-width: 16ch; }
@@ -177,6 +197,7 @@
 .rg-case-end a span { color: #bd2b18; }
 
 @media (max-width: 1000px) {
+  .rguide-case .rguide-analytics .rguide-traffic > header { grid-template-columns: 1fr; min-height: 0; }
   .rg-cover { grid-template-columns: 1fr 1fr; }
   .rg-cover h1 { font-size: 5.5rem; }
   .rguide-case .rg-decision-strip { gap: 1.25rem; }
@@ -184,6 +205,8 @@
 }
 
 @media (max-width: 760px) {
+  .rguide-analytics-toolbar { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .rguide-analytics-tabs button { padding-inline: 0.6rem; }
   .rg-cover { grid-template-columns: 1fr; }
   .rg-cover-topline { font-size: 0.59rem; }
   .rg-cover-copy { padding-block: 1.5rem; }
@@ -230,6 +253,10 @@
   .rguide-case .rguide-city-map i { width: 4px; height: 4px; }
   .rguide-case .rguide-timeline-detail { grid-template-columns: auto minmax(0, 1fr); }
   .rguide-case .rguide-timeline-detail > small { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rguide-analytics-tabs::before, .rguide-analytics-tabs button { transition: none; }
 }
 
 @media (max-width: 420px) {
