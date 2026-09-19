@@ -463,7 +463,7 @@ The repository contains dedicated workflows for editorial guides, destination de
 <section class="rguide-resilience" aria-labelledby="rguide-resilience-title">
   <header>
     <span>Product resilience</span>
-    <h3 id="rguide-resilience-title">Built to stay useful when a service fails.</h3>
+    <h3 id="rguide-resilience-title">Built to stay useful</h3>
     <p>A travel guide should not disappear because a database or image service is temporarily slow.<br />RGuide prepares a verified version of published content so the essential experience can remain available.</p>
   </header>
   <div class="rguide-resilience-paths">
@@ -508,7 +508,6 @@ The repository contains dedicated workflows for editorial guides, destination de
   </header>
   <article class="rguide-ds-sheet rguide-ds-sheet--structure" aria-labelledby="rguide-ds-structure-title">
     <header class="rguide-ds-sheet-header">
-      <span>Plate 01 / Structure</span>
       <h4 id="rguide-ds-structure-title">Two scales, one model</h4>
       <small>From product shell to guide detail</small>
     </header>
@@ -599,7 +598,6 @@ The repository contains dedicated workflows for editorial guides, destination de
   </article>
   <article class="rguide-ds-sheet" aria-labelledby="rguide-ds-foundations-title">
     <header class="rguide-ds-sheet-header">
-      <span>Plate 02 / Foundations</span>
       <h4 id="rguide-ds-foundations-title">Tokens and controls</h4>
       <small>Small rules establish system-wide behavior</small>
     </header>
@@ -655,7 +653,6 @@ The repository contains dedicated workflows for editorial guides, destination de
   </article>
   <article class="rguide-ds-sheet rguide-ds-sheet--proof" aria-labelledby="rguide-ds-proof-title">
     <header class="rguide-ds-sheet-header">
-      <span>Plate 03 / In production</span>
       <h4 id="rguide-ds-proof-title">The system in use</h4>
       <small>City orientation → expanded editorial guide</small>
     </header>
@@ -3336,8 +3333,8 @@ The same architecture supports product growth without turning the core explorer 
 
   .rguide-resilience > header {
     display: grid;
-    grid-template-columns: minmax(18rem, 0.8fr) minmax(22rem, 1.2fr);
-    gap: 1rem clamp(2rem, 6cqw, 6rem);
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.35rem;
     padding: clamp(1.25rem, 3cqw, 2rem);
   }
 
