@@ -1,0 +1,165 @@
+---
+interface Props {
+  metadata: string;
+  chapters: { id: string; label: string; eyebrow?: string }[];
+}
+const { metadata, chapters } = Astro.props;
+---
+
+<div class="rg-reading-header" data-project-reading-header>
+  <div class="rg-cover-topline">
+    <a href="/#work">← Selected work</a>
+    <span>{metadata}</span>
+  </div>
+  <nav class="rg-page-nav" aria-label="On this page">
+    <p class="rg-page-nav-caption">On this page</p>
+    <div class="rg-page-nav-scroll">
+      <ol class="rg-page-timeline" style={`--chapter-count: ${chapters.length}`}>
+        {chapters.map((chapter, index) => (
+          <li>
+            <a href={`#${chapter.id}`} data-chapter-label={chapter.eyebrow ? `${String(index + 1).padStart(2, "0")}   ${chapter.eyebrow}` : undefined}>
+              <span class="rg-page-dot" aria-hidden="true"></span>
+              <span class="rg-page-chapter"><span class="rg-page-number">{String(index + 1).padStart(2, "0")}</span>{chapter.label}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+</div>
+
+<style>
+  .rg-reading-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    color: var(--paper);
+    background: var(--ink);
+  }
+  .rg-cover-topline {
+    position: relative;
+    z-index: 2;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem var(--page-gutter);
+    border-bottom: 1px solid #ffffff38;
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: var(--ink);
+  }
+  .rg-cover-topline a { color: inherit; text-decoration: none; }
+  .rg-cover-topline a:hover { color: var(--signal); }
+  .rg-cover-topline > span { text-align: right; }
+  a:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+  .rg-page-nav {
+    position: absolute;
+    inset: 100% 0 auto;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.95rem var(--page-gutter) 0.55rem;
+    color: var(--ink);
+    background: var(--paper);
+    border-bottom: var(--rule);
+    transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms ease, visibility 380ms;
+  }
+  :global(.has-js) .rg-reading-header:not(.is-reading) .rg-page-nav {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+  .rg-page-nav-caption {
+    align-self: center;
+    margin: 0 0 0.4rem;
+    color: #67635b;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .rg-page-nav-scroll {
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #08080840 transparent;
+  }
+  .rg-page-timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--chapter-count), minmax(8.5rem, 1fr));
+    min-width: calc(var(--chapter-count) * 8.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rg-page-timeline::before,
+  .rg-page-timeline::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: calc(100% / (var(--chapter-count) * 2));
+    right: calc(100% / (var(--chapter-count) * 2));
+    height: 1px;
+    background: #08080838;
+    pointer-events: none;
+  }
+  .rg-page-timeline::after {
+    background: var(--signal);
+    transform: scaleX(var(--chapter-progress, 0));
+    transform-origin: left;
+  }
+  .rg-page-timeline a {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 0.55rem;
+    min-height: 3rem;
+    padding: 4px 0.45rem 0.4rem;
+    color: #67635b;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+  .rg-page-timeline a:focus-visible { outline-offset: -2px; }
+  .rg-page-dot {
+    width: 7px;
+    height: 7px;
+    border: 1px solid #8c887f;
+    border-radius: 50%;
+    background: var(--paper);
+    transition: background 180ms ease, box-shadow 180ms ease;
+  }
+  .rg-page-chapter { display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; max-width: 100%; text-align: center; font-size: 0.72rem; font-weight: 600; line-height: 1.4; }
+  .rg-page-number { font-size: 0.62rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .rg-page-timeline .is-past .rg-page-dot,
+  .rg-page-timeline [aria-current] .rg-page-dot { background: var(--signal); border-color: var(--signal); }
+  .rg-page-timeline [aria-current] .rg-page-dot { box-shadow: 0 0 0 3px #f03a2226; }
+  .rg-page-timeline a:hover,
+  .rg-page-timeline a[aria-current] { color: #bd2b18; }
+  @media (max-width: 1000px) {
+    .rg-page-nav { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .rg-page-nav-caption { display: none; }
+  }
+  @media (max-width: 760px) {
+    .rg-reading-header { top: var(--mobile-header-height); }
+    .rg-cover-topline { min-height: 3.1rem; padding-block: 0.8rem; gap: 0.75rem; font-size: 0.59rem; }
+    .rg-page-nav { padding-block: 0.75rem 0.3rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rg-page-nav, .rg-page-dot, .rg-page-timeline a { transition: none; }
+  }
+</style>
+
+<script>
+  import { initProjectReadingHeader } from "../scripts/project-reading-header";
+  const header = document.querySelector<HTMLElement>("[data-project-reading-header]");
+  if (header) initProjectReadingHeader(header);
+</script>

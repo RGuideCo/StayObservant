@@ -15,24 +15,18 @@ deliverables: ["A working travel platform"]
       <p>RGuide turns researched city knowledge into an interactive travel guide that helps people explore cities with confidence and make better decisions while they are there.</p>
       <p>I designed and built the platform from the ground up. That meant shaping the experience on screen and the system behind it, so a useful idea could become a working product.</p>
     </div>
-    <a class="rguide-live-link" href="https://www.rguide.co" target="_blank" rel="noreferrer">
-      <span class="rguide-live-link-kicker">Open the live product</span>
-      <span class="rguide-live-link-action"><span>Explore RGuide</span><i class="material-symbols-outlined" aria-hidden="true">north_east</i></span>
+    <a class="rguide-live-link" href="https://www.rguide.co" target="_blank" rel="noreferrer" aria-label="Explore RGuide (opens in a new tab)">
+      <span class="rguide-live-link-copy">
+        <span class="rguide-live-link-globe" aria-hidden="true"><video autoplay muted loop playsinline preload="auto" poster="/Projects/RGuide/rotating-earth-still.png" tabindex="-1"><source src="/Projects/RGuide/rotating-earth.webm" type="video/webm" /><source src="/Projects/RGuide/rotating-earth.mp4" type="video/mp4" /></video></span>
+        <span class="rguide-live-link-type"><span class="rguide-live-link-label"><span>Explore</span><span>RGuide</span></span><span class="rguide-live-link-address" aria-hidden="true">rguide.co</span></span>
+      </span>
+      <span class="rguide-live-link-arrow" aria-hidden="true"><svg class="rguide-live-link-arrow-field" viewBox="0 0 120 120" fill="none"><path class="rguide-live-link-arrow-haze" d="M30 90 90 30M42 30h48v48" /><g class="rguide-live-link-particles"></g><path class="rguide-live-link-arrow-shape" d="M42 24.5H95.5V78H84.5V43.278L30 97.778L22.222 90L76.722 35.5H42Z" /></svg></span>
     </a>
   </div>
 </section>
 
-<nav class="rg-chapter-index" aria-label="RGuide case study chapters">
-  <a href="#the-question"><span>01</span>The question</a>
-  <a href="#the-experience"><span>02</span>The experience</a>
-  <a href="#the-content"><span>03</span>The content</a>
-  <a href="#the-publishing"><span>04</span>Publishing</a>
-  <a href="#the-platform"><span>05</span>The platform</a>
-  <a href="#the-result"><span>06</span>The result</a>
-</nav>
-
-<header class="rg-chapter" aria-labelledby="the-question">
-  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">01</span>Define the problem</p><h2 id="the-question">Give a recommendation a sense of place.</h2><p class="rg-chapter-lead">A good recommendation tells you why somewhere is worth visiting. A map tells you where it is. I wanted those two things to work together, from the first look at a city to the moment you choose a place.</p></div>
+<header class="rg-chapter" id="the-question" aria-labelledby="the-question-title">
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">01</span>Define the problem</p><h2 id="the-question-title">Put discovery on the map.</h2><p class="rg-chapter-lead">A good recommendation tells you why somewhere is worth visiting. A map tells you where it is. I wanted those two things to work together, from the first look at a city to the moment you choose a place.</p></div>
 </header>
 <div class="rg-brief">
   <div class="rg-prose">
@@ -46,8 +40,8 @@ deliverables: ["A working travel platform"]
   </aside>
 </div>
 
-<header class="rg-chapter" aria-labelledby="the-experience">
-  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">02</span>Design the experience</p><h2 id="the-experience">Keep the place in view.</h2><p class="rg-chapter-lead">The central decision was to let the guide and the map share the screen. People can compare recommendations, open a guide, and look at an individual stop while keeping a sense of the city around them.</p></div>
+<header class="rg-chapter" id="the-experience" aria-labelledby="the-experience-title">
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">02</span>Design the experience</p><h2 id="the-experience-title">Keep the place in view.</h2><p class="rg-chapter-lead">The central decision was to let the guide and the map share the screen. People can compare recommendations, open a guide, and look at an individual stop while keeping a sense of the city around them.</p></div>
 </header>
 <div class="rg-experience-body">
 <header class="rg-experience-phase">
@@ -237,8 +231,8 @@ deliverables: ["A working travel platform"]
 </div>
 </div>
 
-<header class="rg-chapter" aria-labelledby="the-content">
-  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">03</span>Design the content</p><h2 id="the-content">One place. More than one story.</h2><p class="rg-chapter-lead">A restaurant might belong in several guides, each for a different reason. Its address and opening hours should stay consistent, while each guide can explain what makes it relevant.</p></div>
+<header class="rg-chapter" id="the-content" aria-labelledby="the-content-title">
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">03</span>Design the content</p><h2 id="the-content-title">One place. More than one story.</h2><p class="rg-chapter-lead">A restaurant might belong in several guides, each for a different reason. Its address and opening hours should stay consistent, while each guide can explain what makes it relevant.</p></div>
 </header>
 <div class="rg-comparison" aria-label="How the content model changed">
   <article><span class="rg-eyebrow">The first version</span><h3>Each guide carried its own facts</h3><p>Local content objects let me build quickly. But the same venue appeared in multiple lists. A change in opening hours meant finding and updating every copy.</p></article>
@@ -376,8 +370,8 @@ deliverables: ["A working travel platform"]
   <aside class="rg-design-note"><span class="rg-eyebrow">A useful question</span><p>Where can I stay that feels social without being a party hostel?</p></aside>
 </div>
 
-<header class="rg-chapter" aria-labelledby="the-publishing">
-  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">04</span>Design the publishing process</p><h2 id="the-publishing">Make good content repeatable.</h2><p class="rg-chapter-lead">As the catalog grew, writing a guide became only part of the work. I built a publishing process that connects the research to the right places and checks the result before it reaches the site. I applied the same checks when updating venue hours and preparing translations.</p></div>
+<header class="rg-chapter" id="the-publishing" aria-labelledby="the-publishing-title">
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">04</span>Design the publishing process</p><h2 id="the-publishing-title">Make good content repeatable.</h2><p class="rg-chapter-lead">As the catalog grew, writing a guide became only part of the work. I built a publishing process that connects the research to the right places and checks the result before it reaches the site. I applied the same checks when updating venue hours and preparing translations.</p></div>
 </header>
 <div class="rguide-pipeline" aria-label="The six stages of publishing a guide">
   <div><span>01</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">travel_explore</i><strong>Research</strong><p>Start with a useful question and find sources that support the recommendations.</p></div>
@@ -425,8 +419,8 @@ deliverables: ["A working travel platform"]
   </footer>
 </section>
 
-<header class="rg-chapter" aria-labelledby="the-platform">
-  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">05</span>Build for everyday use</p><h2 id="the-platform">Make the complexity earn its place.</h2><p class="rg-chapter-lead">The engineering decisions had to support the experience. I focused on loading what a person needs at that moment and keeping the guide useful as the amount of content grows.</p></div>
+<header class="rg-chapter" id="the-platform" aria-labelledby="the-platform-title">
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">05</span>Build for everyday use</p><h2 id="the-platform-title">Make the complexity earn its place.</h2><p class="rg-chapter-lead">The engineering decisions had to support the experience. I focused on loading what a person needs at that moment and keeping the guide useful as the amount of content grows.</p></div>
 </header>
 <div class="rguide-principles">
   <article><span>Load what is in view</span><p>A city page requests its own content. It does not need to fetch every guide in the catalog.</p></article>
@@ -453,8 +447,8 @@ deliverables: ["A working travel platform"]
   </div>
 </div>
 
-<header class="rg-chapter" aria-labelledby="the-result">
-  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">06</span>Reflect on the result</p><h2 id="the-result">An idea that became a working product.</h2><p class="rg-chapter-lead">The initial build ran from April to August 2026. Over 105 calendar days, I took RGuide from a map prototype to a published platform covering 47 cities.</p></div>
+<header class="rg-chapter" id="the-result" aria-labelledby="the-result-title">
+  <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">06</span>Reflect on the result</p><h2 id="the-result-title">An idea that became a working product.</h2><p class="rg-chapter-lead">The initial build ran from April to August 2026. Over 105 calendar days, I took RGuide from a map prototype to a published platform covering 47 cities.</p></div>
 </header>
 <section class="rguide-impact" data-rguide-impact aria-label="RGuide production data snapshot from September 19, 2026">
   <div class="rguide-city-map" role="img" aria-label="World map marking 78 cities with published RGuide content as of September 19, 2026">
@@ -557,7 +551,7 @@ deliverables: ["A working travel platform"]
   <header>
     <span>105 calendar days</span>
     <strong>How the build developed</strong>
-    <small>593 commits · 71 active days</small>
+    <div class="rguide-timeline-meta"><small>593 commits · 71 active days</small><button type="button" data-rguide-timeline-play aria-label="Pause timeline animation">Pause <span aria-hidden="true">Ⅱ</span></button></div>
   </header>
   <div class="rguide-timeline-track">
     <span class="rguide-timeline-line" aria-hidden="true"><span data-rguide-timeline-progress></span></span>
@@ -584,7 +578,7 @@ deliverables: ["A working travel platform"]
   </div>
 </section>
 <section class="rguide-analytics" data-rguide-analytics aria-label="RGuide audience data">
-  <div class="rguide-analytics-toolbar" hidden>
+  <div class="rguide-analytics-toolbar">
     <p class="rg-eyebrow">Recorded use</p>
     <div class="rguide-analytics-tabs" role="tablist" aria-label="Choose an audience dataset">
       <button type="button" id="rguide-search-tab" role="tab" aria-controls="rguide-search-panel" aria-selected="true">Google Search</button>
@@ -596,7 +590,7 @@ deliverables: ["A working travel platform"]
   <header>
     <div>
       <span>Recent search performance</span>
-      <h3 id="rguide-search-title">People found RGuide through search.</h3>
+      <h3 id="rguide-search-title">RGuide through search.</h3>
       <p>From August 20 to September 16, Google Search brought 356 clicks to RGuide, compared with 90 in the previous 28 days. The chart shows how that discovery developed over the full reporting period.</p>
     </div>
     <div class="rguide-analytics-totals">
@@ -724,7 +718,7 @@ deliverables: ["A working travel platform"]
   </figcaption>
 </figure>
   </div>
-  <div class="rguide-analytics-panel" id="rguide-traffic-panel" role="tabpanel" aria-labelledby="rguide-traffic-tab" tabindex="0">
+  <div class="rguide-analytics-panel" id="rguide-traffic-panel" role="tabpanel" aria-labelledby="rguide-traffic-tab" tabindex="0" hidden>
 <figure
   class="rguide-traffic"
   data-rguide-traffic
@@ -884,7 +878,6 @@ deliverables: ["A working travel platform"]
   .rguide-impact header > span,
   .rguide-impact-data span,
   .rguide-impact footer,
-  .rguide-opening-lower a,
   .rguide-build-signals span {
     font-size: 0.62rem;
     font-weight: 800;
@@ -906,92 +899,6 @@ deliverables: ["A working travel platform"]
     margin: 0;
     font-size: clamp(1rem, 1.45vw, 1.2rem);
     line-height: 1.6;
-  }
-
-  .rguide-opening-lower a {
-    display: inline-flex;
-    min-width: 13.5rem;
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    flex-direction: column;
-    gap: 0.85rem;
-    align-items: flex-start;
-    justify-content: space-between;
-    align-self: stretch;
-    justify-self: end;
-    padding: 0.85rem 0.9rem;
-    color: var(--ink);
-    background: transparent;
-    border: 1px solid var(--ink);
-    box-shadow: 0.35rem 0.35rem 0 var(--signal);
-    text-decoration: none;
-    transition:
-      color 240ms ease,
-      box-shadow 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .rguide-live-link::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background: var(--signal);
-    clip-path: polygon(0 0, 0 0, 0 0);
-    transition: clip-path 520ms cubic-bezier(0.76, 0, 0.24, 1);
-  }
-
-  .rguide-live-link > span {
-    position: relative;
-    z-index: 1;
-    line-height: 1.25;
-  }
-
-  .rguide-live-link .material-symbols-outlined {
-    display: grid;
-    position: relative;
-    z-index: 1;
-    width: 4.5rem;
-    height: 4.5rem;
-    place-items: center;
-    color: var(--signal);
-    font-size: 3.9rem;
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-    letter-spacing: 0;
-    line-height: 1;
-    text-transform: none;
-    transition:
-      color 220ms ease,
-      transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .rguide-live-link:hover,
-  .rguide-live-link:focus-visible {
-    color: #fff;
-    box-shadow: 0.55rem 0.55rem 0 #09090b;
-    transform: translate(-0.18rem, -0.18rem);
-  }
-
-  .rguide-live-link:hover::before,
-  .rguide-live-link:focus-visible::before {
-    clip-path: polygon(0 0, 200% 0, 0 200%);
-  }
-
-  .rguide-live-link:focus-visible {
-    outline: 3px solid var(--signal);
-    outline-offset: 3px;
-  }
-
-  .rguide-live-link:hover .material-symbols-outlined,
-  .rguide-live-link:focus-visible .material-symbols-outlined {
-    color: #fff;
-    transform: translate(0.28rem, -0.28rem) rotate(3deg) scale(1.06);
-  }
-
-  .rguide-live-link:active {
-    box-shadow: 0.15rem 0.15rem 0 var(--signal);
-    transform: translate(0.08rem, 0.08rem);
   }
 
   .rguide-build-signals {
@@ -4484,10 +4391,6 @@ deliverables: ["A working travel platform"]
       gap: 1.25rem;
     }
 
-    .rguide-opening-lower a {
-      justify-self: start;
-    }
-
     .rguide-build-signals {
       grid-template-columns: 1fr;
     }
@@ -4727,10 +4630,7 @@ deliverables: ["A working travel platform"]
     }
 
     .rguide-timeline-line > span,
-    .rguide-timeline-track button i,
-    .rguide-live-link,
-    .rguide-live-link::before,
-    .rguide-live-link .material-symbols-outlined {
+    .rguide-timeline-track button i {
       transition: none;
     }
   }

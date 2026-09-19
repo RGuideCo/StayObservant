@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import ProjectReadingHeader from "../../components/ProjectReadingHeader.astro";
+import { getProjectChapters } from "../../data/project-navigation";
 import { getCollection } from "astro:content";
 import "../../styles/rguide-case-study.css";
 
@@ -18,15 +20,16 @@ if (!entry) {
   return new Response("Not found", { status: 404 });
 }
 
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const project = entry.data;
 const isRGuide = slug === "rguide";
+const chapters = getProjectChapters(slug!, headings);
 ---
 
 <Layout title={project.title}>
+  <ProjectReadingHeader chapters={chapters} metadata={isRGuide ? "Independent product / 2026" : `Case study / ${project.role ?? "Design"}`} />
   {isRGuide ? (
-    <header class="rg-cover">
-      <div class="rg-cover-topline"><a href="/#work">← Selected work</a><span>Independent product / 2026</span></div>
+    <header class="rg-cover" data-project-hero>
       <div class="rg-cover-copy">
         <p class="rg-eyebrow">From an idea to a live platform</p>
         <h1>RGuide</h1>
@@ -38,22 +41,9 @@ const isRGuide = slug === "rguide";
       </div>
     </header>
   ) : (
-  <header class="case-hero">
-    <img
-      src={project.hero ?? project.cover}
-      alt={project.title}
-      fetchpriority="high"
-      decoding="async"
-      class="case-hero-image"
-    />
-    <div class="case-hero-shade" aria-hidden="true"></div>
-
+  <header class="case-hero" data-project-hero>
     <div class="case-hero-content">
-      <div class="case-hero-topline">
-        <a href="/#work">← Project index</a>
-        <span>Case study / {project.role ?? "Design"}</span>
-      </div>
-
+      <p class="case-hero-eyebrow">{project.tags[0] ?? "Selected work"}</p>
       <h1 class="project-hero-title">
         {
           project.heroTitleLines?.length
@@ -74,6 +64,9 @@ const isRGuide = slug === "rguide";
           ) : null
         }
       </div>
+    </div>
+    <div class="case-hero-media">
+      <img src={project.hero ?? project.cover} alt={project.title} fetchpriority="high" decoding="async" class="case-hero-image" />
     </div>
   </header>
   )}
@@ -120,12 +113,6 @@ const isRGuide = slug === "rguide";
           <Content />
         </article>
 
-        <aside class="project-toc" aria-label="On this page">
-          <p class="project-toc-title">On This Page</p>
-          <nav>
-            <ul class="project-toc-list" data-project-toc></ul>
-          </nav>
-        </aside>
       </div>
     </div>
   </div>
@@ -150,105 +137,83 @@ const isRGuide = slug === "rguide";
 
   .case-hero {
     position: relative;
-    min-height: calc(clamp(21rem, 36vh, 26rem) + 0.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    min-height: 25rem;
     overflow: hidden;
-    color: #fff;
-    background: #111;
+    color: var(--paper);
+    background: var(--ink);
     border-bottom: var(--rule);
   }
 
-  .case-hero-image,
-  .case-hero-shade {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+  .case-hero-media {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: #e4dfd4;
   }
 
   .case-hero-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
-  .case-hero-shade {
-    background:
-      linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.16) 65%),
-      linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent 62%);
-  }
-
   .case-hero-content {
-    position: relative;
-    z-index: 2;
     display: flex;
-    min-height: inherit;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    padding: clamp(1.75rem, 3vw, 3rem) var(--page-gutter);
   }
 
-  .case-hero-topline,
-  .case-hero-bottom {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.55fr);
-    gap: 2rem;
-    padding: 1rem var(--page-gutter);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
-    font-size: 0.64rem;
+  .case-hero-eyebrow {
+    color: #ff715d;
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-  }
-
-  .case-hero-topline a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .case-hero-topline span {
-    text-align: right;
   }
 
   .project-hero-title {
-    max-width: 10ch;
-    margin: auto 0 1.5rem;
-    padding: 1.5rem var(--page-gutter) 0;
-    color: #fff;
-    font-size: clamp(3.25rem, 7.4vw, 7.8rem);
-    line-height: 0.82;
-    text-transform: uppercase;
+    max-width: 12ch;
+    margin: 1.25rem 0 1.5rem;
+    padding: 0;
+    color: var(--paper);
+    font-size: clamp(2.8rem, 5.3vw, 5.8rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    overflow-wrap: break-word;
   }
 
   .case-hero-bottom {
-    align-items: end;
-    padding-block: 1.25rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.42);
-    border-bottom: 0;
+    display: grid;
+    gap: 1.5rem;
   }
 
   .case-hero-bottom > p {
-    max-width: 43rem;
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
-    font-weight: 500;
-    line-height: 1.5;
-    letter-spacing: 0;
-    text-transform: none;
+    max-width: 43ch;
+    color: #c9c4b8;
+    font-size: clamp(0.98rem, 1.2vw, 1.15rem);
+    line-height: 1.6;
   }
 
   .case-hero-bottom ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 0;
+    gap: 0.4rem;
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.45);
-    border-left: 1px solid rgba(255, 255, 255, 0.45);
   }
 
   .case-hero-bottom li {
-    padding: 0.5rem 0.65rem;
-    border-right: 1px solid rgba(255, 255, 255, 0.45);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
-    font-size: 0.56rem;
+    padding: 0.45rem 0.55rem;
+    border: 1px solid #ffffff38;
+    font-size: 0.6rem;
+    line-height: 1.25;
   }
 
   .case-body {
@@ -262,23 +227,44 @@ const isRGuide = slug === "rguide";
   }
 
   .project-shell {
-    display: grid;
-    grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);
-    align-items: start;
-    gap: clamp(1.6rem, 3vw, 3rem);
+    display: block;
+    max-width: 68rem;
+    margin-inline: auto;
   }
 
-  .project-shell .project-content {
-    grid-column: 2;
-    grid-row: 1;
+  .project-content :is(h2[id], h3[id]),
+  .project-chapter-target {
+    scroll-margin-top: var(--project-reading-offset, 9rem);
   }
 
-  .project-shell .project-toc {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: stretch;
-    width: auto;
-    margin-right: 0;
+  .has-js .project-chapter-target.motion-reveal { transform: none; }
+  .project-content:not(.rguide-case) > .project-chapter-target {
+    margin: clamp(3.5rem, 6vw, 5rem) 0 1.25rem;
+    padding-top: 1.6rem;
+    border-top: var(--rule);
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4.7vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.03;
+    letter-spacing: -0.05em;
+  }
+  .project-content:not(.rguide-case) > .project-chapter-target::before {
+    content: attr(data-chapter-label);
+    display: block;
+    margin-bottom: 0.7rem;
+    color: #bd2b18;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    white-space: pre-wrap;
+  }
+  @media (max-width: 760px) {
+    .project-content:not(.rguide-case) > .project-chapter-target {
+      font-size: clamp(2.25rem, 8vw, 3.5rem);
+    }
   }
 
   .project-meta-strip {
@@ -312,94 +298,6 @@ const isRGuide = slug === "rguide";
     font-size: 0.9rem;
     line-height: 1.5;
     color: #27272a;
-  }
-
-  .project-toc {
-    position: sticky;
-    top: 1.3rem;
-    padding: 0.2rem 0 0.2rem 0.9rem;
-    border-radius: 0;
-    background: transparent;
-    border-left: 1px solid rgba(0, 0, 0, 0.16);
-  }
-
-  .project-toc-title {
-    margin: 0;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #71717a;
-  }
-
-  .project-toc-list {
-    list-style: none;
-    margin: 0.8rem 0 0;
-    padding: 0;
-    display: grid;
-    gap: 0.25rem;
-  }
-
-  .project-toc-list li {
-    margin: 0;
-    padding: 0;
-  }
-
-  .project-toc-list a {
-    position: relative;
-    display: block;
-    padding: 0.14rem 0 0.14rem 0.4rem;
-    text-decoration: none;
-    color: #3f3f46;
-    font-size: 0.78rem;
-    line-height: 1.45;
-    transition: color 320ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .project-toc-list .toc-section > a {
-    font-weight: 600;
-  }
-
-  .project-toc-sublist {
-    list-style: none;
-    margin: 0.28rem 0 0 0;
-    padding: 0 0 0 0.64rem;
-    display: grid;
-    gap: 0.16rem;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(-3px);
-    transition:
-      max-height 420ms cubic-bezier(0.22, 0.61, 0.36, 1),
-      opacity 280ms ease,
-      transform 320ms ease;
-  }
-
-  .project-toc-list .toc-section.is-expanded .project-toc-sublist {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .project-toc-sublist a {
-    color: #71717a;
-    font-size: 0.78rem;
-  }
-
-  .project-toc-list a:hover,
-  .project-toc-list a.is-active {
-    color: #09090b;
-  }
-
-  .project-toc-list a.is-active::before {
-    content: "";
-    position: absolute;
-    top: 0.35rem;
-    bottom: 0.35rem;
-    left: -0.92rem;
-    width: 2px;
-    border-radius: 0;
-    background: var(--signal);
   }
 
   /* ===============================
@@ -762,7 +660,7 @@ const isRGuide = slug === "rguide";
     margin: 0;
     padding: clamp(1.5rem, 3vw, 2.4rem) 0 0;
     border-top: var(--rule);
-    border-bottom: var(--rule);
+    border-bottom: 0;
   }
 
   .project-content .cfa-project-overview__intro {
@@ -2215,20 +2113,6 @@ const isRGuide = slug === "rguide";
   }
 
   @media (max-width: 1100px) {
-    .case-hero-topline,
-    .case-hero-bottom {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-    }
-
-    .case-hero-topline span {
-      display: none;
-    }
-
-    .case-hero-bottom ul {
-      justify-self: start;
-    }
-
     .project-content .concept-split {
       grid-template-columns: 1fr;
     }
@@ -2252,42 +2136,20 @@ const isRGuide = slug === "rguide";
       height: 64px;
     }
 
-    .project-shell {
-      display: block;
-      gap: 0;
-    }
-
-    .project-toc {
-      display: none;
-    }
-
     .project-meta-strip {
       grid-template-columns: 1fr;
       gap: 0;
     }
   }
 
+  @media (max-width: 760px) {
+    .case-hero { grid-template-columns: 1fr; min-height: 0; }
+    .case-hero-content { padding-block: 1.75rem; }
+    .case-hero-media { aspect-ratio: 1.7; max-height: 23rem; }
+    .project-hero-title { font-size: clamp(2.9rem, 12vw, 5.5rem); }
+  }
+
   @media (max-width: 600px) {
-    .case-hero {
-      min-height: 23rem;
-    }
-
-    .project-hero-title {
-      margin-bottom: 1.5rem;
-      padding-inline: 1rem;
-      font-size: clamp(2.65rem, 13.5vw, 5.5rem);
-      white-space: nowrap;
-    }
-
-    .case-hero-topline,
-    .case-hero-bottom {
-      padding-inline: 1rem;
-    }
-
-    .case-hero-bottom ul {
-      display: none;
-    }
-
     .project-content .project-flipbook {
       margin-inline: 0;
       padding: 0 0 0.75rem;
@@ -2341,135 +2203,12 @@ const isRGuide = slug === "rguide";
 
 <script>
   import { PageFlip } from "page-flip";
+  import { initRguideLiveLink } from "../../scripts/rguide-live-link";
 
   (() => {
     const init = () => {
       const content = document.querySelector(".project-content");
       if (!content) return;
-
-      const slugify = (value) =>
-        value
-          .toLowerCase()
-          .trim()
-          .replace(/[^\w\s-]/g, "")
-          .replace(/\s+/g, "-");
-
-      const buildToc = () => {
-        const tocList = document.querySelector("[data-project-toc]");
-        if (!tocList) return;
-
-        const headings = Array.from(content.querySelectorAll("h2, h3")).filter((h) =>
-          h.textContent?.trim()
-        );
-        if (!headings.length) return;
-
-        const seen = new Map();
-        headings.forEach((heading) => {
-          if (!heading.id) {
-            const base = slugify(heading.textContent || "section");
-            const count = seen.get(base) || 0;
-            const nextCount = count + 1;
-            seen.set(base, nextCount);
-            heading.id = nextCount > 1 ? `${base}-${nextCount}` : base;
-          }
-        });
-
-        const sections = [];
-        let currentSection = null;
-        headings.forEach((heading) => {
-          if (heading.tagName === "H2") {
-            currentSection = { heading, children: [] };
-            sections.push(currentSection);
-            return;
-          }
-          if (!currentSection) {
-            currentSection = { heading, children: [] };
-            sections.push(currentSection);
-            return;
-          }
-          currentSection.children.push(heading);
-        });
-
-        tocList.innerHTML = "";
-        const sectionEntries = [];
-        const allLinks = [];
-
-        sections.forEach((section) => {
-          const li = document.createElement("li");
-          li.className = "toc-section";
-
-          const topLink = document.createElement("a");
-          topLink.href = `#${section.heading.id}`;
-          topLink.textContent = section.heading.textContent?.trim() || "";
-          li.appendChild(topLink);
-
-          const subList = document.createElement("ul");
-          subList.className = "project-toc-sublist";
-
-          const childLinks = section.children.map((child) => {
-            const childItem = document.createElement("li");
-            const childLink = document.createElement("a");
-            childLink.href = `#${child.id}`;
-            childLink.textContent = child.textContent?.trim() || "";
-            childItem.appendChild(childLink);
-            subList.appendChild(childItem);
-            allLinks.push(childLink);
-            return childLink;
-          });
-
-          if (section.children.length) {
-            li.appendChild(subList);
-          }
-
-          allLinks.push(topLink);
-          tocList.appendChild(li);
-          sectionEntries.push({ section, li, topLink, childLinks });
-        });
-
-        const headingToSectionId = new Map();
-        sections.forEach((section) => {
-          headingToSectionId.set(section.heading.id, section.heading.id);
-          section.children.forEach((child) => {
-            headingToSectionId.set(child.id, section.heading.id);
-          });
-        });
-
-        const updateActiveToc = () => {
-          const offset = 150;
-          let current = headings[0];
-          headings.forEach((heading) => {
-            if (heading.getBoundingClientRect().top - offset <= 0) {
-              current = heading;
-            }
-          });
-
-          const currentId = current?.id;
-          const activeSectionId = headingToSectionId.get(currentId);
-
-          allLinks.forEach((link) => {
-            link.classList.toggle("is-active", link.getAttribute("href") === `#${currentId}`);
-          });
-
-          sectionEntries.forEach((entry) => {
-            const isActiveSection = entry.section.heading.id === activeSectionId;
-            entry.li.classList.toggle("is-expanded", isActiveSection);
-            entry.topLink.classList.toggle(
-              "is-active",
-              isActiveSection || entry.topLink.getAttribute("href") === `#${currentId}`
-            );
-
-            const subList = entry.li.querySelector(".project-toc-sublist");
-            if (!subList) return;
-            subList.style.maxHeight = isActiveSection ? `${subList.scrollHeight}px` : "0px";
-          });
-        };
-
-        window.addEventListener("scroll", updateActiveToc, { passive: true });
-        window.addEventListener("resize", updateActiveToc);
-        updateActiveToc();
-      };
-
-      buildToc();
 
       const images = content.querySelectorAll("p > img");
       images.forEach((img) => {
@@ -2655,14 +2394,15 @@ const isRGuide = slug === "rguide";
 
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+      const rguideLiveLink = content.querySelector<HTMLAnchorElement>(".rguide-live-link");
+      if (rguideLiveLink) initRguideLiveLink(rguideLiveLink);
+
       const rguideAnalytics = content.querySelector<HTMLElement>("[data-rguide-analytics]");
       if (rguideAnalytics) {
-        const toolbar = rguideAnalytics.querySelector<HTMLElement>(".rguide-analytics-toolbar");
         const tablist = rguideAnalytics.querySelector<HTMLElement>('[role="tablist"]');
         const tabs = Array.from(rguideAnalytics.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
         const panels = Array.from(rguideAnalytics.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
         const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-        const compactAnalytics = window.matchMedia("(max-width: 760px)");
         let activeIndex = -1;
 
         const selectDataset = (index: number, animate = true) => {
@@ -2686,35 +2426,6 @@ const isRGuide = slug === "rguide";
           tablist?.style.setProperty("--active-tab", String(index));
         };
 
-        const setAnalyticsLayout = () => {
-          if (compactAnalytics.matches) {
-            panels.forEach((panel, index) => {
-              panel.setAttribute("role", "tabpanel");
-              panel.setAttribute("aria-labelledby", tabs[index].id);
-              panel.tabIndex = 0;
-            });
-            if (toolbar) toolbar.hidden = false;
-            selectDataset(activeIndex < 0 ? 0 : activeIndex, false);
-            return;
-          }
-
-          activeIndex = -1;
-          if (toolbar) toolbar.hidden = true;
-          tabs.forEach((tab, index) => {
-            tab.setAttribute("aria-selected", String(index === 0));
-            tab.tabIndex = index === 0 ? 0 : -1;
-          });
-          panels.forEach((panel) => {
-            panel.getAnimations().forEach((animation) => animation.cancel());
-            panel.hidden = false;
-            panel.setAttribute("role", "region");
-            panel.removeAttribute("aria-labelledby");
-            panel.removeAttribute("tabindex");
-            const heading = panel.querySelector("h3");
-            if (heading?.textContent) panel.setAttribute("aria-label", heading.textContent.trim());
-          });
-        };
-
         tabs.forEach((tab, index) => {
           tab.addEventListener("click", () => selectDataset(index));
           tab.addEventListener("keydown", (event) => {
@@ -2730,8 +2441,7 @@ const isRGuide = slug === "rguide";
           });
         });
 
-        setAnalyticsLayout();
-        compactAnalytics.addEventListener("change", setAnalyticsLayout);
+        selectDataset(0, false);
       }
 
       const rguideCounters = Array.from(content.querySelectorAll("[data-rguide-count]"));
@@ -2841,14 +2551,44 @@ const isRGuide = slug === "rguide";
           }
         };
 
-        // Let readers choose each milestone and read it at their own pace.
+        const playButton = rguideTimeline.querySelector<HTMLButtonElement>("[data-rguide-timeline-play]");
+        const detail = rguideTimeline.querySelector<HTMLElement>(".rguide-timeline-detail");
+        const timelineMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let autoPlay = !timelineMotion.matches;
+        let timelineVisible = false;
+        let phaseTimer: ReturnType<typeof setTimeout>;
+        const schedulePhase = () => {
+          clearTimeout(phaseTimer);
+          const playing = autoPlay && timelineVisible && !document.hidden;
+          rguideTimeline.classList.toggle("is-playing", playing);
+          if (detail) detail.setAttribute("aria-live", autoPlay ? "off" : "polite");
+          if (playButton) {
+            playButton.innerHTML = autoPlay ? 'Pause <span aria-hidden="true">Ⅱ</span>' : 'Play <span aria-hidden="true">▶</span>';
+            playButton.setAttribute("aria-label", autoPlay ? "Pause timeline animation" : "Play timeline animation");
+          }
+          if (!playing) return;
+          phaseTimer = setTimeout(() => {
+            showPhase((activeIndex + 1) % phases.length, true);
+            schedulePhase();
+          }, 4500);
+        };
+
         phases.forEach((phase, index) => {
           phase.addEventListener("click", () => {
+            autoPlay = false;
+            schedulePhase();
             showPhase(index, true);
           });
         });
-
+        playButton?.addEventListener("click", () => { autoPlay = !autoPlay; schedulePhase(); });
+        timelineMotion.addEventListener("change", () => { autoPlay = !timelineMotion.matches; schedulePhase(); });
+        document.addEventListener("visibilitychange", schedulePhase);
+        new IntersectionObserver(([entry]) => {
+          timelineVisible = entry.isIntersecting;
+          schedulePhase();
+        }, { threshold: 0.25 }).observe(rguideTimeline);
         showPhase(0);
+        schedulePhase();
       }
 
 
