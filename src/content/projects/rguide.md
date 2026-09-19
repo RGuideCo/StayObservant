@@ -1,14 +1,464 @@
 ---
 title: "RGuide"
-description: "Designing and engineering a map-first travel platform—and the data, publishing, media, localization, and growth systems that make it scale."
-tags: ["UI/UX", "Product Design", "Development", "Data Systems"]
+description: "A better way to find your way."
+tags: ["Product Design", "Development"]
 cover: "/Projects/RGuide/rguide-imac-mockup.webp"
 hero: "/Projects/RGuide/rguide-imac-mockup.webp"
-role: "Founder · Product & Engineering"
+role: "Founder, designer and developer"
 tools: ["Next.js", "TypeScript", "Supabase", "PostGIS", "MapLibre", "Cloudflare R2"]
-deliverables: ["Product strategy", "UX/UI", "Design system", "Data model", "Publishing pipelines", "Production build"]
+deliverables: ["A working travel platform"]
 ---
 
+<section class="rguide-opening" aria-label="Project summary">
+  <div class="rguide-opening-lower">
+    <div class="rg-opening-copy">
+      <p>RGuide turns researched city knowledge into an interactive travel guide that helps people explore cities with confidence and make better decisions while they are there.</p>
+      <p>I designed and built the platform from the ground up. That meant shaping the experience on screen and the system behind it, so a useful idea could become a working product.</p>
+    </div>
+    <a class="rguide-live-link" href="https://www.rguide.co" target="_blank" rel="noreferrer">
+      <i class="material-symbols-outlined" aria-hidden="true">open_in_new</i><span>Explore RGuide</span>
+    </a>
+  </div>
+</section>
+
+<nav class="rg-chapter-index" aria-label="RGuide case study chapters">
+  <a href="#the-question"><span>01</span>The question</a>
+  <a href="#the-experience"><span>02</span>The experience</a>
+  <a href="#the-content"><span>03</span>The content</a>
+  <a href="#the-publishing"><span>04</span>Publishing</a>
+  <a href="#the-platform"><span>05</span>The platform</a>
+  <a href="#the-result"><span>06</span>The result</a>
+</nav>
+
+<header class="rg-chapter" aria-labelledby="the-question">
+  <span class="rg-chapter-number" aria-hidden="true">01</span>
+  <div><p class="rg-eyebrow">Define the problem</p><h2 id="the-question">Give a recommendation a sense of place.</h2><p class="rg-chapter-lead">A good recommendation tells you why somewhere is worth visiting. A map tells you where it is. I wanted those two things to work together, from the first look at a city to the moment you choose a place.</p></div>
+</header>
+<div class="rg-brief">
+  <div class="rg-prose">
+    <h3>The starting point</h3>
+    <p>A list can make a city feel like a collection of unrelated stops. It leaves the traveler to work out what is nearby and how one place connects to the next.</p>
+    <p>With RGuide, I made geography part of the reading experience. The map gives each recommendation context, while the guide explains what makes it worth considering.</p>
+  </div>
+  <aside class="rg-design-note">
+    <span class="rg-eyebrow">The design question</span>
+    <p>How can someone explore a city without losing their bearings?</p>
+  </aside>
+</div>
+
+<header class="rg-chapter" aria-labelledby="the-experience">
+  <span class="rg-chapter-number" aria-hidden="true">02</span>
+  <div><p class="rg-eyebrow">Design the experience</p><h2 id="the-experience">Keep the place in view.</h2><p class="rg-chapter-lead">The central decision was to let the guide and the map share the screen. People can compare recommendations, open a guide, and look at an individual stop while keeping a sense of the city around them.</p></div>
+</header>
+<section class="rguide-design-system" aria-labelledby="rguide-design-system-title">
+  <header class="rguide-ds-intro">
+    <div>
+      <span>The interaction model</span>
+      <h3 id="rguide-design-system-title">A familiar way to explore</h3>
+    </div>
+    <p>The Barcelona views show the finished experience. Below them, the wireframes explain the layout and the details that make it consistent.</p>
+  </header>
+  <article class="rguide-ds-sheet rguide-ds-sheet--proof" aria-labelledby="rguide-ds-proof-title">
+    <header class="rguide-ds-sheet-header">
+      <h4 id="rguide-ds-proof-title">The finished interface</h4>
+      <small>Barcelona, from browsing to choosing</small>
+    </header>
+    <div class="rguide-ds-product-proof">
+      <figure class="rguide-ds-product-view">
+        <figcaption><b>01</b><span><strong>City view</strong><small>Compare recommendations without losing the map</small></span></figcaption>
+        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open City view at full size">
+          <img src="/Projects/RGuide/rguide-barcelona-city-hd.png" alt="The Barcelona explorer with its map beside the available city guides" width="1600" height="900" loading="lazy" decoding="async" />
+        </button>
+      </figure>
+      <figure class="rguide-ds-product-view">
+        <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Understand the recommendation, then explore each stop</small></span></figcaption>
+        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open Expanded guide at full size">
+          <img src="/Projects/RGuide/rguide-barcelona-expanded-hd.png" alt="A Barcelona food guide open beside its numbered stops on the map" width="1600" height="900" loading="lazy" decoding="async" />
+        </button>
+      </figure>
+    </div>
+  </article>
+  <article class="rguide-ds-sheet rguide-ds-sheet--structure" aria-labelledby="rguide-ds-structure-title">
+    <header class="rguide-ds-sheet-header">
+      <h4 id="rguide-ds-structure-title">From the city to the detail</h4>
+      <small>Keep the same sense of place</small>
+    </header>
+    <div class="rguide-ds-wireframes">
+      <figure class="rguide-ds-specimen rguide-ds-specimen--home-shell">
+        <figcaption><b>01</b><span><strong>Explorer layout</strong><small>The map stays in view</small></span></figcaption>
+        <div class="rguide-ds-layout-theory">
+          <ol class="rguide-ds-theory-key">
+            <li><b>01</b><span><strong>Choose a place</strong><small>The left side lets people move from a broad destination to a neighborhood.</small></span></li>
+            <li><b>02</b><span><strong>Keep your bearings</strong><small>The map stays visible while people compare places to visit.</small></span></li>
+            <li><b>03</b><span><strong>Narrow the choice</strong><small>The categories work the same way in every destination.</small></span></li>
+            <li><b>04</b><span><strong>Open what interests you</strong><small>Each card gives enough context to decide whether a guide is worth opening.</small></span></li>
+          </ol>
+          <article class="rguide-ds-home-wireframe" aria-label="Annotated wireframe showing the RGuide homepage as navigation, map, filters, and guide index">
+            <ol class="rguide-ds-callouts rguide-ds-callouts--home" aria-hidden="true">
+              <li style="--x:14%;--line:4.3rem">01</li><li style="--x:46%;--line:6.5rem">02</li><li style="--x:73%;--line:8.4rem">03</li><li style="--x:91%;--line:14.5rem">04</li>
+            </ol>
+            <aside class="rguide-ds-home-nav">
+              <small class="rguide-ds-wf-label">Choose a destination</small>
+              <div class="rguide-ds-home-heading"><i></i><i></i></div>
+              <div class="rguide-ds-home-rows">
+                <span><i></i><em><b></b><small></small></em></span>
+                <span><i></i><em><b></b><small></small></em></span>
+                <span><i></i><em><b></b><small></small></em></span>
+                <span><i></i><em><b></b><small></small></em></span>
+              </div>
+            </aside>
+            <div class="rguide-ds-home-map">
+              <small class="rguide-ds-wf-label">Map</small>
+              <div class="rguide-ds-map-streets" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <b style="--x:31%;--y:31%"></b><b style="--x:67%;--y:24%"></b><b style="--x:48%;--y:66%"></b><b style="--x:76%;--y:55%"></b>
+              <div class="rguide-ds-map-controls" aria-hidden="true"><i>+</i><i>−</i></div>
+            </div>
+            <section class="rguide-ds-home-index">
+              <header><small class="rguide-ds-wf-label">Guide index</small><div><i></i><i></i></div><span><i></i><i></i></span></header>
+              <nav><small>Shared filters</small><div><i></i><i></i><i></i><i></i></div></nav>
+              <div class="rguide-ds-home-cards">
+                <small class="rguide-ds-wf-label">Guide cards</small>
+                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
+                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
+                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
+              </div>
+            </section>
+          </article>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--guide-shell">
+        <figcaption><b>02</b><span><strong>Inside a guide</strong><small>Give each detail a reason to be here</small></span></figcaption>
+        <div class="rguide-ds-guide-theory">
+          <ol class="rguide-ds-theory-key">
+            <li><b>01</b><span><strong>Set expectations</strong><small>The title makes clear what the guide covers.</small></span></li>
+            <li><b>02</b><span><strong>Keep context</strong><small>Related guides stay close so there is always another way to explore.</small></span></li>
+            <li><b>03</b><span><strong>Explain the recommendation</strong><small>The introduction explains the choice. Sources let people follow the research.</small></span></li>
+            <li><b>04</b><span><strong>Make it usable</strong><small>Each stop connects the recommendation to a place on the map.</small></span></li>
+          </ol>
+          <article class="rguide-ds-wireframe" aria-label="Annotated wireframe showing the four layers of an RGuide guide module">
+            <header class="rguide-ds-wf-identity">
+              <div class="rguide-ds-wf-title"><i></i><i></i></div>
+              <div class="rguide-ds-wf-actions"><i></i><i></i><i></i></div>
+            </header>
+            <section class="rguide-ds-wf-related">
+              <small>Related guides in current destination</small>
+              <div><i></i><i></i><i></i><i></i></div>
+            </section>
+            <section class="rguide-ds-wf-context">
+              <div class="rguide-ds-wf-context-copy">
+                <small>Why these places</small>
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <div class="rguide-ds-wf-proof">
+                <small>Sources</small>
+                <span><i></i><i></i><i></i></span>
+              </div>
+              <div class="rguide-ds-wf-stops">
+                <small>Ordered places</small>
+                <ol><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li></ol>
+              </div>
+            </section>
+            <section class="rguide-ds-wf-place">
+              <div class="rguide-ds-wf-photo"><i class="material-symbols-outlined" aria-hidden="true">image</i></div>
+              <div class="rguide-ds-wf-place-copy"><strong></strong><i></i><i></i><i></i><span></span></div>
+              <div class="rguide-ds-wf-place-actions"><i></i><i></i><i></i></div>
+            </section>
+          </article>
+        </div>
+      </figure>
+    </div>
+  </article>
+  <article class="rguide-ds-sheet" aria-labelledby="rguide-ds-foundations-title">
+    <header class="rguide-ds-sheet-header">
+      <h4 id="rguide-ds-foundations-title">Details that stay familiar</h4>
+      <small>Consistency helps people find their way</small>
+    </header>
+    <div class="rguide-ds-foundations">
+      <figure class="rguide-ds-specimen rguide-ds-specimen--categories">
+        <figcaption><b>01</b><span><strong>Recognizable categories</strong><small>The same color follows a place across the interface</small></span></figcaption>
+        <div class="rguide-ds-category-list" aria-label="RGuide category tokens">
+          <span style="--category:#f59e0b"><i class="material-symbols-outlined" aria-hidden="true">restaurant</i><b>Food</b><small>#F59E0B</small></span>
+          <span style="--category:#6366f1"><i class="material-symbols-outlined" aria-hidden="true">nightlife</i><b>Nightlife</b><small>#6366F1</small></span>
+          <span style="--category:#f43f5e"><i class="material-symbols-outlined" aria-hidden="true">museum</i><b>Culture</b><small>#F43F5E</small></span>
+          <span style="--category:#0891b2"><i class="material-symbols-outlined" aria-hidden="true">bed</i><b>Stay</b><small>#0891B2</small></span>
+          <span style="--category:#10b981"><i class="material-symbols-outlined" aria-hidden="true">park</i><b>Nature</b><small>#10B981</small></span>
+          <span style="--category:#f97316"><i class="material-symbols-outlined" aria-hidden="true">local_activity</i><b>Activities</b><small>#F97316</small></span>
+          <span style="--category:#2563eb"><i class="material-symbols-outlined" aria-hidden="true">route</i><b>Routes</b><small>#2563EB</small></span>
+          <span style="--category:#7c3aed"><i class="material-symbols-outlined" aria-hidden="true">info</i><b>Essentials</b><small>#7C3AED</small></span>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--actions">
+        <figcaption><b>02</b><span><strong>Shared controls</strong><small>Common actions keep a consistent appearance</small></span></figcaption>
+        <div class="rguide-ds-actions" aria-label="Guide action button states">
+          <button type="button" aria-label="Add guide"><i class="material-symbols-outlined" aria-hidden="true">add</i></button>
+          <button type="button" aria-label="Save guide"><i class="material-symbols-outlined" aria-hidden="true">favorite</i></button>
+          <button type="button" class="is-active" aria-label="Saved guide"><i class="material-symbols-outlined" aria-hidden="true">favorite</i></button>
+          <button type="button" aria-label="Expand guide"><i class="material-symbols-outlined" aria-hidden="true">expand_more</i></button>
+          <button type="button" class="rguide-ds-action-square" aria-label="Search"><i class="material-symbols-outlined" aria-hidden="true">search</i></button>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--markers">
+        <figcaption><b>03</b><span><strong>Map markers</strong><small>Numbered markers connect the guide to the map</small></span></figcaption>
+        <div class="rguide-ds-markers" aria-label="Map marker hierarchy">
+          <span class="rguide-ds-marker" style="--marker:#f59e0b">1</span>
+          <span class="rguide-ds-marker is-selected" style="--marker:#f59e0b">5</span>
+          <span class="rguide-ds-marker" style="--marker:#6366f1">8</span>
+          <span class="rguide-ds-marker rguide-ds-marker--nested" style="--marker:#f59e0b">A</span>
+        </div>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--route">
+        <figcaption><b>04</b><span><strong>A shareable location</strong><small>The address follows where you are</small></span></figcaption>
+        <nav class="rguide-ds-route" aria-label="Example geographic route">
+          <span>World</span><i aria-hidden="true">→</i><span>Europe</span><i aria-hidden="true">→</i><span>Spain</span><i aria-hidden="true">→</i><strong>Barcelona</strong>
+        </nav>
+      </figure>
+      <figure class="rguide-ds-specimen rguide-ds-specimen--sources">
+        <figcaption><b>05</b><span><strong>Visible sources</strong><small>The research stays attached to the recommendation</small></span></figcaption>
+        <div class="rguide-ds-source-row">
+          <span>Sourced</span><i aria-hidden="true"></i>
+          <div aria-label="Source publishers"><b>E</b><b>G</b><b>G</b></div>
+          <strong>Eater, local publishers +2</strong>
+          <i class="material-symbols-outlined" aria-hidden="true">expand_more</i>
+        </div>
+      </figure>
+    </div>
+  </article>
+
+</section>
+
+<div class="rg-decision-strip" aria-label="Interaction decisions">
+  <article><span class="rg-eyebrow">Navigation</span><h3>Every view has an address</h3><p>Opening a guide updates the URL. Someone can share that exact view and return to it without starting again.</p></article>
+  <article><span class="rg-eyebrow">Smaller screens</span><h3>The same journey, less space</h3><p>On mobile, panels and sheets reorganize the content around the map. The relationship between a guide and its places stays the same.</p></article>
+  <article><span class="rg-eyebrow">Visual language</span><h3>Recognition before decoration</h3><p>A category keeps its color from the guide card to the map marker. Repeated controls make familiar actions easier to find.</p></article>
+</div>
+
+<header class="rg-chapter" aria-labelledby="the-content">
+  <span class="rg-chapter-number" aria-hidden="true">03</span>
+  <div><p class="rg-eyebrow">Design the content</p><h2 id="the-content">One place. More than one story.</h2><p class="rg-chapter-lead">A restaurant might belong in several guides, each for a different reason. Its address and opening hours should stay consistent, while each guide can explain what makes it relevant.</p></div>
+</header>
+<div class="rg-comparison" aria-label="How the content model changed">
+  <article><span class="rg-eyebrow">The first version</span><h3>Each guide carried its own facts</h3><p>Local content objects let me build quickly. But the same venue appeared in multiple lists. A change in opening hours meant finding and updating every copy.</p></article>
+  <article><span class="rg-eyebrow">The decision</span><h3>Give shared information one home</h3><p>I separated the venue record from its place in a guide. The venue holds the facts. The guide holds the recommendation and the order of its stops.</p></article>
+</div>
+<div class="rg-example">
+  <span class="rg-eyebrow">A practical example</span>
+  <p>The same restaurant can appear in a neighborhood walk and a guide to eating after midnight. Its hours come from one record. The reason to visit belongs to each guide.</p>
+</div>
+<details class="rg-deep-dive">
+  <summary><span>See how the records connect</span><small>Content model</small></summary>
+  <figure class="rguide-schema" data-rguide-schema aria-labelledby="rguide-schema-title">
+  <header>
+    <span id="rguide-schema-title">Inside the content model</span>
+    <p>Shared place records connect to individual guides. Prepared copies bring those relationships to the screen.</p>
+  </header>
+  <div class="rguide-schema-viewport" tabindex="0" role="group" aria-label="Scrollable core production data schema">
+    <div class="rguide-schema-diagram">
+      <div class="rguide-schema-primary">
+        <article class="rguide-schema-node">
+          <i class="material-symbols-outlined" aria-hidden="true">location_on</i>
+          <span>Geography</span>
+          <strong>destinations</strong>
+          <div class="rguide-schema-relations">
+            <small>parent_id → destinations</small>
+            <small>destination_boundaries</small>
+            <small>destination_translations</small>
+          </div>
+          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
+        </article>
+        <span class="rguide-schema-edge rguide-schema-edge--reverse" aria-hidden="true"><i></i></span>
+        <article class="rguide-schema-node rguide-schema-node--accent">
+          <i class="material-symbols-outlined" aria-hidden="true">article</i>
+          <span>Editorial</span>
+          <strong>entries</strong>
+          <div class="rguide-schema-relations">
+            <small>destination_id → destinations</small>
+            <small>entry_translations</small>
+            <small>entry_render_cache</small>
+          </div>
+          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
+        </article>
+        <span class="rguide-schema-edge" aria-hidden="true"><i></i></span>
+        <article class="rguide-schema-node">
+          <i class="material-symbols-outlined" aria-hidden="true">route</i>
+          <span>Guide stops</span>
+          <strong>entry_stops</strong>
+          <div class="rguide-schema-relations">
+            <small>entry_id → entries</small>
+            <small>venue_id → venues</small>
+            <small>event_occurrence_id → events</small>
+          </div>
+          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
+        </article>
+        <span class="rguide-schema-edge rguide-schema-edge--both" aria-hidden="true"><i></i></span>
+        <article class="rguide-schema-node">
+          <i class="material-symbols-outlined" aria-hidden="true">storefront</i>
+          <span>Shared places</span>
+          <strong>venues</strong>
+          <div class="rguide-schema-relations">
+            <small>venue_hours · special_hours</small>
+            <small>venue_media</small>
+            <small>venue_taggings → venue_tags</small>
+            <small>venue_translations</small>
+          </div>
+          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
+        </article>
+      </div>
+      <div class="rguide-schema-support">
+        <article class="rguide-schema-node rguide-schema-node--support">
+          <i class="material-symbols-outlined" aria-hidden="true">polyline</i>
+          <span>Spatial views</span>
+          <strong>destination_tree</strong>
+          <div class="rguide-schema-relations"><small>boundaries_geojson</small></div>
+          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
+        </article>
+        <article class="rguide-schema-node rguide-schema-node--support">
+          <i class="material-symbols-outlined" aria-hidden="true">hub</i>
+          <span>Sources</span>
+          <strong>entity_sources</strong>
+          <div class="rguide-schema-relations"><small>source_id → sources</small></div>
+          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
+        </article>
+        <article class="rguide-schema-node rguide-schema-node--support">
+          <i class="material-symbols-outlined" aria-hidden="true">event</i>
+          <span>Event system</span>
+          <strong>events</strong>
+          <div class="rguide-schema-relations"><small>activations → occurrences</small><small>event_media · event_translations</small></div>
+          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
+        </article>
+        <article class="rguide-schema-node rguide-schema-node--support">
+          <i class="material-symbols-outlined" aria-hidden="true">category</i>
+          <span>Category fields</span>
+          <strong>venue_tags</strong>
+          <div class="rguide-schema-relations"><small>food · stay · nightlife</small></div>
+          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
+        </article>
+      </div>
+      <div class="rguide-schema-view-layer">
+        <article class="rguide-schema-node rguide-schema-node--derived rguide-schema-node--aggregate">
+          <i class="material-symbols-outlined" aria-hidden="true">account_tree</i>
+          <span>Combined guide data</span>
+          <strong>entries_maplist</strong>
+          <div class="rguide-schema-relations"><small>destinations + entries + stops + venues + sources</small></div>
+          <span class="rguide-schema-view-flow" aria-hidden="true"><i></i></span>
+        </article>
+      </div>
+      <div class="rguide-schema-delivery" aria-label="Prepared content path">
+        <article class="rguide-schema-node rguide-schema-node--derived">
+          <i class="material-symbols-outlined" aria-hidden="true">cached</i>
+          <span>Prepared guide</span>
+          <strong>entry_render_cache</strong>
+        </article>
+        <span class="rguide-schema-edge" aria-hidden="true"><i></i></span>
+        <article class="rguide-schema-node rguide-schema-node--derived">
+          <i class="material-symbols-outlined" aria-hidden="true">translate</i>
+          <span>Translated guide</span>
+          <strong>localized_cache</strong>
+        </article>
+        <span class="rguide-schema-edge" aria-hidden="true"><i></i></span>
+        <article class="rguide-schema-node rguide-schema-node--output">
+          <i class="material-symbols-outlined" aria-hidden="true">map</i>
+          <span>On screen</span>
+          <strong>explorer UI</strong>
+        </article>
+      </div>
+    </div>
+  </div>
+  <figcaption>
+    <span><i></i>Shared facts</span>
+    <span><i></i>Guide context</span>
+    <span><i></i>Prepared content</span>
+  </figcaption>
+</figure>
+</details>
+<div class="rg-brief rg-brief--filters">
+  <div class="rg-prose"><h3>Filters that reflect the choice</h3><p>Choosing a place to stay raises different questions from choosing a restaurant. I gave each category its own fields so the filters could reflect those differences.</p><p>For a stay, that might mean the type of lodging and its atmosphere. For a restaurant, it might mean the cuisine and when it serves food. The way the information is stored determines what the interface can help someone find.</p></div>
+  <aside class="rg-design-note"><span class="rg-eyebrow">A useful question</span><p>Where can I stay that feels social without being a party hostel?</p></aside>
+</div>
+
+<header class="rg-chapter" aria-labelledby="the-publishing">
+  <span class="rg-chapter-number" aria-hidden="true">04</span>
+  <div><p class="rg-eyebrow">Design the publishing process</p><h2 id="the-publishing">Make good content repeatable.</h2><p class="rg-chapter-lead">As the catalog grew, writing a guide became only part of the work. I built a publishing process that connects the research to the right places and checks the result before it reaches the site.</p></div>
+</header>
+<div class="rguide-pipeline" aria-label="The six stages of publishing a guide">
+  <div><span>01</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">travel_explore</i><strong>Research</strong><p>Start with a useful question and find sources that support the recommendations.</p></div>
+  <div><span>02</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">hub</i><strong>Match</strong><p>Connect each place to an existing venue record, or create one if it is new.</p></div>
+  <div><span>03</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">account_tree</i><strong>Shape</strong><p>Write the guide and arrange its stops into a sequence that makes sense.</p></div>
+  <div><span>04</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">image</i><strong>Complete</strong><p>Add the supporting images and check the details someone will need to visit.</p></div>
+  <div><span>05</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">publish</i><strong>Publish</strong><p>Prepare the guide for the interface and refresh the saved version.</p></div>
+  <div><span>06</span><i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">verified</i><strong>Verify</strong><p>Check the published page, including its sources and the places shown on the map.</p></div>
+</div>
+<p class="rg-editorial-note">I used the same approach for recurring work such as updating venue hours and preparing translations. Each process has a defined input and a result that can be checked.</p>
+<section class="rguide-resilience" aria-labelledby="rguide-resilience-title">
+  <header>
+    <span>When a service slows down</span>
+    <h3 id="rguide-resilience-title">Built to stay useful</h3>
+    <p>A slow database should not leave someone with an empty guide. I built a fallback that can serve the last verified content while the live service recovers.</p>
+  </header>
+  <div class="rguide-resilience-paths">
+    <article>
+      <div class="rguide-resilience-path-heading">
+        <i class="material-symbols-outlined" aria-hidden="true">cloud_done</i>
+        <span>Normal operation</span>
+        <b>01</b>
+      </div>
+      <h4>Show the latest guide</h4>
+      <p>The page requests the published content for the place being viewed. Shared records are already assembled into a guide the interface can display.</p>
+      <div class="rguide-resilience-flow" aria-label="Structured records flow to a published view and then to the explorer">
+        <span>Structured records</span><i aria-hidden="true">→</i><span>Published view</span><i aria-hidden="true">→</i><span>Explorer</span>
+      </div>
+    </article>
+    <article>
+      <div class="rguide-resilience-path-heading">
+        <i class="material-symbols-outlined" aria-hidden="true">offline_bolt</i>
+        <span>If a service is interrupted</span>
+        <b>02</b>
+      </div>
+      <h4>Keep the guide available</h4>
+      <p>A saved version keeps the essential guide and map available. Backup images help the page remain usable if an image service is interrupted.</p>
+      <div class="rguide-resilience-flow" aria-label="Verified guide data, boundary snapshots, and image fallbacks flow to the same explorer">
+        <span>Verified content</span><i aria-hidden="true">+</i><span>Saved map and media</span><i aria-hidden="true">→</i><span>Same explorer</span>
+      </div>
+    </article>
+  </div>
+  <footer>
+    <strong>Why this mattered</strong>
+    <p>Both versions use the same structure, so the interface can display either one. This also let me improve the database in stages without rebuilding the guide cards. All editing still happens in the primary records.</p>
+  </footer>
+</section>
+
+<header class="rg-chapter" aria-labelledby="the-platform">
+  <span class="rg-chapter-number" aria-hidden="true">05</span>
+  <div><p class="rg-eyebrow">Build for everyday use</p><h2 id="the-platform">Make the complexity earn its place.</h2><p class="rg-chapter-lead">The engineering decisions had to support the experience. I focused on loading what a person needs at that moment and keeping the guide useful as the amount of content grows.</p></div>
+</header>
+<div class="rguide-principles">
+  <article><span>Load what is in view</span><p>A city page requests its own content. It does not need to fetch every guide in the catalog.</p></article>
+  <article><span>Add detail when it matters</span><p>Neighborhood boundaries load as the traveler gets closer, keeping the first view lighter.</p></article>
+  <article><span>Prepare the guide once</span><p>Saved versions bring related records together before the interface asks for them.</p></article>
+  <article><span>Fit the image to the screen</span><p>The media process creates smaller versions for cards, so a small image does not require a large download.</p></article>
+</div>
+<details class="rg-deep-dive">
+  <summary><span>Inside the build</span><small>Technical decisions</small></summary>
+  <div class="rguide-system" aria-label="How the platform is built">
+    <details open><summary><span>01</span><strong>The interface</strong><small>Next.js</small></summary><div><p>I used Next.js to connect page routes with the map experience. Selecting a guide updates the visible content and its address together. Local interface state keeps those interactions responsive.</p></div></details>
+    <details><summary><span>02</span><strong>The records</strong><small>Supabase and PostGIS</small></summary><div><p>Supabase stores the shared content in Postgres. PostGIS connects places to their coordinates and geographic boundaries. Access policies allow public reading while controlling who can make changes.</p></div></details>
+    <details><summary><span>03</span><strong>The delivery</strong><small>Prepared content</small></summary><div><p>Database views assemble related records into the structure a guide needs. Versioned copies make those results reusable. Cloudflare R2 stores the images and their different sizes.</p></div></details>
+    <details><summary><span>04</span><strong>The upkeep</strong><small>Publishing tools</small></summary><div><p>I built scripts to handle recurring content work and verify the result. This made publishing easier to repeat as the number of destinations increased.</p></div></details>
+  </div>
+</details>
+<div class="rg-growth">
+  <header><p class="rg-eyebrow">Room to develop</p><h3>More ways into the same product</h3><p>I treated growth as an extension of the core experience. Each addition needed to make the existing guide more useful.</p></header>
+  <div class="rg-growth-rows">
+    <article><h4>Read in another language</h4><p>Spanish content uses the same underlying records as English. Translations can develop without creating a separate product to maintain.</p></article>
+    <article><h4>Find a guide through search</h4><p>City and guide pages have their own addresses and readable content before the interactive map loads.</p></article>
+    <article><h4>Come back to a place</h4><p>Profiles and saved places give people a reason to return. The site can also be installed on a phone for easier access.</p></article>
+    <article><h4>Support the service</h4><p>Relevant stays can link to booking partners. Those links sit within the guide context without determining its editorial order.</p></article>
+  </div>
+</div>
+
+<header class="rg-chapter" aria-labelledby="the-result">
+  <span class="rg-chapter-number" aria-hidden="true">06</span>
+  <div><p class="rg-eyebrow">Reflect on the result</p><h2 id="the-result">An idea that became a working product.</h2><p class="rg-chapter-lead">The initial build ran from April to August 2026. Over 105 calendar days, I took RGuide from a map prototype to a published platform covering 47 cities.</p></div>
+</header>
 <section class="rguide-impact" data-rguide-impact aria-label="RGuide production data snapshot from August 11, 2026">
   <div class="rguide-city-map" role="img" aria-label="World map marking cities with published RGuide content">
     <img src="/Projects/RGuide/world-outline.svg" alt="" aria-hidden="true" />
@@ -61,749 +511,96 @@ deliverables: ["Product strategy", "UX/UI", "Design system", "Data model", "Publ
     <i style="--x: 52.37%; --y: 23.68%; --delay: 450ms" data-city="Zurich"></i>
   </div>
   <header>
-    <span>Live platform footprint</span>
-    <strong class="rguide-impact-title">Travel knowledge,<br />mapped.</strong>
-    <p>Published city guides connected through one geographic system</p>
+    <span>August 2026 snapshot</span>
+    <strong class="rguide-impact-title">47 cities.<br />One way to explore.</strong>
+    <p>A working platform, built around the same relationship between guides and places.</p>
   </header>
   <div class="rguide-impact-data">
     <div><strong data-rguide-count="749">749</strong><span>Published entries</span></div>
     <div><strong data-rguide-count="5979">5,979</strong><span>Guide stops</span></div>
-    <div><strong data-rguide-count="4950">4,950</strong><span>Canonical venues</span></div>
-    <div><strong data-rguide-count="11362">11,362</strong><span>Source connections</span></div>
+    <div><strong data-rguide-count="4950">4,950</strong><span>Shared venue records</span></div>
+    <div><strong data-rguide-count="11362">11,362</strong><span>Links to sources</span></div>
     <div><strong data-rguide-count="24813">24,813</strong><span>Hours records</span></div>
-    <div><strong data-rguide-count="7364">7,364</strong><span>Localized records</span></div>
+    <div><strong data-rguide-count="7364">7,364</strong><span>Translated records</span></div>
   </div>
   <footer><span aria-hidden="true"></span><b>Production data · August 11, 2026</b><small>Map: <a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_world_map_without_borders.svg">Ebrahim / Natural Earth · CC BY-SA 4.0</a></small></footer>
 </section>
-
-<section class="rguide-opening" aria-label="Project summary">
-  <div class="rguide-opening-lower">
-    <p>RGuide turns researched city knowledge into a spatial product travelers can browse, trust, and use in place. I designed and engineered the complete platform—from the interaction model and responsive system to the database, publishing tools, media pipeline, localization, and production operations.</p>
-    <a class="rguide-live-link" href="https://www.rguide.co" target="_blank" rel="noreferrer">
-      <i class="material-symbols-outlined" aria-hidden="true">open_in_new</i>
-      <span>Explore the live product</span>
-    </a>
-  </div>
-  <div class="rguide-build-signals" aria-label="Build record">
-    <div><strong data-rguide-count="593">593</strong><span>Commits</span></div>
-    <div><strong data-rguide-count="71">71</strong><span>Active build days</span></div>
-    <div><strong>Apr 28 → Aug 10</strong><span>Prototype to platform</span></div>
-  </div>
-</section>
-
-<img class="rguide-online-mockup" src="/Projects/RGuide/rguide-imac-mockup.webp" alt="RGuide world explorer displayed on a desktop monitor" width="2800" height="1920" loading="lazy" decoding="async" />
-
-<section class="rguide-impact" data-rguide-impact hidden aria-hidden="true" aria-label="RGuide production data snapshot from August 11, 2026">
-  <div class="rguide-city-map" role="img" aria-label="World map marking cities with published RGuide content">
-    <img src="/Projects/RGuide/world-outline.svg" alt="" aria-hidden="true" />
-    <i style="--x: 51.36%; --y: 20.91%; --delay: 0ms" data-city="Amsterdam"></i>
-    <i style="--x: 56.59%; --y: 28.9%; --delay: 45ms" data-city="Athens"></i>
-    <i style="--x: 77.92%; --y: 42.36%; --delay: 90ms" data-city="Bangkok"></i>
-    <i style="--x: 50.6%; --y: 27.01%; --delay: 135ms" data-city="Barcelona"></i>
-    <i style="--x: 53.72%; --y: 20.82%; --delay: 180ms" data-city="Berlin"></i>
-    <i style="--x: 29.42%; --y: 47.38%; --delay: 225ms" data-city="Bogota"></i>
-    <i style="--x: 33.78%; --y: 69.22%; --delay: 270ms" data-city="Buenos Aires"></i>
-    <i style="--x: 53.49%; --y: 19.07%; --delay: 315ms" data-city="Copenhagen"></i>
-    <i style="--x: 30.01%; --y: 57.52%; --delay: 360ms" data-city="Cusco"></i>
-    <i style="--x: 65.35%; --y: 36%; --delay: 405ms" data-city="Dubai"></i>
-    <i style="--x: 48.26%; --y: 20.36%; --delay: 450ms" data-city="Dublin"></i>
-    <i style="--x: 53.13%; --y: 25.68%; --delay: 495ms" data-city="Florence"></i>
-    <i style="--x: 79.4%; --y: 38.32%; --delay: 0ms" data-city="Hanoi"></i>
-    <i style="--x: 81.71%; --y: 37.6%; --delay: 45ms" data-city="Hong Kong"></i>
-    <i style="--x: 58.05%; --y: 27.22%; --delay: 90ms" data-city="Istanbul"></i>
-    <i style="--x: 78.25%; --y: 48.26%; --delay: 135ms" data-city="Kuala Lumpur"></i>
-    <i style="--x: 87.71%; --y: 30.55%; --delay: 180ms" data-city="Kyoto"></i>
-    <i style="--x: 18.02%; --y: 29.91%; --delay: 225ms" data-city="Las Vegas"></i>
-    <i style="--x: 28.6%; --y: 56.69%; --delay: 270ms" data-city="Lima"></i>
-    <i style="--x: 47.46%; --y: 28.49%; --delay: 315ms" data-city="Lisbon"></i>
-    <i style="--x: 49.96%; --y: 21.38%; --delay: 360ms" data-city="London"></i>
-    <i style="--x: 17.15%; --y: 31.08%; --delay: 405ms" data-city="Los Angeles"></i>
-    <i style="--x: 48.97%; --y: 27.55%; --delay: 450ms" data-city="Madrid"></i>
-    <i style="--x: 29.01%; --y: 46.53%; --delay: 495ms" data-city="Medellin"></i>
-    <i style="--x: 90.27%; --y: 71.01%; --delay: 0ms" data-city="Melbourne"></i>
-    <i style="--x: 22.46%; --y: 39.2%; --delay: 45ms" data-city="Mexico City"></i>
-    <i style="--x: 27.72%; --y: 35.69%; --delay: 90ms" data-city="Miami"></i>
-    <i style="--x: 52.55%; --y: 24.74%; --delay: 135ms" data-city="Milan"></i>
-    <i style="--x: 53.22%; --y: 23.26%; --delay: 180ms" data-city="Munich"></i>
-    <i style="--x: 29.44%; --y: 27.38%; --delay: 225ms" data-city="New York City"></i>
-    <i style="--x: 27.39%; --y: 34.15%; --delay: 270ms" data-city="Orlando"></i>
-    <i style="--x: 87.64%; --y: 30.73%; --delay: 315ms" data-city="Osaka"></i>
-    <i style="--x: 50.65%; --y: 22.86%; --delay: 360ms" data-city="Paris"></i>
-    <i style="--x: 54.01%; --y: 22.18%; --delay: 405ms" data-city="Prague"></i>
-    <i style="--x: 53.47%; --y: 26.72%; --delay: 450ms" data-city="Rome"></i>
-    <i style="--x: 15.99%; --y: 29.01%; --delay: 495ms" data-city="San Francisco"></i>
-    <i style="--x: 30.37%; --y: 68.59%; --delay: 0ms" data-city="Santiago"></i>
-    <i style="--x: 85.27%; --y: 29.13%; --delay: 45ms" data-city="Seoul"></i>
-    <i style="--x: 83.74%; --y: 32.65%; --delay: 90ms" data-city="Shanghai"></i>
-    <i style="--x: 78.84%; --y: 49.25%; --delay: 135ms" data-city="Singapore"></i>
-    <i style="--x: 92%; --y: 68.82%; --delay: 180ms" data-city="Sydney"></i>
-    <i style="--x: 83.77%; --y: 36.09%; --delay: 225ms" data-city="Taipei"></i>
-    <i style="--x: 88.79%; --y: 30.18%; --delay: 270ms" data-city="Tokyo"></i>
-    <i style="--x: 27.95%; --y: 25.75%; --delay: 315ms" data-city="Toronto"></i>
-    <i style="--x: 53.42%; --y: 24.76%; --delay: 360ms" data-city="Venice"></i>
-    <i style="--x: 54.55%; --y: 23.22%; --delay: 405ms" data-city="Vienna"></i>
-    <i style="--x: 52.37%; --y: 23.68%; --delay: 450ms" data-city="Zurich"></i>
-  </div>
-  <header>
-    <span>Live platform footprint</span>
-    <strong class="rguide-impact-title">One platform,<br />built to scale.</strong>
-    <p>Published city guides connected through one geographic system</p>
-  </header>
-  <div class="rguide-impact-data">
-    <div><strong data-rguide-count="749">749</strong><span>Published entries</span></div>
-    <div><strong data-rguide-count="5979">5,979</strong><span>Guide stops</span></div>
-    <div><strong data-rguide-count="4950">4,950</strong><span>Canonical venues</span></div>
-    <div><strong data-rguide-count="11362">11,362</strong><span>Source connections</span></div>
-    <div><strong data-rguide-count="24813">24,813</strong><span>Hours records</span></div>
-    <div><strong data-rguide-count="7364">7,364</strong><span>Localized records</span></div>
-  </div>
-  <footer><span aria-hidden="true"></span><b>Production data · August 11, 2026</b><small>Map: <a href="https://commons.wikimedia.org/wiki/File:Equirectangular_projection_world_map_without_borders.svg">Ebrahim / Natural Earth · CC BY-SA 4.0</a></small></footer>
-</section>
-
-## From Prototype to Platform
-
-The product moved from a local-data map prototype to a production platform in 105 calendar days.
-
 <section class="rguide-timeline" data-rguide-timeline aria-label="Interactive RGuide product evolution">
   <header>
     <span>105 calendar days</span>
-    <strong>Prototype → product → platform</strong>
+    <strong>How the build developed</strong>
     <small>593 commits · 71 active days</small>
   </header>
   <div class="rguide-timeline-track">
     <span class="rguide-timeline-line" aria-hidden="true"><span data-rguide-timeline-progress></span></span>
-    <button type="button" aria-pressed="true" data-rguide-phase data-phase="01" data-title="Frame the experience" data-system="Interaction" data-copy="Built the split-screen explorer, responsive map behavior, route structure, and first local guide model.">
+    <button type="button" aria-pressed="true" data-rguide-phase data-phase="01" data-title="Start with the map" data-system="Interaction" data-copy="I built the first explorer to test how a map and a guide could work together.">
       <span>Apr 28</span><i aria-hidden="true"></i><strong>Prototype</strong>
     </button>
-    <button type="button" aria-pressed="false" data-rguide-phase data-phase="02" data-title="Make it live" data-system="Product" data-copy="Connected authentication, editable profiles, submissions, runtime editorial content, and crawlable city routes.">
+    <button type="button" aria-pressed="false" data-rguide-phase data-phase="02" data-title="Connect the content" data-system="Product" data-copy="I connected the interface to published content and gave each city its own address.">
       <span>Apr 29</span><i aria-hidden="true"></i><strong>Live data</strong>
     </button>
-    <button type="button" aria-pressed="false" data-rguide-phase data-phase="03" data-title="Normalize the product" data-system="Data" data-copy="Replaced blob records with reusable destinations, entries, stops, venues, sources, hours, events, and render views.">
-      <span>May 10</span><i aria-hidden="true"></i><strong>Normalize</strong>
+    <button type="button" aria-pressed="false" data-rguide-phase data-phase="03" data-title="Give each fact one home" data-system="Data" data-copy="I separated shared venue information from the story each guide tells about it.">
+      <span>May 10</span><i aria-hidden="true"></i><strong>Shared records</strong>
     </button>
-    <button type="button" aria-pressed="false" data-rguide-phase data-phase="04" data-title="Operationalize quality" data-system="Systems" data-copy="Added publishing and verification flows, boundaries, media ingestion, analytics, hours, and schema audits.">
-      <span>May 27</span><i aria-hidden="true"></i><strong>Operate</strong>
+    <button type="button" aria-pressed="false" data-rguide-phase data-phase="04" data-title="Make publishing repeatable" data-system="Systems" data-copy="I built checks into publishing so new guides could follow the same standards.">
+      <span>May 27</span><i aria-hidden="true"></i><strong>Publishing</strong>
     </button>
-    <button type="button" aria-pressed="false" data-rguide-phase data-phase="05" data-title="Scale the surface" data-system="Platform" data-copy="Expanded to 47 cities, hardened access, localized Spanish content, added responsive media, caches, and PWA installation.">
-      <span>Aug 10</span><i aria-hidden="true"></i><strong>Scale</strong>
+    <button type="button" aria-pressed="false" data-rguide-phase data-phase="05" data-title="Extend the platform" data-system="Platform" data-copy="The platform reached 47 cities. I added Spanish content and refined how the site loads on different devices.">
+      <span>Aug 10</span><i aria-hidden="true"></i><strong>47 cities</strong>
     </button>
   </div>
   <div class="rguide-timeline-detail" aria-live="polite">
     <span data-rguide-phase-number>01</span>
-    <div><strong data-rguide-phase-title>Frame the experience</strong><p data-rguide-phase-copy>Built the split-screen explorer, responsive map behavior, route structure, and first local guide model.</p></div>
+    <div><strong data-rguide-phase-title>Start with the map</strong><p data-rguide-phase-copy>I built the first explorer to test how a map and a guide could work together.</p></div>
     <small data-rguide-phase-system>Interaction</small>
   </div>
 </section>
-
-The governing decision stayed consistent: **increase the structure behind the interface without increasing the complexity in front of the traveler.**
-
-## The System at a Glance
-
-<div class="rguide-system" aria-label="Interactive RGuide system architecture">
-  <details open>
-    <summary>
-      <span>01</span>
-      <strong>Experience</strong>
-      <small>Map + route + responsive UI</small>
-    </summary>
-    <div>
-      <p>A Next.js App Router interface keeps the map, destination hierarchy, filters, guide rail, selected guide, and selected place synchronized. URLs represent real product state, so an interaction can also become a shareable and indexable page.</p>
-      <ul>
-        <li>Desktop split-screen and mobile sheet patterns</li>
-        <li>Map camera, boundary, marker, and guide-selection state</li>
-        <li>City, category, guide, event, venue, creator, and locale routes</li>
-      </ul>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <span>02</span>
-      <strong>Application</strong>
-      <small>Server reads + client state</small>
-    </summary>
-    <div>
-      <p>Server components and scoped endpoints assemble only the destination and guide data a route needs. Zustand and focused React hooks handle transient explorer state, favorites, itinerary workspaces, and places-been behavior without turning the database into UI state.</p>
-      <ul>
-        <li>Scoped app-data and editorial-guide reads</li>
-        <li>Authentication, profile, submission, and analytics endpoints</li>
-        <li>Static HTML and local fallbacks for graceful degradation</li>
-      </ul>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <span>03</span>
-      <strong>Data</strong>
-      <small>Normalized source of truth</small>
-    </summary>
-    <div>
-      <p>Supabase/Postgres stores destinations, venues, editorial entries, stops, events, schedules, classifications, hours, media, and citations as reusable records. PostGIS points and boundary polygons turn the editorial model into a geographic one.</p>
-      <ul>
-        <li>Relational records replace legacy blob-table workflows</li>
-        <li>Canonical venues share facts across many guides</li>
-        <li>Row-level policies separate public reading from controlled writes</li>
-      </ul>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <span>04</span>
-      <strong>Delivery</strong>
-      <small>Views + caches + media</small>
-    </summary>
-    <div>
-      <p>Database views and versioned render caches transform normalized records into the stable card shape expected by the interface. Cloudflare R2 holds canonical imagery and responsive renditions, while local snapshots protect key destination and boundary experiences from upstream outages.</p>
-      <ul>
-        <li>Normalized records → render view → versioned cache</li>
-        <li>Source image → canonical media → responsive renditions</li>
-        <li>Live data → scoped fallback → crawlable output</li>
-      </ul>
-    </div>
-  </details>
-  <details>
-    <summary>
-      <span>05</span>
-      <strong>Operations</strong>
-      <small>Publish + verify + learn</small>
-    </summary>
-    <div>
-      <p>Purpose-built scripts and runbooks make content operations repeatable. Guide publishing resolves entities, verifies structure and hours, ingests media, refreshes caches, and audits the final route. Localization, analytics, SEO, and event workflows use the same operational discipline.</p>
-      <ul>
-        <li>Guide, event, media, hours, and translation pipelines</li>
-        <li>Schema, content-source, SEO, and publish verification</li>
-        <li>First-party click analytics and affiliate attribution</li>
-      </ul>
-    </div>
-  </details>
-</div>
-
-## Designing the Data Model
-
-The key implementation change was separating authored content from its rendered presentation. Initially, content moved quickly as local objects, but each guide duplicated destinations, venue details, images, and sources. This made scaling fragile: a venue closure or change in opening hours could require updates across multiple unrelated lists.
-
-The normalized model gives each fact one owner and lets guides compose those facts into an editorial point of view.
-
-<figure class="rguide-schema" data-rguide-schema aria-labelledby="rguide-schema-title">
-  <header>
-    <span id="rguide-schema-title">Production schema · core relationships</span>
-    <p>Canonical records converge through secure views, versioned caches, and localized delivery.</p>
-  </header>
-  <div class="rguide-schema-viewport" tabindex="0" role="group" aria-label="Scrollable core production data schema">
-    <div class="rguide-schema-diagram">
-      <div class="rguide-schema-primary">
-        <article class="rguide-schema-node">
-          <i class="material-symbols-outlined" aria-hidden="true">location_on</i>
-          <span>Geography</span>
-          <strong>destinations</strong>
-          <div class="rguide-schema-relations">
-            <small>parent_id → destinations</small>
-            <small>destination_boundaries</small>
-            <small>destination_translations</small>
-          </div>
-          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
-        </article>
-        <span class="rguide-schema-edge rguide-schema-edge--reverse" aria-hidden="true"><i></i></span>
-        <article class="rguide-schema-node rguide-schema-node--accent">
-          <i class="material-symbols-outlined" aria-hidden="true">article</i>
-          <span>Editorial</span>
-          <strong>entries</strong>
-          <div class="rguide-schema-relations">
-            <small>destination_id → destinations</small>
-            <small>entry_translations</small>
-            <small>entry_render_cache</small>
-          </div>
-          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
-        </article>
-        <span class="rguide-schema-edge" aria-hidden="true"><i></i></span>
-        <article class="rguide-schema-node">
-          <i class="material-symbols-outlined" aria-hidden="true">route</i>
-          <span>Join model</span>
-          <strong>entry_stops</strong>
-          <div class="rguide-schema-relations">
-            <small>entry_id → entries</small>
-            <small>venue_id → venues</small>
-            <small>event_occurrence_id → events</small>
-          </div>
-          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
-        </article>
-        <span class="rguide-schema-edge rguide-schema-edge--both" aria-hidden="true"><i></i></span>
-        <article class="rguide-schema-node">
-          <i class="material-symbols-outlined" aria-hidden="true">storefront</i>
-          <span>Canonical place</span>
-          <strong>venues</strong>
-          <div class="rguide-schema-relations">
-            <small>venue_hours · special_hours</small>
-            <small>venue_media</small>
-            <small>venue_taggings → venue_tags</small>
-            <small>venue_translations</small>
-          </div>
-          <span class="rguide-schema-row-flow" aria-hidden="true"><i></i></span>
-        </article>
-      </div>
-      <div class="rguide-schema-support">
-        <article class="rguide-schema-node rguide-schema-node--support">
-          <i class="material-symbols-outlined" aria-hidden="true">polyline</i>
-          <span>Spatial views</span>
-          <strong>destination_tree</strong>
-          <div class="rguide-schema-relations"><small>boundaries_geojson</small></div>
-          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
-        </article>
-        <article class="rguide-schema-node rguide-schema-node--support">
-          <i class="material-symbols-outlined" aria-hidden="true">hub</i>
-          <span>Provenance</span>
-          <strong>entity_sources</strong>
-          <div class="rguide-schema-relations"><small>source_id → sources</small></div>
-          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
-        </article>
-        <article class="rguide-schema-node rguide-schema-node--support">
-          <i class="material-symbols-outlined" aria-hidden="true">event</i>
-          <span>Event system</span>
-          <strong>events</strong>
-          <div class="rguide-schema-relations"><small>activations → occurrences</small><small>event_media · event_translations</small></div>
-          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
-        </article>
-        <article class="rguide-schema-node rguide-schema-node--support">
-          <i class="material-symbols-outlined" aria-hidden="true">category</i>
-          <span>Typed taxonomy</span>
-          <strong>venue_tags</strong>
-          <div class="rguide-schema-relations"><small>food · stay · nightlife</small></div>
-          <span class="rguide-schema-drop" aria-hidden="true"><i></i></span>
-        </article>
-      </div>
-      <div class="rguide-schema-view-layer">
-        <article class="rguide-schema-node rguide-schema-node--derived rguide-schema-node--aggregate">
-          <i class="material-symbols-outlined" aria-hidden="true">account_tree</i>
-          <span>Security-invoker view</span>
-          <strong>entries_maplist</strong>
-          <div class="rguide-schema-relations"><small>destinations + entries + stops + venues + sources</small></div>
-          <span class="rguide-schema-view-flow" aria-hidden="true"><i></i></span>
-        </article>
-      </div>
-      <div class="rguide-schema-delivery" aria-label="Derived delivery path">
-        <article class="rguide-schema-node rguide-schema-node--derived">
-          <i class="material-symbols-outlined" aria-hidden="true">cached</i>
-          <span>Versioned payload</span>
-          <strong>entry_render_cache</strong>
-        </article>
-        <span class="rguide-schema-edge" aria-hidden="true"><i></i></span>
-        <article class="rguide-schema-node rguide-schema-node--derived">
-          <i class="material-symbols-outlined" aria-hidden="true">translate</i>
-          <span>Locale payload</span>
-          <strong>localized_cache</strong>
-        </article>
-        <span class="rguide-schema-edge" aria-hidden="true"><i></i></span>
-        <article class="rguide-schema-node rguide-schema-node--output">
-          <i class="material-symbols-outlined" aria-hidden="true">map</i>
-          <span>Product surface</span>
-          <strong>explorer UI</strong>
-        </article>
-      </div>
-    </div>
-  </div>
-  <figcaption>
-    <span><i></i>Canonical truth</span>
-    <span><i></i>Editorial meaning</span>
-    <span><i></i>Derived delivery</span>
-  </figcaption>
-</figure>
-
-This structure supports both reuse and editorial specificity. A venue owns its address, coordinates, operating state, classification, hours, and canonical media. A guide stop owns the reason that venue belongs in a particular story, its order, contextual copy, and journey timing. Updating shared truth no longer erases the authorial reason for inclusion.
-
-### A Typed Taxonomy Instead of Generic Tags
-
-Different kinds of places call for different ways to filter them. A hotel is not evaluated like a restaurant, and a nightlife venue is not described like a trail or cultural site. The schema reflects those differences with fields tailored to the questions each category raises. It can distinguish how a place serves food, what kind of lodging it offers, whether a bar is centered on cocktails or music, and how its price and other curated attributes should be understood. This keeps the system more useful than a single list of generic tags.
-
-That structure lets the interface answer practical questions. *Which neighborhoods are best for cocktail bars? Where can you find a social stay that is not a party hostel? Which restaurants are dependable after midnight?* The filters come directly from the way the content is modeled.
-
-## Building the Publishing Engine
-
-Content quality depends on operations, not only copy. I created a repeatable pipeline that treats a guide as a dataset with editorial judgment.
-
-<div class="rguide-pipeline" aria-label="RGuide publishing pipeline">
-  <div>
-    <span>01</span>
-    <i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">travel_explore</i>
-    <strong>Research</strong>
-    <p>Define the user need, guide scope, authoritative sources, and minimum stop quality.</p>
-  </div>
-  <div>
-    <span>02</span>
-    <i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">hub</i>
-    <strong>Resolve</strong>
-    <p>Match destinations and reuse canonical venues before creating any new entity.</p>
-  </div>
-  <div>
-    <span>03</span>
-    <i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">account_tree</i>
-    <strong>Structure</strong>
-    <p>Write entries and ordered stops with classification, coordinates, sources, and hours.</p>
-  </div>
-  <div>
-    <span>04</span>
-    <i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">auto_awesome</i>
-    <strong>Enrich</strong>
-    <p>Ingest canonical media, responsive renditions, boundaries, and provider-backed details.</p>
-  </div>
-  <div>
-    <span>05</span>
-    <i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">publish</i>
-    <strong>Publish</strong>
-    <p>Generate render views, refresh current caches, and expose the guide through scoped routes.</p>
-  </div>
-  <div>
-    <span>06</span>
-    <i class="material-symbols-outlined rguide-pipeline-icon" aria-hidden="true">verified</i>
-    <strong>Verify</strong>
-    <p>Audit hours, sources, schema shape, media, URLs, SEO output, and live rendering.</p>
-  </div>
-</div>
-
-The repository contains dedicated workflows for editorial guides, destination descriptions, city boundaries, venue hours, weekly events, R2 media, translation batches, cache refreshes, and verification. These are small operational products inside the product: each one defines inputs, quality gates, failure handling, and a deterministic output.
-
-<section class="rguide-resilience" aria-labelledby="rguide-resilience-title">
-  <header>
-    <span>Product resilience</span>
-    <h3 id="rguide-resilience-title">Built to stay useful</h3>
-    <p>A travel guide should not disappear because a database or image service is temporarily slow.<br />RGuide prepares a verified version of published content so the essential experience can remain available.</p>
-  </header>
-  <div class="rguide-resilience-paths">
-    <article>
-      <div class="rguide-resilience-path-heading">
-        <i class="material-symbols-outlined" aria-hidden="true">cloud_done</i>
-        <span>Normal operation</span>
-        <b>01</b>
-      </div>
-      <h4>Serve the newest published version.</h4>
-      <p>Structured destination, venue, hours, source, and media records are assembled into a frontend-ready guide. The interface requests only the city or guide the traveler is viewing.</p>
-      <div class="rguide-resilience-flow" aria-label="Structured records flow to a published view and then to the explorer">
-        <span>Structured records</span><i aria-hidden="true">→</i><span>Published view</span><i aria-hidden="true">→</i><span>Explorer</span>
-      </div>
-    </article>
-    <article>
-      <div class="rguide-resilience-path-heading">
-        <i class="material-symbols-outlined" aria-hidden="true">offline_bolt</i>
-        <span>If a service is interrupted</span>
-        <b>02</b>
-      </div>
-      <h4>Use the last verified version.</h4>
-      <p>Saved guide content, map boundaries, destination descriptions, and image fallbacks keep the page usable while the live service recovers.</p>
-      <div class="rguide-resilience-flow" aria-label="Verified guide data, boundary snapshots, and image fallbacks flow to the same explorer">
-        <span>Verified content</span><i aria-hidden="true">+</i><span>Saved map and media</span><i aria-hidden="true">→</i><span>Same explorer</span>
-      </div>
-    </article>
-  </div>
-  <footer>
-    <strong>Why this mattered</strong>
-    <p>Both paths deliver content in the same predictable structure. That let me replace the original all-in-one JSON records with a normalized data model in stages—without redesigning the guide cards, routes, or map interactions. The backup remains a read-only copy of published content, never a second place to edit it.</p>
-  </footer>
-</section>
-
-<section class="rguide-design-system" aria-labelledby="rguide-design-system-title">
-  <header class="rguide-ds-intro">
-    <div>
-      <span>Production interface system</span>
-      <h3 id="rguide-design-system-title">A reusable product language.</h3>
-    </div>
-    <p>The wireframes isolate the logic behind the interface before the visual system is applied: geographic orientation stays visible, guides remain comparable, and every editorial claim resolves into a useful place.</p>
-  </header>
-  <article class="rguide-ds-sheet rguide-ds-sheet--structure" aria-labelledby="rguide-ds-structure-title">
-    <header class="rguide-ds-sheet-header">
-      <h4 id="rguide-ds-structure-title">Two scales, one model</h4>
-      <small>From product shell to guide detail</small>
-    </header>
-    <div class="rguide-ds-wireframes">
-      <figure class="rguide-ds-specimen rguide-ds-specimen--home-shell">
-        <figcaption><b>01</b><span><strong>Explorer layout</strong><small>Homepage / persistent geographic context</small></span></figcaption>
-        <div class="rguide-ds-layout-theory">
-          <ol class="rguide-ds-theory-key">
-            <li><b>01</b><span><strong>Browse by hierarchy</strong><small>The left rail narrows the world into regions, countries, cities, and neighborhoods.</small></span></li>
-            <li><b>02</b><span><strong>Keep position visible</strong><small>The map remains present while the traveler changes scope or compares options.</small></span></li>
-            <li><b>03</b><span><strong>Filter consistently</strong><small>The same category system follows the traveler through every geographic level.</small></span></li>
-            <li><b>04</b><span><strong>Compare before opening</strong><small>The guide index summarizes the choice before revealing the full editorial route.</small></span></li>
-          </ol>
-          <article class="rguide-ds-home-wireframe" aria-label="Annotated wireframe showing the RGuide homepage as navigation, map, filters, and guide index">
-            <ol class="rguide-ds-callouts rguide-ds-callouts--home" aria-hidden="true">
-              <li style="--x:14%;--line:4.3rem">01</li><li style="--x:46%;--line:6.5rem">02</li><li style="--x:73%;--line:8.4rem">03</li><li style="--x:91%;--line:14.5rem">04</li>
-            </ol>
-            <aside class="rguide-ds-home-nav">
-              <small class="rguide-ds-wf-label">Destination hierarchy</small>
-              <div class="rguide-ds-home-heading"><i></i><i></i></div>
-              <div class="rguide-ds-home-rows">
-                <span><i></i><em><b></b><small></small></em></span>
-                <span><i></i><em><b></b><small></small></em></span>
-                <span><i></i><em><b></b><small></small></em></span>
-                <span><i></i><em><b></b><small></small></em></span>
-              </div>
-            </aside>
-            <div class="rguide-ds-home-map">
-              <small class="rguide-ds-wf-label">Persistent map</small>
-              <div class="rguide-ds-map-streets" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <b style="--x:31%;--y:31%"></b><b style="--x:67%;--y:24%"></b><b style="--x:48%;--y:66%"></b><b style="--x:76%;--y:55%"></b>
-              <div class="rguide-ds-map-controls" aria-hidden="true"><i>+</i><i>−</i></div>
-            </div>
-            <section class="rguide-ds-home-index">
-              <header><small class="rguide-ds-wf-label">Guide index</small><div><i></i><i></i></div><span><i></i><i></i></span></header>
-              <nav><small>Shared filters</small><div><i></i><i></i><i></i><i></i></div></nav>
-              <div class="rguide-ds-home-cards">
-                <small class="rguide-ds-wf-label">Comparable guide cards</small>
-                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
-                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
-                <article><figure><i class="material-symbols-outlined" aria-hidden="true">image</i></figure><span><b></b><small></small><small></small></span><em><i></i><i></i></em></article>
-              </div>
-            </section>
-          </article>
-        </div>
-      </figure>
-      <figure class="rguide-ds-specimen rguide-ds-specimen--guide-shell">
-        <figcaption><b>02</b><span><strong>Guide module</strong><small>MapListCardShell / editorial information hierarchy</small></span></figcaption>
-        <div class="rguide-ds-guide-theory">
-          <ol class="rguide-ds-theory-key">
-            <li><b>01</b><span><strong>Orient</strong><small>Name the guide, its category, scope, and available actions.</small></span></li>
-            <li><b>02</b><span><strong>Keep context</strong><small>Expose adjacent guides without ejecting the traveler from the city.</small></span></li>
-            <li><b>03</b><span><strong>Explain and prove</strong><small>Pair editorial rationale with sources and an ordered visual route.</small></span></li>
-            <li><b>04</b><span><strong>Resolve to action</strong><small>Turn the guide’s argument into a specific place a traveler can use.</small></span></li>
-          </ol>
-          <article class="rguide-ds-wireframe" aria-label="Annotated wireframe showing the four layers of an RGuide guide module">
-            <header class="rguide-ds-wf-identity">
-              <div class="rguide-ds-wf-title"><i></i><i></i></div>
-              <div class="rguide-ds-wf-actions"><i></i><i></i><i></i></div>
-            </header>
-            <section class="rguide-ds-wf-related">
-              <small>Related guides in current destination</small>
-              <div><i></i><i></i><i></i><i></i></div>
-            </section>
-            <section class="rguide-ds-wf-context">
-              <div class="rguide-ds-wf-context-copy">
-                <small>Editorial rationale</small>
-                <i></i><i></i><i></i><i></i>
-              </div>
-              <div class="rguide-ds-wf-proof">
-                <small>Sources</small>
-                <span><i></i><i></i><i></i></span>
-              </div>
-              <div class="rguide-ds-wf-stops">
-                <small>Ordered places</small>
-                <ol><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li></ol>
-              </div>
-            </section>
-            <section class="rguide-ds-wf-place">
-              <div class="rguide-ds-wf-photo"><i class="material-symbols-outlined" aria-hidden="true">image</i></div>
-              <div class="rguide-ds-wf-place-copy"><strong></strong><i></i><i></i><i></i><span></span></div>
-              <div class="rguide-ds-wf-place-actions"><i></i><i></i><i></i></div>
-            </section>
-          </article>
-        </div>
-      </figure>
-    </div>
-  </article>
-  <article class="rguide-ds-sheet" aria-labelledby="rguide-ds-foundations-title">
-    <header class="rguide-ds-sheet-header">
-      <h4 id="rguide-ds-foundations-title">Tokens and controls</h4>
-      <small>Small rules establish system-wide behavior</small>
-    </header>
-    <div class="rguide-ds-foundations">
-      <figure class="rguide-ds-specimen rguide-ds-specimen--categories">
-        <figcaption><b>01</b><span><strong>Category tokens</strong><small>Label · icon · map color · POI color</small></span></figcaption>
-        <div class="rguide-ds-category-list" aria-label="RGuide category tokens">
-          <span style="--category:#f59e0b"><i class="material-symbols-outlined" aria-hidden="true">restaurant</i><b>Food</b><small>#F59E0B</small></span>
-          <span style="--category:#6366f1"><i class="material-symbols-outlined" aria-hidden="true">nightlife</i><b>Nightlife</b><small>#6366F1</small></span>
-          <span style="--category:#f43f5e"><i class="material-symbols-outlined" aria-hidden="true">museum</i><b>Culture</b><small>#F43F5E</small></span>
-          <span style="--category:#0891b2"><i class="material-symbols-outlined" aria-hidden="true">bed</i><b>Stay</b><small>#0891B2</small></span>
-          <span style="--category:#10b981"><i class="material-symbols-outlined" aria-hidden="true">park</i><b>Nature</b><small>#10B981</small></span>
-          <span style="--category:#f97316"><i class="material-symbols-outlined" aria-hidden="true">local_activity</i><b>Activities</b><small>#F97316</small></span>
-          <span style="--category:#2563eb"><i class="material-symbols-outlined" aria-hidden="true">route</i><b>Routes</b><small>#2563EB</small></span>
-          <span style="--category:#7c3aed"><i class="material-symbols-outlined" aria-hidden="true">info</i><b>Essentials</b><small>#7C3AED</small></span>
-        </div>
-      </figure>
-      <figure class="rguide-ds-specimen rguide-ds-specimen--actions">
-        <figcaption><b>02</b><span><strong>Action family</strong><small>Rest · hover · selected</small></span></figcaption>
-        <div class="rguide-ds-actions" aria-label="Guide action button states">
-          <button type="button" aria-label="Add guide"><i class="material-symbols-outlined" aria-hidden="true">add</i></button>
-          <button type="button" aria-label="Save guide"><i class="material-symbols-outlined" aria-hidden="true">favorite</i></button>
-          <button type="button" class="is-active" aria-label="Saved guide"><i class="material-symbols-outlined" aria-hidden="true">favorite</i></button>
-          <button type="button" aria-label="Expand guide"><i class="material-symbols-outlined" aria-hidden="true">expand_more</i></button>
-          <button type="button" class="rguide-ds-action-square" aria-label="Search"><i class="material-symbols-outlined" aria-hidden="true">search</i></button>
-        </div>
-      </figure>
-      <figure class="rguide-ds-specimen rguide-ds-specimen--markers">
-        <figcaption><b>03</b><span><strong>Map markers</strong><small>Guide stop · selected stop · nested POI</small></span></figcaption>
-        <div class="rguide-ds-markers" aria-label="Map marker hierarchy">
-          <span class="rguide-ds-marker" style="--marker:#f59e0b">1</span>
-          <span class="rguide-ds-marker is-selected" style="--marker:#f59e0b">5</span>
-          <span class="rguide-ds-marker" style="--marker:#6366f1">8</span>
-          <span class="rguide-ds-marker rguide-ds-marker--nested" style="--marker:#f59e0b">A</span>
-        </div>
-      </figure>
-      <figure class="rguide-ds-specimen rguide-ds-specimen--route">
-        <figcaption><b>04</b><span><strong>Route hierarchy</strong><small>The navigation model becomes the URL model</small></span></figcaption>
-        <nav class="rguide-ds-route" aria-label="Example geographic route">
-          <span>World</span><i aria-hidden="true">→</i><span>Europe</span><i aria-hidden="true">→</i><span>Spain</span><i aria-hidden="true">→</i><strong>Barcelona</strong>
-        </nav>
-      </figure>
-      <figure class="rguide-ds-specimen rguide-ds-specimen--sources">
-        <figcaption><b>05</b><span><strong>Source proof</strong><small>Editorial claims keep visible provenance</small></span></figcaption>
-        <div class="rguide-ds-source-row">
-          <span>Sourced</span><i aria-hidden="true"></i>
-          <div aria-label="Source publishers"><b>E</b><b>G</b><b>G</b></div>
-          <strong>Eater, local publishers +2</strong>
-          <i class="material-symbols-outlined" aria-hidden="true">expand_more</i>
-        </div>
-      </figure>
-    </div>
-  </article>
-  <article class="rguide-ds-sheet rguide-ds-sheet--proof" aria-labelledby="rguide-ds-proof-title">
-    <header class="rguide-ds-sheet-header">
-      <h4 id="rguide-ds-proof-title">The system in use</h4>
-      <small>City orientation → expanded editorial guide</small>
-    </header>
-    <div class="rguide-ds-product-proof">
-      <figure class="rguide-ds-product-view">
-        <figcaption><b>01</b><span><strong>City view</strong><small>Barcelona / orientation and guide comparison</small></span></figcaption>
-        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open City view at full size">
-          <img src="/Projects/RGuide/rguide-barcelona-city-hd.png" alt="RGuide Barcelona city view with destination context, map, filters, neighborhoods, and guide index" width="1600" height="900" loading="lazy" decoding="async" />
-        </button>
-      </figure>
-      <figure class="rguide-ds-product-view">
-        <figcaption><b>02</b><span><strong>Expanded guide</strong><small>Editorial rationale / sources / ordered places</small></span></figcaption>
-        <button type="button" class="rguide-ds-product-zoom" data-project-lightbox-trigger aria-label="Open Expanded guide at full size">
-          <img src="/Projects/RGuide/rguide-barcelona-expanded-hd.png" alt="RGuide Barcelona late-night food guide showing synchronized map markers, source-backed copy, ordered places, and place details" width="1600" height="900" loading="lazy" decoding="async" />
-        </button>
-      </figure>
-    </div>
-  </article>
-</section>
-
-The interface uses one consistent mental model across scales. The left side answers **where am I?** The map answers **how does it relate spatially?** The guide rail answers **what is worth doing and why?** Selecting a destination, neighborhood, category, guide, or place updates the other surfaces rather than creating disconnected navigation modes.
-
-### Interaction and Routing Work Together
-
-- City and neighborhood boundaries load only when they become relevant.
-- Guide markers, selected places, and the camera share one state model.
-- Expanded guides update the URL immediately, preserving the current destination and category context.
-- Each city, category, guide, event, and venue has crawlable server-rendered output in addition to the interactive explorer.
-- The responsive system reorganizes the same hierarchy into mobile controls and sheets rather than reducing it to a separate, weaker product.
-
-## Performance and Delivery Systems
-
-Map products become slow when everything is treated as global. RGuide instead reduces work at every layer.
-
-<div class="rguide-principles">
-  <article>
-    <span>Scoped reads</span>
-    <p>Routes request the current city, destination, or guide instead of repeatedly loading the complete editorial catalog.</p>
-  </article>
-  <article>
-    <span>Deferred geography</span>
-    <p>Neighborhood scoring and boundary geometry wait until the user reaches the relevant destination scope.</p>
-  </article>
-  <article>
-    <span>Render caches</span>
-    <p>Normalized joins are converted into versioned, frontend-ready payloads with an explicit current-cache contract.</p>
-  </article>
-  <article>
-    <span>Responsive media</span>
-    <p>R2 ingestion creates canonical, deduplicated image records and right-sized renditions for cards and details.</p>
-  </article>
-  <article>
-    <span>Stable crawling</span>
-    <p>Metadata, sitemaps, canonical URLs, server output, and local fallbacks keep search access independent of client interaction.</p>
-  </article>
-  <article>
-    <span>Installable product</span>
-    <p>A web manifest and service worker turn the responsive site into an installable web app without forking the experience.</p>
-  </article>
-</div>
-
-## Systems for Growth
-
-The same architecture supports product growth without turning the core explorer into an advertising shell.
-
-- **Localization:** normalized translation tables and locale-specific render caches preserve one canonical English record while delivering complete Spanish routes, metadata, and sitemaps.
-- **SEO:** city, category, query-focused guide, event, venue, country, and continent routes translate explorer state into useful entry points for search.
-- **Analytics:** first-party click collection batches events, records campaign context, and powers a protected internal dashboard while retaining a Vercel analytics layer.
-- **Monetization:** stay calls-to-action use city and guide context to create attributable affiliate routes without changing editorial ranking.
-- **Participation:** authentication, profiles, favorites, saved places, and controlled guide submission add user value while keeping public write paths gated.
-
 <figure
   class="rguide-traffic"
   data-rguide-traffic
-  data-points="0,1176,2420,2703,3862,4401,4658,5094,5541,5935,6103,6871,7360,7455,7710,7912,8267,8622,8977,9332"
-  data-labels="Apr 27,May 04,May 11,May 18,May 25,Jun 01,Jun 08,Jun 15,Jun 22,Jun 29,Jul 06,Jul 13,Jul 20,Jul 27,Aug 03,Aug 10,Aug 17,Aug 24,Aug 31,Sep 07"
+  data-points="0,1176,2420,2703,3862,4401,4658,5094,5541,5935,6103,6871,7360,7455,7710,7912"
+  data-labels="Apr 27,May 04,May 11,May 18,May 25,Jun 01,Jun 08,Jun 15,Jun 22,Jun 29,Jul 06,Jul 13,Jul 20,Jul 27,Aug 03,Aug 10"
   data-actual-count="16"
   aria-labelledby="rguide-traffic-title"
 >
   <header>
     <div>
-      <span>Production traffic · Cumulative pageview growth</span>
-      <h3 id="rguide-traffic-title">Pageview growth, actual to projected.</h3>
-      <p>The solid line accumulates verified production pageviews. The dotted continuation projects the recent viewing rate forward four weeks.</p>
+      <span>Recorded use</span>
+      <h3 id="rguide-traffic-title">People began using it</h3>
+      <p>The saved analytics show 7,912 pageviews and 1,115 unique visitors during the initial build. These figures describe early use, not whether every recommendation helped someone make a better decision.</p>
     </div>
     <dl>
       <div><dt>Observed pageviews</dt><dd data-rguide-count="7912">7,912</dd></div>
       <div><dt>Unique visitors</dt><dd data-rguide-count="1115">1,115</dd></div>
-      <div><dt>Four-week projection</dt><dd data-rguide-count="9332">9,332</dd></div>
     </dl>
   </header>
   <div class="rguide-traffic-stage">
     <canvas
       data-rguide-traffic-canvas
       role="img"
-      aria-label="Cumulative pageviews rise from zero on April 27 to 7,912 observed pageviews on August 10, 2026, followed by a four-week projection reaching 9,332 pageviews by September 7."
+      aria-label="Cumulative pageviews rise from zero on April 27 to 7,912 on August 10, 2026."
     ></canvas>
     <output class="rguide-traffic-tooltip" data-rguide-traffic-tooltip hidden></output>
   </div>
   <figcaption>
-    <span class="rguide-traffic-key"><i aria-hidden="true"></i> Observed cumulative pageviews</span>
-    <span class="rguide-traffic-key rguide-traffic-key--projection"><i aria-hidden="true"></i> Projected cumulative pageviews</span>
-    <span>Vercel Web Analytics · Production · Apr 28–Aug 12, 2026 · UTC</span>
-    <span>Projection: trailing five complete-week average · +355/week</span>
+    <span class="rguide-traffic-key"><i aria-hidden="true"></i> Recorded pageviews</span>
+    <span>Source: saved Vercel Web Analytics snapshot, April to August 2026</span>
   </figcaption>
 </figure>
-
-<section class="rguide-build-proof" aria-labelledby="rguide-build-proof-title">
-  <header>
-    <span>Implementation outcome</span>
-    <h2 id="rguide-build-proof-title">What the build proved.</h2>
-    <p>RGuide proved that a travel platform can grow without making the traveler experience harder to use. From the first prototype to 749 published entries, the interface kept the same clear pattern while the system underneath became more structured and reusable.</p>
-  </header>
-  <div class="rguide-proof-grid">
-    <article>
-      <div><i class="material-symbols-outlined" aria-hidden="true">database</i><b>01</b></div>
-      <span>Reusable foundation</span>
-      <h3>Facts are stored once.</h3>
-      <p>Destinations, venues, events, hours, sources, and images each have one shared record instead of being copied into every guide.</p>
-      <small>Correct a fact once; every guide that uses it receives the update.</small>
-    </article>
-    <article>
-      <div><i class="material-symbols-outlined" aria-hidden="true">edit_note</i><b>02</b></div>
-      <span>Editorial layer</span>
-      <h3>Guides add the meaning.</h3>
-      <p>Editors can explain why a place matters, when to visit, and where it belongs in a route without rewriting its underlying facts.</p>
-      <small>Shared data stays accurate while every guide keeps its own point of view.</small>
-    </article>
-    <article>
-      <div><i class="material-symbols-outlined" aria-hidden="true">speed</i><b>03</b></div>
-      <span>Fast delivery</span>
-      <h3>The interface stays simple.</h3>
-      <p>Focused APIs, ready-to-render views, responsive images, caches, and fallbacks keep the map fast as the catalog grows.</p>
-      <small>Travelers see a consistent product—not the complexity behind it.</small>
-    </article>
-  </div>
-  <footer>
-    <strong>The result</strong>
-    <p>RGuide can add cities, languages, content, and contributors without redesigning the product for every destination. Editors get a dependable publishing system, and travelers get the same clear journey from world to street.</p>
-  </footer>
-</section>
-
+<div class="rg-reflection">
+  <p class="rg-eyebrow">What I took from the project</p>
+  <h3>The experience depends on what sits behind it.</h3>
+  <div><p>Building RGuide made one thing clear to me: the interface cannot do its job alone. A filter is only useful if the information behind it supports the choice. A guide is only dependable if its details can be maintained.</p><p>The most valuable work was getting those decisions to support each other. It gave me a platform I could keep developing, with a clear relationship between what someone sees and how it is managed.</p></div>
+</div>
 <section class="rguide-closing-film" aria-labelledby="rguide-closing-film-title">
   <header>
     <div>
-      <span>Live product walkthrough · 32 sec</span>
-      <h2 id="rguide-closing-film-title">World to street.</h2>
+      <span>See it in use</span>
+      <h3 id="rguide-closing-film-title">From the world to a street</h3>
     </div>
     <div class="rguide-closing-hierarchy">
-      <span>Navigation hierarchy</span>
-      <p>The same geographic model carries a traveler from broad orientation to a useful, editorially curated route.</p>
+      <span>A closer look</span>
+      <p>The walkthrough follows one journey into Barcelona. Each step brings the choice closer without losing its place on the map.</p>
       <p class="rguide-hierarchy-path" aria-label="World to continent to country to city to neighborhood to guide">
         <b>World</b><i aria-hidden="true">→</i><b>Continent</b><i aria-hidden="true">→</i><b>Country</b><i aria-hidden="true">→</i><b>City</b><i aria-hidden="true">→</i><b>Neighborhood</b><i aria-hidden="true">→</i><b>Guide</b>
       </p>
@@ -811,7 +608,6 @@ The same architecture supports product growth without turning the core explorer 
   </header>
   <figure>
     <video
-      autoplay
       muted
       loop
       playsinline
@@ -829,40 +625,45 @@ The same architecture supports product growth without turning the core explorer 
       <span>01</span>
       <small>Orient</small>
       <strong>World</strong>
-      <p>Begin with a spatial overview of available travel knowledge.</p>
+      <p>Start with the places covered by the platform.</p>
     </li>
     <li>
       <span>02</span>
       <small>Focus</small>
       <strong>Europe</strong>
-      <p>Move from the global index into a browsable regional collection.</p>
+      <p>Choose a part of the world to explore.</p>
     </li>
     <li>
       <span>03</span>
       <small>Narrow</small>
       <strong>Spain</strong>
-      <p>Compare destinations through a country-level view.</p>
+      <p>Find a city within the country.</p>
     </li>
     <li>
       <span>04</span>
       <small>Explore</small>
       <strong>Barcelona</strong>
-      <p>Pair city context, live geography, and editorial guides.</p>
+      <p>See the city alongside its guides.</p>
     </li>
     <li>
       <span>05</span>
       <small>Understand</small>
       <strong>Neighborhoods</strong>
-      <p>Move between districts without losing city context.</p>
+      <p>Look more closely at a neighborhood.</p>
     </li>
     <li>
       <span>06</span>
       <small>Act</small>
       <strong>Selected guide</strong>
-      <p>Open a curated route designed for use on the street.</p>
+      <p>Open a guide and follow its places on the map.</p>
     </li>
   </ol>
 </section>
+<footer class="rg-case-end">
+  <p>Explore it for yourself.</p>
+  <a href="https://www.rguide.co" target="_blank" rel="noreferrer">Visit RGuide <span aria-hidden="true">↗</span></a>
+  <a href="/#work">Back to selected work <span aria-hidden="true">↗</span></a>
+</footer>
 
 <style>
   .rguide-opening {

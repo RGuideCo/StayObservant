@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import "../../styles/rguide-case-study.css";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -19,9 +20,22 @@ if (!entry) {
 
 const { Content } = await entry.render();
 const project = entry.data;
+const isRGuide = slug === "rguide";
 ---
 
 <Layout title={project.title}>
+  {isRGuide ? (
+    <header class="rg-cover">
+      <div class="rg-cover-topline"><a href="/#work">← Selected work</a><span>Independent product / 2026</span></div>
+      <div class="rg-cover-copy">
+        <p class="rg-eyebrow">From an idea to a live platform</p>
+        <h1>RGuide</h1>
+        <p class="rg-cover-title">{project.description}</p>
+        <p class="rg-cover-credit">Conceived, designed and built by Brian Rodriguez.</p>
+      </div>
+      <img class="rg-cover-image" src={project.hero ?? project.cover} alt="RGuide on a desktop screen, with city guides beside an interactive map" width="2800" height="1920" fetchpriority="high" decoding="async" />
+    </header>
+  ) : (
   <header class="case-hero">
     <img
       src={project.hero ?? project.cover}
@@ -60,9 +74,17 @@ const project = entry.data;
       </div>
     </div>
   </header>
+  )}
 
-  <div class="case-body">
+  <div class:list={["case-body", { "case-body--rguide": isRGuide }]}>
     <div class="container-page case-page">
+      {isRGuide ? (
+        <section class="rg-project-facts" aria-label="Project details">
+          <div><span>My role</span><p>Founder, designer and developer</p></div>
+          <div><span>Initial build</span><p>April to August 2026</p></div>
+          <div><span>The product</span><p><a href="https://www.rguide.co" target="_blank" rel="noreferrer">Explore RGuide ↗</a></p></div>
+        </section>
+      ) : (
       <section class="project-meta-strip" aria-label="Project metadata">
         {
           project.role ? (
@@ -89,9 +111,10 @@ const project = entry.data;
           ) : null
         }
       </section>
+      )}
 
       <div class="project-shell">
-        <article class="project-content">
+        <article class:list={["project-content", { "rguide-case": isRGuide }]}>
           <Content />
         </article>
 
@@ -2723,14 +2746,6 @@ const project = entry.data;
         const phaseSystem = rguideTimeline.querySelector("[data-rguide-phase-system]");
         const track = rguideTimeline.querySelector(".rguide-timeline-track");
         let activeIndex = 0;
-        let timer = null;
-        let autoplayCancelled = prefersReduced;
-
-        const stopTimeline = () => {
-          if (!timer) return;
-          window.clearInterval(timer);
-          timer = null;
-        };
 
         const showPhase = (index, shouldScroll = false) => {
           const nextIndex = Math.min(Math.max(index, 0), phases.length - 1);
@@ -2763,40 +2778,14 @@ const project = entry.data;
           }
         };
 
-        const startTimeline = () => {
-          if (autoplayCancelled || timer || activeIndex >= phases.length - 1) return;
-          timer = window.setInterval(() => {
-            if (activeIndex >= phases.length - 1) {
-              stopTimeline();
-              return;
-            }
-            showPhase(activeIndex + 1, true);
-          }, 1350);
-        };
-
+        // Let readers choose each milestone and read it at their own pace.
         phases.forEach((phase, index) => {
           phase.addEventListener("click", () => {
-            autoplayCancelled = true;
-            stopTimeline();
             showPhase(index, true);
           });
         });
 
         showPhase(0);
-
-        if (!prefersReduced && "IntersectionObserver" in window) {
-          const timelineObserver = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.target !== rguideTimeline) return;
-                if (entry.isIntersecting && entry.intersectionRatio >= 0.45) startTimeline();
-                else stopTimeline();
-              });
-            },
-            { threshold: [0.2, 0.45, 0.75] }
-          );
-          timelineObserver.observe(rguideTimeline);
-        }
       }
 
       const rguideTraffic = content.querySelector("[data-rguide-traffic]");
