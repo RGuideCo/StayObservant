@@ -16,7 +16,8 @@ deliverables: ["A working travel platform"]
       <p>I designed and built the platform from the ground up. That meant shaping the experience on screen and the system behind it, so a useful idea could become a working product.</p>
     </div>
     <a class="rguide-live-link" href="https://www.rguide.co" target="_blank" rel="noreferrer">
-      <i class="material-symbols-outlined" aria-hidden="true">open_in_new</i><span>Explore RGuide</span>
+      <span class="rguide-live-link-kicker">Open the live product</span>
+      <span class="rguide-live-link-action"><span>Explore RGuide</span><i class="material-symbols-outlined" aria-hidden="true">north_east</i></span>
     </a>
   </div>
 </section>
@@ -49,6 +50,10 @@ deliverables: ["A working travel platform"]
   <div><p class="rg-eyebrow"><span class="rg-chapter-number" aria-hidden="true">02</span>Design the experience</p><h2 id="the-experience">Keep the place in view.</h2><p class="rg-chapter-lead">The central decision was to let the guide and the map share the screen. People can compare recommendations, open a guide, and look at an individual stop while keeping a sense of the city around them.</p></div>
 </header>
 <div class="rg-experience-body">
+<header class="rg-experience-phase">
+  <span class="rg-eyebrow">Extended development phase</span>
+  <p>From the interaction model to the finished interface</p>
+</header>
 <section class="rguide-design-system" aria-labelledby="rguide-design-system-title">
   <header class="rguide-ds-intro">
     <div>

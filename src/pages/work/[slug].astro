@@ -2662,6 +2662,7 @@ const isRGuide = slug === "rguide";
         const tabs = Array.from(rguideAnalytics.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
         const panels = Array.from(rguideAnalytics.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
         const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const compactAnalytics = window.matchMedia("(max-width: 760px)");
         let activeIndex = -1;
 
         const selectDataset = (index: number, animate = true) => {
@@ -2685,6 +2686,35 @@ const isRGuide = slug === "rguide";
           tablist?.style.setProperty("--active-tab", String(index));
         };
 
+        const setAnalyticsLayout = () => {
+          if (compactAnalytics.matches) {
+            panels.forEach((panel, index) => {
+              panel.setAttribute("role", "tabpanel");
+              panel.setAttribute("aria-labelledby", tabs[index].id);
+              panel.tabIndex = 0;
+            });
+            if (toolbar) toolbar.hidden = false;
+            selectDataset(activeIndex < 0 ? 0 : activeIndex, false);
+            return;
+          }
+
+          activeIndex = -1;
+          if (toolbar) toolbar.hidden = true;
+          tabs.forEach((tab, index) => {
+            tab.setAttribute("aria-selected", String(index === 0));
+            tab.tabIndex = index === 0 ? 0 : -1;
+          });
+          panels.forEach((panel) => {
+            panel.getAnimations().forEach((animation) => animation.cancel());
+            panel.hidden = false;
+            panel.setAttribute("role", "region");
+            panel.removeAttribute("aria-labelledby");
+            panel.removeAttribute("tabindex");
+            const heading = panel.querySelector("h3");
+            if (heading?.textContent) panel.setAttribute("aria-label", heading.textContent.trim());
+          });
+        };
+
         tabs.forEach((tab, index) => {
           tab.addEventListener("click", () => selectDataset(index));
           tab.addEventListener("keydown", (event) => {
@@ -2700,8 +2730,8 @@ const isRGuide = slug === "rguide";
           });
         });
 
-        selectDataset(0, false);
-        if (toolbar) toolbar.hidden = false;
+        setAnalyticsLayout();
+        compactAnalytics.addEventListener("change", setAnalyticsLayout);
       }
 
       const rguideCounters = Array.from(content.querySelectorAll("[data-rguide-count]"));
