@@ -3,7 +3,8 @@ title: "Chick-Fil-A"
 description: "An interactive in-store concept designed to make kid participation fun, social, and measurable."
 tags: ["UI/UX", "Retail", "Industrial Design", "Experience Design"]
 cover: "/Projects/ChickFilA/Thumb.png"
-hero: "/optimized/Projects/ChickFilA/Joy%20Machine/J04.webp"
+hero: "/optimized/Projects/ChickFilA/LemonSqueezey/lemon-craze-final-rendering.webp"
+heroPosition: "center 20%"
 role: "Chief Designer"
 tools: ["Sketching", "3D Visualization", "Interaction Design"]
 deliverables: ["Concept development", "Interaction model", "UI direction", "Prototype visuals"]
@@ -237,6 +238,10 @@ Two concepts were selected to move forward into mock store testing with families
 Following the 50% family test, Lemon Squeezy was selected for a more resolved working prototype. The team rebuilt the concept at child scale, integrating the enclosure, transparent mechanical sequence, digital guidance, foot-pedal interaction, and sticker reward into one system. Development focused on making every action more visible, intuitive, eventful, and smooth, with a 95% success target for the final “winning” moment.
 
 <section class="model-build-block" data-model-stage="lemon-90">
+  <h3 class="model-block-title" id="cfa-final-rendering-title">Final rendering</h3>
+  <figure>
+    <span class="project-image-frame"><img loading="lazy" decoding="async" src="/optimized/Projects/ChickFilA/LemonSqueezey/lemon-craze-final-rendering.webp" width="1500" height="1183" alt="Final rendering of the Lemon Craze concept in a Chick-fil-A restaurant, showing the transparent enclosure, lemon mechanism, screen, crank, and foot pedal" /><span class="project-image-bar">Final rendering</span></span>
+  </figure>
   <h3 class="model-block-title">Working Prototype at the CFA Site Visit</h3>
   <p class="model-block-copy">The selected site-visit documentation shows the resolved child-scale model, its transparent mechanical sequence, digital guidance, foot-pedal interaction, and reward system at full clarity.</p>
 

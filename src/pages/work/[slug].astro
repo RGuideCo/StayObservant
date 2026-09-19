@@ -66,7 +66,7 @@ const chapters = getProjectChapters(slug!, headings);
       </div>
     </div>
     <div class="case-hero-media">
-      <img src={project.hero ?? project.cover} alt={project.title} fetchpriority="high" decoding="async" class="case-hero-image" />
+      <img src={project.hero ?? project.cover} alt={project.title} fetchpriority="high" decoding="async" class="case-hero-image" style={project.heroPosition ? `object-position: ${project.heroPosition}` : undefined} />
     </div>
   </header>
   )}
