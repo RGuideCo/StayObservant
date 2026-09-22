@@ -4,7 +4,7 @@ description: "A vivid identity and release-art system pairing expressive typogra
 tags: ["Branding", "Illustration", "Art Direction", "Advertising"]
 cover: "/optimized/Projects/BocaPaila/thumb-desktop.webp"
 mobileCover: "/optimized/Projects/BocaPaila/thumb-mobile.webp"
-hero: "/optimized/Projects/BocaPaila/BP10.webp"
+hero: "/optimized/Projects/BocaPaila/S2.webp"
 role: "Brand & Visual Designer"
 tools: ["Art Direction", "Custom Typography", "Illustration", "Layout Design"]
 deliverables: ["Brand identity", "Album artwork", "Single covers", "Campaign applications"]

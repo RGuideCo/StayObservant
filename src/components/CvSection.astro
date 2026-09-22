@@ -127,21 +127,22 @@ const awards = [
       <div>
         <p class="cv-kicker">03 / Curriculum vitae</p>
         <h2 id="cv-title">Experience</h2>
+        <figure class="cv-logo-collage">
+          <img
+            src="/Logo-Collage.png"
+            alt="Selected client logos including P&G, Gillette, Hasbro, Timberland, Chobani, 3M, Chick-fil-A, Heineken and Morgans Hotel Group"
+            width="1000"
+            height="587"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
 
       <p class="cv-intro">
         Multidisciplinary design leadership across digital products, brand systems,
         packaging, experiences and physical product development.
       </p>
-
-      <section class="cv-education" aria-labelledby="education-title">
-        <p class="supporting-kicker">Education</p>
-        <h3 id="education-title">College for Creative Studies</h3>
-        <p>BFA Product Design · GPA 3.6 · Detroit, 2012</p>
-        <p class="supporting-note">Sponsored projects: Nike, Motorola, Black &amp; Decker</p>
-        <h3>Design and Architecture Senior High</h3>
-        <p>Product Design · Miami, 2008</p>
-      </section>
 
       <a
         class="cv-download"
@@ -199,6 +200,35 @@ const awards = [
           </div>
         </details>
       ))}
+
+      <details class="experience-item education-item">
+        <summary>
+          <span class="experience-index">06</span>
+          <span class="experience-company">Education</span>
+          <span class="experience-role">Product Design</span>
+          <span class="experience-meta">
+            <span>2008 — 2012</span>
+            <span>Detroit / Miami</span>
+          </span>
+          <span class="experience-toggle" aria-hidden="true"></span>
+        </summary>
+
+        <div class="experience-body experience-body--stacked">
+          <div class="education-grid">
+            <article>
+              <span class="education-year">2012</span>
+              <h3>College for Creative Studies</h3>
+              <p>BFA Product Design · GPA 3.6 · Detroit</p>
+              <p class="supporting-note">Sponsored projects: Nike, Motorola, Black &amp; Decker</p>
+            </article>
+            <article>
+              <span class="education-year">2008</span>
+              <h3>Design and Architecture Senior High</h3>
+              <p>Product Design · Miami</p>
+            </article>
+          </div>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -274,29 +304,18 @@ const awards = [
     letter-spacing: -0.045em;
   }
 
-  .cv-education {
-    margin-top: clamp(2rem, 3vw, 3rem);
-    padding-top: 1rem;
-    border-top: var(--rule);
+  .cv-logo-collage {
+    margin: clamp(1.5rem, 3vw, 2.75rem) 0 0;
+    padding: clamp(0.75rem, 1.4vw, 1.25rem) 0;
+    border-top: 1px solid rgba(8, 8, 8, 0.45);
+    border-bottom: 1px solid rgba(8, 8, 8, 0.45);
   }
 
-  .cv-education h3 {
-    margin: 1rem 0 0.25rem;
-    font-family: var(--font-display);
-    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-  }
-
-  .cv-education > p:not(.supporting-kicker) {
-    font-size: 0.67rem;
-    line-height: 1.45;
-  }
-
-  .cv-education .supporting-note {
-    margin-top: 0.45rem;
-    color: rgba(8, 8, 8, 0.65);
+  .cv-logo-collage img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(0) invert(1);
   }
 
   .cv-download {
@@ -477,6 +496,51 @@ const awards = [
     top: 0.95rem;
     left: 0.8rem;
     font-size: 0.38rem;
+  }
+
+  .education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--rule);
+    border-left: var(--rule);
+  }
+
+  .education-grid article {
+    min-width: 0;
+    min-height: 11rem;
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+    border-right: var(--rule);
+    border-bottom: var(--rule);
+  }
+
+  .education-year {
+    display: block;
+    margin-bottom: clamp(1.5rem, 3vw, 3rem);
+    color: #6a665e;
+    font-size: 0.58rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .education-grid h3 {
+    max-width: 18ch;
+    margin: 0 0 0.65rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .education-grid p {
+    font-size: 0.76rem;
+    line-height: 1.5;
+  }
+
+  .education-grid .supporting-note {
+    margin-top: 0.7rem;
   }
 
   .client-list {
@@ -686,6 +750,10 @@ const awards = [
     }
 
     .client-list {
+      grid-template-columns: 1fr;
+    }
+
+    .education-grid {
       grid-template-columns: 1fr;
     }
 
