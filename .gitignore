@@ -6,6 +6,7 @@ dist/
 
 # dependencies
 node_modules/
+node_modules
 
 # logs
 npm-debug.log*
@@ -23,3 +24,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# Unencrypted client proposal sources stay local.
+private/
