@@ -37,7 +37,9 @@ export default async function handler(req, res) {
   res.setHeader('Vercel-CDN-Cache-Control', 'no-store');
   res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('Referrer-Policy', 'no-referrer');
+  // Preserve Origin for same-origin HTML form posts; no-referrer makes some
+  // browsers serialize that Origin as null. External links still receive none.
+  res.setHeader('Referrer-Policy', 'same-origin');
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('Content-Security-Policy', `default-src 'none'; script-src 'nonce-${nonce}'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'`);
   const html = (status, content) => { res.statusCode = status; res.setHeader('Content-Type', 'text/html; charset=utf-8'); res.end(content); };
