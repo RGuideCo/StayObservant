@@ -47,7 +47,11 @@ export default async function handler(req, res) {
   const isPage = asset === '' || asset === 'api/proposal';
   const cookies = Object.fromEntries((req.headers.cookie || '').split(';').map(v => v.trim().split('=')));
   if (req.method === 'POST') {
-    if (req.headers.origin && req.headers.origin !== `https://${req.headers.host}`) return html(403, 'Request not allowed.');
+    // Vercel can rewrite Host internally; validate browser origins against our
+    // owned domains and the deployment hostname, not that internal header.
+    const allowedOrigins = new Set(['https://www.stayobservant.com', 'https://stayobservant.com']);
+    if (process.env.VERCEL_URL) allowedOrigins.add(`https://${process.env.VERCEL_URL}`);
+    if (req.headers.origin && !allowedOrigins.has(req.headers.origin)) return html(403, 'Request not allowed.');
     let body = req.body;
     if (body === undefined) {
       let raw = '';
