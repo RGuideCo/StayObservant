@@ -10,6 +10,8 @@ const projects = defineCollection({
     // Used for the card grid thumbnail
     cover: z.string(),
     mobileCover: z.string().optional(),
+    cardSize: z.enum(["featured", "small"]).default("featured"),
+    previewImages: z.array(z.string()).optional(),
 
     // Optional big image at top of the case study
     hero: z.string().optional(),

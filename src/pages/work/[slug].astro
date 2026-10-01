@@ -80,7 +80,7 @@ const chapters = getProjectChapters(slug!, headings);
           <div><span>The product</span><p><a href="https://www.rguide.co" target="_blank" rel="noreferrer">Explore RGuide ↗</a></p></div>
         </section>
       ) : (
-      <section class="project-meta-strip" aria-label="Project metadata">
+      <section class:list={["project-meta-strip", { "project-meta-strip--two": [project.role, project.tools?.length, project.deliverables?.length].filter(Boolean).length === 2 }]} aria-label="Project metadata">
         {
           project.role ? (
             <div class="project-meta-item">
@@ -274,6 +274,10 @@ const chapters = getProjectChapters(slug!, headings);
     margin-bottom: clamp(2rem, 5vw, 4.5rem);
     border-top: var(--rule);
     border-left: var(--rule);
+  }
+
+  .project-meta-strip--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project-meta-item {

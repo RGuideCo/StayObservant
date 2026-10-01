@@ -3,14 +3,19 @@ import { getCollection } from "astro:content";
 
 const entries = await getCollection("projects");
 const preferredOrder = ["rguide", "chick-fil-a", "boca-paila", "chobani", "sidestreat", "3m-home-depot", "morgans", "nike-ko"];
-const projects = entries
-  .map((entry) => ({ slug: entry.slug, ...entry.data }))
+const smallerOrder = ["54-hundred", "studio-d-vgs", "estrella-damm", "spirits-beverage"];
+const projects = entries.map((entry) => ({ slug: entry.slug, ...entry.data }));
+const featuredProjects = projects
+  .filter((project) => project.cardSize === "featured")
   .sort((a, b) => {
     const aIndex = preferredOrder.indexOf(a.slug);
     const bIndex = preferredOrder.indexOf(b.slug);
     return (aIndex === -1 ? preferredOrder.length : aIndex)
       - (bIndex === -1 ? preferredOrder.length : bIndex);
   });
+const smallerProjects = projects
+  .filter((project) => project.cardSize === "small")
+  .sort((a, b) => smallerOrder.indexOf(a.slug) - smallerOrder.indexOf(b.slug));
 
 const filterTags = [
   "UI/UX",
@@ -36,7 +41,7 @@ const filterTags = [
   </header>
 
   <div class="projects-grid">
-    {projects.map((project, index) => (
+    {featuredProjects.map((project, index) => (
       <a
         href={`/work/${project.slug}`}
         data-project-card
@@ -80,11 +85,88 @@ const filterTags = [
     ))}
   </div>
 
+  {smallerProjects.length > 0 && (
+    <div id="more-work" class="more-projects" data-more-projects data-collapsed>
+      <button type="button" class="more-projects-heading" aria-expanded="false" aria-controls="more-work-grid" data-more-projects-toggle>
+        <span class="more-projects-title">More work</span>
+        <span class="more-projects-meta">
+          <span>{String(smallerProjects.length).padStart(2, "0")} projects</span>
+          <span class="more-projects-preview" aria-hidden="true">
+            <span class="more-projects-thumbnails">
+              {smallerProjects.map((project) => (
+                <img src={project.cover} alt="" loading="lazy" decoding="async" />
+              ))}
+            </span>
+            <span class="more-projects-icon"></span>
+          </span>
+        </span>
+      </button>
+      <div id="more-work-grid" class="more-projects-content" data-more-projects-content inert aria-hidden="true">
+        <div class="more-projects-grid">
+          {smallerProjects.map((project) => (
+            <a
+              href={`/work/${project.slug}`}
+              data-project-card
+              data-project-tags={(project.tags || []).map((tag) => tag.toLowerCase()).join("|")}
+              class="project-card project-card--small"
+              aria-label={`View ${project.title} project`}
+            >
+              {project.previewImages?.length ? (
+                <div class="project-card-media project-card-media--triptych">
+                  {project.previewImages.map((src, index) => (
+                    <img src={src} alt="" loading="lazy" decoding="async" style={`--image-order: ${index}`} />
+                  ))}
+                </div>
+              ) : (
+                <div class="project-card-media">
+                  <img src={project.cover} alt="" loading="lazy" decoding="async" />
+                </div>
+              )}
+              <div class="project-card-caption">
+                <div>
+                  <span>{project.tags[0] ?? "Project"}</span>
+                  <h3>{project.title}</h3>
+                </div>
+                <span class="project-card-open" aria-hidden="true">↗</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+
   <script>
     (() => {
       const init = () => {
         const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
         const projectCards = Array.from(document.querySelectorAll("[data-project-card]"));
+        const moreProjects = document.querySelector("[data-more-projects]");
+        const moreProjectsToggle = moreProjects?.querySelector("[data-more-projects-toggle]");
+        const moreProjectsContent = moreProjects?.querySelector("[data-more-projects-content]");
+        const featuredGrid = document.querySelector(".projects-grid");
+
+        const setMoreProjectsExpanded = (expanded) => {
+          if (!moreProjects || !moreProjectsToggle || !moreProjectsContent) return;
+          if (expanded) moreProjects.removeAttribute("data-preview-held");
+          moreProjects.toggleAttribute("data-collapsed", !expanded);
+          moreProjectsToggle.setAttribute("aria-expanded", String(expanded));
+          moreProjectsContent.toggleAttribute("inert", !expanded);
+          moreProjectsContent.toggleAttribute("aria-hidden", !expanded);
+        };
+
+        moreProjectsToggle?.addEventListener("click", () => {
+          const expanded = moreProjects.hasAttribute("data-collapsed");
+          moreProjects.toggleAttribute(
+            "data-preview-held",
+            !expanded && moreProjectsToggle.matches(":hover") && window.matchMedia("(hover: hover)").matches
+          );
+          setMoreProjectsExpanded(expanded);
+        });
+
+        moreProjectsToggle?.addEventListener("pointerleave", () => {
+          moreProjects?.removeAttribute("data-preview-held");
+        });
 
         filterButtons.forEach((button) => {
           button.addEventListener("click", () => {
@@ -94,6 +176,17 @@ const filterTags = [
               const tags = (card.getAttribute("data-project-tags") || "").split("|");
               card.toggleAttribute("hidden", filter !== "all" && !tags.includes(filter));
             });
+            if (moreProjects) {
+              const hasMatchingProjects = Array.from(moreProjects.querySelectorAll("[data-project-card]")).some(
+                (card) => !card.hasAttribute("hidden")
+              );
+              moreProjects.toggleAttribute(
+                "hidden",
+                !hasMatchingProjects
+              );
+              if (hasMatchingProjects && filter !== "all") setMoreProjectsExpanded(true);
+            }
+            featuredGrid?.classList.toggle("is-filtered", filter !== "all");
           });
         });
       };
@@ -304,6 +397,12 @@ const filterTags = [
     aspect-ratio: auto;
   }
 
+  .projects-grid.is-filtered .project-card[data-project-slug="boca-paila"] {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 1.15;
+  }
+
   .project-card img,
   .project-shade {
     position: absolute;
@@ -331,7 +430,6 @@ const filterTags = [
     position: absolute;
     inset: auto 0 0;
     background: rgba(8, 8, 8, 0.94);
-    border-top: 1px solid rgba(255, 255, 255, 0.38);
     transform: translateY(calc(100% - var(--project-footer-height)));
     transition: transform 360ms cubic-bezier(0.2, 0.75, 0.2, 1);
   }
@@ -429,7 +527,9 @@ const filterTags = [
     }
 
     .project-card[data-project-slug="boca-paila"] {
-      grid-column: 2;
+      grid-column: auto;
+      grid-row: auto;
+      aspect-ratio: 1.15;
     }
 
     .project-card:last-child:nth-child(odd) {
@@ -471,6 +571,383 @@ const filterTags = [
   @media (hover: none) {
     .project-card {
       --project-footer-height: 4.1rem;
+    }
+  }
+
+  .more-projects {
+    scroll-margin-top: var(--mobile-header-height, 0);
+  }
+
+  .more-projects[hidden] {
+    display: none;
+  }
+
+  .more-projects-heading {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.1rem;
+    padding: 0.7rem 1rem;
+    color: #fff;
+    background: var(--ink);
+    border: 0;
+    border-bottom: var(--rule);
+    border-radius: 0;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 220ms ease;
+  }
+
+  .more-projects-heading:hover {
+    background: #191919;
+  }
+
+  .more-projects-heading:focus-visible {
+    outline: 3px solid var(--signal);
+    outline-offset: -3px;
+  }
+
+  .more-projects-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.8rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+  }
+
+  .more-projects-meta {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.85rem, 2vw, 1.7rem);
+    flex: none;
+    color: var(--signal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .more-projects-preview {
+    --icon-size: 2rem;
+    --thumb-size: var(--icon-size);
+    --thumb-gap: 0.25rem;
+    --thumb-step: calc(var(--thumb-size) + var(--thumb-gap));
+    --icon-gap: 0.5rem;
+    --preview-width: calc(var(--thumb-step) + var(--thumb-step) + var(--thumb-step) + var(--thumb-size) + var(--icon-gap) + var(--icon-size));
+    position: relative;
+    display: block;
+    flex: none;
+    width: var(--preview-width);
+    height: var(--icon-size);
+    transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .more-projects:not([data-collapsed]) .more-projects-preview,
+  .more-projects[data-preview-held] .more-projects-preview {
+    width: var(--icon-size);
+  }
+
+  .more-projects-thumbnails {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--preview-width);
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .more-projects-preview img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    object-fit: cover;
+    opacity: 1;
+    transform: translateY(-50%);
+    transition:
+      left 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--exit-delay, 0ms),
+      opacity 160ms ease 80ms;
+  }
+
+  .more-projects:not([data-collapsed]) .more-projects-preview img,
+  .more-projects[data-preview-held] .more-projects-preview img {
+    left: calc(100% - var(--thumb-size));
+    opacity: 0;
+    visibility: hidden;
+    /* Keep the images behind the icon until the pointer leaves after collapse. */
+    transition: none;
+  }
+
+  .more-projects-preview img:nth-child(2) {
+    left: var(--thumb-step);
+    --enter-delay: 120ms;
+    --exit-delay: 60ms;
+  }
+
+  .more-projects-preview img:nth-child(3) {
+    left: calc(var(--thumb-step) + var(--thumb-step));
+    --enter-delay: 60ms;
+    --exit-delay: 120ms;
+  }
+
+  .more-projects-preview img:nth-child(4) {
+    left: calc(var(--thumb-step) + var(--thumb-step) + var(--thumb-step));
+    --exit-delay: 180ms;
+  }
+
+  .more-projects-preview img:first-child {
+    --enter-delay: 180ms;
+  }
+
+  @media (min-width: 601px) {
+    .more-projects[data-collapsed] .more-projects-heading:is(:hover, :focus-visible) .more-projects-preview {
+      width: var(--icon-size);
+      transition: width 700ms cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    .more-projects[data-collapsed] .more-projects-heading:is(:hover, :focus-visible) .more-projects-preview img {
+      left: calc(100% - var(--thumb-size));
+      transition-delay: var(--enter-delay, 0ms);
+    }
+  }
+
+  .more-projects-icon {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    display: grid;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    place-items: center;
+    background: var(--ink);
+    border: 1px solid currentColor;
+    transition: color 220ms ease, background-color 220ms ease;
+  }
+
+  .more-projects-icon::before,
+  .more-projects-icon::after {
+    content: "";
+    position: absolute;
+    width: 0.7rem;
+    height: 1.5px;
+    background: currentColor;
+  }
+
+  .more-projects-icon::after {
+    transform: rotate(90deg) scaleX(0);
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .more-projects[data-collapsed] .more-projects-icon::after {
+    transform: rotate(90deg) scaleX(1);
+  }
+
+  .more-projects-heading:is(:hover, :focus-visible) .more-projects-icon {
+    color: #fff;
+    background: #bd2b18;
+  }
+
+  .more-projects-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms ease;
+  }
+
+  .more-projects[data-collapsed] .more-projects-content {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  .more-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    min-height: 0;
+    overflow: hidden;
+    border-left: var(--rule);
+  }
+
+  .project-card--small,
+  .project-card--small:last-child:nth-child(odd) {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    aspect-ratio: auto;
+    color: var(--ink);
+    background: var(--paper);
+  }
+
+  .project-card--small .project-card-media {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.08;
+    overflow: hidden;
+    background: #e7e3da;
+  }
+
+  .project-card--small .project-card-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-card--small .project-card-media--triptych {
+    display: block;
+    background: var(--ink);
+  }
+
+  .project-card--small .project-card-media--triptych img {
+    inset: 0 auto 0 0;
+    object-position: center;
+  }
+
+  .project-card--small .project-card-media--triptych img:nth-child(1) {
+    width: 42%;
+    clip-path: polygon(0 0, 100% 0, 71.5% 100%, 0 100%);
+  }
+
+  .project-card--small .project-card-media--triptych img:nth-child(2) {
+    left: 30%;
+    width: 46%;
+    object-position: 38% center;
+    clip-path: polygon(26% 0, 100% 0, 74% 100%, 0 100%);
+  }
+
+  .project-card--small .project-card-media--triptych img:nth-child(3) {
+    left: 64%;
+    width: 36%;
+    clip-path: polygon(33.5% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .project-card--small:hover .project-card-media--triptych img,
+  .project-card--small:focus-visible .project-card-media--triptych img {
+    transform: none;
+  }
+
+  .project-card-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    min-height: 5.2rem;
+    padding: 0.8rem clamp(0.8rem, 1.25vw, 1.25rem);
+    border-top: var(--rule);
+  }
+
+  .project-card-caption > div {
+    min-width: 0;
+  }
+
+  .project-card-caption > div > span {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #bd2b18;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .project-card--small h3 {
+    font-size: clamp(1.1rem, 1.5vw, 1.65rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .project-card-open {
+    display: grid;
+    flex: none;
+    width: 1.9rem;
+    height: 1.9rem;
+    place-items: center;
+    color: #bd2b18;
+    border: 1px solid currentColor;
+    font-size: 0.75rem;
+    transition: color 250ms ease, background-color 250ms ease, transform 250ms ease;
+  }
+
+  .project-card--small:hover .project-card-open,
+  .project-card--small:focus-visible .project-card-open {
+    color: #fff;
+    background: #bd2b18;
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 1050px) {
+    .more-projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 420px) {
+    .more-projects-heading {
+      min-height: 3.8rem;
+      gap: 0.5rem;
+    }
+
+    .more-projects-meta {
+      gap: 0.4rem;
+    }
+
+    .more-projects-preview {
+      --icon-size: 1.5rem;
+      --thumb-gap: 0.1rem;
+      --icon-gap: 0.3rem;
+    }
+
+    .project-card-caption {
+      min-height: 5.8rem;
+      padding: 0.7rem;
+    }
+
+    .project-card--small h3 {
+      font-size: 1.05rem;
+    }
+
+    .project-card-open {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .more-projects-heading {
+      gap: 0.5rem;
+    }
+
+    .more-projects-title {
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+
+    .more-projects-meta {
+      gap: 0.35rem;
+      font-size: 0.57rem;
+      letter-spacing: 0.04em;
+    }
+
+    .more-projects-preview {
+      --icon-size: 1.25rem;
+      --icon-gap: 0.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .more-projects-content,
+    .more-projects-icon::after,
+    .more-projects-preview,
+    .more-projects-preview img {
+      transition: none;
     }
   }
 </style>
