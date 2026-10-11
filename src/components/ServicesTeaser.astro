@@ -1,0 +1,27 @@
+<section class="services-teaser" aria-labelledby="services-teaser-title">
+  <div>
+    <p>Design for your business</p>
+    <h2 id="services-teaser-title">Like the work?<br />Let’s talk about yours.</h2>
+  </div>
+  <div class="teaser-detail">
+    <p>Branding, websites, packaging, products, and illustration. Explore what I can help with, what you’ll get, and how we’ll work together.</p>
+    <div class="teaser-actions">
+      <a class="teaser-primary" href="/services">Explore services</a>
+      <button type="button" data-contact-open aria-haspopup="dialog" aria-controls="contact-modal">Reach out</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-teaser { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; align-items: center; padding: clamp(2rem, 5vw, 5rem) var(--page-gutter); border-block: var(--rule); background: var(--signal); }
+  .services-teaser > div:first-child > p { font-size: 0.875rem; font-weight: 600; }
+  h2 { margin-top: 1rem; font-size: clamp(2rem, 3.8vw, 4rem); line-height: 1.02; letter-spacing: -0.055em; font-weight: 700; }
+  .teaser-detail > p { max-width: 36rem; font-size: 1.125rem; line-height: 1.6; font-weight: 400; }
+  .teaser-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; margin-top: 1.5rem; }
+  .teaser-actions :is(a, button) { display: inline-flex; align-items: center; min-height: 3rem; font-weight: 600; text-underline-offset: 0.3em; }
+  .teaser-actions button { padding: 0; border: 0; color: inherit; background: transparent; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
+  .teaser-primary { padding: 0.8rem 1.2rem; color: var(--paper); background: var(--ink); text-decoration: none; }
+  :is(a, button):focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+  :is(a, button):hover { text-decoration: underline; }
+  @media (max-width: 760px) { .services-teaser { grid-template-columns: 1fr; } }
+</style>

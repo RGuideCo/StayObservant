@@ -1,0 +1,247 @@
+---
+import { quoteEmail } from "../data/contact";
+import { contactServices } from "../data/contact-services.js";
+---
+
+<dialog id="contact-modal" class="contact-modal" aria-labelledby="enquiry-title" aria-describedby="enquiry-intro">
+  <div class="enquiry-panel">
+    <header class="enquiry-heading">
+      <p class="enquiry-eyebrow">Start a conversation</p>
+      <button class="enquiry-close" type="button" data-contact-close aria-label="Close contact form">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </button>
+      <h2 id="enquiry-title">What do you<br />have in mind?</h2>
+      <p id="enquiry-intro">A few details is enough. I’ll reply by email.</p>
+    </header>
+
+    <form class="enquiry-form" action="/api/contact" method="post">
+      <div class="enquiry-field">
+        <label for="enquiry-email"><span class="enquiry-number" aria-hidden="true">01</span>Your email</label>
+        <input id="enquiry-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@yourcompany.com" maxlength="254" required autofocus />
+      </div>
+
+      <fieldset class="enquiry-services">
+        <legend><span class="enquiry-number" aria-hidden="true">02</span>What can I help with?</legend>
+        <p id="enquiry-services-hint">Choose any that fit. It’s OK if you’re still figuring it out.</p>
+        <div class="enquiry-options">
+          {contactServices.map((service) => (
+            <label class="enquiry-option">
+              <input type="checkbox" name="services" value={service.id} aria-describedby="enquiry-services-hint" />
+              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m4 10 4 4 8-8" /></svg>{service.name}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div class="enquiry-field">
+        <label for="enquiry-message"><span class="enquiry-number" aria-hidden="true">03</span>A little about your project</label>
+        <textarea id="enquiry-message" name="message" rows="4" maxlength="8000" placeholder="Tell me about your business, what you’d like to create or improve, and any timing you have in mind." required></textarea>
+      </div>
+
+      <div class="enquiry-trap" aria-hidden="true">
+        <label for="enquiry-website">Leave this field empty</label>
+        <input id="enquiry-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <p class="enquiry-error" role="alert" hidden></p>
+      <div class="enquiry-send-row">
+        <p>Straight to Brian.<br />No mailing lists.</p>
+        <button class="enquiry-send" type="submit">
+          <span data-send-label>Send message</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+        </button>
+      </div>
+    </form>
+
+    <section class="enquiry-success" hidden aria-labelledby="enquiry-success-title">
+      <span class="enquiry-success-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m5 12 4 4L19 6" /></svg></span>
+      <h3 id="enquiry-success-title" tabindex="-1">Thanks for reaching out.</h3>
+      <p>Your message is on its way to Brian.<br />I’ll reply to <strong data-reply-email></strong>.</p>
+      <button class="enquiry-send" type="button" data-contact-close>Back to the site</button>
+    </section>
+
+    <footer class="enquiry-footer">Prefer email? <a href={`mailto:${quoteEmail}`}>{quoteEmail}</a></footer>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("#contact-modal");
+  if (dialog) {
+    const form = dialog.querySelector<HTMLFormElement>(".enquiry-form")!;
+    const emailInput = form.querySelector<HTMLInputElement>("[name=email]")!;
+    const messageInput = form.querySelector<HTMLTextAreaElement>("[name=message]")!;
+    const services = Array.from(form.querySelectorAll<HTMLInputElement>("[name=services]"));
+    const submitButton = form.querySelector<HTMLButtonElement>("[type=submit]")!;
+    const sendLabel = form.querySelector<HTMLElement>("[data-send-label]")!;
+    const error = form.querySelector<HTMLElement>(".enquiry-error")!;
+    const success = dialog.querySelector<HTMLElement>(".enquiry-success")!;
+    let opener: HTMLElement | null = null;
+    let previousOverflow = "";
+    let sending = false;
+    let lastPayload = "";
+    let submissionId = "";
+
+    const close = () => dialog.close();
+    document.querySelectorAll<HTMLElement>("[data-contact-open]").forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (dialog.open) return;
+        opener = trigger;
+        if (!success.hidden) {
+          form.reset();
+          form.hidden = false;
+          success.hidden = true;
+          lastPayload = "";
+          submissionId = "";
+        }
+        const selectedService = trigger.dataset.contactService;
+        if (selectedService && !sending) {
+          services.forEach((input) => { input.checked = input.value === selectedService; });
+        }
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelectorAll("[data-contact-close]").forEach((button) => button.addEventListener("click", close));
+    dialog.addEventListener("close", () => {
+      document.body.style.overflow = previousOverflow;
+      opener?.focus({ preventScroll: true });
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) close();
+    });
+
+    services.forEach((input) => input.addEventListener("change", () => {
+      if (!input.checked) return;
+      services.forEach((other) => {
+        if (other !== input && (input.value === "not-sure" || other.value === "not-sure")) other.checked = false;
+      });
+    }));
+    form.addEventListener("input", () => {
+      messageInput.setCustomValidity("");
+      error.hidden = true;
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      if (!messageInput.value.trim()) {
+        messageInput.setCustomValidity("Tell me a little about your project.");
+        messageInput.reportValidity();
+        return;
+      }
+      if (!form.reportValidity()) return;
+      const fields = new FormData(form);
+      const payload = {
+        email: emailInput.value.trim(),
+        message: messageInput.value.trim(),
+        services: fields.getAll("services"),
+        website: fields.get("website") || "",
+      };
+      const snapshot = JSON.stringify(payload);
+      if (snapshot !== lastPayload) {
+        submissionId = crypto.randomUUID();
+        lastPayload = snapshot;
+      }
+      sending = true;
+      submitButton.disabled = true;
+      form.setAttribute("aria-busy", "true");
+      sendLabel.textContent = "Sending…";
+      error.hidden = true;
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...payload, submissionId }),
+          signal: AbortSignal.timeout(25000),
+        });
+        const result = await response.json().catch(() => null);
+        if (!response.ok || result?.ok !== true) {
+          throw new Error(result?.error || "Your message couldn’t be sent. Please try again or email me directly below.");
+        }
+        dialog.querySelector<HTMLElement>("[data-reply-email]")!.textContent = payload.email;
+        form.hidden = true;
+        success.hidden = false;
+        if (dialog.open) dialog.querySelector<HTMLElement>("#enquiry-success-title")!.focus();
+      } catch (failure) {
+        error.textContent = failure instanceof Error && failure.name !== "TimeoutError"
+          ? failure.message
+          : "The connection took too long. Please try again or email me directly below.";
+        error.hidden = false;
+      } finally {
+        sending = false;
+        submitButton.disabled = false;
+        form.removeAttribute("aria-busy");
+        sendLabel.textContent = "Send message";
+      }
+    });
+  }
+</script>
+
+<style>
+  .contact-modal { width: min(40rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 0; border: 1px solid var(--ink); color: var(--ink); background: var(--paper); overflow-y: auto; overscroll-behavior: contain; box-shadow: 0 1.5rem 5rem #0005; }
+  .contact-modal::backdrop { background: #080808b3; backdrop-filter: blur(5px); }
+  .contact-modal[open] { animation: enquiry-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .enquiry-heading { position: relative; padding: 1.75rem 2rem; border-bottom: var(--rule); background: var(--signal); }
+  .enquiry-eyebrow { padding-right: 3rem; font-size: 0.7rem; line-height: 1.5; font-weight: 700; letter-spacing: 0.085em; text-transform: uppercase; }
+  .enquiry-heading h2 { margin-top: 1rem; font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 700; line-height: 0.98; letter-spacing: -0.06em; }
+  #enquiry-intro { margin-top: 0.85rem; font-size: 0.875rem; line-height: 1.5; }
+  .enquiry-close { position: absolute; top: 1rem; right: 1rem; display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background 150ms; }
+  .enquiry-close:hover { background: var(--paper); }
+  .enquiry-close svg { width: 1.4rem; height: 1.4rem; }
+  .enquiry-form { display: grid; gap: 1.4rem; padding: 1.75rem 2rem; }
+  .enquiry-form[hidden], .enquiry-success[hidden], .enquiry-error[hidden] { display: none; }
+  .enquiry-field > label, .enquiry-services legend { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.65rem; font-size: 0.875rem; line-height: 1.5; font-weight: 600; }
+  .enquiry-number { color: #68665f; font-size: 0.7rem; font-weight: 400; }
+  .enquiry-field input, .enquiry-field textarea { display: block; width: 100%; min-height: 3rem; padding: 0.8rem 0.9rem; border: 1px solid #a6a39a; border-radius: 0; color: var(--ink); background: #fff8; font: inherit; font-size: 1rem; line-height: 1.5; }
+  .enquiry-field textarea { min-height: 7.5rem; resize: vertical; }
+  .enquiry-field :is(input, textarea)::placeholder { color: #6d6a61; opacity: 1; }
+  .enquiry-field :is(input, textarea):focus-visible { border-color: var(--ink); outline: 2px solid var(--ink); outline-offset: 2px; }
+  .enquiry-services { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .enquiry-services legend { padding: 0; }
+  #enquiry-services-hint { margin-top: -0.3rem; margin-bottom: 0.75rem; font-size: 0.75rem; line-height: 1.5; color: #56544e; }
+  .enquiry-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .enquiry-option { position: relative; cursor: pointer; }
+  .enquiry-option input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .enquiry-option > span { display: flex; align-items: center; gap: 0.4rem; min-height: 2.75rem; padding: 0.55rem 0.75rem; border: 1px solid #a6a39a; font-size: 0.8125rem; line-height: 1.3; transition: background 150ms, color 150ms, border-color 150ms; }
+  .enquiry-option svg { width: 1rem; height: 1rem; flex-shrink: 0; opacity: 0.25; }
+  .enquiry-option:hover > span { border-color: var(--ink); }
+  .enquiry-option input:checked + span { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+  .enquiry-option input:checked + span svg { opacity: 1; }
+  .enquiry-option input:focus-visible + span { outline: 2px solid var(--signal); outline-offset: 3px; }
+  .enquiry-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .enquiry-error { padding: 0.85rem; border-left: 3px solid #b82612; color: #8b1e11; background: #f03a2210; font-size: 0.875rem; line-height: 1.5; }
+  .enquiry-send-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.25rem; }
+  .enquiry-send-row > p { color: #56544e; font-size: 0.75rem; line-height: 1.5; }
+  .enquiry-send { display: inline-flex; align-items: center; justify-content: center; gap: 1.5rem; min-height: 3.25rem; padding: 0.8rem 1.1rem; border: 1px solid var(--ink); color: var(--paper); background: var(--ink); font: inherit; font-size: 0.9375rem; font-weight: 600; line-height: 1.5; cursor: pointer; transition: background 150ms, color 150ms; }
+  .enquiry-send:hover { background: var(--signal); color: var(--ink); }
+  .enquiry-send:disabled { opacity: 0.6; cursor: wait; }
+  .enquiry-send svg { width: 1.3rem; height: 1.3rem; }
+  .enquiry-close:focus-visible, .enquiry-send:focus-visible, .enquiry-footer a:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+  .enquiry-footer { padding: 1rem 2rem; border-top: var(--rule); color: #56544e; font-size: 0.75rem; line-height: 1.5; }
+  .enquiry-footer a { color: var(--ink); text-underline-offset: 0.25em; }
+  .enquiry-success { padding: 2rem; }
+  .enquiry-success-mark { display: grid; width: 3.5rem; height: 3.5rem; margin-bottom: 1.25rem; place-items: center; background: var(--signal); }
+  .enquiry-success-mark svg { width: 2rem; height: 2rem; }
+  .enquiry-success h3 { font-size: 1.8rem; line-height: 1.1; font-weight: 600; letter-spacing: -0.045em; }
+  .enquiry-success p { margin: 1rem 0 1.5rem; font-size: 0.9375rem; line-height: 1.65; overflow-wrap: anywhere; }
+  .enquiry-success strong { font-weight: 600; }
+  @keyframes enquiry-in { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 540px) {
+    .contact-modal { width: calc(100% - 1rem); max-height: calc(100dvh - 1rem); }
+    .enquiry-heading, .enquiry-form, .enquiry-success { padding: 1.5rem 1.25rem; }
+    .enquiry-footer { padding: 1rem 1.25rem; }
+    .enquiry-send-row { align-items: stretch; flex-direction: column-reverse; }
+    .enquiry-send-row > p br { display: none; }
+    .enquiry-send-row > p { text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .contact-modal[open] { animation: none; }
+    .enquiry-option > span, .enquiry-close, .enquiry-send { transition: none; }
+  }
+</style>

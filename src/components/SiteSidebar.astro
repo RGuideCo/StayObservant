@@ -2,6 +2,8 @@
 import logoSvg from "../assets/Logo.svg?raw";
 
 const isHome = Astro.url.pathname === "/";
+const isServices = Astro.url.pathname.replace(/\/$/, "") === "/services";
+const isWork = Astro.url.pathname.startsWith("/work/");
 const sectionHref = (section) => isHome ? `#${section}` : `/#${section}`;
 
 const navigation = [
@@ -10,9 +12,11 @@ const navigation = [
   { label: "Capabilities", href: sectionHref("capabilities"), icon: "capabilities" },
   { label: "CV", href: sectionHref("cv"), icon: "cv" },
   { label: "Contact", href: sectionHref("contact"), icon: "contact" },
+  { label: "Services", href: "/services", icon: "services" },
 ];
 
 const icons = {
+  services: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M4 5h10M4 12h7M4 19h10M18 8v8M14 12h8"/></svg>',
   contact: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="5" width="18" height="14"/><path d="m4 7 8 6 8-6"/></svg>',
   work: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>',
   cv: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></svg>',
@@ -29,11 +33,11 @@ const icons = {
   <nav class="sidebar-nav" aria-label="Site sections">
     {navigation.map((item) => (
       <a
-        class:list={["sidebar-nav-link", !isHome && item.icon === "work" && "is-active"]}
+        class:list={["sidebar-nav-link", ((isWork && item.icon === "work") || (isServices && item.icon === "services")) && "is-active"]}
         href={item.href}
         data-sidebar-section={item.icon}
         aria-label={item.label}
-        aria-current={!isHome && item.icon === "work" ? "location" : undefined}
+        aria-current={(isWork && item.icon === "work") || (isServices && item.icon === "services") ? "page" : undefined}
         title={item.label}
         target={item.external ? "_blank" : undefined}
         rel={item.external ? "noopener" : undefined}
@@ -129,6 +133,7 @@ const icons = {
   :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(3) { animation-delay: 225ms; }
   :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(4) { animation-delay: 275ms; }
   :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(5) { animation-delay: 325ms; }
+  :global(html.has-js.is-page-ready) .sidebar-nav-link:nth-child(6) { animation-delay: 375ms; }
 
   @keyframes toolbar-pop {
     0% { opacity: 0; transform: scale(0.45); }
@@ -208,7 +213,7 @@ const icons = {
     .site-sidebar {
       inset: 0 0 auto;
       display: grid;
-      grid-template-columns: var(--mobile-header-height) minmax(0, 1fr);
+      grid-template-columns: 3rem minmax(0, 1fr);
       width: 100%;
       height: var(--mobile-header-height);
     }
@@ -225,7 +230,7 @@ const icons = {
     }
 
     .sidebar-nav {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       height: var(--mobile-header-height);
       gap: 0;
       padding: 0;
@@ -233,12 +238,12 @@ const icons = {
 
     .sidebar-nav-link {
       min-height: 0;
-      padding: 0.55rem;
+      padding: 0.25rem;
     }
 
     .sidebar-nav-icon {
-      width: 2.45rem;
-      height: 2.45rem;
+      width: 2.25rem;
+      height: 2.25rem;
     }
 
     .sidebar-nav-icon :global(svg) {

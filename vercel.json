@@ -1,5 +1,8 @@
 {
-  "functions": { "api/proposal.js": { "includeFiles": "proposal-content/angel-city-chorale.enc" } },
+  "functions": {
+    "api/proposal.js": { "includeFiles": "proposal-content/angel-city-chorale.enc" },
+    "api/contact.js": { "maxDuration": 30 }
+  },
   "rewrites": [
     { "source": "/proposals/angel-city-chorale", "destination": "/api/proposal" },
     { "source": "/proposals/angel-city-chorale/:asset", "destination": "/api/proposal?asset=:asset" }

@@ -1,0 +1,181 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ReachOutButton from "../components/ReachOutButton.astro";
+import { quoteEmail } from "../data/contact";
+import "../styles/services.css";
+
+const services = [
+  {
+    id: "brand", number: "01", name: "Branding & packaging", short: "Build your brand",
+    title: "Look like you mean business.",
+    description: "Give people a clear, consistent way to recognize you. From a new logo to the packaging on a shelf, I help your business look and feel like itself.",
+    fit: "You’re launching, refreshing your look, or bringing a new product to market.",
+    deliverables: ["Logos, colors, and typography", "Packaging concepts and design", "Brand guidelines and everyday templates"],
+    image: "/optimized/Projects/54Hundred/identity.webp", alt: "54 Hundred brand identity with its custom monogram and typography",
+    example: "54 Hundred", slug: "54-hundred", caption: "A visual identity for a Miami media studio.",
+    related: { name: "Chobani packaging", slug: "chobani" },
+  },
+  {
+    id: "digital", number: "02", name: "Websites & apps", short: "Improve your website",
+    title: "Make the next step feel obvious.",
+    description: "Help people understand what you offer and find what they need. I plan, design, and build websites and digital products around the people using them.",
+    fit: "Your website feels confusing, your product is hard to use, or you’re starting with an idea.",
+    deliverables: ["Website structure and page design", "Interactive previews to try before building", "Website development or developer handoff"],
+    image: "/Projects/RGuide/rguide-imac-mockup.webp", alt: "RGuide travel website with an interactive map and guides on a desktop screen",
+    example: "RGuide", slug: "rguide", caption: "A travel platform, designed and built from the ground up.",
+    related: { name: "SideStreat app design", slug: "sidestreat" },
+  },
+  {
+    id: "physical", number: "03", name: "Products & retail displays", short: "Bring an idea to life",
+    title: "Make an impression in the real world.",
+    description: "Turn an idea into something people can see, touch, and use. I develop physical products and store displays that connect your brand with everyday experiences.",
+    fit: "You need to explore a product idea, present it clearly, or stand out in a store.",
+    deliverables: ["Concept sketches and product directions", "3D models, materials, and realistic visuals", "Prototypes and production handoff support"],
+    image: "/optimized/Projects/ThreeM-HomeDepot/17-in-aisle-experience.webp", alt: "3M Command retail display designed to organize products and explain their uses at Home Depot",
+    example: "3M at Home Depot", slug: "3m-home-depot", caption: "A display system that helps shoppers find the right product.",
+    related: { name: "Chick-fil-A interactive concepts", slug: "chick-fil-a" },
+  },
+  {
+    id: "illustration", number: "04", name: "Illustration & campaigns", short: "Tell your story",
+    title: "Give people something to remember.",
+    description: "Create a visual voice that belongs to your brand. Custom artwork and campaign graphics help tell your story across screens, print, packaging, and spaces.",
+    fit: "You have a launch, a story, or a campaign that needs its own distinct look.",
+    deliverables: ["Custom illustration and artwork", "Campaign visuals for print and digital", "Icons, storyboards, and supporting graphics"],
+    image: "/optimized/Projects/BocaPaila/Aa2.webp", alt: "Custom Boca Paila album illustration shown on a vinyl sleeve and record",
+    example: "Boca Paila", slug: "boca-paila", caption: "An illustrated world across a band’s identity and releases.",
+    related: { name: "Estrella Damm campaign", slug: "estrella-damm" },
+  },
+];
+
+const steps = [
+  { title: "Tell me what you’re working on.", body: "Share your business, what you want to improve, and any timing or budget you have in mind. A few sentences is enough." },
+  { title: "Get a clear plan and quote.", body: "We’ll agree on what you need, what you’ll receive, the schedule, and the cost before the design work begins." },
+  { title: "Shape it together. Put it to work.", body: "I’ll develop the work, walk you through the decisions, and refine it with your feedback before the agreed handoff or launch." },
+];
+---
+
+<Layout
+  title="Design services for your business — Stay Observant"
+  description="18+ years of design experience. Branding, websites, packaging, physical products, and illustration by Brian Rodriguez. Explore the work and request a quote."
+>
+  <div class="services-page">
+    <a class="services-skip" href="#service-options">Skip to services</a>
+    <header class="services-topbar">
+      <a href="/" class="services-wordmark">Stay Observant<span>Brian Rodriguez / Independent designer</span></a>
+      <button class="pitch-button pitch-button--small" type="button" data-contact-open aria-haspopup="dialog" aria-controls="contact-modal">Contact me</button>
+    </header>
+
+    <section class="pitch-hero" aria-labelledby="pitch-title">
+      <div class="pitch-hero-copy">
+        <p class="pitch-eyebrow">A creative partner for your next chapter</p>
+        <h1 id="pitch-title">Good design.<br />Built around<br /><em>your business.</em></h1>
+        <p class="pitch-lead">You know your business. I help people see what makes it worth choosing—with a clearer brand, a better website, or a product that stands out.</p>
+        <div class="pitch-actions">
+          <ReachOutButton />
+          <a class="pitch-text-link" href="#service-options">Find the right service</a>
+        </div>
+        <p class="pitch-small">No design brief needed. Let’s start with what you want to achieve.</p>
+      </div>
+      <div class="pitch-mosaic" aria-label="A selection of branding, illustration, and website work">
+        <a class="mosaic-brand" href="/work/54-hundred" aria-label="Explore the 54 Hundred brand identity case study">
+          <img src="/optimized/Projects/54Hundred/thumb.webp" alt="54 Hundred identity on a lush green palm background" width="1500" height="1500" fetchpriority="high" />
+          <span>Brand identity / 54 Hundred</span>
+        </a>
+        <a class="mosaic-experience" href="#experience" aria-label="18+ years of design experience">
+          <strong class="mosaic-experience-number" aria-hidden="true">18<span>+</span></strong>
+          <span class="mosaic-experience-label">Years of design<br />experience</span>
+        </a>
+        <a class="mosaic-art" href="/work/boca-paila" aria-label="Explore the Boca Paila illustration case study">
+          <img src="/optimized/Projects/BocaPaila/SI5.webp" alt="Boca Paila illustrated posters hanging on a wall above a dining table" width="1920" height="1365" />
+          <span>Illustration / Boca Paila</span>
+        </a>
+        <a class="mosaic-digital" href="/work/rguide" aria-label="Explore the RGuide website case study">
+          <img src="/Projects/RGuide/rguide-imac-mockup.webp" alt="RGuide’s map and travel guide website" width="2800" height="1920" />
+          <span>Design & development / RGuide</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="experience" class="pitch-experience" aria-labelledby="experience-heading">
+      <div class="pitch-experience-copy">
+        <p class="pitch-eyebrow">Independent perspective. Broad experience.</p>
+        <h2 id="experience-heading">Big-brand experience.<br />A personal approach.</h2>
+        <p class="pitch-experience-description">I’m Brian, the designer behind Stay Observant. I bring 18+ years of experience across digital products, brands, and physical design. You work directly with me, from the first conversation to the details that make the work feel right.</p>
+        <a class="pitch-text-link" href="/#cv">Explore my experience</a>
+      </div>
+      <figure class="pitch-logo-grid">
+        <img
+          src="/Logo-Collage.png"
+          alt="Selected client and agency logos including P&G, Gillette, Hasbro, Timberland, Chobani, 3M, Chick-fil-A, Heineken, and Morgans Hotel Group"
+          width="1000"
+          height="587"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </section>
+
+    <section id="service-options" class="pitch-services" aria-labelledby="services-heading">
+      <header class="pitch-section-heading">
+        <div><p class="pitch-eyebrow">What I can help with</p><h2 id="services-heading">Start with what<br />your business needs.</h2></div>
+        <p>One focused project or a few connected pieces. We’ll choose the right mix for your goals.</p>
+      </header>
+      <nav class="service-jump-links" aria-label="Find a service">
+        {services.map((service) => <a href={`#${service.id}`}><span>{service.number}</span>{service.short}</a>)}
+      </nav>
+      <div class="service-grid">
+        {services.map((service) => (
+          <article id={service.id} class="pitch-service" aria-labelledby={`${service.id}-title`}>
+            <div class="service-copy">
+              <p class="service-label"><span>{service.number}</span>{service.name}</p>
+              <h3 id={`${service.id}-title`}>{service.title}</h3>
+              <p class="service-description">{service.description}</p>
+              <p class="service-fit"><strong>A good fit if</strong>{service.fit}</p>
+              <div class="service-deliverables"><h4>What we can create</h4><ul>{service.deliverables.map((item) => <li>{item}</li>)}</ul></div>
+              <button class="pitch-button pitch-button--outline" type="button" data-contact-open data-contact-service={service.id} aria-haspopup="dialog" aria-controls="contact-modal" aria-label={`Request a quote for ${service.name.toLowerCase()}`}>Request a quote</button>
+            </div>
+            <div class="service-proof">
+              <a class="service-case-link" href={`/work/${service.slug}`}>
+                <div class="service-case-image"><img src={service.image} alt={service.alt} width="1200" height="750" loading="lazy" decoding="async" /></div>
+                <div class="service-case-caption"><div><p class="pitch-eyebrow">See it in practice</p><h4>{service.example}</h4></div><span>View case study</span></div>
+              </a>
+              <p class="service-case-description">{service.caption}</p>
+              <a class="pitch-text-link service-related" href={`/work/${service.related.slug}`}>Also explore: {service.related.name}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <aside class="pitch-help" aria-label="Help choosing a service">
+      <div><h2>Not sure what you need yet?</h2><p>Tell me what isn’t working, or what you’d like to make possible. I’ll help you find a useful starting point.</p></div>
+      <button class="pitch-button" type="button" data-contact-open data-contact-service="not-sure" aria-haspopup="dialog" aria-controls="contact-modal">Let’s figure it out</button>
+    </aside>
+
+    <section class="pitch-process" aria-labelledby="process-heading">
+      <header class="pitch-section-heading">
+        <div><p class="pitch-eyebrow">How we’ll work together</p><h2 id="process-heading">A clear plan.<br />No guesswork.</h2></div>
+        <p>You don’t need to speak design. You’ll know what we’re making, why it matters, and what happens next.</p>
+      </header>
+      <ol class="pitch-steps">
+        {steps.map((step, index) => <li><span class="step-number" aria-hidden="true">0{index + 1}</span><h3>{step.title}</h3><p>{step.body}</p></li>)}
+      </ol>
+      <div class="pitch-questions">
+        <details><summary>How much will my project cost?</summary><p>It depends on what we’re making, how much is involved, and the timing. Send a short outline and any budget range you have in mind. I’ll put together a quote with a clear scope before we start.</p></details>
+        <details><summary>What if I only need one thing?</summary><p>That’s a good place to start. A packaging update, a set of illustrations, or a single website can be a focused project. We’ll agree on the work that’s useful to you.</p></details>
+        <details><summary>Can you work with my existing brand or team?</summary><p>Yes. I can build on your existing brand guidelines and collaborate with your marketing team, developers, or production partners. We’ll establish who handles what at the start.</p></details>
+      </div>
+    </section>
+
+    <section id="request-quote" class="pitch-contact" aria-labelledby="quote-heading">
+      <div><p class="pitch-eyebrow">Your next chapter starts with a conversation</p><h2 id="quote-heading">Let’s make<br /><em>your next move.</em></h2></div>
+      <div class="pitch-contact-action">
+        <p>Tell me a little about your business, what you have in mind, and when you’d like to get started.</p>
+        <button class="pitch-button pitch-button--light" type="button" data-contact-open aria-haspopup="dialog" aria-controls="contact-modal">Contact me</button>
+        <p class="pitch-email-note">A few details is enough. Send a message here and I’ll reply by email.</p>
+        <a class="pitch-contact-email" href={`mailto:${quoteEmail}`}>{quoteEmail}</a>
+      </div>
+      <footer class="pitch-footer"><a href="/">Stay Observant / Brian Rodriguez</a><a href="/#work">Explore all work</a></footer>
+    </section>
+  </div>
+</Layout>

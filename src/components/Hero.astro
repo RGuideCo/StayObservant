@@ -46,7 +46,7 @@ const titleWords = title.trim().split(/\s+/);
     <div class="hero-actions">
       <a href={primaryCtaHref} class="hero-action hero-action-primary">
         <span>{primaryCtaText}</span>
-        <span aria-hidden="true">↓</span>
+        <span aria-hidden="true">{primaryCtaHref.startsWith("#") ? "↓" : "→"}</span>
       </a>
       <a href={secondaryCtaHref} class="hero-action hero-action-secondary">
         <span>{secondaryCtaText}</span>

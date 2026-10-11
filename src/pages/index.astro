@@ -6,6 +6,7 @@ import CapabilitiesSection from "../components/CapabilitiesSection.astro";
 import SketchbookSection from "../components/SketchbookSection.astro";
 import CvSection from "../components/CvSection.astro";
 import ContactSection from "../components/ContactSection.astro";
+import ServicesTeaser from "../components/ServicesTeaser.astro";
 
 const title = "Stay Observant";
 ---
@@ -14,13 +15,14 @@ const title = "Stay Observant";
   <Hero
     title="Stay Observant"
     note="Selected work below"
-    primaryCtaText="Experience"
-    primaryCtaHref="#cv"
+    primaryCtaText="Services"
+    primaryCtaHref="/services"
     secondaryCtaText="Contact"
     secondaryCtaHref="#contact"
   />
 
   <ProjectsGrid />
+  <ServicesTeaser />
   <SketchbookSection />
   <CapabilitiesSection />
   <CvSection />
