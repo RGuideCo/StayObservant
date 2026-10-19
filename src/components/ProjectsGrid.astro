@@ -318,17 +318,34 @@ const filterTags = [
     transform: translate3d(var(--mosaic-x, 0), var(--mosaic-y, 2.5rem), 0)
       scale(0.985)
       rotate(var(--mosaic-rotate, 0deg));
-    transition:
-      transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
-      clip-path 700ms cubic-bezier(0.76, 0, 0.24, 1);
-    transition-delay: calc(var(--reveal-order, 0) * 50ms);
+    transition: none;
     will-change: transform, clip-path;
   }
 
   :global(html.has-js) .project-card.motion-reveal.is-revealed {
     opacity: 1;
-    clip-path: inset(0);
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    clip-path: none;
+    transform: none;
+    will-change: auto;
+    /* Release the clipping and compositing effects after the entrance finishes. */
+    animation:
+      project-move-in 650ms cubic-bezier(0.22, 1, 0.36, 1) backwards,
+      project-clip-in 700ms cubic-bezier(0.76, 0, 0.24, 1) backwards;
+    animation-delay: calc(var(--reveal-order, 0) * 50ms);
+  }
+
+  @keyframes project-move-in {
+    from {
+      transform: translate3d(var(--mosaic-x, 0), var(--mosaic-y, 2.5rem), 0)
+        scale(0.985)
+        rotate(var(--mosaic-rotate, 0deg));
+    }
+    to { transform: none; }
+  }
+
+  @keyframes project-clip-in {
+    from { clip-path: var(--mosaic-clip, inset(0 0 100% 0)); }
+    to { clip-path: inset(0); }
   }
 
   :global(html.has-js) .project-card:nth-child(1) {
